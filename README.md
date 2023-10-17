@@ -1,6 +1,16 @@
 # React + Vite
 
-To start working with project in dev mode run in console:
+Для початку клонуємо репозиторій на свою локальну машину:
+```
+git clone https://github.com/Skiftech-project/skiftech-frontend.git
+```
+
+Переходимо до папки з проектом:
+```
+cd ./skiftech-frontend
+```
+
+Щоб запустити проект у режимі розробки треба ввести у консолі наступну команду:
 
 ```
 npm i
