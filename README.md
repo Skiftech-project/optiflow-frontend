@@ -28,7 +28,7 @@ o
 Команда для збірки проекту після завершення розробки (збірка для хостинга):
 
 ```
-npm run build`
+npm run build
 ```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
