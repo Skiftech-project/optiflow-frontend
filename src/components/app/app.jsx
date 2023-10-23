@@ -1,7 +1,8 @@
 import { Component } from 'react';
 
-import Footer from '../ui/footer/footer';
-import Header from '../ui/header/header';
+import Footer from '../simple/footer/footer';
+import Header from '../simple/header/header';
+import FirstModule from '../smart/first-module/first-module';
 import './app.css';
 
 class App extends Component {
@@ -13,7 +14,10 @@ class App extends Component {
         return (
             <>
                 <Header />
-                <main>BODY OF CALCULATOR</main>
+                <main>
+                    BODY OF CALCULATOR
+                    <FirstModule />
+                </main>
                 <Footer />
             </>
         );
