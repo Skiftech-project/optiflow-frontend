@@ -4,21 +4,34 @@
     align-items: center;
     background-color: #686868;
     width: 400px;
-    height: 400px;
+    min-height: 500px;
     border-radius: 24px;
     background: #d9d9d9;
     margin: 50px;
 }
-.InputData_form {
-    width: 80%;
-    height: 70%;
+.InputData__form {
+    width: 90%;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
-.InputData_form input {
+.InputData__input {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.InputData__input label {
+    align-self: flex-start;
+}
+
+.InputData__input input {
     width: 100%;
     border-radius: 5px;
     background: #bdbdbd;
