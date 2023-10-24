@@ -1,4 +1,9 @@
 .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-transform: uppercase;
     background-color: #aba5a5;
     height: 100px;
 }

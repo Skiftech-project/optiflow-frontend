@@ -19,7 +19,7 @@
 }
 
 .InputData__input {
-    margin: 10px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,6 +29,7 @@
 
 .InputData__input label {
     align-self: flex-start;
+    margin-bottom: 7px;
 }
 
 .InputData__input input {
