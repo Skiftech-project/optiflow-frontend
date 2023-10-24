@@ -12,14 +12,14 @@ class App extends Component {
 
     render() {
         return (
-            <>
+            <div className="wrapper">
                 <Header />
-                <main>
+                <main className="main">
                     BODY OF CALCULATOR
                     <FirstModule />
                 </main>
                 <Footer />
-            </>
+            </div>
         );
     }
 }

@@ -3,6 +3,7 @@ const input = ({ name, type, ...props }) => {
         <input
             name={name}
             type={type}
+            {...props}
         ></input>
     );
 };
