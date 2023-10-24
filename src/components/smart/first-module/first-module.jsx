@@ -21,44 +21,64 @@ const FirstModule = () => {
         <div className="InputData">
             <form
                 action="#"
-                className="InputData_form"
+                className="InputData__form"
                 onSubmit={formik.handleSubmit}
             >
-                <input
-                    name="distance"
-                    type="number"
-                    placeholder="Відстань"
-                    value={formik.values.distance}
-                    onChange={formik.handleChange}
-                />
-                <input
-                    name="sensitivity"
-                    type="number"
-                    placeholder="Чутливість"
-                    value={formik.values.sensitivity}
-                    onChange={formik.handleChange}
-                />
-                <input
-                    name="power"
-                    type="number"
-                    placeholder="Потужність"
-                    value={formik.values.power}
-                    onChange={formik.handleChange}
-                />
-                <input
-                    name="angleWidth"
-                    type="number"
-                    placeholder="Кутовий розмір ширини"
-                    value={formik.values.angleWidth}
-                    onChange={formik.handleChange}
-                />
-                <input
-                    name="angleHeight"
-                    type="number"
-                    placeholder="Кутовий розмір висоти"
-                    value={formik.values.angleHeight}
-                    onChange={formik.handleChange}
-                />
+                <div className="InputData__input">
+                    <label htmlFor="distance">Відстань</label>
+                    <input
+                        name="distance"
+                        type="number"
+                        placeholder="Відстань"
+                        id="distance"
+                        value={formik.values.distance}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div className="InputData__input">
+                    <label htmlFor="sensitivity">Чутливість</label>
+                    <input
+                        name="sensitivity"
+                        type="number"
+                        placeholder="Чутливість"
+                        id="sensitivity"
+                        value={formik.values.sensitivity}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div className="InputData__input">
+                    <label htmlFor="power">Потужність</label>
+                    <input
+                        name="power"
+                        type="number"
+                        placeholder="Потужність"
+                        id="power"
+                        value={formik.values.power}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div className="InputData__input">
+                    <label htmlFor="angleWidth">Кутовий розмір ширини</label>
+                    <input
+                        name="angleWidth"
+                        type="number"
+                        placeholder="Кутовий розмір ширини"
+                        id="angleWidth"
+                        value={formik.values.angleWidth}
+                        onChange={formik.handleChange}
+                    />
+                </div>
+                <div className="InputData__input">
+                    <label htmlFor="angleHeight">Кутовий розмір висоти</label>
+                    <input
+                        name="angleHeight"
+                        type="number"
+                        placeholder="Кутовий розмір висоти"
+                        id="angleHeight"
+                        value={formik.values.angleHeight}
+                        onChange={formik.handleChange}
+                    />
+                </div>
 
                 <Button
                     className="InputData_btn"
