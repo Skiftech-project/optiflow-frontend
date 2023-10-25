@@ -1,6 +1,6 @@
 // import { useFormik } from 'formik';
 import Input from '../../ui/Input/Input';
-import './first-module.css';
+import './FirstModule.css';
 
 const FirstModule = () => {
     // const formik = useFormik({

@@ -1,8 +1,8 @@
 import { Component } from 'react';
 
-import Footer from '../simple/footer/footer';
-import Header from '../simple/header/header';
-import FirstModule from '../smart/first-module/first-module';
+import Header from '../simple/Header/Header';
+import Footer from '../simple/Footer/Footer';
+import FirstModule from '../smart/FirstModule/FirstModule';
 import './app.css';
 
 class App extends Component {

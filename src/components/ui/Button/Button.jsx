@@ -1,4 +1,4 @@
-import './button.css';
+import './Button.css';
 const Button = ({ className, type, text, ...props }) => {
     return (
         <button
