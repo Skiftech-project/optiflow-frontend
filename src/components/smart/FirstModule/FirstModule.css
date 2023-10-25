@@ -22,3 +22,8 @@
 .form__item {
     margin-bottom: 20px;
 }
+
+.form__select {
+    display: flex;
+    justify-content: center;
+}

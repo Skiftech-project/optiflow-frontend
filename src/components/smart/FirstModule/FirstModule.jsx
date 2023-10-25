@@ -1,5 +1,6 @@
 // import { useFormik } from 'formik';
 import Input from '../../ui/Input/Input';
+import { Radio } from 'antd';
 import './FirstModule.css';
 
 const FirstModule = () => {
@@ -48,6 +49,20 @@ const FirstModule = () => {
                         name="distance"
                         type="number"
                     />
+                    <Radio.Group
+                        buttonStyle="solid"
+                        className="form__select"
+                    >
+                        <Radio.Button
+                            defaultChecked
+                            value="ellipse"
+                        >
+                            Ввести кути
+                        </Radio.Button>
+                        <Radio.Button value="rectangle">
+                            Ввести довжини
+                        </Radio.Button>
+                    </Radio.Group>
                 </form>
             </div>
         </div>
