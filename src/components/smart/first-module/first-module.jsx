@@ -1,91 +1,55 @@
-import { useFormik } from 'formik';
-
-import Button from '../../ui/button/button';
+// import { useFormik } from 'formik';
+import Input from '../../ui/Input/Input';
 import './first-module.css';
 
 const FirstModule = () => {
-    const formik = useFormik({
-        // это значения которые называются так же как и атрибуты ***name*** у полей формы для хранения данных в хуке.
-        initialValues: {
-            distance: 0,
-            sensitivity: 0,
-            power: 0,
-            angleWidth: 0,
-            angleHeight: 0,
-        },
-        //событие которое происходит после отправки формы куда передаются все значения выше в виде обьекта и обрабатываются.
-        onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
-    });
+    // const formik = useFormik({
+    //     // это значения которые называются так же как и атрибуты ***name*** у полей формы для хранения данных в хуке.
+    //     initialValues: {
+    //         distance: 0,
+    //         sensitivity: 0,
+    //         power: 0,
+    //         angleWidth: 0,
+    //         angleHeight: 0,
+    //     },
+    //     //событие которое происходит после отправки формы куда передаются все значения выше в виде обьекта и обрабатываются.
+    //     onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
+    // });
 
     return (
-        <div className="InputData">
-            <form
-                action="#"
-                className="InputData__form"
-                onSubmit={formik.handleSubmit}
-            >
-                <div className="InputData__input">
-                    <label htmlFor="distance">Відстань</label>
-                    <input
+        <div className="data">
+            <div className="form">
+                <div className="form__title">
+                    Калькулятор розсіяння зони плями
+                </div>
+                <form
+                    action="#"
+                    id="form"
+                    className="form__body"
+                >
+                    <Input
+                        className="form__item"
+                        text="Відстань (м):"
+                        id="distance"
                         name="distance"
                         type="number"
-                        placeholder="Відстань"
+                    />
+                    <Input
+                        className="form__item"
+                        text="Чутливість (Вт/м²):"
                         id="distance"
-                        value={formik.values.distance}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div className="InputData__input">
-                    <label htmlFor="sensitivity">Чутливість</label>
-                    <input
-                        name="sensitivity"
+                        name="distance"
                         type="number"
-                        placeholder="Чутливість"
-                        id="sensitivity"
-                        value={formik.values.sensitivity}
-                        onChange={formik.handleChange}
                     />
-                </div>
-                <div className="InputData__input">
-                    <label htmlFor="power">Потужність</label>
-                    <input
-                        name="power"
+                    <Input
+                        className="form__item"
+                        text="Потужність (Вт):"
+                        id="distance"
+                        name="distance"
                         type="number"
-                        placeholder="Потужність"
-                        id="power"
-                        value={formik.values.power}
-                        onChange={formik.handleChange}
                     />
-                </div>
-                <div className="InputData__input">
-                    <label htmlFor="angleWidth">Кутовий розмір ширини</label>
-                    <input
-                        name="angleWidth"
-                        type="number"
-                        placeholder="Кутовий розмір ширини"
-                        id="angleWidth"
-                        value={formik.values.angleWidth}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-                <div className="InputData__input">
-                    <label htmlFor="angleHeight">Кутовий розмір висоти</label>
-                    <input
-                        name="angleHeight"
-                        type="number"
-                        placeholder="Кутовий розмір висоти"
-                        id="angleHeight"
-                        value={formik.values.angleHeight}
-                        onChange={formik.handleChange}
-                    />
-                </div>
-
-                <Button
-                    className="InputData_btn"
-                    type="submit"
-                    text="CALC"
-                />
-            </form>
+                </form>
+            </div>
         </div>
     );
 };

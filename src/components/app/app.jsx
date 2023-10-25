@@ -15,7 +15,6 @@ class App extends Component {
             <div className="wrapper">
                 <Header />
                 <main className="main">
-                    BODY OF CALCULATOR
                     <FirstModule />
                 </main>
                 <Footer />
