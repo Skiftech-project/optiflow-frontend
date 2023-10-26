@@ -1,6 +1,7 @@
 // import { useFormik } from 'formik';
 import Input from '../../ui/Input/Input';
 import { Radio } from 'antd';
+import { Button } from 'antd';
 import './FirstModule.css';
 
 const FirstModule = () => {
@@ -38,15 +39,15 @@ const FirstModule = () => {
                     <Input
                         className="form__item"
                         text="Чутливість (Вт/м²):"
-                        id="distance"
-                        name="distance"
+                        id="sensitivity"
+                        name="sensitivity"
                         type="number"
                     />
                     <Input
                         className="form__item"
                         text="Потужність (Вт):"
-                        id="distance"
-                        name="distance"
+                        id="power"
+                        name="power"
                         type="number"
                     />
                     <Radio.Group
@@ -63,6 +64,13 @@ const FirstModule = () => {
                             Ввести довжини
                         </Radio.Button>
                     </Radio.Group>
+                    <Button
+                        className="form__button"
+                        type="primary"
+                        htmlType="submit"
+                    >
+                        Розрахувати
+                    </Button>
                 </form>
             </div>
         </div>
