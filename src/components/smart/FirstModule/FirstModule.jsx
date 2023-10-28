@@ -204,7 +204,7 @@ const FirstModule = () => {
                                 </div>
                             </>
                         )}
-
+                        {/* отрендерит поля если выбрана опция через размер пятна */}
                         {selectedOption === 'rectangle' && (
                             <>
                                 <div className="form__item">
