@@ -1,29 +1,16 @@
 // import { useFormik } from 'formik';
 import { useState } from 'react';
-import Input from '../../ui/Input/Input';
+// import Input from '../../ui/Input/Input';
 import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
 
 const FirstModule = () => {
-    const [selectedOption, setSelectedOption] = useState('ellipse'); // Значение по умолчанию "ellipse"
+    const [selectedOption, setSelectedOption] = useState('ellipse');
 
-    // Обработчик изменения выбранной опции
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
     };
-    // const formik = useFormik({
-    //     // это значения которые называются так же как и атрибуты ***name*** у полей формы для хранения данных в хуке.
-    //     initialValues: {
-    //         distance: 0,
-    //         sensitivity: 0,
-    //         power: 0,
-    //         angleWidth: 0,
-    //         angleHeight: 0,
-    //     },
-    //     //событие которое происходит после отправки формы куда передаются все значения выше в виде обьекта и обрабатываются.
-    //     onSubmit: (values) => console.log(JSON.stringify(values, null, 2)),
-    // });
 
     return (
         <div className="data">
@@ -36,27 +23,48 @@ const FirstModule = () => {
                     id="form"
                     className="form__body"
                 >
-                    <Input
-                        className="form__item"
-                        text="Відстань (м):"
-                        id="distance"
-                        name="distance"
-                        type="number"
-                    />
-                    <Input
-                        className="form__item"
-                        text="Чутливість (Вт/м²):"
-                        id="sensitivity"
-                        name="sensitivity"
-                        type="number"
-                    />
-                    <Input
-                        className="form__item"
-                        text="Потужність (Вт):"
-                        id="power"
-                        name="power"
-                        type="number"
-                    />
+                    <div className="form__item">
+                        <label
+                            htmlFor="distance"
+                            className="form__label"
+                        >
+                            Відстань (м):
+                        </label>
+                        <input
+                            id="distance"
+                            name="distance"
+                            type="number"
+                        />
+                    </div>
+
+                    <div className="form__item">
+                        <label
+                            htmlFor="sensitivity"
+                            className="form__label"
+                        >
+                            Чутливість (мВт/м²):
+                        </label>
+                        <input
+                            id="sensitivity"
+                            name="sensitivity"
+                            type="number"
+                        />
+                    </div>
+
+                    <div className="form__item">
+                        <label
+                            htmlFor="power"
+                            className="form__label"
+                        >
+                            Потужність (мВт):
+                        </label>
+                        <input
+                            id="power"
+                            name="power"
+                            type="number"
+                        />
+                    </div>
+
                     <Radio.Group
                         value={selectedOption}
                         buttonStyle="solid"
@@ -75,39 +83,63 @@ const FirstModule = () => {
                     </Radio.Group>
                     {selectedOption === 'ellipse' && (
                         <>
-                            <Input
-                                className="form__item"
-                                text="Кут Ширини (°):"
-                                id="angleWidth"
-                                name="angleWidth"
-                                type="number"
-                            />
-                            <Input
-                                className="form__item"
-                                text="Кут Висоти (°):"
-                                id="angleHeight"
-                                name="angleHeight"
-                                type="number"
-                            />
+                            <div className="form__item">
+                                <label
+                                    htmlFor="angleWidth"
+                                    className="form__label"
+                                >
+                                    Кут Ширини (°):
+                                </label>
+                                <input
+                                    id="angleWidth"
+                                    name="angleWidth"
+                                    type="number"
+                                />
+                            </div>
+                            <div className="form__item">
+                                <label
+                                    htmlFor="angleHeight"
+                                    className="form__label"
+                                >
+                                    Кут Висоти (°):
+                                </label>
+                                <input
+                                    id="angleHeight"
+                                    name="angleHeight"
+                                    type="number"
+                                />
+                            </div>
                         </>
                     )}
 
                     {selectedOption === 'rectangle' && (
                         <>
-                            <Input
-                                className="form__item"
-                                text="Ширина Плями (м):"
-                                id="spotWidth"
-                                name="spotWidth"
-                                type="number"
-                            />
-                            <Input
-                                className="form__item"
-                                text="Висота Плями (м):"
-                                id="spotHeight"
-                                name="spotHeight"
-                                type="number"
-                            />
+                            <div className="form__item">
+                                <label
+                                    htmlFor="spotWidth"
+                                    className="form__label"
+                                >
+                                    Ширина Плями (м):
+                                </label>
+                                <input
+                                    id="spotWidth"
+                                    name="spotWidth"
+                                    type="number"
+                                />
+                            </div>
+                            <div className="form__item">
+                                <label
+                                    htmlFor="spotHeight"
+                                    className="form__label"
+                                >
+                                    Висота Плями (м):
+                                </label>
+                                <input
+                                    id="spotHeight"
+                                    name="spotHeight"
+                                    type="number"
+                                />
+                            </div>
                         </>
                     )}
                     <Button
