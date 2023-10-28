@@ -1,6 +1,6 @@
-// import { useFormik } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import { useState } from 'react';
-// import Input from '../../ui/Input/Input';
 import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
@@ -18,138 +18,205 @@ const FirstModule = () => {
                 <div className="form__title">
                     Калькулятор розсіяння зони плями
                 </div>
-                <form
-                    action="#"
-                    id="form"
-                    className="form__body"
+                <Formik
+                    initialValues={{
+                        distance: 0,
+                        sensitivity: 0,
+                        power: 0,
+                        angleWidth: 0,
+                        angleHeight: 0,
+                        spotWidth: 0,
+                        spotHeight: 0,
+                    }}
+                    validationSchema={Yup.object({
+                        distance: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                        sensitivity: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                        power: Yup.number().required("Це поле є обов'язковим"),
+                        angleWidth: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                        angleHeight: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                        spotWidth: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                        spotHeight: Yup.number().required(
+                            "Це поле є обов'язковим",
+                        ),
+                    })}
+                    onSubmit={(values) =>
+                        console.log(JSON.stringify(values, null, 2))
+                    }
                 >
-                    <div className="form__item">
-                        <label
-                            htmlFor="distance"
-                            className="form__label"
-                        >
-                            Відстань (м):
-                        </label>
-                        <input
-                            id="distance"
-                            name="distance"
-                            type="number"
-                        />
-                    </div>
+                    <Form className="form__body">
+                        <div className="form__item">
+                            <label
+                                htmlFor="distance"
+                                className="form__label"
+                            >
+                                Відстань (м):
+                            </label>
+                            <Field
+                                id="distance"
+                                name="distance"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="distance"
+                                component="div"
+                            />
+                        </div>
 
-                    <div className="form__item">
-                        <label
-                            htmlFor="sensitivity"
-                            className="form__label"
-                        >
-                            Чутливість (мВт/м²):
-                        </label>
-                        <input
-                            id="sensitivity"
-                            name="sensitivity"
-                            type="number"
-                        />
-                    </div>
+                        <div className="form__item">
+                            <label
+                                htmlFor="sensitivity"
+                                className="form__label"
+                            >
+                                Чутливість (мВт/м²):
+                            </label>
+                            <Field
+                                id="sensitivity"
+                                name="sensitivity"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="sensitivity"
+                                component="div"
+                            />
+                        </div>
 
-                    <div className="form__item">
-                        <label
-                            htmlFor="power"
-                            className="form__label"
-                        >
-                            Потужність (мВт):
-                        </label>
-                        <input
-                            id="power"
-                            name="power"
-                            type="number"
-                        />
-                    </div>
+                        <div className="form__item">
+                            <label
+                                htmlFor="power"
+                                className="form__label"
+                            >
+                                Потужність (мВт):
+                            </label>
+                            <Field
+                                id="power"
+                                name="power"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="power"
+                                component="div"
+                            />
+                        </div>
 
-                    <Radio.Group
-                        value={selectedOption}
-                        buttonStyle="solid"
-                        className="form__item form__select"
-                        onChange={handleOptionChange}
-                    >
-                        <Radio.Button
-                            defaultChecked
-                            value="ellipse"
+                        <Radio.Group
+                            value={selectedOption}
+                            buttonStyle="solid"
+                            className="form__item form__select"
+                            onChange={handleOptionChange}
                         >
-                            Ввести кути
-                        </Radio.Button>
-                        <Radio.Button value="rectangle">
-                            Ввести довжини
-                        </Radio.Button>
-                    </Radio.Group>
-                    {selectedOption === 'ellipse' && (
-                        <>
-                            <div className="form__item">
-                                <label
-                                    htmlFor="angleWidth"
-                                    className="form__label"
-                                >
-                                    Кут Ширини (°):
-                                </label>
-                                <input
-                                    id="angleWidth"
-                                    name="angleWidth"
-                                    type="number"
-                                />
-                            </div>
-                            <div className="form__item">
-                                <label
-                                    htmlFor="angleHeight"
-                                    className="form__label"
-                                >
-                                    Кут Висоти (°):
-                                </label>
-                                <input
-                                    id="angleHeight"
-                                    name="angleHeight"
-                                    type="number"
-                                />
-                            </div>
-                        </>
-                    )}
+                            <Radio.Button
+                                defaultChecked
+                                value="ellipse"
+                            >
+                                Ввести кути
+                            </Radio.Button>
+                            <Radio.Button value="rectangle">
+                                Ввести довжини
+                            </Radio.Button>
+                        </Radio.Group>
+                        {selectedOption === 'ellipse' && (
+                            <>
+                                <div className="form__item">
+                                    <label
+                                        htmlFor="angleWidth"
+                                        className="form__label"
+                                    >
+                                        Кут Ширини (°):
+                                    </label>
+                                    <Field
+                                        id="angleWidth"
+                                        name="angleWidth"
+                                        type="number"
+                                    />
+                                    <ErrorMessage
+                                        className="error"
+                                        name="angleWidth"
+                                        component="div"
+                                    />
+                                </div>
+                                <div className="form__item">
+                                    <label
+                                        htmlFor="angleHeight"
+                                        className="form__label"
+                                    >
+                                        Кут Висоти (°):
+                                    </label>
+                                    <Field
+                                        id="angleHeight"
+                                        name="angleHeight"
+                                        type="number"
+                                    />
+                                    <ErrorMessage
+                                        className="error"
+                                        name="angleHeight"
+                                        component="div"
+                                    />
+                                </div>
+                            </>
+                        )}
 
-                    {selectedOption === 'rectangle' && (
-                        <>
-                            <div className="form__item">
-                                <label
-                                    htmlFor="spotWidth"
-                                    className="form__label"
-                                >
-                                    Ширина Плями (м):
-                                </label>
-                                <input
-                                    id="spotWidth"
-                                    name="spotWidth"
-                                    type="number"
-                                />
-                            </div>
-                            <div className="form__item">
-                                <label
-                                    htmlFor="spotHeight"
-                                    className="form__label"
-                                >
-                                    Висота Плями (м):
-                                </label>
-                                <input
-                                    id="spotHeight"
-                                    name="spotHeight"
-                                    type="number"
-                                />
-                            </div>
-                        </>
-                    )}
-                    <Button
-                        className="form__button"
-                        type="primary"
-                        htmlType="submit"
-                    >
-                        Розрахувати
-                    </Button>
-                </form>
+                        {selectedOption === 'rectangle' && (
+                            <>
+                                <div className="form__item">
+                                    <label
+                                        htmlFor="spotWidth"
+                                        className="form__label"
+                                    >
+                                        Ширина Плями (м):
+                                    </label>
+                                    <Field
+                                        id="spotWidth"
+                                        name="spotWidth"
+                                        type="number"
+                                    />
+                                    <ErrorMessage
+                                        className="error"
+                                        name="spotWidth"
+                                        component="div"
+                                    />
+                                </div>
+                                <div className="form__item">
+                                    <label
+                                        htmlFor="spotHeight"
+                                        className="form__label"
+                                    >
+                                        Висота Плями (м):
+                                    </label>
+                                    <Field
+                                        id="spotHeight"
+                                        name="spotHeight"
+                                        type="number"
+                                    />
+                                    <ErrorMessage
+                                        className="error"
+                                        name="spotHeight"
+                                        component="div"
+                                    />
+                                </div>
+                            </>
+                        )}
+                        <Button
+                            className="form__button"
+                            type="primary"
+                            htmlType="submit"
+                        >
+                            Розрахувати
+                        </Button>
+                    </Form>
+                </Formik>
             </div>
         </div>
     );
