@@ -5,11 +5,77 @@ import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
 
+const validationSchema = Yup.object({
+    distance: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    sensitivity: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    power: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    angleWidth: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    angleHeight: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    spotWidth: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+    spotHeight: Yup.number()
+        .required("Це поле є обов'язковим")
+        .test(
+            'not-zero',
+            'Значення не повинно бути рівним 0',
+            (value) => value !== 0,
+        ),
+});
+
+const initialValues = {
+    distance: 0,
+    sensitivity: 0,
+    power: 0,
+    angleWidth: 0,
+    angleHeight: 0,
+    spotWidth: 0,
+    spotHeight: 0,
+};
+
 const FirstModule = () => {
     const [selectedOption, setSelectedOption] = useState('ellipse');
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
+    };
+
+    const handleFormSubmit = (values) => {
+        console.log(JSON.stringify(values, null, 2));
     };
 
     return (
@@ -19,69 +85,9 @@ const FirstModule = () => {
                     Калькулятор розсіяння зони плями
                 </div>
                 <Formik
-                    initialValues={{
-                        distance: 0,
-                        sensitivity: 0,
-                        power: 0,
-                        angleWidth: 0,
-                        angleHeight: 0,
-                        spotWidth: 0,
-                        spotHeight: 0,
-                    }}
-                    validationSchema={Yup.object({
-                        distance: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        sensitivity: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        power: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        angleWidth: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        angleHeight: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        spotWidth: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                        spotHeight: Yup.number()
-                            .required("Це поле є обов'язковим")
-                            .test(
-                                'not-zero',
-                                'Значення не повинно бути рівним 0',
-                                (value) => value !== 0,
-                            ),
-                    })}
-                    onSubmit={(values) =>
-                        console.log(JSON.stringify(values, null, 2))
-                    }
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleFormSubmit}
                 >
                     <Form className="form__body">
                         <div className="form__item">
@@ -157,6 +163,7 @@ const FirstModule = () => {
                                 Ввести довжини
                             </Radio.Button>
                         </Radio.Group>
+                        {/* отрендерит поля если выбрана опция через расчет углов */}
                         {selectedOption === 'ellipse' && (
                             <>
                                 <div className="form__item">
