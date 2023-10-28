@@ -29,25 +29,55 @@ const FirstModule = () => {
                         spotHeight: 0,
                     }}
                     validationSchema={Yup.object({
-                        distance: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
-                        sensitivity: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
-                        power: Yup.number().required("Це поле є обов'язковим"),
-                        angleWidth: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
-                        angleHeight: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
-                        spotWidth: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
-                        spotHeight: Yup.number().required(
-                            "Це поле є обов'язковим",
-                        ),
+                        distance: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        sensitivity: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        power: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        angleWidth: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        angleHeight: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        spotWidth: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
+                        spotHeight: Yup.number()
+                            .required("Це поле є обов'язковим")
+                            .test(
+                                'not-zero',
+                                'Значення не повинно бути рівним 0',
+                                (value) => value !== 0,
+                            ),
                     })}
                     onSubmit={(values) =>
                         console.log(JSON.stringify(values, null, 2))
