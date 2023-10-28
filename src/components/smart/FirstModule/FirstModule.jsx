@@ -1,10 +1,17 @@
 // import { useFormik } from 'formik';
+import { useState } from 'react';
 import Input from '../../ui/Input/Input';
 import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
 
 const FirstModule = () => {
+    const [selectedOption, setSelectedOption] = useState('ellipse'); // Значение по умолчанию "ellipse"
+
+    // Обработчик изменения выбранной опции
+    const handleOptionChange = (e) => {
+        setSelectedOption(e.target.value);
+    };
     // const formik = useFormik({
     //     // это значения которые называются так же как и атрибуты ***name*** у полей формы для хранения данных в хуке.
     //     initialValues: {
@@ -51,8 +58,10 @@ const FirstModule = () => {
                         type="number"
                     />
                     <Radio.Group
+                        value={selectedOption}
                         buttonStyle="solid"
-                        className="form__select"
+                        className="form__item form__select"
+                        onChange={handleOptionChange}
                     >
                         <Radio.Button
                             defaultChecked
@@ -64,6 +73,43 @@ const FirstModule = () => {
                             Ввести довжини
                         </Radio.Button>
                     </Radio.Group>
+                    {selectedOption === 'ellipse' && (
+                        <>
+                            <Input
+                                className="form__item"
+                                text="Кут Ширини (°):"
+                                id="angleWidth"
+                                name="angleWidth"
+                                type="number"
+                            />
+                            <Input
+                                className="form__item"
+                                text="Кут Висоти (°):"
+                                id="angleHeight"
+                                name="angleHeight"
+                                type="number"
+                            />
+                        </>
+                    )}
+
+                    {selectedOption === 'rectangle' && (
+                        <>
+                            <Input
+                                className="form__item"
+                                text="Ширина Плями (м):"
+                                id="spotWidth"
+                                name="spotWidth"
+                                type="number"
+                            />
+                            <Input
+                                className="form__item"
+                                text="Висота Плями (м):"
+                                id="spotHeight"
+                                name="spotHeight"
+                                type="number"
+                            />
+                        </>
+                    )}
                     <Button
                         className="form__button"
                         type="primary"
