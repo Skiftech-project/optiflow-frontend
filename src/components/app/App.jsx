@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Header from '../simple/Header/Header';
 import Footer from '../simple/Footer/Footer';
 import FirstModule from '../smart/FirstModule/FirstModule';
