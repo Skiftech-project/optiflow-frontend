@@ -1,4 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 import { useState } from 'react';
 import { Radio } from 'antd';
@@ -74,9 +75,40 @@ const FirstModule = () => {
         setSelectedOption(e.target.value);
     };
 
-    const handleFormSubmit = (values) => {
-        console.log(JSON.stringify(values, null, 2));
+    const handleFormSubmit = async (values) => {
+        try {
+            const response = await axios.post(
+                'http://127.0.0.1:5000/index',
+                values,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                },
+            );
+
+            console.log('Успешно отправлено', response.data);
+            // Вместо response, вы можете получить данные ответа через response.data
+        } catch (error) {
+            console.error('Произошла ошибка при отправке данных', error);
+        }
     };
+
+    // const handleFormSubmit = async (values) => {
+    //     // Отправка данных на сервер с использованием Axios
+    //     axios
+    //         .post('http://127.0.0.1:5000/index', values, {
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //         })
+    //         .then((response) => {
+    //             console.log('Успешно отправлено', response);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Произошла ошибка при отправке данных', error);
+    //         });
+    // };
 
     return (
         <div className="data">
