@@ -94,22 +94,6 @@ const FirstModule = () => {
         }
     };
 
-    // const handleFormSubmit = async (values) => {
-    //     // Отправка данных на сервер с использованием Axios
-    //     axios
-    //         .post('http://127.0.0.1:5000/index', values, {
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         })
-    //         .then((response) => {
-    //             console.log('Успешно отправлено', response);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Произошла ошибка при отправке данных', error);
-    //         });
-    // };
-
     return (
         <div className="data">
             <div className="form">
