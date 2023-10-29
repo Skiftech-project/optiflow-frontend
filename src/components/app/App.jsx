@@ -6,17 +6,12 @@ import OutputBlock from '../smart/OutputBlock/OutputBlock';
 import './App.css';
 
 const App = () => {
-    async function fetchData() {
-        const responce = await axios.get('http://127.0.0.1:5000/index');
-        console.log(responce);
-    }
     return (
         <>
             <Header />
             <main className="main">
                 <FirstModule />
                 <OutputBlock />
-                <button onClick={fetchData}>Fetch Data</button>
             </main>
             <Footer />
         </>
