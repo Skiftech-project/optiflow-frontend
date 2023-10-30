@@ -1,103 +1,39 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
-import * as Yup from 'yup';
 import { useState } from 'react';
-// import { Radio } from 'antd';
+import validationSchema from '../../../core/shemes/ShemaFirstModule';
+
+import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button } from 'antd';
 import './FirstModule.css';
 
-const validationSchema = Yup.object({
-    distance: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
-    sensitivity: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
-    power: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
-    angleWidth: Yup.number()
-		.when('selectedOption', {
-			is: 'ellipse',
-			then: Yup.number()
-				.required("Це поле є обов'язковим")
-				.test(
-					'is-more-than-zero',
-					'Значення повинно бути більшим або рівним 0',
-					(value) => value >= 0,
-				),
-        }),
-    angleHeight: Yup.number()
-        .when('selectedOption', {
-			is: 'ellipse',
-			then: Yup.number()
-				.required("Це поле є обов'язковим")
-				.test(
-					'is-more-than-zero',
-					'Значення повинно бути більшим або рівним 0',
-					(value) => value >= 0,
-				),
-        }),
-    spotWidth: Yup.number()
-		.when('selectedOption', {
-			is: 'rectangle',
-			then: Yup.number()
-				.required("Це поле є обов'язковим")
-				.test(
-					'is-more-than-zero',
-					'Значення повинно бути більшим або рівним 0',
-					(value) => value >= 0,
-				),
-        }),
-    spotHeight: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'is-more-than-zero',
-            'Значення повинно бути більшим або рівним 0',
-            (value) => value >= 0,
-        ),
-});
-
 const initialValues = {
-    distance: 0,
-    sensitivity: 0,
-    power: 0,
-    angleWidth: 0,
-    angleHeight: 0,
-    spotWidth: 0,
-    spotHeight: 0,
+    distance: '',
+    sensitivity: '',
+    power: '',
+    angleWidth: 1,
+    angleHeight: 1,
+    spotWidth: 1,
+    spotHeight: 1,
 };
 
 const FirstModule = () => {
-    const [selectedOption, setSelectedOption] = useState('ellipse');
-	
+    const [selectedOption, setSelectedOption] = useState('angles');
 
     const handleOptionChange = (e) => {
-		setSelectedOption(e.target.value);
+        setSelectedOption(e.target.value);
     };
 
     const handleFormSubmit = async (values) => {
-		const updatedValues = { ...values };
+        const updatedValues = { ...values };
         try {
-			if (selectedOption === 'ellipse'){
-				delete updatedValues.spotWidth;
-				delete updatedValues.spotHeight;
-			}else if(selectedOption === 'rectangle'){
-				delete updatedValues.angleWidth;
-				delete updatedValues.angleHeight;
-			}
+            if (selectedOption === 'angles') {
+                delete updatedValues.spotWidth;
+                delete updatedValues.spotHeight;
+            } else if (selectedOption === 'dimensions') {
+                delete updatedValues.angleWidth;
+                delete updatedValues.angleHeight;
+            }
             const response = await axios.post(
                 'http://127.0.0.1:5000/index',
                 updatedValues,
@@ -113,7 +49,6 @@ const FirstModule = () => {
             console.error('Произошла ошибка при отправке данных', error);
         }
         console.log(updatedValues);
-		
     };
 
     return (
@@ -128,150 +63,63 @@ const FirstModule = () => {
                     onSubmit={handleFormSubmit}
                 >
                     <Form className="form__body">
-                        <div className="form__item">
-                            <label
-                                htmlFor="distance"
-                                className="form__label"
-                            >
-                                Відстань (м):
-                            </label>
-                            <Field
-                                id="distance"
-                                name="distance"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="distance"
-                                component="div"
-                            />
-                        </div>
+                        <InputBlock
+                            label="Відстань (м):"
+                            id="distance"
+                            name="distance"
+                            type="number"
+                        />
 
-                        <div className="form__item">
-                            <label
-                                htmlFor="sensitivity"
-                                className="form__label"
-                            >
-                                Чутливість (мВт/м²):
-                            </label>
-                            <Field
-                                id="sensitivity"
-                                name="sensitivity"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="sensitivity"
-                                component="div"
-                            />
-                        </div>
+                        <InputBlock
+                            label="Чутливість (мВт/м²):"
+                            id="sensitivity"
+                            name="sensitivity"
+                            type="number"
+                        />
 
-                        <div className="form__item">
-                            <label
-                                htmlFor="power"
-                                className="form__label"
-                            >
-                                Потужність (мВт):
-                            </label>
-                            <Field
-                                id="power"
-                                name="power"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="power"
-                                component="div"
-                            />
-                        </div>
-						
-						
-						
-						{selectedOption === 'ellipse' && (
-							<div>
-								<div className="form__item">
-									<label
-										htmlFor="angleWidth"
-										className="form__label"
-									>
-										Кут Ширини (°):
-									</label>
-									<Field
-										id="angleWidth"
-										name="angleWidth"
-										type="number"
-									/>
-									<ErrorMessage
-										className="error"
-										name="angleWidth"
-										component="div"
-									/>
-								</div>
-								<div className="form__item">
-									<label
-										htmlFor="angleHeight"
-										className="form__label"
-									>
-										Кут Висоти (°):
-									</label>
-									<Field
-										id="angleHeight"
-										name="angleHeight"
-										type="number"
-									/>
-									<ErrorMessage
-										className="error"
-										name="angleHeight"
-										component="div"
-									/>
-								</div>
-							</div>
-						)}
+                        <InputBlock
+                            label="Потужність (мВт):"
+                            id="power"
+                            name="power"
+                            type="number"
+                        />
 
-
-						{selectedOption === 'rectangle' && (
+                        {selectedOption === 'angles' && (
                             <div>
-								<div className="form__item">
-									<label
-										htmlFor="spotWidth"
-										className="form__label"
-									>
-										Ширина Плями (м):
-									</label>
-									<Field
-										id="spotWidth"
-										name="spotWidth"
-										type="number"
-									/>
-									<ErrorMessage
-										className="error"
-										name="spotWidth"
-										component="div"
-									/>
-								</div>
-								<div className="form__item">
-									<label
-										htmlFor="spotHeight"
-										className="form__label"
-									>
-										Висота Плями (м):
-									</label>
-									<Field
-										id="spotHeight"
-										name="spotHeight"
-										type="number"
-									/>
-									<ErrorMessage
-										className="error"
-										name="spotHeight"
-										component="div"
-									/>
-								</div>
-							</div>
-						)}
-						
-						
-						<div className="form__item">
+                                <InputBlock
+                                    label="Кут Ширини (°):"
+                                    id="angleWidth"
+                                    name="angleWidth"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    label="Кут Висоти (°):"
+                                    id="angleHeight"
+                                    name="angleHeight"
+                                    type="number"
+                                />
+                            </div>
+                        )}
+
+                        {selectedOption === 'dimensions' && (
+                            <div>
+                                <InputBlock
+                                    label="Ширина Плями (м):"
+                                    id="spotWidth"
+                                    name="spotWidth"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    label="Висота Плями (м):"
+                                    id="spotHeight"
+                                    name="spotHeight"
+                                    type="number"
+                                />
+                            </div>
+                        )}
+
+                        {/* form radio */}
+                        <div className="form__item">
                             <label className="form__label">
                                 Выберите опцию:
                             </label>
@@ -280,21 +128,23 @@ const FirstModule = () => {
                                     <Field
                                         type="radio"
                                         name="option"
-                                        value="ellipse"
-                                        checked={selectedOption === 'ellipse'}
+                                        value="angles"
+                                        checked={selectedOption === 'angles'}
                                         onChange={handleOptionChange}
                                     />
-                                    Эллипс
+                                    Задати через кути
                                 </label>
                                 <label>
                                     <Field
                                         type="radio"
                                         name="option"
-                                        value="rectangle"
-                                        checked={selectedOption === 'rectangle'}
+                                        value="dimensions"
+                                        checked={
+                                            selectedOption === 'dimensions'
+                                        }
                                         onChange={handleOptionChange}
                                     />
-                                    Прямоугольник
+                                    Задати через розміри плями
                                 </label>
                             </div>
                         </div>
