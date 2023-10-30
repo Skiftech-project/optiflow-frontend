@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-// import { useState } from 'react';
+import { useState } from 'react';
 // import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
@@ -29,32 +29,44 @@ const validationSchema = Yup.object({
             (value) => value !== 0,
         ),
     angleWidth: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
+		.when('selectedOption', {
+			is: 'ellipse',
+			then: Yup.number()
+				.required("Це поле є обов'язковим")
+				.test(
+					'is-more-than-zero',
+					'Значення повинно бути більшим або рівним 0',
+					(value) => value >= 0,
+				),
+        }),
     angleHeight: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
+        .when('selectedOption', {
+			is: 'ellipse',
+			then: Yup.number()
+				.required("Це поле є обов'язковим")
+				.test(
+					'is-more-than-zero',
+					'Значення повинно бути більшим або рівним 0',
+					(value) => value >= 0,
+				),
+        }),
     spotWidth: Yup.number()
-        .required("Це поле є обов'язковим")
-        .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
-        ),
+		.when('selectedOption', {
+			is: 'rectangle',
+			then: Yup.number()
+				.required("Це поле є обов'язковим")
+				.test(
+					'is-more-than-zero',
+					'Значення повинно бути більшим або рівним 0',
+					(value) => value >= 0,
+				),
+        }),
     spotHeight: Yup.number()
         .required("Це поле є обов'язковим")
         .test(
-            'not-zero',
-            'Значення не повинно бути рівним 0',
-            (value) => value !== 0,
+            'is-more-than-zero',
+            'Значення повинно бути більшим або рівним 0',
+            (value) => value >= 0,
         ),
 });
 
@@ -69,17 +81,26 @@ const initialValues = {
 };
 
 const FirstModule = () => {
-    // const [selectedOption, setSelectedOption] = useState('ellipse');
+    const [selectedOption, setSelectedOption] = useState('ellipse');
+	
 
-    // const handleOptionChange = (e) => {
-    //     setSelectedOption(e.target.value);
-    // };
+    const handleOptionChange = (e) => {
+		setSelectedOption(e.target.value);
+    };
 
     const handleFormSubmit = async (values) => {
+		const updatedValues = { ...values };
         try {
+			if (selectedOption === 'ellipse'){
+				delete updatedValues.spotWidth;
+				delete updatedValues.spotHeight;
+			}else if(selectedOption === 'rectangle'){
+				delete updatedValues.angleWidth;
+				delete updatedValues.angleHeight;
+			}
             const response = await axios.post(
                 'http://127.0.0.1:5000/index',
-                values,
+                updatedValues,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -91,7 +112,8 @@ const FirstModule = () => {
         } catch (error) {
             console.error('Произошла ошибка при отправке данных', error);
         }
-        // console.log(JSON.stringify(values, null, 2));
+        console.log(updatedValues);
+		
     };
 
     return (
@@ -162,79 +184,119 @@ const FirstModule = () => {
                                 component="div"
                             />
                         </div>
+						
+						
+						
+						{selectedOption === 'ellipse' && (
+							<div>
+								<div className="form__item">
+									<label
+										htmlFor="angleWidth"
+										className="form__label"
+									>
+										Кут Ширини (°):
+									</label>
+									<Field
+										id="angleWidth"
+										name="angleWidth"
+										type="number"
+									/>
+									<ErrorMessage
+										className="error"
+										name="angleWidth"
+										component="div"
+									/>
+								</div>
+								<div className="form__item">
+									<label
+										htmlFor="angleHeight"
+										className="form__label"
+									>
+										Кут Висоти (°):
+									</label>
+									<Field
+										id="angleHeight"
+										name="angleHeight"
+										type="number"
+									/>
+									<ErrorMessage
+										className="error"
+										name="angleHeight"
+										component="div"
+									/>
+								</div>
+							</div>
+						)}
 
-                        <div className="form__item">
-                            <label
-                                htmlFor="angleWidth"
-                                className="form__label"
-                            >
-                                Кут Ширини (°):
-                            </label>
-                            <Field
-                                id="angleWidth"
-                                name="angleWidth"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="angleWidth"
-                                component="div"
-                            />
-                        </div>
-                        <div className="form__item">
-                            <label
-                                htmlFor="angleHeight"
-                                className="form__label"
-                            >
-                                Кут Висоти (°):
-                            </label>
-                            <Field
-                                id="angleHeight"
-                                name="angleHeight"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="angleHeight"
-                                component="div"
-                            />
-                        </div>
 
-                        <div className="form__item">
-                            <label
-                                htmlFor="spotWidth"
-                                className="form__label"
-                            >
-                                Ширина Плями (м):
+						{selectedOption === 'rectangle' && (
+                            <div>
+								<div className="form__item">
+									<label
+										htmlFor="spotWidth"
+										className="form__label"
+									>
+										Ширина Плями (м):
+									</label>
+									<Field
+										id="spotWidth"
+										name="spotWidth"
+										type="number"
+									/>
+									<ErrorMessage
+										className="error"
+										name="spotWidth"
+										component="div"
+									/>
+								</div>
+								<div className="form__item">
+									<label
+										htmlFor="spotHeight"
+										className="form__label"
+									>
+										Висота Плями (м):
+									</label>
+									<Field
+										id="spotHeight"
+										name="spotHeight"
+										type="number"
+									/>
+									<ErrorMessage
+										className="error"
+										name="spotHeight"
+										component="div"
+									/>
+								</div>
+							</div>
+						)}
+						
+						
+						<div className="form__item">
+                            <label className="form__label">
+                                Выберите опцию:
                             </label>
-                            <Field
-                                id="spotWidth"
-                                name="spotWidth"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="spotWidth"
-                                component="div"
-                            />
-                        </div>
-                        <div className="form__item">
-                            <label
-                                htmlFor="spotHeight"
-                                className="form__label"
-                            >
-                                Висота Плями (м):
-                            </label>
-                            <Field
-                                id="spotHeight"
-                                name="spotHeight"
-                                type="number"
-                            />
-                            <ErrorMessage
-                                className="error"
-                                name="spotHeight"
-                                component="div"
-                            />
+                            <div className="form__radio">
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="option"
+                                        value="ellipse"
+                                        checked={selectedOption === 'ellipse'}
+                                        onChange={handleOptionChange}
+                                    />
+                                    Эллипс
+                                </label>
+                                <label>
+                                    <Field
+                                        type="radio"
+                                        name="option"
+                                        value="rectangle"
+                                        checked={selectedOption === 'rectangle'}
+                                        onChange={handleOptionChange}
+                                    />
+                                    Прямоугольник
+                                </label>
+                            </div>
                         </div>
 
                         <Button
