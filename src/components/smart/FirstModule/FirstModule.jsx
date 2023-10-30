@@ -1,8 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-import { useState } from 'react';
-import { Radio } from 'antd';
+// import { useState } from 'react';
+// import { Radio } from 'antd';
 import { Button } from 'antd';
 import './FirstModule.css';
 
@@ -69,11 +69,11 @@ const initialValues = {
 };
 
 const FirstModule = () => {
-    const [selectedOption, setSelectedOption] = useState('ellipse');
+    // const [selectedOption, setSelectedOption] = useState('ellipse');
 
-    const handleOptionChange = (e) => {
-        setSelectedOption(e.target.value);
-    };
+    // const handleOptionChange = (e) => {
+    //     setSelectedOption(e.target.value);
+    // };
 
     const handleFormSubmit = async (values) => {
         try {
@@ -88,10 +88,10 @@ const FirstModule = () => {
             );
 
             console.log('Успешно отправлено', response.data);
-            // Вместо response, вы можете получить данные ответа через response.data
         } catch (error) {
             console.error('Произошла ошибка при отправке данных', error);
         }
+        // console.log(JSON.stringify(values, null, 2));
     };
 
     return (
@@ -163,104 +163,80 @@ const FirstModule = () => {
                             />
                         </div>
 
-                        <Radio.Group
-                            value={selectedOption}
-                            buttonStyle="solid"
-                            className="form__item form__select"
-                            onChange={handleOptionChange}
-                        >
-                            <Radio.Button
-                                defaultChecked
-                                value="ellipse"
+                        <div className="form__item">
+                            <label
+                                htmlFor="angleWidth"
+                                className="form__label"
                             >
-                                Ввести кути
-                            </Radio.Button>
-                            <Radio.Button value="rectangle">
-                                Ввести довжини
-                            </Radio.Button>
-                        </Radio.Group>
-                        {/* отрендерит поля если выбрана опция через расчет углов */}
-                        {selectedOption === 'ellipse' && (
-                            <>
-                                <div className="form__item">
-                                    <label
-                                        htmlFor="angleWidth"
-                                        className="form__label"
-                                    >
-                                        Кут Ширини (°):
-                                    </label>
-                                    <Field
-                                        id="angleWidth"
-                                        name="angleWidth"
-                                        type="number"
-                                    />
-                                    <ErrorMessage
-                                        className="error"
-                                        name="angleWidth"
-                                        component="div"
-                                    />
-                                </div>
-                                <div className="form__item">
-                                    <label
-                                        htmlFor="angleHeight"
-                                        className="form__label"
-                                    >
-                                        Кут Висоти (°):
-                                    </label>
-                                    <Field
-                                        id="angleHeight"
-                                        name="angleHeight"
-                                        type="number"
-                                    />
-                                    <ErrorMessage
-                                        className="error"
-                                        name="angleHeight"
-                                        component="div"
-                                    />
-                                </div>
-                            </>
-                        )}
-                        {/* отрендерит поля если выбрана опция через размер пятна */}
-                        {selectedOption === 'rectangle' && (
-                            <>
-                                <div className="form__item">
-                                    <label
-                                        htmlFor="spotWidth"
-                                        className="form__label"
-                                    >
-                                        Ширина Плями (м):
-                                    </label>
-                                    <Field
-                                        id="spotWidth"
-                                        name="spotWidth"
-                                        type="number"
-                                    />
-                                    <ErrorMessage
-                                        className="error"
-                                        name="spotWidth"
-                                        component="div"
-                                    />
-                                </div>
-                                <div className="form__item">
-                                    <label
-                                        htmlFor="spotHeight"
-                                        className="form__label"
-                                    >
-                                        Висота Плями (м):
-                                    </label>
-                                    <Field
-                                        id="spotHeight"
-                                        name="spotHeight"
-                                        type="number"
-                                    />
-                                    <ErrorMessage
-                                        className="error"
-                                        name="spotHeight"
-                                        component="div"
-                                    />
-                                </div>
-                            </>
-                        )}
+                                Кут Ширини (°):
+                            </label>
+                            <Field
+                                id="angleWidth"
+                                name="angleWidth"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="angleWidth"
+                                component="div"
+                            />
+                        </div>
+                        <div className="form__item">
+                            <label
+                                htmlFor="angleHeight"
+                                className="form__label"
+                            >
+                                Кут Висоти (°):
+                            </label>
+                            <Field
+                                id="angleHeight"
+                                name="angleHeight"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="angleHeight"
+                                component="div"
+                            />
+                        </div>
+
+                        <div className="form__item">
+                            <label
+                                htmlFor="spotWidth"
+                                className="form__label"
+                            >
+                                Ширина Плями (м):
+                            </label>
+                            <Field
+                                id="spotWidth"
+                                name="spotWidth"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="spotWidth"
+                                component="div"
+                            />
+                        </div>
+                        <div className="form__item">
+                            <label
+                                htmlFor="spotHeight"
+                                className="form__label"
+                            >
+                                Висота Плями (м):
+                            </label>
+                            <Field
+                                id="spotHeight"
+                                name="spotHeight"
+                                type="number"
+                            />
+                            <ErrorMessage
+                                className="error"
+                                name="spotHeight"
+                                component="div"
+                            />
+                        </div>
+
                         <Button
                             className="form__button"
                             type="primary"
