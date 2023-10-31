@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import { useState } from 'react';
 import validationSchema from '../../../core/shemes/ShemaFirstModule';
@@ -19,6 +19,7 @@ const initialValues = {
 
 const FirstModule = () => {
     const [selectedOption, setSelectedOption] = useState('angles');
+    const [data, setData] = useState(null);
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -45,10 +46,10 @@ const FirstModule = () => {
             );
 
             console.log('Успешно отправлено', response.data);
+            setData(response.data);
         } catch (error) {
             console.error('Произошла ошибка при отправке данных', error);
         }
-        console.log(updatedValues);
     };
 
     return (
@@ -123,8 +124,9 @@ const FirstModule = () => {
                             <label className="form__label">
                                 Выберите опцию:
                             </label>
-                            <div className="form__radio">
-                                <label>
+                            <div className="radio">
+                                <div className="radio__item">
+                                    <label>Кути:</label>
                                     <Field
                                         type="radio"
                                         name="option"
@@ -132,9 +134,9 @@ const FirstModule = () => {
                                         checked={selectedOption === 'angles'}
                                         onChange={handleOptionChange}
                                     />
-                                    Задати через кути
-                                </label>
-                                <label>
+                                </div>
+                                <div className="radio__item">
+                                    <label>Пляма:</label>
                                     <Field
                                         type="radio"
                                         name="option"
@@ -144,8 +146,7 @@ const FirstModule = () => {
                                         }
                                         onChange={handleOptionChange}
                                     />
-                                    Задати через розміри плями
-                                </label>
+                                </div>
                             </div>
                         </div>
 
@@ -158,6 +159,28 @@ const FirstModule = () => {
                         </Button>
                     </Form>
                 </Formik>
+            </div>
+            <div className="output">
+                <div className="output__item">
+                    Максимальна площа:
+                    <br />
+                    <span> {data?.max_area}</span>
+                </div>
+                <div className="output__item">
+                    Максимальна дистанція:
+                    <br />
+                    <span> {data?.max_distance}</span>
+                </div>
+                <div className="output__item">
+                    Кут ширини:
+                    <br />
+                    <span> {data?.angle_width}</span>
+                </div>
+                <div className="output__item">
+                    Кут висоти:
+                    <br />
+                    <span> {data?.angle_height}</span>
+                </div>
             </div>
         </div>
     );
