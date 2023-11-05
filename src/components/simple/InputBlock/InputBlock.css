@@ -1,5 +1,5 @@
 .error {
-    color: red;
+    color: #ff5861;
     margin-top: 7px;
 }
 .form__label {
@@ -12,16 +12,22 @@
     flex-direction: column;
 }
 
-.form__item input {
+.form__input {
     width: 100%;
     height: 35px;
     padding: 0px 0px 0px 10px;
     border-radius: 7px;
     border: 1px solid rgba(0, 0, 0, 0.302);
+    border-bottom: 2px solid black;
     outline: none;
-    transition: 0.3s border;
+    transition: 0.4s border ease-in-out;
 }
 
 .form__item input:focus {
-    border: 1px solid #1677ff;
+    border-bottom: 2px solid blue;
+}
+
+.errored {
+    border-bottom: 2px solid #ff5861;
+    color: #ff5861;
 }

@@ -3,7 +3,13 @@ import { ErrorMessage } from 'formik';
 import './InputBlock.css';
 
 const InputBlock = ({ label, ...props }) => {
-    const [field] = useField(props);
+    const [field, meta] = useField(props);
+    const isError = meta.touched && meta.error;
+    let classNames = 'form__input';
+    if (isError) {
+        classNames += ' errored';
+    }
+
     return (
         <div className="form__item">
             <label
@@ -15,6 +21,7 @@ const InputBlock = ({ label, ...props }) => {
             <input
                 {...props}
                 {...field}
+                className={classNames}
             />
             <ErrorMessage
                 className="error"

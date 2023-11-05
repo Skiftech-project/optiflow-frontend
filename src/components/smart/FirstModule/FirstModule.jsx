@@ -160,6 +160,7 @@ const FirstModule = () => {
                     </Form>
                 </Formik>
             </div>
+
             <div className="output">
                 <div className="output__item">
                     Максимальна площа:
