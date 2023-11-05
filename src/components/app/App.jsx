@@ -8,7 +8,9 @@ const App = () => {
         <>
             <Header />
             <main className="main">
-                <FirstModule />
+                <div className="container">
+                    <FirstModule />
+                </div>
             </main>
             <Footer />
         </>
