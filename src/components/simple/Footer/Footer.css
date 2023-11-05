@@ -1,9 +1,37 @@
 .footer {
+    width: 100%;
+    background: #fff;
+}
+
+.footer__body {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 20px;
-    text-transform: uppercase;
-    background-color: #aba5a5;
-    height: 70px;
+    justify-content: space-around;
+    min-height: 70px;
+}
+.footer__copyright {
+    color: rgba(25, 21, 21, 0.5);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+.footer__list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer__item {
+    margin-right: 45px;
+}
+
+.footer__item a {
+    text-decoration: none;
+    color: rgba(25, 21, 21, 0.5);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.footer__item:last-child {
+    margin-right: 0px;
 }
