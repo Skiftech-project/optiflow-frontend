@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object({
-    min_plume_size: Yup.number()
+    distance: Yup.number()
         .required("Це поле є обов'язковим")
         .test(
             'not-zero',

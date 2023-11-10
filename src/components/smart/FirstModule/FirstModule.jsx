@@ -19,7 +19,12 @@ const initialValues = {
 
 const FirstModule = () => {
     const [selectedOption, setSelectedOption] = useState('angles');
-    const [data, setData] = useState(null);
+    const [data, setData] = useState({
+        max_area: 0,
+        max_distance: 0,
+        angle_width: 0,
+        angle_height: 0,
+    });
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -65,13 +70,6 @@ const FirstModule = () => {
                 >
                     <Form className="form__body">
                         <InputBlock
-                            label="Відстань (м):"
-                            id="distance"
-                            name="distance"
-                            type="number"
-                        />
-
-                        <InputBlock
                             label="Чутливість (мВт/м²):"
                             id="sensitivity"
                             name="sensitivity"
@@ -85,44 +83,10 @@ const FirstModule = () => {
                             type="number"
                         />
 
-                        {selectedOption === 'angles' && (
-                            <div>
-                                <InputBlock
-                                    label="Кут Ширини (°):"
-                                    id="angleWidth"
-                                    name="angleWidth"
-                                    type="number"
-                                />
-                                <InputBlock
-                                    label="Кут Висоти (°):"
-                                    id="angleHeight"
-                                    name="angleHeight"
-                                    type="number"
-                                />
-                            </div>
-                        )}
-
-                        {selectedOption === 'dimensions' && (
-                            <div>
-                                <InputBlock
-                                    label="Ширина Плями (м):"
-                                    id="spotWidth"
-                                    name="spotWidth"
-                                    type="number"
-                                />
-                                <InputBlock
-                                    label="Висота Плями (м):"
-                                    id="spotHeight"
-                                    name="spotHeight"
-                                    type="number"
-                                />
-                            </div>
-                        )}
-
                         {/* form radio */}
                         <div className="form__item">
                             <label className="form__label">
-                                Выберите опцию:
+                                Оберіть опцію:
                             </label>
                             <div className="radio">
                                 <div className="radio__item">
@@ -150,6 +114,46 @@ const FirstModule = () => {
                             </div>
                         </div>
 
+                        {selectedOption === 'angles' && (
+                            <div>
+                                <InputBlock
+                                    label="Кут Ширини (°):"
+                                    id="angleWidth"
+                                    name="angleWidth"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    label="Кут Висоти (°):"
+                                    id="angleHeight"
+                                    name="angleHeight"
+                                    type="number"
+                                />
+                            </div>
+                        )}
+
+                        {selectedOption === 'dimensions' && (
+                            <div>
+                                <InputBlock
+                                    label="Відстань (м):"
+                                    id="distance"
+                                    name="distance"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    label="Ширина Плями (м):"
+                                    id="spotWidth"
+                                    name="spotWidth"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    label="Висота Плями (м):"
+                                    id="spotHeight"
+                                    name="spotHeight"
+                                    type="number"
+                                />
+                            </div>
+                        )}
+
                         <Button
                             className="form__button"
                             type="primary"
@@ -163,24 +167,19 @@ const FirstModule = () => {
 
             <div className="output">
                 <div className="output__item">
-                    Максимальна площа:
+                    Максимальна дистанція (м):
                     <br />
-                    <span> {data?.max_area}</span>
+                    <span> {data.max_distance}</span>
                 </div>
                 <div className="output__item">
-                    Максимальна дистанція:
+                    Кут ширини (°):
                     <br />
-                    <span> {data?.max_distance}</span>
+                    <span> {data.angle_width}</span>
                 </div>
                 <div className="output__item">
-                    Кут ширини:
+                    Кут висоти (°):
                     <br />
-                    <span> {data?.angle_width}</span>
-                </div>
-                <div className="output__item">
-                    Кут висоти:
-                    <br />
-                    <span> {data?.angle_height}</span>
+                    <span> {data.angle_height}</span>
                 </div>
             </div>
         </div>

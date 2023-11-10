@@ -24,7 +24,7 @@
 }
 
 .form__item input:focus {
-    border-bottom: 2px solid blue;
+    border-bottom: 2px solid #1e55b3;
 }
 
 .errored {
