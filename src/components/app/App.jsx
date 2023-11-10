@@ -9,8 +9,10 @@ const App = () => {
         <>
             <Header />
             <main className={styles.main}>
-                <TitleBlock text="Калькулятор розрахунку області передачі даних в оптичних системах" />
-                <FirstModule />
+                <div className="container">
+                    <TitleBlock text="Калькулятор розрахунку області передачі даних в оптичних системах" />
+                    <FirstModule />
+                </div>
             </main>
             <Footer />
         </>

@@ -19,12 +19,6 @@ const initialValues = {
 
 const FirstModule = () => {
     const [selectedOption, setSelectedOption] = useState('angles');
-    const [data, setData] = useState({
-        max_area: 0,
-        max_distance: 0,
-        angle_width: 0,
-        angle_height: 0,
-    });
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -58,28 +52,32 @@ const FirstModule = () => {
     };
 
     return (
-        <div className="data">
+        <div className="forms">
             <div className="form">
-                <div className="form__title">геометрия блять</div>
+                <div className="form__title">модуль 4 та 1</div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={handleFormSubmit}
                 >
                     <Form className="form__body">
-                        <InputBlock
-                            label="Чутливість (мВт/м²):"
-                            id="sensitivity"
-                            name="sensitivity"
-                            type="number"
-                        />
+                        <div className="form__item">
+                            <InputBlock
+                                label="Чутливість (мВт/м²):"
+                                id="sensitivity"
+                                name="sensitivity"
+                                type="number"
+                            />
+                        </div>
 
-                        <InputBlock
-                            label="Потужність (мВт):"
-                            id="power"
-                            name="power"
-                            type="number"
-                        />
+                        <div className="form__item">
+                            <InputBlock
+                                label="Потужність (мВт):"
+                                id="power"
+                                name="power"
+                                type="number"
+                            />
+                        </div>
 
                         {/* form radio */}
                         <div className="form__item">
@@ -113,44 +111,90 @@ const FirstModule = () => {
                         </div>
 
                         {selectedOption === 'angles' && (
-                            <div>
-                                <InputBlock
-                                    label="Кут Ширини (°):"
-                                    id="angleWidth"
-                                    name="angleWidth"
-                                    type="number"
-                                />
-                                <InputBlock
-                                    label="Кут Висоти (°):"
-                                    id="angleHeight"
-                                    name="angleHeight"
-                                    type="number"
-                                />
-                            </div>
+                            <>
+                                <div className="form__item">
+                                    <InputBlock
+                                        label="Кут Ширини (°):"
+                                        id="angleWidth"
+                                        name="angleWidth"
+                                        type="number"
+                                    />
+                                </div>
+                                <div className="form__item">
+                                    <InputBlock
+                                        label="Кут Висоти (°):"
+                                        id="angleHeight"
+                                        name="angleHeight"
+                                        type="number"
+                                    />
+                                </div>
+                            </>
                         )}
 
                         {selectedOption === 'dimensions' && (
-                            <div>
-                                <InputBlock
-                                    label="Відстань (м):"
-                                    id="distance"
-                                    name="distance"
-                                    type="number"
-                                />
-                                <InputBlock
-                                    label="Ширина Плями (м):"
-                                    id="spotWidth"
-                                    name="spotWidth"
-                                    type="number"
-                                />
-                                <InputBlock
-                                    label="Висота Плями (м):"
-                                    id="spotHeight"
-                                    name="spotHeight"
-                                    type="number"
-                                />
-                            </div>
+                            <>
+                                <div className="form__item">
+                                    <InputBlock
+                                        label="Відстань (м):"
+                                        id="distance"
+                                        name="distance"
+                                        type="number"
+                                    />
+                                </div>
+                                <div className="form__item">
+                                    <InputBlock
+                                        label="Ширина Плями (м):"
+                                        id="spotWidth"
+                                        name="spotWidth"
+                                        type="number"
+                                    />
+                                </div>
+                                <div className="form__item">
+                                    <InputBlock
+                                        label="Висота Плями (м):"
+                                        id="spotHeight"
+                                        name="spotHeight"
+                                        type="number"
+                                    />
+                                </div>
+                            </>
                         )}
+                    </Form>
+                </Formik>
+            </div>
+            <div className="form">
+                <div className="form__title">модуль 2</div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleFormSubmit}
+                >
+                    <Form className="form__body">
+                        <div className="form__item">
+                            <InputBlock
+                                label="Кут Ширини (°):"
+                                id="angleWidth"
+                                name="angleWidth"
+                                type="number"
+                            />
+                        </div>
+                        <div className="form__item">
+                            <InputBlock
+                                label="Кут Висоти (°):"
+                                id="angleHeight"
+                                name="angleHeight"
+                                type="number"
+                            />
+                        </div>
+
+                        <div className="form__item">
+                            <InputBlock
+                                label="Мінімальний розмір плями (м):"
+                                id="minSize"
+                                name="minSize"
+                                type="number"
+                            />
+                        </div>
 
                         <Button
                             className="form__button"
@@ -159,6 +203,42 @@ const FirstModule = () => {
                         >
                             Розрахувати
                         </Button>
+                    </Form>
+                </Formik>
+            </div>
+            <div className="form">
+                <div className="form__title">модуль 3</div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleFormSubmit}
+                >
+                    <Form className="form__body">
+                        <div className="form__item">
+                            <InputBlock
+                                label="Кут Ширини (°):"
+                                id="angleWidth"
+                                name="angleWidth"
+                                type="number"
+                            />
+                        </div>
+                        <div className="form__item">
+                            <InputBlock
+                                label="Кут Висоти (°):"
+                                id="angleHeight"
+                                name="angleHeight"
+                                type="number"
+                            />
+                        </div>
+
+                        <div className="form__item">
+                            <InputBlock
+                                label="Дистанція (м):"
+                                id="power"
+                                name="power"
+                                type="number"
+                            />
+                        </div>
                     </Form>
                 </Formik>
             </div>

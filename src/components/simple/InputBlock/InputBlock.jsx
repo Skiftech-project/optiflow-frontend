@@ -11,7 +11,7 @@ const InputBlock = ({ label, ...props }) => {
     }
 
     return (
-        <div className="form__item">
+        <>
             <label
                 htmlFor={props.name}
                 className="form__label"
@@ -28,7 +28,7 @@ const InputBlock = ({ label, ...props }) => {
                 component="div"
                 {...props}
             />
-        </div>
+        </>
     );
 };
 

@@ -5,12 +5,6 @@
 .form__label {
     margin: 0px 0px 5px 0px;
 }
-.form__item {
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
 
 .form__input {
     width: 100%;
