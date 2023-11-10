@@ -1,11 +1,10 @@
 .data {
-    min-width: 400px;
+    width: fit-content;
     min-height: 500px;
     border-radius: 10px;
     background: #fff;
     padding: 40px;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,7 +42,18 @@
     width: 300px;
 }
 
-.output {
+.radio__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.radio__item label {
+    width: 100%;
+}
+
+/* .output {
     width: 300px;
     padding: 20px;
     display: flex;
@@ -68,15 +78,4 @@
 
 .output__item span {
     color: rgb(23, 117, 125);
-}
-
-.radio__item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.radio__item label {
-    width: 100%;
-}
+} */

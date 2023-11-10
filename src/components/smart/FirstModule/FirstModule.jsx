@@ -60,9 +60,7 @@ const FirstModule = () => {
     return (
         <div className="data">
             <div className="form">
-                <div className="form__title">
-                    Калькулятор розсіяння зони плями
-                </div>
+                <div className="form__title">геометрия блять</div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -163,24 +161,6 @@ const FirstModule = () => {
                         </Button>
                     </Form>
                 </Formik>
-            </div>
-
-            <div className="output">
-                <div className="output__item">
-                    Максимальна дистанція (м):
-                    <br />
-                    <span> {data.max_distance}</span>
-                </div>
-                <div className="output__item">
-                    Кут ширини (°):
-                    <br />
-                    <span> {data.angle_width}</span>
-                </div>
-                <div className="output__item">
-                    Кут висоти (°):
-                    <br />
-                    <span> {data.angle_height}</span>
-                </div>
             </div>
         </div>
     );

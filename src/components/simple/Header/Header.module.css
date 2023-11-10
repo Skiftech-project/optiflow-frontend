@@ -13,10 +13,7 @@
 .header__logo img {
     width: 100%;
 }
-.header__menu {
-}
-.menu {
-}
+
 .menu__list {
     display: flex;
 }
@@ -39,7 +36,7 @@
 .menu__item:last-child {
     margin-right: 0px;
 }
-.header__additional {
+.additional {
     display: flex;
     align-items: center;
 }
