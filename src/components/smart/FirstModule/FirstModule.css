@@ -46,15 +46,31 @@
     width: 300px;
 }
 
-.radio__item {
+.radio {
+    width: 100%;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: space-between;
+}
+.radio__item {
+    font-size: 15px;
+}
+.radio__label {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.radio__group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.radio__item label {
+.form__select {
     width: 100%;
+    height: 35px;
 }
 
 /* .output {
