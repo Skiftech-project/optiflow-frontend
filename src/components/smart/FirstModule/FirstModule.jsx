@@ -7,7 +7,6 @@ import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button } from 'antd';
 import { Radio } from 'antd';
 import { Select } from 'formik-antd';
-//import { Select } from 'antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import './FirstModule.css';
 

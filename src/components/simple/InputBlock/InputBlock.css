@@ -1,5 +1,5 @@
 .error {
-    color: #ff5861;
+    color: var(--main-red);
     margin-top: 7px;
 }
 .form__label {
@@ -18,10 +18,9 @@
 }
 
 .form__item input:focus {
-    border-bottom: 2px solid #1e55b3;
+    border-bottom: 2px solid var(--main-blue);
 }
 
 .errored {
-    border-bottom: 2px solid #ff5861;
-    color: #ff5861;
+    border-bottom: 2px solid var(--main-red);
 }

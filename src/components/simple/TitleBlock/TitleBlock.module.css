@@ -11,7 +11,7 @@
 }
 
 .title__text {
-    color: #1e55b3;
+    color: var(--main-blue);
     text-align: center;
     font-size: 21px;
     font-weight: 700;
