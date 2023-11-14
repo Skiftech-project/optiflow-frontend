@@ -50,6 +50,12 @@ const validationSchema = Yup.object({
             'Значення не повинно бути рівним 0',
             (value) => value !== 0,
         ),
+    minPlumeSize: Yup.number()
+        .typeError('Введіть число')
+        .min(0, "Значення не повинно бути від'ємним"),
+    distanceModuleThird: Yup.number()
+        .typeError('Введіть число')
+        .min(0, "Значення не повинно бути від'ємним"),
 });
 
 export default validationSchema;

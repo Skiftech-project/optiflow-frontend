@@ -2,6 +2,7 @@ import { Formik, Form } from 'formik';
 import axios from 'axios';
 import { useState } from 'react';
 import validationSchema from '../../../core/shemes/ShemaFirstModule';
+//import validationSchemaSecondModule from '../../../core/shemes/ShemaSecondModule';
 
 import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button } from 'antd';
@@ -19,16 +20,20 @@ const initialValues = {
     spotWidth: 1,
     spotHeight: 1,
     plumeForm: 'rectangle',
+    minPlumeSize: 0,
+    distanceModuleThird: 0,
 };
 
 const FirstModule = () => {
     const [selectedOption, setSelectedOption] = useState('angles');
-    // const [data, setData] = useState({
-    //     max_area: 0,
-    //     max_distance: 0,
-    //     angle_width: 0,
-    //     angle_height: 0,
-    // });
+    const [data, setData] = useState({
+        max_distance: 0,
+        min_distance: 0,
+        angle_width: 0,
+        angle_height: 0,
+        plume_width_module3: 0,
+        plume_height_module3: 0,
+    });
 
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -56,7 +61,7 @@ const FirstModule = () => {
             );
 
             console.log('Успешно отправлено', response.data);
-            //setData(response.data);
+            setData(response.data);
         } catch (error) {
             console.error('Произошла ошибка при отправке данных', error);
         }
@@ -194,6 +199,46 @@ const FirstModule = () => {
                         >
                             Розрахувати
                         </Button>
+                    </Form>
+                </Formik>
+            </div>
+            <div className="form">
+                <div className="form__title">Блок виводу даних</div>
+                <div className="output">
+                    {Object.entries(data).map(
+                        ([field, value]) =>
+                            value !== 0 && (
+                                <div key={field}>{`${field}: ${value}`}</div>
+                            ),
+                    )}
+                </div>
+            </div>
+
+            <div className="form">
+                <div className="form__title">модуль 2</div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={handleFormSubmit}
+                >
+                    <Form className="form__body">
+                        <div className="form__item">
+                            <InputBlock
+                                label="Мінімальний розмір плями (м):"
+                                id="minPlumeSize"
+                                name="minPlumeSize"
+                                type="number"
+                            />
+                        </div>
+                        <div className="form__title">Модуль 3</div>
+                        <div className="form__item">
+                            <InputBlock
+                                label="Дистанція (м):"
+                                id="distanceModuleThird"
+                                name="distanceModuleThird"
+                                type="number"
+                            />
+                        </div>
                     </Form>
                 </Formik>
             </div>
