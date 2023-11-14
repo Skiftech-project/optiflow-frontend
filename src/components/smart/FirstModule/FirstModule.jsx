@@ -2,7 +2,6 @@ import { Formik, Form } from 'formik';
 import axios from 'axios';
 import { useState } from 'react';
 import validationSchema from '../../../core/shemes/ShemaFirstModule';
-//import validationSchemaSecondModule from '../../../core/shemes/ShemaSecondModule';
 
 import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button } from 'antd';
