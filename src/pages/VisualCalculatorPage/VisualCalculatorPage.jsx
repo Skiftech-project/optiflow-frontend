@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import "./App.css";
 import { createLightRayScene } from "../../components/visual3D/LightRayEllipse";
 import "./VisualCalculatorPage.css";
 
