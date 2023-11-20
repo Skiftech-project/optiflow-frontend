@@ -14,30 +14,28 @@ const App = () => {
         <>
             <Header />
             <main className={styles.main}>
-                <div className="container">
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={<CalculatorPage />}
-                        />
-                        <Route
-                            path="/visual"
-                            element={<VisualCalculatorPage />}
-                        />
-                        <Route
-                            path="/main"
-                            element={<MainPage />}
-                        />
-                        <Route
-                            path="/about"
-                            element={<AboutUsPage />}
-                        />
-                        <Route
-                            path="*"
-                            element={<NotFoundPage />}
-                        />
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={<CalculatorPage />}
+                    />
+                    <Route
+                        path="/visual"
+                        element={<VisualCalculatorPage />}
+                    />
+                    <Route
+                        path="/main"
+                        element={<MainPage />}
+                    />
+                    <Route
+                        path="/about"
+                        element={<AboutUsPage />}
+                    />
+                    <Route
+                        path="*"
+                        element={<NotFoundPage />}
+                    />
+                </Routes>
             </main>
             <Footer />
         </>

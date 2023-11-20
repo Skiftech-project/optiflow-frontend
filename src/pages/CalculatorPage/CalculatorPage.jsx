@@ -5,8 +5,10 @@ import './CalculatorPage.css';
 const CalculatorPage = () => {
     return (
         <>
-            <TitleBlock text="Калькулятор розрахунку області передачі даних в оптичних системах" />
-            <FirstModule />
+            <div className="container">
+                <TitleBlock text="Калькулятор розрахунку області передачі даних в оптичних системах" />
+                <FirstModule />
+            </div>
         </>
     );
 };

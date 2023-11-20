@@ -1,6 +1,10 @@
 import './MainPage.css';
 const MainPage = () => {
-    return <div>Main Page</div>;
+    return (
+        <div className="container">
+            <div>Main Page</div>
+        </div>
+    );
 };
 
 export default MainPage;
