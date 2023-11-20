@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Header.module.css';
 import logo from '../../../assets/logo.svg';
 
@@ -19,16 +20,16 @@ const Header = () => {
                     <nav className={styles.menu}>
                         <ul className={styles.menu__list}>
                             <li className={styles.menu__item}>
-                                <a href="#">Головна</a>
+                                <Link to="/main">Головна</Link>
                             </li>
                             <li className={styles.menu__item}>
-                                <a href="#">Калькулятор</a>
+                                <Link to="/">Калькулятор</Link>
                             </li>
                             <li className={styles.menu__item}>
-                                <a href="#">Візуальний калькулятор</a>
+                                <Link to="/visual">Візуальний калькулятор</Link>
                             </li>
                             <li className={styles.menu__item}>
-                                <a href="#">Про нас</a>
+                                <Link to="/about">Про нас</Link>
                             </li>
                         </ul>
                     </nav>
