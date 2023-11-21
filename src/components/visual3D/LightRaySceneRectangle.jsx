@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { useRef, useEffect } from "react";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSG } from "three-csg-ts";
+import * as dat from "lil-gui";
 
 const createRectangle = (scene, maxDistance, rectWidth, rectHeight) => {
   /* Rectangle is Smax
@@ -158,6 +159,11 @@ const LightRaySceneRectangle = () => {
     model.position.y = 0;
     model.rotation.z = Math.PI / 2;
     model.position.x = -maxDistance / 2;
+
+    // GUI Controls
+    const gui = new dat.GUI({ autoPlace: true });
+    gui.domElement.id = "gui";
+    gui.add(model.material, "wireframe");
 
     const camera = new THREE.PerspectiveCamera(
       75,

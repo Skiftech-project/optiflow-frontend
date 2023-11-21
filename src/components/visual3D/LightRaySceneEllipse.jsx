@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSG } from "three-csg-ts";
-//import * as dat from "lil-gui";
+import * as dat from "lil-gui";
 
 // Функция для создания конуса (луча)
 const createCone = (scene, coneRadius, xRadius, yRadius, maxDistance) => {
@@ -69,6 +69,7 @@ const createIntersection = (scene, cone, sphere, choice) => {
 
   const material = new THREE.MeshNormalMaterial({
     wireframe: true,
+    color: 0xff0000,
   });
   interRes.material = material;
   scene.add(interRes);
@@ -115,6 +116,11 @@ const LightRaySceneEllipse = () => {
     let model = createIntersection(scene, interModel1, minSphere, "subtract");
     model.rotation.z = Math.PI / 2;
 
+    // GUI Controls
+    const gui = new dat.GUI({ autoPlace: true });
+    gui.domElement.id = "gui";
+    gui.add(model.material, "wireframe");
+
     const camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -148,6 +154,7 @@ const LightRaySceneEllipse = () => {
 
       if (parentElement) {
         parentElement.removeChild(rendererElement);
+        gui.destroy();
       }
     };
   }, []);
