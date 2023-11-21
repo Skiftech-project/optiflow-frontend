@@ -1,13 +1,8 @@
 import styles from './TitleBlock.module.css';
 
-const TitleBlock = ({ text, titleWidth }) => {
-    const titleStyle = titleWidth ? { width: titleWidth } : null;
-
+const TitleBlock = ({ text }) => {
     return (
-        <div
-            className={styles.title}
-            style={titleStyle}
-        >
+        <div className={styles.title}>
             <h2 className={styles.title__text}>{text}</h2>
         </div>
     );
