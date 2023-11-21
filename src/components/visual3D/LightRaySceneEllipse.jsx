@@ -3,6 +3,7 @@ import { useRef, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSG } from "three-csg-ts";
+//import * as dat from "lil-gui";
 
 // Функция для создания конуса (луча)
 const createCone = (scene, coneRadius, xRadius, yRadius, maxDistance) => {
