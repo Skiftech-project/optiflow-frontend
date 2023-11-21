@@ -17,7 +17,12 @@
     transition: 0.4s border ease-in-out;
 }
 
-.form__item input:focus {
+.input_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+input:focus {
     border-bottom: 2px solid var(--main-blue);
 }
 

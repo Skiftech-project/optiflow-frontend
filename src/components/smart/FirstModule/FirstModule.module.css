@@ -1,0 +1,27 @@
+.calculator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.block {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.title {
+    color: var(--main-blue);
+    text-align: center;
+    font-size: 21px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.wrapper {
+    margin-top: 17px;
+}

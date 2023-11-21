@@ -5,10 +5,12 @@ import validationSchema from '../../../core/shemes/ShemaFirstModule';
 
 import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button } from 'antd';
+import TitleBlock from '../../simple/TitleBlock/TitleBlock';
+import { Col, Row } from 'antd';
 import { Radio } from 'antd';
 import { Select } from 'formik-antd';
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
-import './FirstModule.css';
+import styles from './FirstModule.module.css';
 
 const initialValues = {
     distance: 1,
@@ -67,181 +69,172 @@ const FirstModule = () => {
     };
 
     return (
-        <div className="forms">
-            <div className="form">
-                <div className="form__title">модуль 4 та 1</div>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={handleFormSubmit}
-                >
-                    <Form className="form__body">
-                        <div className="form__item">
-                            <InputBlock
-                                label="Чутливість (мВт/м²):"
-                                id="sensitivity"
-                                name="sensitivity"
-                                type="number"
-                            />
-                        </div>
+        <>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={handleFormSubmit}
+            >
+                <Form className={styles.calculator}>
+                    <Row gutter={[15, 15]}>
+                        <Col span={12}>
+                            <div className={styles.block}>
+                                <div className={styles.title}>
+                                    геометрія променю
+                                </div>
+                                <Select
+                                    name="plumeForm"
+                                    defaultValue="rectangle"
+                                    options={[
+                                        {
+                                            value: 'rectangle',
+                                            label: 'Прямокутник',
+                                        },
+                                        {
+                                            value: 'ellipse',
+                                            label: 'Еліпс',
+                                        },
+                                    ]}
+                                />
 
-                        <div className="form__item">
-                            <InputBlock
-                                label="Потужність (мВт):"
-                                id="power"
-                                name="power"
-                                type="number"
-                            />
-                        </div>
+                                <div className="radio">
+                                    <div className="radio__label">
+                                        Оберіть опцію розрахунку:
+                                    </div>
 
-                        <div className="radio">
-                            <div className="radio__label">
-                                Оберіть опцію розрахунку:
+                                    <Radio.Group
+                                        defaultValue="angles"
+                                        buttonStyle="solid"
+                                        size="middle"
+                                    >
+                                        <Radio.Button
+                                            className="radio__item"
+                                            type="radio"
+                                            name="option"
+                                            value="angles"
+                                            checked={
+                                                selectedOption === 'angles'
+                                            }
+                                            onChange={handleOptionChange}
+                                        >
+                                            Кути
+                                        </Radio.Button>
+                                        <Radio.Button
+                                            className="radio__item"
+                                            type="radio"
+                                            name="option"
+                                            value="dimensions"
+                                            checked={
+                                                selectedOption === 'dimensions'
+                                            }
+                                            onChange={handleOptionChange}
+                                        >
+                                            Пляма
+                                        </Radio.Button>
+                                    </Radio.Group>
+
+                                    {selectedOption === 'angles' && (
+                                        <>
+                                            <InputBlock
+                                                wrapperStyle={styles.wrapper}
+                                                label="Кут Ширини (°):"
+                                                id="angleWidth"
+                                                name="angleWidth"
+                                                type="number"
+                                            />
+
+                                            <InputBlock
+                                                wrapperStyle={styles.wrapper}
+                                                label="Кут Висоти (°):"
+                                                id="angleHeight"
+                                                name="angleHeight"
+                                                type="number"
+                                            />
+                                        </>
+                                    )}
+
+                                    {selectedOption === 'dimensions' && (
+                                        <>
+                                            <InputBlock
+                                                wrapperStyle={styles.wrapper}
+                                                label="Відстань (м):"
+                                                id="distance"
+                                                name="distance"
+                                                type="number"
+                                            />
+
+                                            <InputBlock
+                                                wrapperStyle={styles.wrapper}
+                                                label="Ширина Плями (м):"
+                                                id="spotWidth"
+                                                name="spotWidth"
+                                                type="number"
+                                            />
+
+                                            <InputBlock
+                                                wrapperStyle={styles.wrapper}
+                                                label="Висота Плями (м):"
+                                                id="spotHeight"
+                                                name="spotHeight"
+                                                type="number"
+                                            />
+                                        </>
+                                    )}
+                                </div>
+                                <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                >
+                                    Розрахувати
+                                </Button>
                             </div>
-                            <Radio.Group
-                                defaultValue="angles"
-                                buttonStyle="solid"
-                                size="middle"
-                                className="radio__group"
-                            >
-                                <Radio.Button
-                                    className="radio__item"
-                                    type="radio"
-                                    name="option"
-                                    value="angles"
-                                    checked={selectedOption === 'angles'}
-                                    onChange={handleOptionChange}
-                                >
-                                    Кути
-                                </Radio.Button>
-                                <Radio.Button
-                                    className="radio__item"
-                                    type="radio"
-                                    name="option"
-                                    value="dimensions"
-                                    checked={selectedOption === 'dimensions'}
-                                    onChange={handleOptionChange}
-                                >
-                                    Пляма
-                                </Radio.Button>
-                            </Radio.Group>
-
-                            {selectedOption === 'angles' && (
-                                <>
-                                    <div className="form__item">
-                                        <InputBlock
-                                            label="Кут Ширини (°):"
-                                            id="angleWidth"
-                                            name="angleWidth"
-                                            type="number"
-                                        />
-                                    </div>
-                                    <div className="form__item">
-                                        <InputBlock
-                                            label="Кут Висоти (°):"
-                                            id="angleHeight"
-                                            name="angleHeight"
-                                            type="number"
-                                        />
-                                    </div>
-                                </>
-                            )}
-
-                            {selectedOption === 'dimensions' && (
-                                <>
-                                    <div className="form__item">
-                                        <InputBlock
-                                            label="Відстань (м):"
-                                            id="distance"
-                                            name="distance"
-                                            type="number"
-                                        />
-                                    </div>
-                                    <div className="form__item">
-                                        <InputBlock
-                                            label="Ширина Плями (м):"
-                                            id="spotWidth"
-                                            name="spotWidth"
-                                            type="number"
-                                        />
-                                    </div>
-                                    <div className="form__item">
-                                        <InputBlock
-                                            label="Висота Плями (м):"
-                                            id="spotHeight"
-                                            name="spotHeight"
-                                            type="number"
-                                        />
-                                    </div>
-                                </>
-                            )}
-                        </div>
-                        <Select
-                            name="plumeForm"
-                            className="form__select"
-                            defaultValue="rectangle"
-                            options={[
-                                {
-                                    value: 'rectangle',
-                                    label: 'Прямокутник',
-                                },
-                                {
-                                    value: 'ellipse',
-                                    label: 'Еліпс',
-                                },
-                            ]}
-                        />
-                        <Button
-                            className="form__button"
-                            type="primary"
-                            htmlType="submit"
-                        >
-                            Розрахувати
-                        </Button>
-                    </Form>
-                </Formik>
-            </div>
-            <div className="form">
-                <div className="form__title">Блок виводу даних</div>
-                <div className="output">
-                    {Object.entries(data).map(
-                        ([field, value]) =>
-                            value !== 0 && (
-                                <div key={field}>{`${field}: ${value}`}</div>
-                            ),
-                    )}
-                </div>
-            </div>
-
-            <div className="form">
-                <div className="form__title">модуль 2</div>
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={handleFormSubmit}
-                >
-                    <Form className="form__body">
-                        <div className="form__item">
-                            <InputBlock
-                                label="Мінімальний розмір плями (м):"
-                                id="minPlumeSize"
-                                name="minPlumeSize"
-                                type="number"
-                            />
-                        </div>
-                        <div className="form__title">Модуль 3</div>
-                        <div className="form__item">
-                            <InputBlock
-                                label="Дистанція (м):"
-                                id="distanceModuleThird"
-                                name="distanceModuleThird"
-                                type="number"
-                            />
-                        </div>
-                    </Form>
-                </Formik>
-            </div>
-        </div>
+                        </Col>
+                        <Col span={12}>
+                            <div className={styles.block}>
+                                <div className={styles.title}>
+                                    параметри приймача та випромінювача
+                                </div>
+                                <InputBlock
+                                    wrapperStyle={styles.wrapper}
+                                    label="Чутливість (мВт/м²):"
+                                    id="sensitivity"
+                                    name="sensitivity"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    wrapperStyle={styles.wrapper}
+                                    label="Потужність (мВт):"
+                                    id="power"
+                                    name="power"
+                                    type="number"
+                                />
+                            </div>
+                        </Col>
+                        <Col span={12}>
+                            <div className={styles.block}>
+                                <div className={styles.title}>
+                                    додаткові параметри
+                                </div>
+                                <InputBlock
+                                    wrapperStyle={styles.wrapper}
+                                    label="Мінімальний розмір плями (м):"
+                                    id="minPlumeSize"
+                                    name="minPlumeSize"
+                                    type="number"
+                                />
+                                <InputBlock
+                                    wrapperStyle={styles.wrapper}
+                                    label="Дистанція для розрахунку розмірів плями (м):"
+                                    id="distanceModuleThird"
+                                    name="distanceModuleThird"
+                                    type="number"
+                                />
+                            </div>
+                        </Col>
+                    </Row>
+                </Form>
+            </Formik>
+        </>
     );
 };
 

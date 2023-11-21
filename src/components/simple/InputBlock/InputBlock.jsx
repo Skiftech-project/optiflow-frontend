@@ -2,7 +2,7 @@ import { useField } from 'formik';
 import { ErrorMessage } from 'formik';
 import './InputBlock.css';
 
-const InputBlock = ({ label, ...props }) => {
+const InputBlock = ({ label, wrapperStyle, ...props }) => {
     const [field, meta] = useField(props);
     const isError = meta.touched && meta.error;
     let classNames = 'form__input';
@@ -11,7 +11,7 @@ const InputBlock = ({ label, ...props }) => {
     }
 
     return (
-        <>
+        <div className={`input_wrapper ${wrapperStyle || ''}`}>
             <label
                 htmlFor={props.name}
                 className="form__label"
@@ -28,7 +28,7 @@ const InputBlock = ({ label, ...props }) => {
                 component="div"
                 {...props}
             />
-        </>
+        </div>
     );
 };
 
