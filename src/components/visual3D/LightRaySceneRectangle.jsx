@@ -4,53 +4,73 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSG } from "three-csg-ts";
 import * as dat from "lil-gui";
 
-const parameters = {
+
+let parameters = {
   color: 0x4cd6f1,
+  visible: false,
+  intensity: 0.5,
 };
 
-const createGuiControls = (model, light, lightHelper) => {
-  // set up directional light gui
-  const lightSettings = {
-    visible: true,
-    color: light.color.getHex(),
-  };
+const createGuiControls = (model, lights, lightHelpers) => {
+  const addVisibleCheckBox = (dlFolder, lightHelpers) =>
+  {
+    dlFolder.add(parameters, "visible").onChange((value) => {
+    lightHelpers.forEach(lightHelper => {
+      lightHelper.visible = value;
+    });
+  });
+  }
+  const addIntensity = (dlFolder, lights) =>
+  {
+    dlFolder.add(parameters, "intensity", 0.1, 1, 0.1).onChange((value) => {
+      lights.forEach(light => {
+        light.intensity = value;
+      });
+    });
+
+  }
 
   // GUI Controls
   const gui = new dat.GUI({ autoPlace: true });
   gui.domElement.id = "gui";
 
-  gui.add(model.material, "wireframe");
-  gui
-    .addColor(parameters, "color")
-    .onChange(() => model.material.color.set(parameters.color));
+  // Folder Controls
+  const modelFolder = gui.addFolder("Model");
+  modelFolder.add(model.material, "wireframe");
+  modelFolder.addColor(parameters, "color").onChange(() => model.material.color.set(parameters.color));
 
+  // Folder "light helpers"
+  const dlFolder = gui.addFolder("Light helpers");
+  addVisibleCheckBox(dlFolder, lightHelpers);
+  addIntensity(dlFolder, lights);
+  dlFolder.open();
   gui.close();
-
-  // Folder "light properties"
-  const lightPropertiesFolder = gui.addFolder("Light properties");
-  lightPropertiesFolder.add(lightSettings, "visible").onChange((value) => {
-    light.visible = value;
-    lightHelper.visible = value;
-  });
-  lightPropertiesFolder.add(light, "intensity", 0, 1, 0.1);
-  lightPropertiesFolder.add(light, "castShadow");
-  lightPropertiesFolder
-    .addColor(lightSettings, "color")
-    .onChange((value) => light.color.set(value));
-  lightPropertiesFolder.close();
-
-  // Folder "light position"
-  const lightPositionFolder = gui.addFolder("Light position");
-  lightPositionFolder.add(light.position, "x", -4, 4, 0.01);
-  lightPositionFolder.add(light.position, "y", -4, 4, 0.01);
-  lightPositionFolder.add(light.position, "z", -4, 4, 0.01);
-  lightPositionFolder.add(light.rotation, "x", 0, Math.PI * 2, 0.01);
-  lightPositionFolder.add(light.rotation, "y", 0, Math.PI * 2, 0.01);
-  lightPositionFolder.add(light.rotation, "z", 0, Math.PI * 2, 0.01);
-  lightPositionFolder.close();
-
   return gui;
 };
+
+const createLight = (scene, x, y, z) => {
+  let light = new THREE.DirectionalLight(0xffffff, parameters.intensity);
+  light.position.set(x, y / 2, z);
+  let lightHelper = new THREE.DirectionalLightHelper(light, 3);
+  lightHelper.visible = parameters.visible;
+  scene.add(light);
+  scene.add(lightHelper);
+
+  return { light, lightHelper };
+};
+
+const createLightAndTheirHelpers = (scene, lightsConfig) => {
+  let lights = [];
+  let lightHelpers = [];
+  lightsConfig.forEach(lightConfig => {
+    let { light, lightHelper } = createLight(scene, ...lightConfig);
+    lights.push(light);
+    lightHelpers.push(lightHelper);
+  });
+  return {lights, lightHelpers};
+};
+
+
 
 const createCamera = (scene, maxDistance) => {
   const camera = new THREE.PerspectiveCamera(
@@ -59,8 +79,8 @@ const createCamera = (scene, maxDistance) => {
     0.1,
     1000
   );
-  camera.position.x = maxDistance / 2 + 15;
-  camera.position.z = 5;
+  camera.position.x = maxDistance / 2 + 5 ;
+  camera.position.z = 3;
   camera.position.y = 3;
 
   return camera;
@@ -186,7 +206,8 @@ const LightRaySceneRectangle = () => {
   useEffect(() => {
     const scene = new THREE.Scene();
 
-    const renderer = new THREE.WebGLRenderer({ alpha: false });
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+
     renderer.setSize(window.innerWidth, window.innerHeight);
     sceneRef.current.appendChild(renderer.domElement);
 
@@ -227,19 +248,16 @@ const LightRaySceneRectangle = () => {
     model.position.x = -maxDistance / 2;
 
     //setup directional light + helper
-    const light = new THREE.DirectionalLight(0xffffff, 0.5);
-    // use this for YouTube thumbnail
-    light.position.set(0, 2, 0);
-    light.castShadow = true;
-    const lightHelper = new THREE.DirectionalLightHelper(light, 3);
-    scene.add(light);
-    scene.add(lightHelper);
+    const lightsConfig = [
+      [maxDistance, maxDistance, maxDistance], 
+      [-maxDistance, -maxDistance, -maxDistance], 
+      [-maxDistance, -maxDistance, maxDistance], 
+      [maxDistance, maxDistance, -maxDistance]
+    ]
+    const {lights, lightHelpers} = createLightAndTheirHelpers(scene, lightsConfig);
 
-    // set up ambient light
-    // const light = new THREE.AmbientLight(0xffffff, 0.5);
-    // scene.add(light);
-
-    const gui = createGuiControls(model, light, lightHelper);
+    //added gui to scene
+    const gui = createGuiControls(model, lights, lightHelpers);
 
     const camera = createCamera(scene, maxDistance);
     renderer.render(scene, camera);
