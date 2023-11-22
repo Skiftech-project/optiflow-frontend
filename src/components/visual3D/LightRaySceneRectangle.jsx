@@ -4,6 +4,68 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { CSG } from "three-csg-ts";
 import * as dat from "lil-gui";
 
+const parameters = {
+  color: 0x4cd6f1,
+};
+
+const createGuiControls = (model, light, lightHelper) => {
+  // set up directional light gui
+  const lightSettings = {
+    visible: true,
+    color: light.color.getHex(),
+  };
+
+  // GUI Controls
+  const gui = new dat.GUI({ autoPlace: true });
+  gui.domElement.id = "gui";
+
+  gui.add(model.material, "wireframe");
+  gui
+    .addColor(parameters, "color")
+    .onChange(() => model.material.color.set(parameters.color));
+
+  gui.close();
+
+  // Folder "light properties"
+  const lightPropertiesFolder = gui.addFolder("Light properties");
+  lightPropertiesFolder.add(lightSettings, "visible").onChange((value) => {
+    light.visible = value;
+    lightHelper.visible = value;
+  });
+  lightPropertiesFolder.add(light, "intensity", 0, 1, 0.1);
+  lightPropertiesFolder.add(light, "castShadow");
+  lightPropertiesFolder
+    .addColor(lightSettings, "color")
+    .onChange((value) => light.color.set(value));
+  lightPropertiesFolder.close();
+
+  // Folder "light position"
+  const lightPositionFolder = gui.addFolder("Light position");
+  lightPositionFolder.add(light.position, "x", -4, 4, 0.01);
+  lightPositionFolder.add(light.position, "y", -4, 4, 0.01);
+  lightPositionFolder.add(light.position, "z", -4, 4, 0.01);
+  lightPositionFolder.add(light.rotation, "x", 0, Math.PI * 2, 0.01);
+  lightPositionFolder.add(light.rotation, "y", 0, Math.PI * 2, 0.01);
+  lightPositionFolder.add(light.rotation, "z", 0, Math.PI * 2, 0.01);
+  lightPositionFolder.close();
+
+  return gui;
+};
+
+const createCamera = (scene, maxDistance) => {
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
+  camera.position.x = maxDistance / 2 + 15;
+  camera.position.z = 5;
+  camera.position.y = 3;
+
+  return camera;
+};
+
 const createRectangle = (scene, maxDistance, rectWidth, rectHeight) => {
   /* Rectangle is Smax
       Parameters of THREE.BoxGeometry(...): 
@@ -109,7 +171,10 @@ const createIntersection = (scene, pyramid, sphere, actionString) => {
 
   // Convert the result back to Three.js Mesh
   const resultMesh = CSG.toMesh(action, sphere.matrix);
-  resultMesh.material = new THREE.MeshNormalMaterial({ wireframe: true });
+  resultMesh.material = new THREE.MeshPhongMaterial({
+    wireframe: true,
+    color: 0x4cd6f1,
+  });
 
   scene.add(resultMesh);
   return resultMesh;
@@ -121,9 +186,10 @@ const LightRaySceneRectangle = () => {
   useEffect(() => {
     const scene = new THREE.Scene();
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    const renderer = new THREE.WebGLRenderer({ alpha: false });
     renderer.setSize(window.innerWidth, window.innerHeight);
     sceneRef.current.appendChild(renderer.domElement);
+
     renderer.domElement.style.maxWidth = "100%";
     renderer.domElement.style.maxHeight = "100%";
 
@@ -160,20 +226,22 @@ const LightRaySceneRectangle = () => {
     model.rotation.z = Math.PI / 2;
     model.position.x = -maxDistance / 2;
 
-    // GUI Controls
-    const gui = new dat.GUI({ autoPlace: true });
-    gui.domElement.id = "gui";
-    gui.add(model.material, "wireframe");
+    //setup directional light + helper
+    const light = new THREE.DirectionalLight(0xffffff, 0.5);
+    // use this for YouTube thumbnail
+    light.position.set(0, 2, 0);
+    light.castShadow = true;
+    const lightHelper = new THREE.DirectionalLightHelper(light, 3);
+    scene.add(light);
+    scene.add(lightHelper);
 
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.x = maxDistance / 2 + 15;
-    camera.position.z = 5;
-    camera.position.y = 3;
+    // set up ambient light
+    // const light = new THREE.AmbientLight(0xffffff, 0.5);
+    // scene.add(light);
+
+    const gui = createGuiControls(model, light, lightHelper);
+
+    const camera = createCamera(scene, maxDistance);
     renderer.render(scene, camera);
 
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -196,6 +264,7 @@ const LightRaySceneRectangle = () => {
 
       if (parentElement) {
         parentElement.removeChild(rendererElement);
+        gui.destroy();
       }
     };
   }, []);
