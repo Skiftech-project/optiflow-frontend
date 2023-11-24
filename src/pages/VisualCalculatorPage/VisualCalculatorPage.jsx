@@ -5,8 +5,8 @@ import "./VisualCalculatorPage.css";
 const VisualCalculatorPage = () => {
   return (
     <>
-      <LightRaySceneEllipse />
-      {/* <LightRaySceneRectangle /> */}
+      {/* <LightRaySceneEllipse /> */}
+      <LightRaySceneRectangle />
     </>
   );
 };

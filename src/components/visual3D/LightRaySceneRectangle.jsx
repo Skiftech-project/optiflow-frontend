@@ -7,69 +7,28 @@ import * as dat from "lil-gui";
 
 let parameters = {
   color: 0x4cd6f1,
-  visible: false,
-  intensity: 0.5,
 };
 
-const createGuiControls = (model, lights, lightHelpers) => {
-  const addVisibleCheckBox = (dlFolder, lightHelpers) =>
-  {
-    dlFolder.add(parameters, "visible").onChange((value) => {
-    lightHelpers.forEach(lightHelper => {
-      lightHelper.visible = value;
-    });
-  });
-  }
-  const addIntensity = (dlFolder, lights) =>
-  {
-    dlFolder.add(parameters, "intensity", 0.1, 1, 0.1).onChange((value) => {
-      lights.forEach(light => {
-        light.intensity = value;
-      });
-    });
-
-  }
-
+const createGuiControls = (model) => {
   // GUI Controls
   const gui = new dat.GUI({ autoPlace: true });
   gui.domElement.id = "gui";
+  const visualCheckbox = gui.add({ wireframe: false }, 'wireframe').name('wireframe');
+  gui.addColor(parameters, "color").onChange(() => model.material.color.set(parameters.color));
+  
+  // Add a checkbox
+  visualCheckbox.onChange(()=>{
+    if(visualCheckbox.getValue()){
+      model.material = new THREE.MeshBasicMaterial({wireframe : true, color: parameters.color});
+    }
+    else{
+      model.material = new THREE.MeshMatcapMaterial({color: parameters.color});
+    }
+  });
 
-  // Folder Controls
-  const modelFolder = gui.addFolder("Model");
-  modelFolder.add(model.material, "wireframe");
-  modelFolder.addColor(parameters, "color").onChange(() => model.material.color.set(parameters.color));
-
-  // Folder "light helpers"
-  const dlFolder = gui.addFolder("Light helpers");
-  addVisibleCheckBox(dlFolder, lightHelpers);
-  addIntensity(dlFolder, lights);
-  dlFolder.open();
   gui.close();
   return gui;
 };
-
-const createLight = (scene, x, y, z) => {
-  let light = new THREE.DirectionalLight(0xffffff, parameters.intensity);
-  light.position.set(x, y / 2, z);
-  let lightHelper = new THREE.DirectionalLightHelper(light, 3);
-  lightHelper.visible = parameters.visible;
-  scene.add(light);
-  scene.add(lightHelper);
-
-  return { light, lightHelper };
-};
-
-const createLightAndTheirHelpers = (scene, lightsConfig) => {
-  let lights = [];
-  let lightHelpers = [];
-  lightsConfig.forEach(lightConfig => {
-    let { light, lightHelper } = createLight(scene, ...lightConfig);
-    lights.push(light);
-    lightHelpers.push(lightHelper);
-  });
-  return {lights, lightHelpers};
-};
-
 
 
 const createCamera = (scene, maxDistance) => {
@@ -191,9 +150,8 @@ const createIntersection = (scene, pyramid, sphere, actionString) => {
 
   // Convert the result back to Three.js Mesh
   const resultMesh = CSG.toMesh(action, sphere.matrix);
-  resultMesh.material = new THREE.MeshPhongMaterial({
-    wireframe: true,
-    color: 0x4cd6f1,
+  resultMesh.material = new THREE.MeshMatcapMaterial({
+    color: parameters.color,
   });
 
   scene.add(resultMesh);
@@ -247,17 +205,8 @@ const LightRaySceneRectangle = () => {
     model.rotation.z = Math.PI / 2;
     model.position.x = -maxDistance / 2;
 
-    //setup directional light + helper
-    const lightsConfig = [
-      [maxDistance, maxDistance, maxDistance], 
-      [-maxDistance, -maxDistance, -maxDistance], 
-      [-maxDistance, -maxDistance, maxDistance], 
-      [maxDistance, maxDistance, -maxDistance]
-    ]
-    const {lights, lightHelpers} = createLightAndTheirHelpers(scene, lightsConfig);
-
     //added gui to scene
-    const gui = createGuiControls(model, lights, lightHelpers);
+    const gui = createGuiControls(model);
 
     const camera = createCamera(scene, maxDistance);
     renderer.render(scene, camera);
