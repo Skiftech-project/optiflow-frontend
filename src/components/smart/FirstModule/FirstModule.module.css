@@ -41,17 +41,27 @@
 }
 
 .radio {
+    margin-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+.select {
+    width: 100%;
 }
 
 .radio__group {
     align-self: center;
 }
 
+.label {
+    margin-bottom: 7px;
+}
+
 .radio__label {
-    margin-bottom: 5px;
+    text-align: center;
+    margin-bottom: 7px;
 }
 
 .additional {
@@ -77,6 +87,7 @@
 .output span {
     color: var(--main-blue);
     font-weight: bold;
+    padding-left: 5px;
 }
 
 .output h3 {
@@ -96,4 +107,11 @@
     border-radius: 10px;
     background: #fff;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn {
+    margin-top: 15px;
+    background-color: var(--main-blue);
+    font-weight: bold;
+    border: none;
 }

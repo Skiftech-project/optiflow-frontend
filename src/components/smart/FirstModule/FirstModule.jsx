@@ -8,8 +8,9 @@ import axios from 'axios';
 
 import InputBlock from '../../simple/InputBlock/InputBlock';
 import validationSchema from '../../../core/shemes/ShemaFirstModule';
-import styles from './FirstModule.module.css';
+
 import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import styles from './FirstModule.module.css';
 
 const initialValues = {
     distance: 1,
@@ -88,25 +89,31 @@ const FirstModule = () => {
                                 <div className={styles.title}>
                                     геометрія променю
                                 </div>
-                                <Select
-                                    className={styles.select}
-                                    name="plumeForm"
-                                    defaultValue="rectangle"
-                                    options={[
-                                        {
-                                            value: 'rectangle',
-                                            label: 'Прямокутник',
-                                        },
-                                        {
-                                            value: 'ellipse',
-                                            label: 'Еліпс',
-                                        },
-                                    ]}
-                                />
+
+                                <div className={styles.select}>
+                                    <div className={styles.label}>
+                                        Оберіть форму плями:
+                                    </div>
+                                    <Select
+                                        className={styles.select}
+                                        name="plumeForm"
+                                        defaultValue="rectangle"
+                                        options={[
+                                            {
+                                                value: 'rectangle',
+                                                label: 'Прямокутник',
+                                            },
+                                            {
+                                                value: 'ellipse',
+                                                label: 'Еліпс',
+                                            },
+                                        ]}
+                                    />
+                                </div>
 
                                 <div className={styles.radio}>
                                     <div className={styles.radio__label}>
-                                        Оберіть опцію розрахунку:
+                                        Оберіть опцію розрахунку
                                     </div>
 
                                     <Radio.Group
