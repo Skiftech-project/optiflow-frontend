@@ -245,10 +245,44 @@ const FirstModule = () => {
                     </Row>
                 </Form>
             </Formik>
-            <h2 className={styles.calculator__title}>
-                Калькулятор розрахунку області передачі даних в оптичних
-                системах
-            </h2>
+            <h2 className={styles.calculator__title}>Результати обчислень</h2>
+            <div className={styles.result}>
+                <div className={styles.output}>
+                    <h3>Геометрія променю</h3>
+                    <p>
+                        Кут ширини (°): <span>{data.angle_width}</span>
+                    </p>
+                    <p>
+                        Кут висоти (°): <span>{data.angle_height}</span>
+                    </p>
+                </div>
+
+                <div className={styles.output}>
+                    <h3>Інші розраховані значення</h3>
+                    <p>
+                        Максимальна гарантована дистанція передачі даних (м):
+                        <span>{data.max_distance}</span>
+                    </p>
+                    <p>
+                        Мінімальна дистанція: <span>{data.min_distance}</span>
+                    </p>
+                </div>
+
+                <div className={styles.output}>
+                    <h3>
+                        Лінійні розміри перерізу області передачі даних на
+                        заданій дистанції
+                    </h3>
+                    <p>
+                        Висота плями (м):{' '}
+                        <span>{data.plume_height_module3}</span>
+                    </p>
+                    <p>
+                        Ширина плями (М):{' '}
+                        <span>{data.plume_width_module3}</span>
+                    </p>
+                </div>
+            </div>
         </>
     );
 };
