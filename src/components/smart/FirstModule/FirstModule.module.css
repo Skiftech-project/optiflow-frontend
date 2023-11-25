@@ -1,15 +1,29 @@
 .calculator {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
 }
 
 .block {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-direction: column;
     padding: 30px;
     border-radius: 10px;
+    background: #fff;
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.calculator__title {
+    color: var(--main-blue);
+    text-align: center;
+    font-size: 21px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 20px 0px 20px 0px;
+
+    border-radius: 10px;
+    padding: 15px;
     background: #fff;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -24,4 +38,31 @@
 
 .wrapper {
     margin-top: 17px;
+}
+
+.radio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.radio__group {
+    align-self: center;
+}
+
+.radio__label {
+    margin-bottom: 5px;
+}
+
+.additional {
+    margin-top: 15px;
+    min-height: 236px;
+}
+
+.geometry {
+    min-height: 487px;
+}
+
+.receiver {
+    min-height: 236px;
 }
