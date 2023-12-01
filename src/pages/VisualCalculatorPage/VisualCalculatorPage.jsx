@@ -22,7 +22,6 @@ const VisualCalculatorPage = () => {
         setSelectPlumeForm(value);
     };
 
-    console.log(selectPlumeForm);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -30,7 +29,6 @@ const VisualCalculatorPage = () => {
 
     const handleFormSubmit = async (values) => {
         try {
-            console.log(values);
             const response = await axios.post(
                 'http://127.0.0.1:5000/3d',
                 values,
