@@ -11,8 +11,10 @@ const VisualCalculatorPage = () => {
     const [data, setData] = useState({
         max_distance: 0,
         min_distance: 0,
-        plume_width_module3: 0,
-        plume_height_module3: 0,
+        plume_width: 0,
+        plume_height: 0,
+        plume_width_cut: 0,
+        plume_height_cut: 0,
     });
 
     const toggleSidebar = () => {

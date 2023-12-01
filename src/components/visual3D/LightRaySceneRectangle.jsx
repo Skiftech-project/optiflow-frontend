@@ -168,8 +168,8 @@ const LightRaySceneRectangle = ({ data }) => {
     const {
         max_distance,
         min_distance,
-        plume_width_module3,
-        plume_height_module3,
+        plume_width,
+        plume_height,
     } = data;
 
     //console.log(max_distance);
@@ -188,8 +188,8 @@ const LightRaySceneRectangle = ({ data }) => {
         renderer.domElement.style.maxWidth = '100%';
         renderer.domElement.style.maxHeight = '100%';
 
-        const rectWidth = plume_width_module3;
-        const rectHeight = plume_height_module3;
+        const rectWidth = plume_width;
+        const rectHeight = plume_height;
         // const rectWidth = 2;
         // const rectHeight = 4;
 
