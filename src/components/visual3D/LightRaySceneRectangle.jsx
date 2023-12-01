@@ -51,24 +51,24 @@ const createCamera = (scene, maxDistance) => {
     return camera;
 };
 
-const createRectangle = (scene, maxDistance, rectWidth, rectHeight) => {
-    /* Rectangle is Smax
-      Parameters of THREE.BoxGeometry(...): 
-        1. width 
-        2. depth
-        3. height
-    */
+// const createRectangle = (scene, maxDistance, rectWidth, rectHeight) => {
+//     /* Rectangle is Smax
+//       Parameters of THREE.BoxGeometry(...):
+//         1. width
+//         2. depth
+//         3. height
+//     */
 
-    const rectGeometry = new THREE.BoxGeometry(rectWidth, 0, rectHeight); // Параметры: ширина, глубина, высота
-    const rectMaterial = new THREE.MeshBasicMaterial({
-        color: 0x00ff00,
-        wireframe: true,
-    });
-    const rectangle = new THREE.Mesh(rectGeometry, rectMaterial);
-    //rectangle.rotation.z = Math.PI / 2;
-    rectangle.position.set(0, 0, 0); // Размещение в центре основания конуса
-    scene.add(rectangle);
-};
+//     const rectGeometry = new THREE.BoxGeometry(rectWidth, 0, rectHeight); // Параметры: ширина, глубина, высота
+//     const rectMaterial = new THREE.MeshBasicMaterial({
+//         color: 0x00ff00,
+//         wireframe: true,
+//     });
+//     const rectangle = new THREE.Mesh(rectGeometry, rectMaterial);
+//     //rectangle.rotation.z = Math.PI / 2;
+//     rectangle.position.set(0, 0, 0); // Размещение в центре основания конуса
+//     scene.add(rectangle);
+// };
 
 const createSphere = (scene, radius, maxDistance) => {
     // Параметры THREE.SphereGeometry:
@@ -165,17 +165,19 @@ const createIntersection = (scene, pyramid, sphere, actionString) => {
 };
 
 const LightRaySceneRectangle = ({ data }) => {
-    // const {
-    //     max_distance,
-    //     min_distance,
-    //     plume_width_module3,
-    //     plume_height_module3,
-    // } = data;
-    // console.log(max_distance);
+    const {
+        max_distance,
+        min_distance,
+        plume_width_module3,
+        plume_height_module3,
+    } = data;
+
+    //console.log(max_distance);
 
     const sceneRef = useRef(null);
 
     useEffect(() => {
+        console.log(data);
         const scene = new THREE.Scene();
 
         const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -186,15 +188,15 @@ const LightRaySceneRectangle = ({ data }) => {
         renderer.domElement.style.maxWidth = '100%';
         renderer.domElement.style.maxHeight = '100%';
 
-        // const rectWidth = dict['plume_width']
-        // const rectHeight = dict['plume_height']
-        const rectWidth = 2;
-        const rectHeight = 4;
+        const rectWidth = plume_width_module3;
+        const rectHeight = plume_height_module3;
+        // const rectWidth = 2;
+        // const rectHeight = 4;
 
-        // const minDistance = dict['min_distance']
-        // const maxDistance = dict['max_distance']
-        const minDistance = 2;
-        const maxDistance = 8;
+        const minDistance = min_distance;
+        const maxDistance = max_distance;
+        // const minDistance = 2;
+        // const maxDistance = 8;
 
         const maxSphere = createSphere(scene, maxDistance, maxDistance);
         const pyramid = createPyramid(
@@ -258,7 +260,7 @@ const LightRaySceneRectangle = ({ data }) => {
                 gui.destroy();
             }
         };
-    }, []);
+    }, [data]);
 
     return <div ref={sceneRef} />;
 };
