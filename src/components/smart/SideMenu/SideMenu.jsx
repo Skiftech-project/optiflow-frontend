@@ -1,6 +1,8 @@
 import { Formik, Form } from 'formik';
 import InputBlock from '../../simple/InputBlock/InputBlock';
-import { Button, Select } from 'antd';
+import { Button } from 'antd';
+import { Select } from 'formik-antd';
+import { useState } from 'react';
 
 import './SideMenu.css';
 
@@ -19,7 +21,12 @@ const initialValues = {
 в опції пляма поля відстані, ширини і висоти плями
 Додати ще блок виводу результату розрахунків
 */
-const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
+const SideMenu = ({
+    isOpen,
+    onClose,
+    handleFormSubmit,
+    handleSelectChange,
+}) => {
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
             <Button
@@ -39,6 +46,7 @@ const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
                             <Select
                                 style={{ marginTop: 5 }}
                                 name="plumeForm"
+                                onChange={handleSelectChange}
                                 defaultValue="rectangle"
                                 options={[
                                     {

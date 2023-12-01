@@ -16,6 +16,13 @@ const VisualCalculatorPage = () => {
         plume_width_cut: 0,
         plume_height_cut: 0,
     });
+    const [selectPlumeForm, setSelectPlumeForm] = useState('rectangle');
+
+    const handleSelectChange = (value) => {
+        setSelectPlumeForm(value);
+    };
+
+    console.log(selectPlumeForm);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -23,6 +30,7 @@ const VisualCalculatorPage = () => {
 
     const handleFormSubmit = async (values) => {
         try {
+            console.log(values);
             const response = await axios.post(
                 'http://127.0.0.1:5000/3d',
                 values,
@@ -42,7 +50,6 @@ const VisualCalculatorPage = () => {
 
     return (
         <div className="visual">
-            {/* <LightRaySceneEllipse /> */}
             <Button
                 className="menu__btn"
                 type="primary"
@@ -52,11 +59,17 @@ const VisualCalculatorPage = () => {
             </Button>
             <SideMenu
                 handleFormSubmit={handleFormSubmit}
+                handleSelectChange={handleSelectChange}
                 isOpen={sidebarOpen}
                 onClose={toggleSidebar}
             />
 
-            <LightRaySceneRectangle data={data} />
+            {selectPlumeForm === 'rectangle' && (
+                <LightRaySceneRectangle data={data} />
+            )}
+            {selectPlumeForm === 'ellipse' && (
+                <LightRaySceneEllipse data={data} />
+            )}
         </div>
     );
 };

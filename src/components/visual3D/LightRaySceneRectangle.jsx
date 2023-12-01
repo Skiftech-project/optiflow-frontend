@@ -165,19 +165,14 @@ const createIntersection = (scene, pyramid, sphere, actionString) => {
 };
 
 const LightRaySceneRectangle = ({ data }) => {
-    const {
-        max_distance,
-        min_distance,
-        plume_width,
-        plume_height,
-    } = data;
+    const { max_distance, min_distance, plume_width, plume_height } = data;
 
     //console.log(max_distance);
 
     const sceneRef = useRef(null);
 
     useEffect(() => {
-        console.log(data);
+        //console.log(data);
         const scene = new THREE.Scene();
 
         const renderer = new THREE.WebGLRenderer({ alpha: true });
