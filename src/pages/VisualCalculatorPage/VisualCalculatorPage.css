@@ -2,7 +2,15 @@
   margin-top: 50px;
 } */
 #gui {
-  position: absolute;
-  top: 104px;
-  right: 4px;
+    position: absolute;
+    top: 104px;
+    right: 4px;
+}
+
+.visual {
+    position: relative;
+}
+
+.menu__btn {
+    margin: 15px 0px 0px 15px;
 }
