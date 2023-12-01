@@ -13,7 +13,12 @@ const initialValues = {
     plumeForm: 'rectangle',
     distanceModuleThird: 0,
 };
-
+/*
+Додати опції розрахунку: Кути, Пляма
+в опції кути поля куту ширини і куту висоти
+в опції пляма поля відстані, ширини і висоти плями
+Додати ще блок виводу результату розрахунків
+*/
 const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>

@@ -117,8 +117,14 @@ const createIntersection = (scene, cone, sphere, choice) => {
   return interRes;
 };
 
-const LightRaySceneEllipse = () => {
+const LightRaySceneEllipse = ({data}) => {
   const sceneRef = useRef(null);
+  const {
+    max_distance,
+    min_distance,
+    plume_width,
+    plume_height,
+} = data;
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -133,14 +139,14 @@ const LightRaySceneEllipse = () => {
 
     // const xRadius = dict['plume_height']
     // const yRadius = dict['plume_width']
-    const xRadius = 1.31; // 2;
-    const yRadius = 1.77; // 0.5;
+    const xRadius = plume_width; // 2;
+    const yRadius = plume_height; // 0.5;
     const coneRadius = Math.max(xRadius, yRadius);
 
     // const minDistance = dict['min_distance']
     // const maxDistance = dict['max_distance']
-    const minDistance = 3;
-    const maxDistance = 8; //6;
+    const minDistance = min_distance;
+    const maxDistance = max_distance; //6;
 
     const sphere = createSphere(scene, maxDistance, maxDistance);
     const cone = createCone(scene, coneRadius, xRadius, yRadius, maxDistance);
@@ -190,7 +196,7 @@ const LightRaySceneEllipse = () => {
         gui.destroy();
       }
     };
-  }, []);
+  }, [data]);
 
   return <div ref={sceneRef} />;
 };
