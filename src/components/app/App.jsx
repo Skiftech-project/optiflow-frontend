@@ -24,10 +24,7 @@ const App = () => {
                         path="/visual"
                         element={<VisualCalculatorPage />}
                     />
-                    <Route
-                        path="/main"
-                        element={<MainPage />}
-                    />
+
                     <Route
                         path="/about"
                         element={<AboutUsPage />}

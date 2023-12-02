@@ -9,6 +9,7 @@ import './VisualCalculatorPage.css';
 
 const VisualCalculatorPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('angles');
     const [data, setData] = useState({
         max_distance: 0,
         min_distance: 0,
@@ -29,10 +30,20 @@ const VisualCalculatorPage = () => {
         } else if (values.plumeForm === 'ellipse') {
             setSelectPlumeForm('ellipse');
         }
+
+        const updatedValues = { ...values };
         try {
+            if (selectedOption === 'angles') {
+                delete updatedValues.spotWidth;
+                delete updatedValues.spotHeight;
+                delete updatedValues.distance;
+            } else if (selectedOption === 'dimensions') {
+                delete updatedValues.angleWidth;
+                delete updatedValues.angleHeight;
+            }
             const response = await axios.post(
                 'http://127.0.0.1:5000/3d',
-                values,
+                updatedValues,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,6 +67,8 @@ const VisualCalculatorPage = () => {
                 Open Calculator
             </Button>
             <SideMenu
+                setSelectedOption={setSelectedOption}
+                selectedOption={selectedOption}
                 handleFormSubmit={handleFormSubmit}
                 isOpen={sidebarOpen}
                 onClose={toggleSidebar}

@@ -1,27 +1,41 @@
 import { Formik, Form } from 'formik';
 import InputBlock from '../../simple/InputBlock/InputBlock';
-import { Button } from 'antd';
+import { Button, Radio } from 'antd';
 import { Select } from 'formik-antd';
 import { useState } from 'react';
 
 import './SideMenu.css';
 
 const initialValues = {
+    distance: '',
     sensitivity: '',
     power: '',
-    angleWidth: 1,
-    angleHeight: 1,
-    minPlumeSize: 0,
+    angleWidth: '',
+    angleHeight: '',
+    spotWidth: '',
+    spotHeight: '',
     plumeForm: 'rectangle',
-    distanceModuleThird: 0,
+    minPlumeSize: '',
+    distanceModuleThird: '',
 };
+
 /*
 Додати опції розрахунку: Кути, Пляма
 в опції кути поля куту ширини і куту висоти
 в опції пляма поля відстані, ширини і висоти плями
 Додати ще блок виводу результату розрахунків
 */
-const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
+const SideMenu = ({
+    isOpen,
+    onClose,
+    handleFormSubmit,
+    selectedOption,
+    setSelectedOption,
+}) => {
+    //const [selectedOption, setSelectedOption] = useState('angles');
+    const handleOptionChange = (e) => {
+        setSelectedOption(e.target.value);
+    };
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
             <Button
@@ -55,19 +69,82 @@ const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
                             />
                         </div>
 
-                        <InputBlock
-                            label="Кут Висоти (°):"
-                            id="angleHeight"
-                            name="angleHeight"
-                            type="number"
-                        />
+                        <div className="radio">
+                            <div className="radio__label">
+                                Оберіть опцію розрахунку
+                            </div>
 
-                        <InputBlock
-                            label="Кут Ширини (°):"
-                            id="angleWidth"
-                            name="angleWidth"
-                            type="number"
-                        />
+                            <Radio.Group
+                                style={{ marginBottom: 25 }}
+                                defaultValue="angles"
+                                buttonStyle="solid"
+                                size="middle"
+                            >
+                                <Radio.Button
+                                    className="radio__item"
+                                    type="radio"
+                                    name="option"
+                                    value="angles"
+                                    checked={selectedOption === 'angles'}
+                                    onChange={handleOptionChange}
+                                >
+                                    Кути
+                                </Radio.Button>
+                                <Radio.Button
+                                    className="radio__item"
+                                    type="radio"
+                                    name="option"
+                                    value="dimensions"
+                                    checked={selectedOption === 'dimensions'}
+                                    onChange={handleOptionChange}
+                                >
+                                    Пляма
+                                </Radio.Button>
+                            </Radio.Group>
+
+                            {selectedOption === 'angles' && (
+                                <div className="group">
+                                    <InputBlock
+                                        label="Кут Ширини (°):"
+                                        id="angleWidth"
+                                        name="angleWidth"
+                                        type="number"
+                                    />
+
+                                    <InputBlock
+                                        label="Кут Висоти (°):"
+                                        id="angleHeight"
+                                        name="angleHeight"
+                                        type="number"
+                                    />
+                                </div>
+                            )}
+
+                            {selectedOption === 'dimensions' && (
+                                <div className="group">
+                                    <InputBlock
+                                        label="Відстань (м):"
+                                        id="distance"
+                                        name="distance"
+                                        type="number"
+                                    />
+
+                                    <InputBlock
+                                        label="Ширина Плями (м):"
+                                        id="spotWidth"
+                                        name="spotWidth"
+                                        type="number"
+                                    />
+
+                                    <InputBlock
+                                        label="Висота Плями (м):"
+                                        id="spotHeight"
+                                        name="spotHeight"
+                                        type="number"
+                                    />
+                                </div>
+                            )}
+                        </div>
 
                         <InputBlock
                             label="Чутливість (мВт/м²):"
