@@ -1,5 +1,6 @@
 import LightRaySceneEllipse from '../../components/visual3D/LightRaySceneEllipse';
 import LightRaySceneRectangle from '../../components/visual3D/LightRaySceneRectangle';
+import VisualCalculatorOutput from '../../components/simple/VisualCalculatorOutput/VisualCalculatorOutput';
 import { useState } from 'react';
 import { Button } from 'antd';
 import SideMenu from '../../components/smart/SideMenu/SideMenu';
@@ -18,16 +19,16 @@ const VisualCalculatorPage = () => {
     });
     const [selectPlumeForm, setSelectPlumeForm] = useState('rectangle');
 
-    const handleSelectChange = (value) => {
-        setSelectPlumeForm(value);
-    };
-
-
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
     const handleFormSubmit = async (values) => {
+        if (values.plumeForm === 'rectangle') {
+            setSelectPlumeForm('rectangle');
+        } else if (values.plumeForm === 'ellipse') {
+            setSelectPlumeForm('ellipse');
+        }
         try {
             const response = await axios.post(
                 'http://127.0.0.1:5000/3d',
@@ -39,7 +40,6 @@ const VisualCalculatorPage = () => {
                 },
             );
 
-            console.log('Успешно отправлено', response.data);
             setData(response.data);
         } catch (error) {
             console.error('Произошла ошибка при отправке данных', error);
@@ -57,7 +57,6 @@ const VisualCalculatorPage = () => {
             </Button>
             <SideMenu
                 handleFormSubmit={handleFormSubmit}
-                handleSelectChange={handleSelectChange}
                 isOpen={sidebarOpen}
                 onClose={toggleSidebar}
             />
@@ -68,6 +67,8 @@ const VisualCalculatorPage = () => {
             {selectPlumeForm === 'ellipse' && (
                 <LightRaySceneEllipse data={data} />
             )}
+
+            <VisualCalculatorOutput data={data} />
         </div>
     );
 };

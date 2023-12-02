@@ -21,12 +21,7 @@ const initialValues = {
 в опції пляма поля відстані, ширини і висоти плями
 Додати ще блок виводу результату розрахунків
 */
-const SideMenu = ({
-    isOpen,
-    onClose,
-    handleFormSubmit,
-    handleSelectChange,
-}) => {
+const SideMenu = ({ isOpen, onClose, handleFormSubmit }) => {
     return (
         <div className={`sidebar ${isOpen ? 'open' : ''}`}>
             <Button
@@ -46,7 +41,6 @@ const SideMenu = ({
                             <Select
                                 style={{ marginTop: 5 }}
                                 name="plumeForm"
-                                onChange={handleSelectChange}
                                 defaultValue="rectangle"
                                 options={[
                                     {
