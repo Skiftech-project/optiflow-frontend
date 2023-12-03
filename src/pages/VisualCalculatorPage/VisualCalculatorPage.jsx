@@ -42,7 +42,7 @@ const VisualCalculatorPage = () => {
                 delete updatedValues.angleHeight;
             }
             const response = await axios.post(
-                'http://127.0.0.1:5000/3d',
+                'https://skiftech-backend.onrender.com/3d',
                 updatedValues,
                 {
                     headers: {
