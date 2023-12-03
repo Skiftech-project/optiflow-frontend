@@ -139,7 +139,7 @@ const LightRaySceneEllipse = ({data}) => {
 
     // const xRadius = dict['plume_height']
     // const yRadius = dict['plume_width']
-    const xRadius = plume_width; // 2;
+    const xRadius = plume_width ; // 2;
     const yRadius = plume_height; // 0.5;
     const coneRadius = Math.max(xRadius, yRadius);
 
@@ -163,6 +163,7 @@ const LightRaySceneEllipse = ({data}) => {
     scene.add(minSphere);
 
     let model = createIntersection(scene, interModel1, minSphere, "subtract");
+    model.rotation.x = Math.PI / 2;
     model.rotation.z = Math.PI / 2;
 
 

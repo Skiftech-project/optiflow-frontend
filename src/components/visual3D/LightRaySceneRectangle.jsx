@@ -44,9 +44,9 @@ const createCamera = (scene, maxDistance) => {
         0.1,
         1000,
     );
-    camera.position.x = maxDistance / 2 + 5;
-    camera.position.z = 3;
-    camera.position.y = 3;
+    camera.position.x = maxDistance / 2 + 5; // maxDistance / 2 + 5
+    camera.position.z = 3; // 3
+    camera.position.y = 3; // 3
 
     return camera;
 };
@@ -224,6 +224,7 @@ const LightRaySceneRectangle = ({ data }) => {
         );
         model.position.y = 0;
         model.rotation.z = Math.PI / 2;
+        model.rotation.x = Math.PI / 2;
         model.position.x = -maxDistance / 2;
 
         //added gui to scene
