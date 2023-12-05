@@ -13,13 +13,13 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import styles from './FirstModule.module.css';
 
 const initialValues = {
-    distance: '',
+    distance: 1,
     sensitivity: '',
     power: '',
     angleWidth: 1,
     angleHeight: 1,
-    spotWidth: '',
-    spotHeight: '',
+    spotWidth: 1,
+    spotHeight: 1,
     plumeForm: 'rectangle',
     minPlumeSize: '',
     distanceModuleThird: '',

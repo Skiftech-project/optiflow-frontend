@@ -7,13 +7,13 @@ import validationSchema from '../../../core/shemes/ShemaFirstModule';
 import './SideMenu.css';
 
 const initialValues = {
-    distance: '',
+    distance: 1,
     sensitivity: '',
     power: '',
     angleWidth: 1,
     angleHeight: 1,
-    spotWidth: '',
-    spotHeight: '',
+    spotWidth: 1,
+    spotHeight: 1,
     plumeForm: 'rectangle',
     minPlumeSize: '',
     distanceModuleThird: '',
