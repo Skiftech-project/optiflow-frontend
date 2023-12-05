@@ -9,7 +9,7 @@ import './VisualCalculatorPage.css';
 
 const VisualCalculatorPage = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('angles');
+    const [selectedOption, setSelectedOption] = useState('dimensions');
     const [data, setData] = useState({
         max_distance: 0,
         min_distance: 0,

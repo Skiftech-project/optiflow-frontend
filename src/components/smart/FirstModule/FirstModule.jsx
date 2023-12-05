@@ -13,20 +13,20 @@ import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import styles from './FirstModule.module.css';
 
 const initialValues = {
-    distance: 1,
+    distance: '',
     sensitivity: '',
     power: '',
     angleWidth: 1,
     angleHeight: 1,
-    spotWidth: 1,
-    spotHeight: 1,
+    spotWidth: '',
+    spotHeight: '',
     plumeForm: 'rectangle',
-    minPlumeSize: 0,
-    distanceModuleThird: 0,
+    minPlumeSize: '',
+    distanceModuleThird: '',
 };
 
 const FirstModule = () => {
-    const [selectedOption, setSelectedOption] = useState('angles');
+    const [selectedOption, setSelectedOption] = useState('dimensions');
     const [data, setData] = useState({
         max_distance: 0,
         min_distance: 0,
@@ -118,7 +118,7 @@ const FirstModule = () => {
 
                                     <Radio.Group
                                         className={styles.radio__group}
-                                        defaultValue="angles"
+                                        defaultValue="dimensions"
                                         buttonStyle="solid"
                                         size="middle"
                                     >

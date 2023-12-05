@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik';
 import InputBlock from '../../simple/InputBlock/InputBlock';
 import { Button, Radio } from 'antd';
 import { Select } from 'formik-antd';
-import { useState } from 'react';
+import validationSchema from '../../../core/shemes/ShemaFirstModule';
 
 import './SideMenu.css';
 
@@ -10,8 +10,8 @@ const initialValues = {
     distance: '',
     sensitivity: '',
     power: '',
-    angleWidth: '',
-    angleHeight: '',
+    angleWidth: 1,
+    angleHeight: 1,
     spotWidth: '',
     spotHeight: '',
     plumeForm: 'rectangle',
@@ -46,6 +46,7 @@ const SideMenu = ({
             </Button>
             <Formik
                 initialValues={initialValues}
+                validationSchema={validationSchema}
                 onSubmit={handleFormSubmit}
             >
                 <Form>
@@ -76,7 +77,7 @@ const SideMenu = ({
 
                             <Radio.Group
                                 style={{ marginBottom: 25 }}
-                                defaultValue="angles"
+                                defaultValue="dimensions"
                                 buttonStyle="solid"
                                 size="middle"
                             >
