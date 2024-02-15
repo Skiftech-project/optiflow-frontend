@@ -11,7 +11,16 @@ body {
 }
 
 .container {
+    display: grid;
     width: 1322px;
     margin: 0 auto;
     position: relative;
+    transition: 0.5s all;
+}
+
+.example {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
