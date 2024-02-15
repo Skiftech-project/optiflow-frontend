@@ -10,4 +10,13 @@ export default defineConfig({
             targets: ['defaults', 'not IE 11'],
         }),
     ],
+    resolve: {
+        alias: {
+            src: '/src',
+            assets: '/src/assets',
+            components: '/src/components',
+            core: '/src/core',
+            styles: '/src/styles',
+        },
+    },
 });
