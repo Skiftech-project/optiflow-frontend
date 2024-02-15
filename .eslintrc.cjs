@@ -15,7 +15,6 @@ module.exports = {
     rules: {
         'no-var': 'error',
         'no-console': 'warn',
-        'prefer-const': 'error',
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
         'prettier/prettier': ['warn', { endOfLine: 'auto', tabWidth: 4 }],
     },
