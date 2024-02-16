@@ -1,26 +1,9 @@
 /* there will be global app styles as reset, fonts, variables etc... */
-@import './reset.css';
+@import './bootstrap-reboot.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,500&display=swap');
 @import './variables.css';
 
-*,
-html,
-body {
+* {
     font-family: 'Roboto', system-ui, sans-serif;
-    box-sizing: border-box;
-}
-
-.container {
-    display: grid;
-    width: 1322px;
-    margin: 0 auto;
-    position: relative;
-    transition: 0.5s all;
-}
-
-.example {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    user-select: none;
+    scroll-behavior: smooth;
 }
