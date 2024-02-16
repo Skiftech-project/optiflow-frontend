@@ -1,2 +1,3 @@
 import TitleBlock from './TitleBlock/TitleBlock';
-export { TitleBlock };
+import Spinner from './Spinner/Spinner';
+export { TitleBlock, Spinner };
