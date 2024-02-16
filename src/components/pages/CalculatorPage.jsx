@@ -1,5 +1,5 @@
 const CalculatorPage = () => {
-    return <div></div>;
+    return <div>calculator page</div>;
 };
 
 export default CalculatorPage;

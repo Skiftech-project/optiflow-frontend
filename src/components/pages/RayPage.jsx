@@ -1,5 +1,5 @@
 const RayPage = () => {
-    return <div></div>;
+    return <div>3d ray page</div>;
 };
 
 export default RayPage;
