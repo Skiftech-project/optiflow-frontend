@@ -1,16 +1,16 @@
-import Container from '@mui/material/Container';
+import { Box } from '@mui/material';
 import { TitleBlock } from '../ui';
 import { FormBlock } from '../interface';
 
 const CalculatorPage = () => {
     return (
-        <Container maxWidth="xl" sx={{ marginTop: '70px' }}>
+        <Box sx={{ marginTop: '70px' }}>
             <TitleBlock title="Калькулятор розсіяння зони випромінювання" />
 
             <FormBlock />
 
             <TitleBlock title="результати обчислень" />
-        </Container>
+        </Box>
     );
 };
 
