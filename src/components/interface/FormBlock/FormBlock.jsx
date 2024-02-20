@@ -30,18 +30,12 @@ function CustomTabPanel(props) {
         >
             {value === index && (
                 <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                    <Typography component="div">{children}</Typography>
                 </Box>
             )}
         </div>
     );
 }
-
-CustomTabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
 
 function a11yProps(index) {
     return {
@@ -97,8 +91,8 @@ const FormBlock = () => {
                                 label="Оберіть форму перерізу плями:"
                                 onChange={TempHandleChangeList}
                             >
-                                <MenuItem value={10}>Еліпс</MenuItem>
-                                <MenuItem value={20}>Nigger</MenuItem>
+                                <MenuItem value={'ellipse'}>Еліпс</MenuItem>
+                                <MenuItem value={'rectangle'}>Прямокутник</MenuItem>
                             </Select>
                         </FormControl>
 
@@ -228,6 +222,12 @@ const FormBlock = () => {
             </Grid>
         </section>
     );
+};
+
+CustomTabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
 };
 
 export default FormBlock;
