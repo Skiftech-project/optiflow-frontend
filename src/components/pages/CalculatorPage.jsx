@@ -4,7 +4,7 @@ import { FormBlock } from '../interface';
 
 const CalculatorPage = () => {
     return (
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ marginTop: '70px' }}>
             <TitleBlock title="Калькулятор розсіяння зони випромінювання" />
 
             <FormBlock />
