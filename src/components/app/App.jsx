@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container } from '@mui/material';
 
-import { Header, Footer } from '../interface';
+import { Header } from '../interface';
 import { Spinner } from '../ui';
 
 const MainPage = lazy(() => import('components/pages/MainPage'));
@@ -25,7 +25,6 @@ const App = () => {
                         </Routes>
                     </Suspense>
                 </Container>
-                <Footer />
             </div>
         </BrowserRouter>
     );
