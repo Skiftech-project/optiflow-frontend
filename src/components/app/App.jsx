@@ -1,9 +1,12 @@
 import { Suspense, lazy } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Container } from '@mui/material';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { Container, ScopedCssBaseline } from '@mui/material';
 
 import { Header } from '../interface';
 import { Spinner } from '../ui';
+import { lightTheme } from 'src/core/themes';
 
 const MainPage = lazy(() => import('components/pages/MainPage'));
 const CalculatorPage = lazy(() => import('components/pages/CalculatorPage'));
@@ -12,21 +15,23 @@ const NotFoundPage = lazy(() => import('components/pages/NotFoundPage'));
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <div className="app">
-                <Header />
-                <Container maxWidth="xl" component="main">
-                    <Suspense fallback={<Spinner />}>
-                        <Routes>
-                            <Route path="/" element={<MainPage />} />
-                            <Route path="/calculator" element={<CalculatorPage />} />
-                            <Route path="/ray" element={<RayPage />} />
-                            <Route path="*" element={<NotFoundPage />} />
-                        </Routes>
-                    </Suspense>
-                </Container>
-            </div>
-        </BrowserRouter>
+        <ThemeProvider theme={lightTheme}>
+            <Router>
+                <ScopedCssBaseline>
+                    <Header />
+                    <Container maxWidth="xl" component="main">
+                        <Suspense fallback={<Spinner />}>
+                            <Routes>
+                                <Route path="/" element={<MainPage />} />
+                                <Route path="/calculator" element={<CalculatorPage />} />
+                                <Route path="/ray" element={<RayPage />} />
+                                <Route path="*" element={<NotFoundPage />} />
+                            </Routes>
+                        </Suspense>
+                    </Container>
+                </ScopedCssBaseline>
+            </Router>
+        </ThemeProvider>
     );
 };
 

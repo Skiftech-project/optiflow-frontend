@@ -146,7 +146,7 @@ const Header = () => {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar color="white" position="static">
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
                     <Box sx={styleConfig.logo.desktop}>
@@ -172,10 +172,10 @@ const Header = () => {
                     <Box sx={styleConfig.menu.desktop}>
                         {pages.map(page => (
                             <Button
+                                color="black"
                                 key={page.text}
                                 onClick={handleCloseNavMenu}
                                 sx={{
-                                    color: 'white',
                                     display: 'flex',
                                     alignItems: 'center',
                                     height: '20px',
@@ -184,7 +184,7 @@ const Header = () => {
                                 <Link
                                     style={{
                                         textDecoration: 'none',
-                                        color: 'white',
+                                        color: 'black',
                                     }}
                                     to={page.path}
                                 >
