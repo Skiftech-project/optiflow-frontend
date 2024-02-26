@@ -7,16 +7,17 @@ import {
     Toolbar,
     Menu,
     Avatar,
-    Button,
     Tooltip,
     MenuItem,
     IconButton,
     Typography,
+    Button as MuiButton,
 } from '@mui/material';
 
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
 
+import { Button } from 'src/components/ui';
 import { logo } from 'src/assets';
 
 const pages = [
@@ -124,7 +125,7 @@ const BurgerMenu = ({ anchorElNav, handleOpenNavMenu, handleCloseNavMenu }) => {
 };
 
 const Header = () => {
-    const [isAuth] = useState(true);
+    const [isAuth] = useState(false);
 
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -171,7 +172,7 @@ const Header = () => {
 
                     <Box sx={styleConfig.menu.desktop}>
                         {pages.map(page => (
-                            <Button
+                            <MuiButton
                                 color="black"
                                 key={page.text}
                                 onClick={handleCloseNavMenu}
@@ -190,7 +191,7 @@ const Header = () => {
                                 >
                                     {page.text}
                                 </Link>
-                            </Button>
+                            </MuiButton>
                         ))}
                     </Box>
 
@@ -202,19 +203,7 @@ const Header = () => {
                                 handleCloseUserMenu={handleCloseUserMenu}
                             />
                         ) : (
-                            <Button
-                                size="small"
-                                variant="contained"
-                                sx={{
-                                    width: '126px',
-                                    height: '33px',
-                                    fontSize: '12px',
-                                    fontWeight: 'bold',
-                                    textTransform: 'none',
-                                }}
-                            >
-                                Реєстрація
-                            </Button>
+                            <Button>Реєстрація</Button>
                         )}
                     </Box>
                 </Toolbar>
