@@ -1,2 +1,2 @@
-import theme from './light';
-export { theme as lightTheme };
+import { default as lightTheme } from './light';
+export { lightTheme };
