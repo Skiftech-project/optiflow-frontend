@@ -4,17 +4,21 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import PropTypes from 'prop-types';
+import { Input } from 'src/components/ui';
 
 const block = {
     padding: 30,
     borderRadius: '10px',
     background: '#FFF',
     boxShadow: '1px 1px 4px 0px rgba(0, 0, 0, 0.25)',
+};
+
+const inputStyles = {
+    marginBottom: '17px',
 };
 
 function CustomTabPanel(props) {
@@ -106,49 +110,16 @@ const FormBlock = () => {
                                 <Tab label="Розрахунок: кути" {...a11yProps(1)} />
                             </Tabs>
                         </Box>
+
                         <CustomTabPanel value={tabValue} index={0}>
-                            <TextField
-                                fullWidth
-                                label="Відстань (м):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
-                            />
-
-                            <TextField
-                                fullWidth
-                                label="Висота плями (м):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
-                            />
-
-                            <TextField
-                                fullWidth
-                                label="Ширина плями (м):"
-                                variant="outlined"
-                            />
+                            <Input fullWidth label="Відстань (м):" sx={inputStyles} />
+                            <Input fullWidth label="Висота плями (м):" sx={inputStyles} />
+                            <Input fullWidth label="Ширина плями (м):" sx={inputStyles} />
                         </CustomTabPanel>
-                        <CustomTabPanel value={tabValue} index={1}>
-                            <TextField
-                                fullWidth
-                                label="Кут ширини (°):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
-                            />
 
-                            <TextField
-                                fullWidth
-                                label="Кут висоти (°):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
-                            />
+                        <CustomTabPanel value={tabValue} index={1}>
+                            <Input fullWidth label="Кут ширини (°):" sx={inputStyles} />
+                            <Input fullWidth label="Кут висоти (°):" sx={inputStyles} />
                         </CustomTabPanel>
                     </div>
                 </Grid>
@@ -170,20 +141,12 @@ const FormBlock = () => {
                                 параметри приймача-випромінювача
                             </Typography>
 
-                            <TextField
+                            <Input
                                 fullWidth
                                 label="Чутливість (мВт/м²):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
+                                sx={inputStyles}
                             />
-
-                            <TextField
-                                fullWidth
-                                label="Потужність (мВт):"
-                                variant="outlined"
-                            />
+                            <Input fullWidth label="Потужність (мВт):" />
                         </div>
                     </Grid>
                     <Grid item>
@@ -202,20 +165,12 @@ const FormBlock = () => {
                                 додаткові параметри
                             </Typography>
 
-                            <TextField
+                            <Input
                                 fullWidth
                                 label="Мінімальний розмір плями (м):"
-                                variant="outlined"
-                                sx={{
-                                    marginBottom: '17px',
-                                }}
+                                sx={inputStyles}
                             />
-
-                            <TextField
-                                fullWidth
-                                label="Дистанція (м):"
-                                variant="outlined"
-                            />
+                            <Input fullWidth label="Дистанція (м):" sx={inputStyles} />
                         </div>
                     </Grid>
                 </Grid>
