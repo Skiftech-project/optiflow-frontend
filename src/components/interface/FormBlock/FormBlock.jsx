@@ -96,6 +96,7 @@ const FormBlock = () => {
 
                         <CustomTabPanel value={tabValue} index={0}>
                             <Input
+                                id="distance"
                                 fullWidth
                                 label="Відстань:"
                                 type="number"
@@ -103,6 +104,7 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                             <Input
+                                id="spotHeight"
                                 fullWidth
                                 label="Висота плями:"
                                 type="number"
@@ -110,6 +112,7 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                             <Input
+                                id="spotWidth"
                                 fullWidth
                                 label="Ширина плями:"
                                 type="number"
@@ -120,6 +123,7 @@ const FormBlock = () => {
 
                         <CustomTabPanel value={tabValue} index={1}>
                             <Input
+                                id="angleWidth"
                                 fullWidth
                                 label="Кут ширини:"
                                 type="number"
@@ -127,6 +131,7 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                             <Input
+                                id="angleHeight"
                                 fullWidth
                                 label="Кут висоти:"
                                 type="number"
@@ -155,6 +160,7 @@ const FormBlock = () => {
                             </Typography>
 
                             <Input
+                                id="sensitivity"
                                 fullWidth
                                 label="Чутливість:"
                                 type="number"
@@ -162,6 +168,7 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                             <Input
+                                id="power"
                                 fullWidth
                                 label="Потужність:"
                                 type="number"
@@ -186,6 +193,7 @@ const FormBlock = () => {
                             </Typography>
 
                             <Input
+                                id="minPlumeSize"
                                 fullWidth
                                 label="Мінімальний розмір плями:"
                                 type="number"
@@ -193,6 +201,7 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                             <Input
+                                id="distanceModuleThird"
                                 fullWidth
                                 label="Дистанція:"
                                 type="number"
