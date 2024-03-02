@@ -1,11 +1,31 @@
+import { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@mui/material/TextField';
+import { InputAdornment } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 
-const Input = ({ label = 'Label text', size = 'small', ...props }) => {
+const Input = ({ adornment = null, label = 'Label text', size = 'small', ...props }) => {
     const theme = useTheme();
-    return <View theme={theme} label={label} size={size} {...props} />;
+
+    const inputProps = useMemo(
+        () => ({
+            endAdornment: adornment && (
+                <InputAdornment position="end">{adornment}</InputAdornment>
+            ),
+        }),
+        [adornment],
+    );
+
+    return (
+        <View
+            theme={theme}
+            label={label}
+            size={size}
+            InputProps={inputProps}
+            {...props}
+        />
+    );
 };
 
 const View = styled(TextField)(({ theme }) => ({
@@ -40,6 +60,7 @@ const View = styled(TextField)(({ theme }) => ({
 Input.propTypes = {
     label: PropTypes.string,
     size: PropTypes.string,
+    adornment: PropTypes.string,
 };
 
 export default Input;
