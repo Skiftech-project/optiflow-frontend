@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import PropTypes from 'prop-types';
 import {
     AppBar,
@@ -11,13 +12,10 @@ import {
     MenuItem,
     IconButton,
     Typography,
-    Button as MuiButton,
 } from '@mui/material';
-
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
 
-import { Button } from 'src/components/ui';
+import { Button, Link, NavLink } from 'src/components/ui';
 import { logo } from 'src/assets';
 
 const pages = [
@@ -30,11 +28,18 @@ const settings = ['Profile', 'Logout'];
 const styleConfig = {
     logo: {
         desktop: { mr: 5, display: { xs: 'none', md: 'flex' } },
-        mobile: { flexGrow: 1, display: { xs: 'flex', md: 'none' } },
+        mobile: {
+            flexGrow: 1,
+            display: { xs: 'flex', md: 'none' },
+        },
     },
     menu: {
         mobile: { flexGrow: 1, display: { xs: 'flex', md: 'none' } },
-        desktop: { flexGrow: 1, display: { xs: 'none', md: 'flex' } },
+        desktop: {
+            flexGrow: 1,
+            display: { xs: 'none', md: 'flex' },
+            gap: '30px',
+        },
     },
     tools: { flexGrow: 0 },
 };
@@ -107,15 +112,7 @@ const BurgerMenu = ({ anchorElNav, handleOpenNavMenu, handleCloseNavMenu }) => {
                 {pages.map(page => (
                     <MenuItem key={page.text} onClick={handleCloseNavMenu}>
                         <Typography textAlign="center">
-                            <Link
-                                style={{
-                                    textDecoration: 'none',
-                                    color: 'black',
-                                }}
-                                to={page.path}
-                            >
-                                {page.text}
-                            </Link>
+                            <Link to={page.path}>{page.text}</Link>
                         </Typography>
                     </MenuItem>
                 ))}
@@ -151,9 +148,9 @@ const Header = () => {
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
                     <Box sx={styleConfig.logo.desktop}>
-                        <Link to="/">
+                        <NavLink to="/">
                             <img src={logo} alt="logo" />
-                        </Link>
+                        </NavLink>
                     </Box>
 
                     <Box sx={styleConfig.menu.mobile}>
@@ -165,33 +162,16 @@ const Header = () => {
                     </Box>
 
                     <Box sx={styleConfig.logo.mobile}>
-                        <Link to="/">
+                        <NavLink to="/">
                             <img src={logo} alt="logo" />
-                        </Link>
+                        </NavLink>
                     </Box>
 
                     <Box sx={styleConfig.menu.desktop}>
                         {pages.map(page => (
-                            <MuiButton
-                                color="black"
-                                key={page.text}
-                                onClick={handleCloseNavMenu}
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    height: '20px',
-                                }}
-                            >
-                                <Link
-                                    style={{
-                                        textDecoration: 'none',
-                                        color: 'black',
-                                    }}
-                                    to={page.path}
-                                >
-                                    {page.text}
-                                </Link>
-                            </MuiButton>
+                            <NavLink key={page.text} to={page.path}>
+                                {page.text}
+                            </NavLink>
                         ))}
                     </Box>
 
