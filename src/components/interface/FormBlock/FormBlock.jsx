@@ -203,7 +203,7 @@ const FormBlock = () => {
                             <Input
                                 id="distanceModuleThird"
                                 fullWidth
-                                label="Дистанція:"
+                                label="Дистанція для розрахунку розмірів плями:"
                                 type="number"
                                 adornment="м"
                                 sx={inputStyles}
