@@ -1,14 +1,9 @@
 import { useState } from 'react';
-import { Grid, Typography } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+
 import PropTypes from 'prop-types';
-import { Input } from 'src/components/ui';
+import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
+
+import { Input, Select } from 'src/components/ui';
 
 const block = {
     padding: 30,
@@ -20,6 +15,11 @@ const block = {
 const inputStyles = {
     marginBottom: '17px',
 };
+
+const selectOptions = [
+    { name: 'Еліпс', value: 'ellipse' },
+    { name: 'Прямокутник', value: 'rectangle' },
+];
 
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -49,12 +49,7 @@ function a11yProps(index) {
 }
 
 const FormBlock = () => {
-    const [sectionShape, setSectionShape] = useState('');
     const [tabValue, setTabValue] = useState(0);
-
-    const TempHandleChangeList = event => {
-        setSectionShape(event.target.value);
-    };
 
     const TempHandleChangeToggleBtn = (event, newValue) => {
         setTabValue(newValue);
@@ -79,29 +74,17 @@ const FormBlock = () => {
                             геометрія променю
                         </Typography>
 
-                        <FormControl
+                        <Select
                             fullWidth
-                            sx={{
-                                marginBottom: '15px',
-                            }}
-                        >
-                            <InputLabel id="demo-simple-select-label">
-                                Оберіть форму перерізу плями:
-                            </InputLabel>
-                            <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={sectionShape}
-                                label="Оберіть форму перерізу плями:"
-                                onChange={TempHandleChangeList}
-                            >
-                                <MenuItem value={'ellipse'}>Еліпс</MenuItem>
-                                <MenuItem value={'rectangle'}>Прямокутник</MenuItem>
-                            </Select>
-                        </FormControl>
+                            defaultValue="ellipse"
+                            options={selectOptions}
+                            label="Оберіть форму перерізу плями:"
+                            sx={inputStyles}
+                        />
 
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs
+                                centered
                                 value={tabValue}
                                 onChange={TempHandleChangeToggleBtn}
                                 aria-label="basic tabs example"
@@ -112,14 +95,44 @@ const FormBlock = () => {
                         </Box>
 
                         <CustomTabPanel value={tabValue} index={0}>
-                            <Input fullWidth label="Відстань (м):" sx={inputStyles} />
-                            <Input fullWidth label="Висота плями (м):" sx={inputStyles} />
-                            <Input fullWidth label="Ширина плями (м):" sx={inputStyles} />
+                            <Input
+                                fullWidth
+                                label="Відстань:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                fullWidth
+                                label="Висота плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                fullWidth
+                                label="Ширина плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
                         </CustomTabPanel>
 
                         <CustomTabPanel value={tabValue} index={1}>
-                            <Input fullWidth label="Кут ширини (°):" sx={inputStyles} />
-                            <Input fullWidth label="Кут висоти (°):" sx={inputStyles} />
+                            <Input
+                                fullWidth
+                                label="Кут ширини:"
+                                type="number"
+                                adornment="(°)"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                fullWidth
+                                label="Кут висоти:"
+                                type="number"
+                                adornment="(°)"
+                                sx={inputStyles}
+                            />
                         </CustomTabPanel>
                     </div>
                 </Grid>
@@ -143,10 +156,17 @@ const FormBlock = () => {
 
                             <Input
                                 fullWidth
-                                label="Чутливість (мВт/м²):"
+                                label="Чутливість:"
+                                type="number"
+                                adornment="(мВт/м²)"
                                 sx={inputStyles}
                             />
-                            <Input fullWidth label="Потужність (мВт):" />
+                            <Input
+                                fullWidth
+                                label="Потужність:"
+                                type="number"
+                                adornment="мВт"
+                            />
                         </div>
                     </Grid>
                     <Grid item>
@@ -167,10 +187,18 @@ const FormBlock = () => {
 
                             <Input
                                 fullWidth
-                                label="Мінімальний розмір плями (м):"
+                                label="Мінімальний розмір плями:"
+                                type="number"
+                                adornment="м"
                                 sx={inputStyles}
                             />
-                            <Input fullWidth label="Дистанція (м):" sx={inputStyles} />
+                            <Input
+                                fullWidth
+                                label="Дистанція:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
                         </div>
                     </Grid>
                 </Grid>
