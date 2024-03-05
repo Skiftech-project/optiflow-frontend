@@ -12,7 +12,7 @@
 
 Для початку клонуємо репозиторій на свою локальну машину:
 
-```bash
+```
 git clone https://github.com/Skiftech-project/optiflow-frontend.git
 ```
 
