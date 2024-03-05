@@ -1,6 +1,6 @@
 # Optiflow - Client
 
-## Build with ⚙️
+## Стек технологій ⚙️
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui&theme=dark)](https://skillicons.dev)
 
