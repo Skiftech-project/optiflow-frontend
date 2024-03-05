@@ -1,4 +1,9 @@
-# React + Vite
+# Optiflow - Client
+
+## Build with ⚙️
+
+[![My Skills](https://skillicons.dev/icons?i=js,react,threejs)](https://skillicons.dev)
+
 
 Для початку клонуємо репозиторій на свою локальну машину:
 
