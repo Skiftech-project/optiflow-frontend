@@ -1,9 +1,14 @@
 # Optiflow - Client
 
-## Стек технологій ⚙️
+## Стек технологій
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui&theme=dark)](https://skillicons.dev)
 
+## Наживо
+
+Ви можете подивитися поточну розміщену версію додатку за [посиланням](https://optiflow-skiftech.netlify.app/)
+
+## Локальний запуск
 
 Для початку клонуємо репозиторій на свою локальну машину:
 
