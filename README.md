@@ -2,7 +2,7 @@
 
 ## Build with ⚙️
 
-[![My Skills](https://skillicons.dev/icons?i=js,react,threejs&theme=light)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,react,threejs&theme=dark)](https://skillicons.dev)
 
 
 Для початку клонуємо репозиторій на свою локальну машину:
