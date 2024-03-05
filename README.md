@@ -2,7 +2,7 @@
 
 ## Стек технологій
 
-[![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui&theme=dark)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
 
 ## Наживо
 
@@ -12,7 +12,7 @@
 
 Для початку клонуємо репозиторій на свою локальну машину:
 
-```
+```bash
 git clone https://github.com/Skiftech-project/optiflow-frontend.git
 ```
 
