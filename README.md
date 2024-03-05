@@ -1,12 +1,19 @@
 # Optiflow - Client
 
+Тут розробляэться клієнтська частина додатку завдяки якої користувачу буде зручно проводити потрібні розрахунки.
+
 ## Стек технологій
 
 [![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
 
 ## Наживо
 
-Ви можете подивитися поточну розміщену версію додатку за [посиланням](https://optiflow-skiftech.netlify.app/)
+Ви можете подивитися поточну розміщену версію додатку за [посиланням](https://optiflow-skiftech.netlify.app/).
+
+## Командна розробка
+
+Проект вже налаштован для комфорної командної розробки за допомогою [eslint](https://eslint.org/), [prettier](https://prettier.io/), [husky](https://typicode.github.io/husky/).
+`Правила лінтеру` та налаштування `стилістики коду` ви можете знайти у файлах розташованих у корні проекту: `.eslintrc.js` та `.prettierrc`.
 
 ## Локальний запуск
 
