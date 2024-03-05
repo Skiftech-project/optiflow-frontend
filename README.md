@@ -4,7 +4,7 @@
 
 ## Стек технологій
 
-[![My Skills](https://skillicons.dev/icons?i=js,react,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,react,redux,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
 
 ## Наживо
 
@@ -12,7 +12,7 @@
 
 ## Командна розробка
 
-Проект вже налаштован для комфорної командної розробки за допомогою [eslint](https://eslint.org/), [prettier](https://prettier.io/), [husky](https://typicode.github.io/husky/).
+Проект вже налаштован для комфорної командної розробки за допомогою [eslint](https://eslint.org/), [prettier](https://prettier.io/), [husky](https://typicode.github.io/husky/). <br/>
 `Правила лінтеру` та налаштування `стилістики коду` ви можете знайти у файлах розташованих у корні проекту: `.eslintrc.js` та `.prettierrc`.
 
 ## Локальний запуск
