@@ -13,13 +13,13 @@
 Для початку клонуємо репозиторій на свою локальну машину:
 
 ```
-git clone https://github.com/Skiftech-project/skiftech-frontend.git
+git clone https://github.com/Skiftech-project/optiflow-frontend.git
 ```
 
 Переходимо до папки з проектом:
 
 ```
-cd ./skiftech-frontend
+cd ./optiflow-frontend
 ```
 
 Інсталюємо всі залежності проекту запустивши у консолі команду:
