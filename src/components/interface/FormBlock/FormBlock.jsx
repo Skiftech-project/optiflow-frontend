@@ -3,7 +3,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
 
-import { Input, Select } from 'src/components/ui';
+import { Input, Select, TitleBlock } from 'src/components/ui';
 
 const block = {
     padding: 30,
@@ -33,7 +33,7 @@ function CustomTabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
+                <Box sx={{ padding: '40px 0 0 0' }}>
                     <Typography component="div">{children}</Typography>
                 </Box>
             )}
@@ -60,19 +60,9 @@ const FormBlock = () => {
             <Grid container spacing={2}>
                 <Grid item xs={12} md={6}>
                     <div style={{ ...block, height: '100%' }}>
-                        <Typography
-                            align="center"
-                            sx={{
-                                color: '#1E55B3',
-                                textTransform: 'uppercase',
-                                fontWeight: 'bold',
-                                fontSize: 21,
-                                marginBottom: '25px',
-                            }}
-                            component="h2"
-                        >
+                        <TitleBlock sx={{ marginBottom: '25px' }}>
                             геометрія променю
-                        </Typography>
+                        </TitleBlock>
 
                         <Select
                             fullWidth
@@ -88,6 +78,7 @@ const FormBlock = () => {
                                 value={tabValue}
                                 onChange={TempHandleChangeToggleBtn}
                                 aria-label="basic tabs example"
+                                sx={{ padding: 0 }}
                             >
                                 <Tab label="Розрахунок: пляма" {...a11yProps(0)} />
                                 <Tab label="Розрахунок: кути" {...a11yProps(1)} />
@@ -145,19 +136,9 @@ const FormBlock = () => {
                 <Grid item xs={12} md={6} container direction="column" spacing={2}>
                     <Grid item>
                         <div style={block}>
-                            <Typography
-                                align="center"
-                                sx={{
-                                    color: '#1E55B3',
-                                    textTransform: 'uppercase',
-                                    fontWeight: 'bold',
-                                    fontSize: 21,
-                                    marginBottom: '25px',
-                                }}
-                                component="h2"
-                            >
+                            <TitleBlock sx={{ marginBottom: '25px' }}>
                                 параметри приймача-випромінювача
-                            </Typography>
+                            </TitleBlock>
 
                             <Input
                                 id="sensitivity"
@@ -178,19 +159,9 @@ const FormBlock = () => {
                     </Grid>
                     <Grid item>
                         <div style={block}>
-                            <Typography
-                                align="center"
-                                sx={{
-                                    color: '#1E55B3',
-                                    textTransform: 'uppercase',
-                                    fontWeight: 'bold',
-                                    fontSize: 21,
-                                    marginBottom: '25px',
-                                }}
-                                component="h2"
-                            >
+                            <TitleBlock sx={{ marginBottom: '25px' }}>
                                 додаткові параметри
-                            </Typography>
+                            </TitleBlock>
 
                             <Input
                                 id="minPlumeSize"

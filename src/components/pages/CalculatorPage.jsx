@@ -5,11 +5,9 @@ import { FormBlock } from '../interface';
 const CalculatorPage = () => {
     return (
         <Box sx={{ marginTop: '70px' }}>
-            <TitleBlock title="Калькулятор розсіяння зони випромінювання" />
-
+            <TitleBlock block>Калькулятор розсіяння зони випромінювання</TitleBlock>
             <FormBlock />
-
-            <TitleBlock title="результати обчислень" />
+            <TitleBlock block>Результати обчислень</TitleBlock>
         </Box>
     );
 };
