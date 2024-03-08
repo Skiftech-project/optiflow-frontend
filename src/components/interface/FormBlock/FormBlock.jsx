@@ -58,7 +58,7 @@ const FormBlock = () => {
     return (
         <section style={{ margin: '15px 0' }}>
             <Grid container spacing={2}>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <div style={{ ...block, height: '100%' }}>
                         <Typography
                             align="center"
@@ -142,7 +142,7 @@ const FormBlock = () => {
                     </div>
                 </Grid>
 
-                <Grid item xs={6} container direction="column" spacing={2}>
+                <Grid item xs={12} md={6} container direction="column" spacing={2}>
                     <Grid item>
                         <div style={block}>
                             <Typography
