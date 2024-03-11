@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import { styled } from '@mui/system';
 import { Link } from '..';
 
 const NavLink = ({ children, ...props }) => {
@@ -12,11 +13,15 @@ const NavLink = ({ children, ...props }) => {
     });
 
     return (
-        <Link style={isLinkActive} component={RouterNavLink} end {...props}>
+        <View style={isLinkActive} component={RouterNavLink} end {...props}>
             {children}
-        </Link>
+        </View>
     );
 };
+
+const View = styled(Link)(() => ({
+    fontSize: '16px',
+}));
 
 NavLink.propTypes = { children: PropTypes.node.isRequired };
 
