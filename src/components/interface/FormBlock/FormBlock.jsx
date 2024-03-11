@@ -91,7 +91,6 @@ const FormBlock = () => {
                                 id="distance"
                                 fullWidth
                                 label="Відстань:"
-                                type="number"
                                 adornment="м"
                                 sx={inputStyles}
                             />
@@ -100,7 +99,6 @@ const FormBlock = () => {
                                 id="spotHeight"
                                 fullWidth
                                 label="Висота плями:"
-                                type="number"
                                 adornment="м"
                                 sx={inputStyles}
                             />
@@ -109,7 +107,6 @@ const FormBlock = () => {
                                 id="spotWidth"
                                 fullWidth
                                 label="Ширина плями:"
-                                type="number"
                                 adornment="м"
                                 sx={inputStyles}
                             />
@@ -121,7 +118,6 @@ const FormBlock = () => {
                                 id="angleWidth"
                                 fullWidth
                                 label="Кут ширини:"
-                                type="number"
                                 adornment="(°)"
                                 sx={inputStyles}
                             />
@@ -130,7 +126,6 @@ const FormBlock = () => {
                                 id="angleHeight"
                                 fullWidth
                                 label="Кут висоти:"
-                                type="number"
                                 adornment="(°)"
                                 sx={inputStyles}
                             />
@@ -150,7 +145,6 @@ const FormBlock = () => {
                                 id="sensitivity"
                                 fullWidth
                                 label="Чутливість:"
-                                type="number"
                                 adornment="(мВт/м²)"
                                 sx={inputStyles}
                             />
@@ -159,7 +153,6 @@ const FormBlock = () => {
                                 id="power"
                                 fullWidth
                                 label="Потужність:"
-                                type="number"
                                 adornment="мВт"
                             />
                         </div>
@@ -175,7 +168,6 @@ const FormBlock = () => {
                                 id="minPlumeSize"
                                 fullWidth
                                 label="Мінімальний розмір плями:"
-                                type="number"
                                 adornment="м"
                                 sx={inputStyles}
                             />
@@ -184,7 +176,6 @@ const FormBlock = () => {
                                 id="distanceModuleThird"
                                 fullWidth
                                 label="Дистанція для розрахунку розмірів плями:"
-                                type="number"
                                 adornment="м"
                                 sx={inputStyles}
                             />
