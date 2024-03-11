@@ -1,12 +1,20 @@
 import { useMemo } from 'react';
+
 import PropTypes from 'prop-types';
-import TextField from '@mui/material/TextField';
-import { InputAdornment } from '@mui/material';
+import { useController } from 'react-hook-form';
+import { InputAdornment, TextField } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 
-const Input = ({ adornment = null, label = 'Label text', size = 'small', ...props }) => {
+const Input = ({
+    name,
+    adornment = null,
+    label = 'Label text',
+    size = 'small',
+    ...props
+}) => {
     const theme = useTheme();
+    const { field } = useController({ name });
 
     const inputProps = useMemo(
         () => ({
@@ -19,10 +27,12 @@ const Input = ({ adornment = null, label = 'Label text', size = 'small', ...prop
 
     return (
         <View
+            name={field.name}
             theme={theme}
             label={label}
             size={size}
             InputProps={inputProps}
+            {...field}
             {...props}
         />
     );
@@ -58,6 +68,7 @@ const View = styled(TextField)(({ theme }) => ({
 }));
 
 Input.propTypes = {
+    name: PropTypes.string.isRequired,
     label: PropTypes.string,
     size: PropTypes.string,
     adornment: PropTypes.string,

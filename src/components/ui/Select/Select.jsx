@@ -1,35 +1,52 @@
-import { useState } from 'react';
-
 import PropTypes from 'prop-types';
-import MenuItem from '@mui/material/MenuItem';
-import { useTheme } from '@mui/material/styles';
-import { Input } from 'src/components/ui';
+import { Controller } from 'react-hook-form';
+import { FormControl, Select as MuiSelect, InputLabel, MenuItem } from '@mui/material';
 
-const Select = ({ defaultValue, options = [], ...props }) => {
-    const theme = useTheme();
-    const [value, setValue] = useState(defaultValue || '');
-
-    const handleChange = event => {
-        setValue(event.target.value);
-    };
+const Select = ({
+    name,
+    variant = 'outlined',
+    label = 'default',
+    id = 'default',
+    options = [],
+    ...props
+}) => {
+    const labelId = `${id}-label`;
 
     return (
-        <Input select theme={theme} value={value} onChange={handleChange} {...props}>
-            {options.map(option => (
-                <MenuItem key={option.value} value={option.value}>
-                    {option.name}
-                </MenuItem>
-            ))}
-        </Input>
+        <FormControl fullWidth>
+            <InputLabel id={labelId}>{label}</InputLabel>
+            <Controller
+                name={name}
+                render={({ field }) => (
+                    <MuiSelect
+                        labelId={labelId}
+                        id={id}
+                        label={label}
+                        variant={variant}
+                        {...field}
+                        {...props}
+                    >
+                        {options.map(option => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.name}
+                            </MenuItem>
+                        ))}
+                    </MuiSelect>
+                )}
+            />
+        </FormControl>
     );
 };
 
 Select.propTypes = {
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    name: PropTypes.string.isRequired,
+    variant: PropTypes.string,
+    label: PropTypes.string,
+    id: PropTypes.string,
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-            name: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+            name: PropTypes.string.isRequired,
         }),
     ).isRequired,
 };
