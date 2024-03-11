@@ -7,15 +7,15 @@ const CalculatorPage = () => {
     const methods = useForm({
         defaultValues: {
             plumeForm: 'ellipse',
-            distance: '',
-            spotHeight: '',
-            spotWidth: '',
-            angleWidth: '',
-            angleHeight: '',
-            sensitivity: '',
-            power: '',
-            minPlumeSize: '',
-            distanceModuleThird: '',
+            distance: 0,
+            spotHeight: 0,
+            spotWidth: 0,
+            angleWidth: 0,
+            angleHeight: 0,
+            sensitivity: 0,
+            power: 0,
+            minPlumeSize: 0,
+            distanceModuleThird: 0,
         },
     });
 
