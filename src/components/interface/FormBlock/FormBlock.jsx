@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+
 import PropTypes from 'prop-types';
 import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
 
-import { Button, Input, Select, TitleBlock } from 'src/components/ui';
+import { Input, Select, TitleBlock } from 'src/components/ui';
 
 const block = {
     padding: 30,
@@ -50,156 +50,149 @@ function a11yProps(index) {
 
 const FormBlock = () => {
     const [tabValue, setTabValue] = useState(0);
-    const methods = useForm();
 
     const TempHandleChangeToggleBtn = (event, newValue) => {
         setTabValue(newValue);
     };
 
-    const handleSubmit = data => {
-        console.log(JSON.stringify(data, null, 2));
-    };
-
     return (
-        <FormProvider {...methods}>
-            <section style={{ margin: '15px 0' }}>
-                <Grid
-                    component="form"
-                    container
-                    spacing={2}
-                    onSubmit={methods.handleSubmit(handleSubmit)}
-                >
-                    <Grid item xs={12} md={6}>
-                        <div style={{ ...block, height: '100%' }}>
-                            <TitleBlock sx={{ marginBottom: '25px' }}>
-                                геометрія променю
-                            </TitleBlock>
+        <section style={{ margin: '15px 0' }}>
+            <Grid component="form" container spacing={2}>
+                <Grid item xs={12} md={6}>
+                    <div style={{ ...block, height: '100%' }}>
+                        <TitleBlock sx={{ marginBottom: '25px' }}>
+                            геометрія променю
+                        </TitleBlock>
 
-                            <Select
+                        <Select
+                            name="plumeForm"
+                            id="plumeForm"
+                            options={selectOptions}
+                            label="Оберіть форму перерізу плями:"
+                            sx={inputStyles}
+                        />
+
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs
+                                centered
+                                value={tabValue}
+                                onChange={TempHandleChangeToggleBtn}
+                                aria-label="basic tabs example"
+                                sx={{ padding: 0 }}
+                            >
+                                <Tab label="Розрахунок: пляма" {...a11yProps(0)} />
+                                <Tab label="Розрахунок: кути" {...a11yProps(1)} />
+                            </Tabs>
+                        </Box>
+
+                        <CustomTabPanel value={tabValue} index={0}>
+                            <Input
+                                name="distance"
+                                id="distance"
                                 fullWidth
-                                defaultValue="ellipse"
-                                options={selectOptions}
-                                label="Оберіть форму перерізу плями:"
+                                label="Відстань:"
+                                type="number"
+                                adornment="м"
                                 sx={inputStyles}
                             />
+                            <Input
+                                name="spotHeight"
+                                id="spotHeight"
+                                fullWidth
+                                label="Висота плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                name="spotWidth"
+                                id="spotWidth"
+                                fullWidth
+                                label="Ширина плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                        </CustomTabPanel>
 
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs
-                                    centered
-                                    value={tabValue}
-                                    onChange={TempHandleChangeToggleBtn}
-                                    aria-label="basic tabs example"
-                                    sx={{ padding: 0 }}
-                                >
-                                    <Tab label="Розрахунок: пляма" {...a11yProps(0)} />
-                                    <Tab label="Розрахунок: кути" {...a11yProps(1)} />
-                                </Tabs>
-                            </Box>
+                        <CustomTabPanel value={tabValue} index={1}>
+                            <Input
+                                name="angleWidth"
+                                id="angleWidth"
+                                fullWidth
+                                label="Кут ширини:"
+                                type="number"
+                                adornment="(°)"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                name="angleHeight"
+                                id="angleHeight"
+                                fullWidth
+                                label="Кут висоти:"
+                                type="number"
+                                adornment="(°)"
+                                sx={inputStyles}
+                            />
+                        </CustomTabPanel>
+                    </div>
+                </Grid>
 
-                            <CustomTabPanel value={tabValue} index={0}>
-                                <Input
-                                    id="distance"
-                                    fullWidth
-                                    label="Відстань:"
-                                    type="number"
-                                    adornment="м"
-                                    sx={inputStyles}
-                                />
-                                <Input
-                                    id="spotHeight"
-                                    fullWidth
-                                    label="Висота плями:"
-                                    type="number"
-                                    adornment="м"
-                                    sx={inputStyles}
-                                />
-                                <Input
-                                    id="spotWidth"
-                                    fullWidth
-                                    label="Ширина плями:"
-                                    type="number"
-                                    adornment="м"
-                                    sx={inputStyles}
-                                />
-                            </CustomTabPanel>
+                <Grid item xs={12} md={6} container direction="column" spacing={2}>
+                    <Grid item>
+                        <div style={block}>
+                            <TitleBlock sx={{ marginBottom: '25px' }}>
+                                параметри приймача-випромінювача
+                            </TitleBlock>
 
-                            <CustomTabPanel value={tabValue} index={1}>
-                                <Input
-                                    id="angleWidth"
-                                    fullWidth
-                                    label="Кут ширини:"
-                                    type="number"
-                                    adornment="(°)"
-                                    sx={inputStyles}
-                                />
-                                <Input
-                                    id="angleHeight"
-                                    fullWidth
-                                    label="Кут висоти:"
-                                    type="number"
-                                    adornment="(°)"
-                                    sx={inputStyles}
-                                />
-                            </CustomTabPanel>
+                            <Input
+                                name="sensitivity"
+                                id="sensitivity"
+                                fullWidth
+                                label="Чутливість:"
+                                type="number"
+                                adornment="(мВт/м²)"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                name="power"
+                                id="power"
+                                fullWidth
+                                label="Потужність:"
+                                type="number"
+                                adornment="мВт"
+                            />
                         </div>
                     </Grid>
+                    <Grid item>
+                        <div style={block}>
+                            <TitleBlock sx={{ marginBottom: '25px' }}>
+                                додаткові параметри
+                            </TitleBlock>
 
-                    <Grid item xs={12} md={6} container direction="column" spacing={2}>
-                        <Grid item>
-                            <div style={block}>
-                                <TitleBlock sx={{ marginBottom: '25px' }}>
-                                    параметри приймача-випромінювача
-                                </TitleBlock>
-
-                                <Input
-                                    id="sensitivity"
-                                    fullWidth
-                                    label="Чутливість:"
-                                    type="number"
-                                    adornment="(мВт/м²)"
-                                    sx={inputStyles}
-                                />
-                                <Input
-                                    id="power"
-                                    fullWidth
-                                    label="Потужність:"
-                                    type="number"
-                                    adornment="мВт"
-                                />
-                            </div>
-                        </Grid>
-                        <Grid item>
-                            <div style={block}>
-                                <TitleBlock sx={{ marginBottom: '25px' }}>
-                                    додаткові параметри
-                                </TitleBlock>
-
-                                <Input
-                                    id="minPlumeSize"
-                                    fullWidth
-                                    label="Мінімальний розмір плями:"
-                                    type="number"
-                                    adornment="м"
-                                    sx={inputStyles}
-                                />
-                                <Input
-                                    id="distanceModuleThird"
-                                    fullWidth
-                                    label="Дистанція для розрахунку розмірів плями:"
-                                    type="number"
-                                    adornment="м"
-                                    sx={inputStyles}
-                                />
-                            </div>
-                        </Grid>
+                            <Input
+                                name="minPlumeSize"
+                                id="minPlumeSize"
+                                fullWidth
+                                label="Мінімальний розмір плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                            <Input
+                                name="distanceModuleThird"
+                                id="distanceModuleThird"
+                                fullWidth
+                                label="Дистанція для розрахунку розмірів плями:"
+                                type="number"
+                                adornment="м"
+                                sx={inputStyles}
+                            />
+                        </div>
                     </Grid>
-
-                    <Button type="submit" color="primary">
-                        submit
-                    </Button>
                 </Grid>
-            </section>
-        </FormProvider>
+            </Grid>
+        </section>
     );
 };
 
