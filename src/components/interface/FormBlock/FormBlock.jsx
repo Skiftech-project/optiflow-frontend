@@ -4,13 +4,7 @@ import PropTypes from 'prop-types';
 import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
 
 import { Input, Select, TitleBlock } from 'src/components/ui';
-
-const block = {
-    padding: 30,
-    borderRadius: '10px',
-    background: '#FFF',
-    boxShadow: '1px 1px 4px 0px rgba(0, 0, 0, 0.25)',
-};
+import { Block } from 'src/components/ui';
 
 const inputStyles = {
     marginBottom: '17px',
@@ -56,10 +50,10 @@ const FormBlock = () => {
     };
 
     return (
-        <section style={{ margin: '15px 0' }}>
+        <section>
             <Grid component="form" container spacing={2}>
                 <Grid item xs={12} md={6}>
-                    <div style={{ ...block, height: '100%' }}>
+                    <Block padding="30px" style={{ height: '100%' }}>
                         <TitleBlock sx={{ marginBottom: '25px' }}>
                             геометрія променю
                         </TitleBlock>
@@ -88,7 +82,6 @@ const FormBlock = () => {
                         <CustomTabPanel value={tabValue} index={0}>
                             <Input
                                 name="distance"
-                                type="number"
                                 id="distance"
                                 fullWidth
                                 label="Відстань:"
@@ -97,7 +90,6 @@ const FormBlock = () => {
                             />
                             <Input
                                 name="spotHeight"
-                                type="number"
                                 id="spotHeight"
                                 fullWidth
                                 label="Висота плями:"
@@ -106,7 +98,6 @@ const FormBlock = () => {
                             />
                             <Input
                                 name="spotWidth"
-                                type="number"
                                 id="spotWidth"
                                 fullWidth
                                 label="Ширина плями:"
@@ -118,7 +109,6 @@ const FormBlock = () => {
                         <CustomTabPanel value={tabValue} index={1}>
                             <Input
                                 name="angleWidth"
-                                type="number"
                                 id="angleWidth"
                                 fullWidth
                                 label="Кут ширини:"
@@ -127,7 +117,6 @@ const FormBlock = () => {
                             />
                             <Input
                                 name="angleHeight"
-                                type="number"
                                 id="angleHeight"
                                 fullWidth
                                 label="Кут висоти:"
@@ -135,19 +124,18 @@ const FormBlock = () => {
                                 sx={inputStyles}
                             />
                         </CustomTabPanel>
-                    </div>
+                    </Block>
                 </Grid>
 
                 <Grid item xs={12} md={6} container direction="column" spacing={2}>
                     <Grid item>
-                        <div style={block}>
+                        <Block padding="30px">
                             <TitleBlock sx={{ marginBottom: '25px' }}>
                                 параметри приймача-випромінювача
                             </TitleBlock>
 
                             <Input
                                 name="sensitivity"
-                                type="number"
                                 id="sensitivity"
                                 fullWidth
                                 label="Чутливість:"
@@ -156,23 +144,21 @@ const FormBlock = () => {
                             />
                             <Input
                                 name="power"
-                                type="number"
                                 id="power"
                                 fullWidth
                                 label="Потужність:"
                                 adornment="мВт"
                             />
-                        </div>
+                        </Block>
                     </Grid>
                     <Grid item>
-                        <div style={block}>
+                        <Block padding="30px">
                             <TitleBlock sx={{ marginBottom: '25px' }}>
                                 додаткові параметри
                             </TitleBlock>
 
                             <Input
                                 name="minPlumeSize"
-                                type="number"
                                 id="minPlumeSize"
                                 fullWidth
                                 label="Мінімальний розмір плями:"
@@ -181,14 +167,13 @@ const FormBlock = () => {
                             />
                             <Input
                                 name="distanceModuleThird"
-                                type="number"
                                 id="distanceModuleThird"
                                 fullWidth
                                 label="Дистанція для розрахунку розмірів плями:"
                                 adornment="м"
                                 sx={inputStyles}
                             />
-                        </div>
+                        </Block>
                     </Grid>
                 </Grid>
             </Grid>
