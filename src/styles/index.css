@@ -5,6 +5,7 @@
 * {
     font-family: 'Roboto', system-ui, sans-serif;
     scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 
 #root {
