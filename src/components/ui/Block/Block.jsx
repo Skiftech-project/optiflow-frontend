@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
-import { blockStyle } from 'src/styles';
+import { Paper } from '@mui/material';
 
-const Block = ({ padding, style, children, ...props }) => {
+const Block = ({ padding, sx, children, ...props }) => {
     return (
-        <div style={{ padding: padding, ...blockStyle, ...style }} {...props}>
+        <Paper
+            elevation={2}
+            sx={{ padding: padding, borderRadius: '10px', ...sx }}
+            {...props}
+        >
             {children}
-        </div>
+        </Paper>
     );
 };
 
 Block.propTypes = {
     padding: PropTypes.string,
-    style: PropTypes.object,
+    sx: PropTypes.object,
     children: PropTypes.node,
 };
 

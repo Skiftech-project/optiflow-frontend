@@ -1,38 +1,55 @@
-import { Typography } from '@mui/material';
+import { useMemo } from 'react';
+
 import PropTypes from 'prop-types';
+import { useTheme } from '@mui/material/styles';
+import { Typography } from '@mui/material';
 
-const defaultStyle = {
-    color: '#1E55B3',
-    textTransform: 'uppercase',
-    fontWeight: 'bold',
-    fontSize: { xs: 14, sm: 18, md: 21 },
-};
-
-const blockStyle = {
-    padding: '13px 0',
-    borderRadius: '10px',
-    background: '#FFF',
-    boxShadow: '1px 1px 4px 0px rgba(0, 0, 0, 0.25)',
-};
+import { Block } from '..';
 
 const TitleBlock = ({
     align = 'center',
     component = 'h2',
-    block,
-    sx,
+    block = false,
+    sx = {},
     children,
     ...props
 }) => {
-    const style = block ? { ...defaultStyle, ...blockStyle } : { ...defaultStyle };
+    const theme = useTheme();
+
+    const textStyle = useMemo(
+        () => ({
+            color: theme.palette.primary.main,
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+            fontSize: { xs: 14, sm: 18, md: 21 },
+        }),
+        [theme.palette.primary.main],
+    );
+
     return (
-        <Typography
-            align={align}
-            sx={{ ...style, ...sx }}
-            component={component}
-            {...props}
-        >
-            {children}
-        </Typography>
+        <>
+            {block ? (
+                <Block padding="13px 0">
+                    <Typography
+                        align={align}
+                        sx={{ ...textStyle, ...sx }}
+                        component={component}
+                        {...props}
+                    >
+                        {children}
+                    </Typography>
+                </Block>
+            ) : (
+                <Typography
+                    align={align}
+                    sx={{ ...textStyle, ...sx }}
+                    component={component}
+                    {...props}
+                >
+                    {children}
+                </Typography>
+            )}
+        </>
     );
 };
 
