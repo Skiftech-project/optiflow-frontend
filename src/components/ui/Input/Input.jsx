@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import PropTypes from 'prop-types';
-import { useController } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { InputAdornment, TextField } from '@mui/material';
 import { styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
@@ -14,7 +14,9 @@ const Input = ({
     ...props
 }) => {
     const theme = useTheme();
-    const { field } = useController({ name });
+    const {
+        formState: { errors },
+    } = useFormContext();
 
     const inputProps = useMemo(
         () => ({
@@ -26,14 +28,20 @@ const Input = ({
     );
 
     return (
-        <View
-            name={field.name}
-            theme={theme}
-            label={label}
-            size={size}
-            InputProps={inputProps}
-            {...field}
-            {...props}
+        <Controller
+            name={name}
+            render={({ field }) => (
+                <View
+                    theme={theme}
+                    label={label}
+                    size={size}
+                    InputProps={inputProps}
+                    error={!!errors?.[name]}
+                    helperText={errors?.[name]?.message || null}
+                    {...field}
+                    {...props}
+                />
+            )}
         />
     );
 };
