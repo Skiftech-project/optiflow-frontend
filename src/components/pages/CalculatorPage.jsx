@@ -1,22 +1,27 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Box } from '@mui/material';
-import { TitleBlock, Button } from '../ui';
+import { Stack } from '@mui/material';
+
+import { TitleBlock, Button, Block } from '../ui';
 import { FormBlock } from '../interface';
+import { validationSchemaCalc } from 'src/core/shemes';
 
 const CalculatorPage = () => {
     const methods = useForm({
         defaultValues: {
             plumeForm: 'ellipse',
-            distance: 0,
-            spotHeight: 0,
-            spotWidth: 0,
-            angleWidth: 0,
-            angleHeight: 0,
-            sensitivity: 0,
-            power: 0,
-            minPlumeSize: 0,
-            distanceModuleThird: 0,
+            distance: '',
+            spotHeight: '',
+            spotWidth: '',
+            angleWidth: '',
+            angleHeight: '',
+            sensitivity: '',
+            power: '',
+            minPlumeSize: '',
+            distanceModuleThird: '',
         },
+        resolver: yupResolver(validationSchemaCalc),
+        mode: 'all',
     });
 
     const handleSubmit = data => {
@@ -25,14 +30,21 @@ const CalculatorPage = () => {
 
     return (
         <FormProvider {...methods}>
-            <Box sx={{ marginTop: '70px' }}>
+            <Stack sx={{ marginTop: '70px' }} direction="column" spacing={3}>
                 <TitleBlock block>Калькулятор розсіяння зони випромінювання</TitleBlock>
                 <FormBlock />
                 <TitleBlock block>Результати обчислень</TitleBlock>
-                <Button onClick={methods.handleSubmit(handleSubmit)} color="primary">
-                    submit
-                </Button>
-            </Box>
+
+                <Block padding="30px">
+                    <Button
+                        disabled={!methods.formState.isValid}
+                        onClick={methods.handleSubmit(handleSubmit)}
+                        color="primary"
+                    >
+                        submit
+                    </Button>
+                </Block>
+            </Stack>
         </FormProvider>
     );
 };
