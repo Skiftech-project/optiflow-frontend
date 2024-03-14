@@ -149,7 +149,9 @@ const Header = () => {
                 <Toolbar disableGutters>
                     <Box sx={styleConfig.logo.desktop}>
                         <NavLink to="/">
-                            <img src={logo} alt="logo" />
+                            <Tooltip color="primary" title="На головну">
+                                <img src={logo} alt="logo" />
+                            </Tooltip>
                         </NavLink>
                     </Box>
 
