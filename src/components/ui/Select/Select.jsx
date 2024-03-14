@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
 import { FormControl, Select as MuiSelect, InputLabel, MenuItem } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const Select = ({
     name,
@@ -18,7 +19,8 @@ const Select = ({
             <Controller
                 name={name}
                 render={({ field }) => (
-                    <MuiSelect
+                    <View
+                        size="small"
                         labelId={labelId}
                         id={id}
                         label={label}
@@ -31,12 +33,16 @@ const Select = ({
                                 {option.name}
                             </MenuItem>
                         ))}
-                    </MuiSelect>
+                    </View>
                 )}
             />
         </FormControl>
     );
 };
+
+const View = styled(MuiSelect)(() => ({
+    borderRadius: '7px',
+}));
 
 Select.propTypes = {
     name: PropTypes.string.isRequired,
