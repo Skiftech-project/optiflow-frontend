@@ -1,19 +1,32 @@
 import { Button as MuiButton } from '@mui/material';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const Button = ({ color = 'secondary', size = 'small', children, ...props }) => {
+const buttonStyles = {
+    width: '126px',
+    height: '33px',
+    fontSize: '15px',
+    fontWeight: 'bold',
+    textTransform: 'none',
+};
+
+const Button = ({
+    to = '/',
+    link = false,
+    color = 'secondary',
+    size = 'small',
+    sx = {},
+    children,
+    ...props
+}) => {
     return (
         <MuiButton
+            to={link ? to : null}
+            component={link ? Link : null}
             size={size}
             variant="contained"
             color={color}
-            sx={{
-                width: '126px',
-                height: '33px',
-                fontSize: '15px',
-                fontWeight: 'bold',
-                textTransform: 'none',
-            }}
+            sx={{ ...buttonStyles, ...sx }}
             {...props}
         >
             {children}
@@ -22,6 +35,9 @@ const Button = ({ color = 'secondary', size = 'small', children, ...props }) => 
 };
 
 Button.propTypes = {
+    to: PropTypes.string,
+    sx: PropTypes.object,
+    link: PropTypes.bool,
     color: PropTypes.string,
     size: PropTypes.string,
     children: PropTypes.node.isRequired,
