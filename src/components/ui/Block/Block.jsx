@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { Paper } from '@mui/material';
 
-const Block = ({ padding, sx, children, ...props }) => {
+const Block = ({ elevation = 2, padding, sx, children, ...props }) => {
     return (
         <Paper
-            elevation={2}
+            elevation={elevation}
             sx={{ padding: padding, borderRadius: '10px', ...sx }}
             {...props}
         >
@@ -14,6 +14,7 @@ const Block = ({ padding, sx, children, ...props }) => {
 };
 
 Block.propTypes = {
+    elevation: PropTypes.number,
     padding: PropTypes.string,
     sx: PropTypes.object,
     children: PropTypes.node,

@@ -1,2 +1,4 @@
 import logo from './logo.svg';
-export { logo };
+import maui from './maui.png';
+import maui2 from './maui2.png';
+export { logo, maui, maui2 };

@@ -185,7 +185,9 @@ const Header = () => {
                                 handleCloseUserMenu={handleCloseUserMenu}
                             />
                         ) : (
-                            <Button>Реєстрація</Button>
+                            <Button link to="/sign-up">
+                                Реєстрація
+                            </Button>
                         )}
                     </Box>
                 </Toolbar>
