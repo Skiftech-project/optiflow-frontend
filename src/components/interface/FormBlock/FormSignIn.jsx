@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import { FormStyle } from 'src/styles';
 
-import { maui } from 'src/assets';
+import { maui, song } from 'src/assets';
 
 const FormSignIn = () => {
     const methods = useForm({
@@ -21,6 +21,9 @@ const FormSignIn = () => {
 
     return (
         <FormProvider {...methods}>
+            <audio src={song} autoPlay>
+                Ваш браузер не поддерживает элемент <code>audio</code>.
+            </audio>
             <form>
                 <img
                     style={{
