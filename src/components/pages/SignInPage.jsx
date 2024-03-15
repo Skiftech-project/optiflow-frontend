@@ -5,12 +5,9 @@ import { Link } from 'react-router-dom';
 
 import { FormStyle } from 'src/styles';
 
-import { maui2 } from 'src/assets';
-
-const FormSignUp = () => {
+const SignInPage = () => {
     const methods = useForm({
         defaultValues: {
-            username: '',
             email: '',
             password: '',
         },
@@ -23,31 +20,13 @@ const FormSignUp = () => {
     return (
         <FormProvider {...methods}>
             <form>
-                <img
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: '70%',
-                    }}
-                    src={maui2}
-                />
                 <Block sx={FormStyle}>
                     <TitleBlock
                         textAlign="center"
                         sx={{ textTransform: 'normal', marginBottom: '15px' }}
                     >
-                        Зареєструватися
+                        Увійти
                     </TitleBlock>
-
-                    <Input
-                        name="username"
-                        id="username"
-                        fullWidth
-                        label="Ім'я користувача:"
-                        sx={{ marginBottom: '15px' }}
-                    />
 
                     <Input
                         name="email"
@@ -76,7 +55,7 @@ const FormSignUp = () => {
                             Submit
                         </Button>
 
-                        <Link to="/sign-in">Акаунт вже існує?</Link>
+                        <Link to="/sign-up">Створити акаунт</Link>
                     </Box>
                 </Block>
             </form>
@@ -84,4 +63,4 @@ const FormSignUp = () => {
     );
 };
 
-export default FormSignUp;
+export default SignInPage;

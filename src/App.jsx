@@ -7,12 +7,12 @@ import { Container } from '@mui/material';
 import { Header } from './components/interface';
 import { Spinner } from './components/ui';
 import { lightTheme } from './core/themes';
-import FormSignUp from './components/interface/FormBlock/FormSignUp';
-import FormSignIn from './components/interface/FormBlock/FormSignIn';
 
 const MainPage = lazy(() => import('components/pages/MainPage'));
 const CalculatorPage = lazy(() => import('components/pages/CalculatorPage'));
 const RayPage = lazy(() => import('components/pages/RayPage'));
+const SignUpPage = lazy(() => import('components/pages/SignUpPage'));
+const SignInPage = lazy(() => import('components/pages/SignInPage'));
 const NotFoundPage = lazy(() => import('components/pages/NotFoundPage'));
 
 const App = () => {
@@ -26,8 +26,8 @@ const App = () => {
                             <Route path="/" element={<MainPage />} />
                             <Route path="/calculator" element={<CalculatorPage />} />
                             <Route path="/ray" element={<RayPage />} />
-                            <Route path="/sign-up" element={<FormSignUp />} />
-                            <Route path="/sign-in" element={<FormSignIn />} />
+                            <Route path="/sign-up" element={<SignUpPage />} />
+                            <Route path="/sign-in" element={<SignInPage />} />
                             <Route path="*" element={<NotFoundPage />} />
                         </Routes>
                     </Suspense>

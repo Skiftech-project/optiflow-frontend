@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 
 import { FormStyle } from 'src/styles';
 
-import { maui, song } from 'src/assets';
-
-const FormSignIn = () => {
+const SignUpPage = () => {
     const methods = useForm({
         defaultValues: {
+            username: '',
             email: '',
             password: '',
         },
@@ -21,26 +20,22 @@ const FormSignIn = () => {
 
     return (
         <FormProvider {...methods}>
-            <audio src={song} autoPlay>
-                Ваш браузер не поддерживает элемент <code>audio</code>.
-            </audio>
             <form>
-                <img
-                    style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                    }}
-                    src={maui}
-                />
                 <Block sx={FormStyle}>
                     <TitleBlock
                         textAlign="center"
                         sx={{ textTransform: 'normal', marginBottom: '15px' }}
                     >
-                        Увійти
+                        Зареєструватися
                     </TitleBlock>
+
+                    <Input
+                        name="username"
+                        id="username"
+                        fullWidth
+                        label="Ім'я користувача:"
+                        sx={{ marginBottom: '15px' }}
+                    />
 
                     <Input
                         name="email"
@@ -69,7 +64,7 @@ const FormSignIn = () => {
                             Submit
                         </Button>
 
-                        <Link to="/sign-up">Створити акаунт</Link>
+                        <Link to="/sign-in">Акаунт вже існує?</Link>
                     </Box>
                 </Block>
             </form>
@@ -77,4 +72,4 @@ const FormSignIn = () => {
     );
 };
 
-export default FormSignIn;
+export default SignUpPage;
