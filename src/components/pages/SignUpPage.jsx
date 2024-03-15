@@ -1,7 +1,10 @@
 import { Block, TitleBlock, Input, Button } from 'src/components/ui';
 import { FormProvider, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+
+import { validationShemaRegistration } from 'src/core/shemes';
 
 import { FormStyle } from 'src/styles';
 
@@ -12,6 +15,8 @@ const SignUpPage = () => {
             email: '',
             password: '',
         },
+        resolver: yupResolver(validationShemaRegistration),
+        mode: 'all',
     });
 
     const handleSubmit = data => {
