@@ -1,2 +1,4 @@
 import useOptiflowService from './OptiflowService';
-export { useOptiflowService };
+import useAuthService from './AuthService';
+
+export { useOptiflowService, useAuthService };

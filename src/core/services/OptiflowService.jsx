@@ -1,5 +1,13 @@
+import $api from '../api';
+
 const useOptiflowService = () => {
-    return <div></div>;
+    const calculateData = data => {
+        return $api.post('/calc', { data });
+    };
+
+    return {
+        calculateData,
+    };
 };
 
 export default useOptiflowService;
