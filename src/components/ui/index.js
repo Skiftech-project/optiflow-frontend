@@ -7,5 +7,17 @@ import Select from './Select/Select';
 import Link from './Link/Link';
 import NavLink from './Link/NavLink';
 import Block from './Block/Block';
+import Table from './Table/Table';
 
-export { TitleBlock, Spinner, Button, Preloader, Input, Select, Link, NavLink, Block };
+export {
+    TitleBlock,
+    Spinner,
+    Button,
+    Preloader,
+    Input,
+    Select,
+    Link,
+    NavLink,
+    Block,
+    Table,
+};
