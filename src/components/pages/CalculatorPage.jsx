@@ -1,16 +1,18 @@
 import { useState } from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Stack } from '@mui/material';
+import { IconButton, Stack, Tooltip } from '@mui/material';
+import DownloadIcon from '@mui/icons-material/Download';
 
-import { TitleBlock, Button, Block } from '../ui';
+import { TitleBlock, Button, Block, Table } from '../ui';
 import { FormBlock } from '../interface';
+import { saveToMarkdownFile } from 'src/core/utils';
+import { useOptiflowService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
-import Markdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 
 const CalculatorPage = () => {
-    const [data, setData] = useState({});
+    const [data, setData] = useState(null);
 
     const methods = useForm({
         defaultValues: {
@@ -28,47 +30,58 @@ const CalculatorPage = () => {
         resolver: yupResolver(validationSchemaCalc),
         mode: 'all',
     });
+    const { calculateData } = useOptiflowService();
 
     const handleSubmit = data => {
-        console.log(JSON.stringify(data, null, 2));
-        setData(data);
+        setData(calculateData(data));
     };
 
-    const markdownData = `
-
-Нижче приведені розрахунки у форматі **md**:
-
-| Параметр | Значення   |
-| ----- | ------- |
-| distanceModuleThird  | ${data.distanceModuleThird || '-'} |
-| minPlumeSize | ${data.minPlumeSize || '-'} |
-| power | ${data.power || '-'} |
-| sensitivity | ${data.sensitivity || '-'} |
-| angleHeight | ${data.angleHeight || '-'} |
-| angleWidth | ${data.angleWidth || '-'} |
-| spotWidth | ${data.spotWidth || '-'} |
-| spotHeight | ${data.spotHeight || '-'} |
-| distance | ${data.distance || '-'} |
-| plumeForm | ${data.plumeForm || '-'} |
-`;
+    const tooltipText = !data ? null : (
+        <span>
+            save as <b>.md</b>
+        </span>
+    );
 
     return (
         <FormProvider {...methods}>
-            <Stack sx={{ marginTop: '70px' }} direction="column" spacing={3}>
+            <Stack
+                sx={{ marginTop: '70px', marginBottom: '70px' }}
+                direction="column"
+                spacing={3}
+            >
                 <TitleBlock block>Калькулятор розсіяння зони випромінювання</TitleBlock>
                 <FormBlock />
                 <TitleBlock block>Результати обчислень</TitleBlock>
 
                 <Block padding="30px">
-                    <Markdown remarkPlugins={[remarkGfm]}>{markdownData}</Markdown>
+                    <Table tableData={data} />
 
-                    <Button
-                        disabled={!methods.formState.isValid}
-                        onClick={methods.handleSubmit(handleSubmit)}
-                        color="primary"
+                    <Stack
+                        direction="row"
+                        justifyContent="space-between"
+                        alignItems="center"
                     >
-                        submit
-                    </Button>
+                        <Button
+                            disabled={!methods.formState.isValid}
+                            onClick={methods.handleSubmit(handleSubmit)}
+                            color="primary"
+                        >
+                            Розрахувати
+                        </Button>
+
+                        <Tooltip title={tooltipText}>
+                            <span>
+                                <IconButton
+                                    aria-label="save"
+                                    color="primary"
+                                    disabled={!data}
+                                    onClick={() => saveToMarkdownFile(data)}
+                                >
+                                    <DownloadIcon />
+                                </IconButton>
+                            </span>
+                        </Tooltip>
+                    </Stack>
                 </Block>
             </Stack>
         </FormProvider>
