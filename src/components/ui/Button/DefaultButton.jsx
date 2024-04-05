@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const buttonStyles = {
-    width: '126px',
     height: '33px',
     fontSize: '15px',
     fontWeight: 'bold',
     textTransform: 'none',
+    width: 'fit-content',
 };
 
 const Button = ({
