@@ -18,9 +18,9 @@ export const $api = axios.create({
 //     return config;
 // });
 
-export const signup = async (name, email, password) => {
+export const signup = async (username, email, password) => {
     try {
-        const response = await $api.post('/auth/register', { name, email, password });
+        const response = await $api.post('/auth/register', { username, email, password });
         return response.data;
     } catch (error) {
         throw error.message;

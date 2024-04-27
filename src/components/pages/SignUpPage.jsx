@@ -24,7 +24,6 @@ const SignUpPage = () => {
 
     const handleSubmit = data => {
         authService.registration(data.username, data.email, data.password);
-        // console.log(JSON.stringify(data, null, 2));
     };
 
     return (
