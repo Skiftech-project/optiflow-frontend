@@ -1,6 +1,12 @@
 import ReactDOM from 'react-dom/client';
-import { AppLoader } from './components/interface';
+import { Provider } from 'react-redux';
+import { AppContainer } from './components/interface';
+import store from './core/store';
 import './styles/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<AppLoader />);
+root.render(
+    <Provider store={store}>
+        <AppContainer />
+    </Provider>,
+);
