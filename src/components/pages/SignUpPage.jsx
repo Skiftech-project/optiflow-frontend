@@ -3,6 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useAuthService } from 'src/core/services';
 
 import { validationShemaRegistration } from 'src/core/shemes';
 
@@ -19,8 +20,11 @@ const SignUpPage = () => {
         mode: 'all',
     });
 
+    const authService = useAuthService();
+
     const handleSubmit = data => {
-        console.log(JSON.stringify(data, null, 2));
+        authService.registration(data.username, data.email, data.password);
+        // console.log(JSON.stringify(data, null, 2));
     };
 
     return (

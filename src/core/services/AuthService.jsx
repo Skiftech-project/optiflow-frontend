@@ -1,4 +1,5 @@
-import $api from '../api';
+import { $api } from '../api';
+import { signup } from '../api';
 
 const useAuthService = () => {
     const login = (email, password) => {
@@ -6,7 +7,7 @@ const useAuthService = () => {
     };
 
     const registration = (name, email, password) => {
-        return $api.post('/registration', { name, email, password });
+        return signup(name, email, password);
     };
 
     const logout = () => {
