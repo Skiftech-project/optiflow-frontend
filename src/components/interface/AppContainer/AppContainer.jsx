@@ -3,7 +3,7 @@ import { Preloader } from 'src/components/ui';
 
 const App = lazy(() => import('src/App'));
 
-const AppLoader = () => {
+const AppContainer = () => {
     return (
         <Suspense fallback={<Preloader />}>
             <App />
@@ -11,4 +11,4 @@ const AppLoader = () => {
     );
 };
 
-export default AppLoader;
+export default AppContainer;
