@@ -1,16 +1,43 @@
 import { signupRequest, loginRequest, logoutRequest } from '../api';
+import { useDispatch } from 'react-redux';
+import { signupFetched, signupFetching, signupFetchingError } from '../store/actions';
+import { jwtDecode } from 'jwt-decode';
 
 const useAuthService = () => {
+    const dispatch = useDispatch();
+
     const login = (email, password) => {
         return loginRequest(email, password);
     };
 
     const registration = (username, email, password) => {
-        return signupRequest(username, email, password);
+        dispatch(signupFetching());
+
+        const response = signupRequest(username, email, password)
+            .then(data => {
+                localStorage.setItem('accessToken', data.tokens.access_token);
+                localStorage.setItem('refreshToken', data.tokens.refresh_token);
+
+                const user = jwtDecode(data.tokens.access_token);
+
+                dispatch(signupFetched(_transformJwtPayload(user)));
+            })
+            .catch(e => {
+                dispatch(signupFetchingError());
+                console.log(e.message);
+            });
+        return response;
     };
 
     const logout = () => {
         return logoutRequest();
+    };
+
+    const _transformJwtPayload = payload => {
+        return {
+            sub: payload.sub,
+            // name: TODO: change name field
+        };
     };
 
     return {
