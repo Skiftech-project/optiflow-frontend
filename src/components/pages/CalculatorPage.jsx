@@ -1,18 +1,18 @@
-import { useState } from 'react';
-
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import { IconButton, Stack, Tooltip } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 
 import { TitleBlock, Button, Block, Table } from '../ui';
 import { FormBlock } from '../interface';
-import { saveToMarkdownFile } from 'src/core/utils';
-import { useOptiflowService } from 'src/core/services';
+import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
 
 const CalculatorPage = () => {
-    const [data, setData] = useState(null);
+    const { calculateData } = useOptiflowService();
+    const { saveTableToMarkdownFile } = useSaveToFileService();
+    const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
 
     const methods = useForm({
         defaultValues: {
@@ -30,13 +30,12 @@ const CalculatorPage = () => {
         resolver: yupResolver(validationSchemaCalc),
         mode: 'all',
     });
-    const { calculateData } = useOptiflowService();
 
     const handleSubmit = data => {
-        setData(calculateData(data));
+        calculateData(data);
     };
 
-    const tooltipText = !data ? null : (
+    const tooltipText = !calculations ? null : (
         <span>
             save as <b>.md</b>
         </span>
@@ -54,7 +53,7 @@ const CalculatorPage = () => {
                 <TitleBlock block>Результати обчислень</TitleBlock>
 
                 <Block padding="30px">
-                    <Table tableData={data} />
+                    <Table tableData={calculations} />
 
                     <Stack
                         direction="row"
@@ -62,7 +61,10 @@ const CalculatorPage = () => {
                         alignItems="center"
                     >
                         <Button
-                            disabled={!methods.formState.isValid}
+                            disabled={
+                                !methods.formState.isValid ||
+                                calculationsLoadingStatus === 'loading'
+                            }
                             onClick={methods.handleSubmit(handleSubmit)}
                             color="primary"
                         >
@@ -74,8 +76,11 @@ const CalculatorPage = () => {
                                 <IconButton
                                     aria-label="save"
                                     color="primary"
-                                    disabled={!data}
-                                    onClick={() => saveToMarkdownFile(data)}
+                                    disabled={
+                                        !calculations ||
+                                        calculationsLoadingStatus === 'loading'
+                                    }
+                                    onClick={() => saveTableToMarkdownFile(calculations)}
                                 >
                                     <DownloadIcon />
                                 </IconButton>
