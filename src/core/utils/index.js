@@ -1,2 +1,1 @@
-import { saveToMarkdownFile } from './saveToMarkdownFile';
-export { saveToMarkdownFile };
+export { generateMetaData } from './genMetaData';
