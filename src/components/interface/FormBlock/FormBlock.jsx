@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
 
 import { Input, Select, TitleBlock } from 'src/components/ui';
@@ -45,9 +44,6 @@ function a11yProps(index) {
 
 const FormBlock = () => {
     const [tabValue, setTabValue] = useState(0);
-    const result = useSelector(state => state.calc.calculations);
-
-    console.log(result);
 
     const TempHandleChangeToggleBtn = (event, newValue) => {
         setTabValue(newValue);
