@@ -1,17 +1,15 @@
-// import $api from '../api';
+import { useDispatch } from 'react-redux';
+import { basicCalculationsRequest } from '../api';
+import { calcFetching, calcFetched, calcFetchingError } from '../store/actions';
 
 const useOptiflowService = () => {
-    const calculateData = data => {
-        let imitateBackendData = {
-            angleWidth: data.distance * 5,
-            angleHeight: 7,
-            plumeWidth: 10,
-            plumeHeight: 7.5,
-            minDistance: 0.9,
-            maxDistance: 60,
-        };
+    const dispatch = useDispatch();
 
-        return imitateBackendData;
+    const calculateData = data => {
+        dispatch(calcFetching());
+        basicCalculationsRequest(data)
+            .then(data => dispatch(calcFetched(data)))
+            .catch(() => dispatch(calcFetchingError()));
     };
 
     return {
