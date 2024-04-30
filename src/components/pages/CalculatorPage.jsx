@@ -9,6 +9,7 @@ import { FormBlock } from '../interface';
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
 
+// !FIX: two 2d request outgoing from this component on first render after calculations button is clicked
 const CalculatorPage = () => {
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
@@ -61,10 +62,8 @@ const CalculatorPage = () => {
                         alignItems="center"
                     >
                         <Button
-                            disabled={
-                                !methods.formState.isValid ||
-                                calculationsLoadingStatus === 'loading'
-                            }
+                            disabled={!methods.formState.isValid}
+                            loading={calculationsLoadingStatus === 'loading'}
                             onClick={methods.handleSubmit(handleSubmit)}
                             color="primary"
                         >
