@@ -35,8 +35,8 @@ const useAuthService = () => {
 
     const _transformJwtPayload = payload => {
         return {
+            username: payload.username,
             sub: payload.sub,
-            // name: TODO: change name field
         };
     };
 

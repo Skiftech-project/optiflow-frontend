@@ -24,8 +24,9 @@ const SignUpPage = () => {
         mode: 'all',
     });
 
-    const handleSubmit = data => {
-        registration(data.username, data.email, data.password);
+    const handleSubmit = async data => {
+        await registration(data.username, data.email, data.password);
+        methods.reset();
     };
 
     return (

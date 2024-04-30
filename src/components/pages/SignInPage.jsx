@@ -52,7 +52,7 @@ const SignInPage = () => {
                             onClick={methods.handleSubmit(handleSubmit)}
                             color="primary"
                         >
-                            Submit
+                            Увійти
                         </Button>
 
                         <Link to="/sign-up">Створити акаунт</Link>
