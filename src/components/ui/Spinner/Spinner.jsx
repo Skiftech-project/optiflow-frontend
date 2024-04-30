@@ -2,13 +2,15 @@ import './Spinner.css';
 
 const Spinner = () => {
     return (
-        <div className="spinner">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+        <div className="spinner_container">
+            <div className="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     );
 };

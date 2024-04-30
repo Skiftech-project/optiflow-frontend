@@ -1,9 +1,11 @@
-.spinner {
+.spinner_container {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
 
+.spinner {
     width: 44.8px;
     height: 44.8px;
     animation: spinner-y0fdc1 2s infinite ease;
