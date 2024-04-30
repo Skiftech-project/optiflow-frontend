@@ -8,8 +8,12 @@ import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
 
 import { FormStyle } from 'src/styles';
+import { useSelector } from 'react-redux';
 
 const SignUpPage = () => {
+    const { dataLoadingStatus } = useSelector(state => state.signup);
+    const { registration } = useAuthService();
+
     const methods = useForm({
         defaultValues: {
             username: '',
@@ -20,10 +24,8 @@ const SignUpPage = () => {
         mode: 'all',
     });
 
-    const authService = useAuthService();
-
     const handleSubmit = data => {
-        authService.registration(data.username, data.email, data.password);
+        registration(data.username, data.email, data.password);
     };
 
     return (
@@ -68,8 +70,9 @@ const SignUpPage = () => {
                             disabled={!methods.formState.isValid}
                             onClick={methods.handleSubmit(handleSubmit)}
                             color="primary"
+                            loading={dataLoadingStatus === 'loading'}
                         >
-                            Submit
+                            Зареєструватися
                         </Button>
 
                         <Link to="/sign-in">Акаунт вже існує?</Link>

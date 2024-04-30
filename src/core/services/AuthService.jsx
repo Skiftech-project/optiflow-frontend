@@ -24,7 +24,7 @@ const useAuthService = () => {
             })
             .catch(e => {
                 dispatch(signupFetchingError());
-                console.log(e.message);
+                console.log(e);
             });
         return response;
     };
