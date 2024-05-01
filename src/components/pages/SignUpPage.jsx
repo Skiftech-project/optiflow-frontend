@@ -76,7 +76,7 @@ const SignUpPage = () => {
                             Зареєструватися
                         </Button>
 
-                        <Link to="/sign-in">Акаунт вже існує?</Link>
+                        <Link to="/login">Акаунт вже існує?</Link>
                     </Box>
                 </Block>
             </form>
