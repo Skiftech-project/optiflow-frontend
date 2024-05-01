@@ -17,6 +17,7 @@ export default defineConfig({
             components: '/src/components',
             core: '/src/core',
             styles: '/src/styles',
+            routes: '/src/routes',
         },
     },
 });
