@@ -1,13 +1,33 @@
 import { signupRequest, loginRequest, logoutRequest } from '../api';
 import { useDispatch } from 'react-redux';
-import { signupFetched, signupFetching, signupFetchingError } from '../store/actions';
+import {
+    signupFetched,
+    signupFetching,
+    signupFetchingError,
+    loginFetched,
+    loginFetching,
+    loginFetchingError,
+} from '../store/actions';
 import { jwtDecode } from 'jwt-decode';
 
 const useAuthService = () => {
     const dispatch = useDispatch();
 
     const login = (email, password) => {
-        return loginRequest(email, password);
+        dispatch(loginFetching());
+
+        const response = loginRequest(email, password)
+            .then(data => {
+                localStorage.setItem('accessToken', data.tokens.access_token);
+                localStorage.setItem('refreshToken', data.tokens.refresh_token);
+
+                const user = jwtDecode(data.tokens.access_token);
+
+                dispatch(loginFetched(_transformJwtPayload(user)));
+            })
+            .catch(() => dispatch(loginFetchingError()));
+
+        return response;
     };
 
     const registration = (username, email, password) => {

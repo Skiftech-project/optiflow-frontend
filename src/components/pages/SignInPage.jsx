@@ -2,19 +2,30 @@ import { Block, TitleBlock, Input, Button } from 'src/components/ui';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useAuthService } from 'src/core/services';
+import { useSelector } from 'react-redux';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import { validationShemaLogin } from 'src/core/shemes';
 
 import { FormStyle } from 'src/styles';
 
 const SignInPage = () => {
+    const { login } = useAuthService();
+    const { dataLoadingStatus } = useSelector(state => state.login);
+
     const methods = useForm({
         defaultValues: {
             email: '',
             password: '',
         },
+        resolver: yupResolver(validationShemaLogin),
+        mode: 'all',
     });
 
-    const handleSubmit = data => {
-        console.log(JSON.stringify(data, null, 2));
+    const handleSubmit = async data => {
+        await login(data.email, data.password);
+        methods.reset();
     };
 
     return (
@@ -51,6 +62,7 @@ const SignInPage = () => {
                             disabled={!methods.formState.isValid}
                             onClick={methods.handleSubmit(handleSubmit)}
                             color="primary"
+                            loading={dataLoadingStatus === 'loading'}
                         >
                             Увійти
                         </Button>
