@@ -67,7 +67,7 @@ const SignInPage = () => {
                             Увійти
                         </Button>
 
-                        <Link to="/sign-up">Створити акаунт</Link>
+                        <Link to="/register">Створити акаунт</Link>
                     </Box>
                 </Block>
             </form>
