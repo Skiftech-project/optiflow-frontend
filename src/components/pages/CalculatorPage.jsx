@@ -14,6 +14,7 @@ const CalculatorPage = () => {
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+    console.log('CalcPage render');
 
     const methods = useForm({
         defaultValues: {
@@ -54,7 +55,10 @@ const CalculatorPage = () => {
                 <TitleBlock block>Результати обчислень</TitleBlock>
 
                 <Block padding="30px">
-                    <Table tableData={calculations} />
+                    <Table
+                        tableData={calculations}
+                        loading={calculationsLoadingStatus === 'loading'}
+                    />
 
                     <Stack
                         direction="row"

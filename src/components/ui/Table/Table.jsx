@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import {
+    CircularProgress,
     Table as MuiTable,
     TableBody,
     TableCell,
@@ -7,8 +8,7 @@ import {
     TableHead,
     TableRow,
 } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useTheme } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 
 const StyledTableRow = styled(TableRow)({
@@ -21,7 +21,7 @@ const StyledTableRow = styled(TableRow)({
     },
 });
 
-const Table = ({ tableData }) => {
+const Table = ({ tableData = {}, loading = false }) => {
     const theme = useTheme();
 
     const styles = useMemo(
@@ -91,7 +91,11 @@ const Table = ({ tableData }) => {
                                 <>
                                     <TableCell scope="row">{row.label}</TableCell>
                                     <TableCell scope="row" align="center">
-                                        {row.value}
+                                        {loading ? (
+                                            <CircularProgress size={14} />
+                                        ) : (
+                                            row.value
+                                        )}
                                     </TableCell>
                                 </>
                             )}
@@ -104,6 +108,7 @@ const Table = ({ tableData }) => {
 };
 
 Table.propTypes = {
+    loading: PropTypes.bool,
     tableData: PropTypes.shape({
         angle_width: PropTypes.number,
         angle_height: PropTypes.number,
