@@ -3,11 +3,10 @@
 			/* 1. BODY */
 /***********************************/
 
-body {
-    overflow: hidden;
-}
-
 .page {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
     height: 100vh;
 }
 
