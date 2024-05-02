@@ -1,20 +1,42 @@
-# React + Vite
+# Optiflow - Client
+
+Тут розробляється клієнтська частина додатку завдяки якої користувачу буде зручно проводити потрібні розрахунки.
+
+## Стек технологій
+
+[![My Skills](https://skillicons.dev/icons?i=js,redux,react,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
+
+## Наживо
+
+Ви можете подивитися поточну розміщену версію додатку за [посиланням](https://optiflow-skiftech.netlify.app/).
+
+## Командна розробка
+
+Проект вже налаштован для комфорної командної розробки за допомогою [eslint](https://eslint.org/), [prettier](https://prettier.io/), [husky](https://typicode.github.io/husky/). <br/>
+`Правила лінтеру` та налаштування `стилістики коду` ви можете знайти у файлах розташованих у корні проекту: `.eslintrc.js` та `.prettierrc`.
+
+## Локальний запуск
 
 Для початку клонуємо репозиторій на свою локальну машину:
+
 ```
-git clone https://github.com/Skiftech-project/skiftech-frontend.git
+git clone https://github.com/Skiftech-project/optiflow-frontend.git
 ```
 
 Переходимо до папки з проектом:
+
 ```
-cd ./skiftech-frontend
+cd ./optiflow-frontend
 ```
+
 Інсталюємо всі залежності проекту запустивши у консолі команду:
+
 ```
 npm i
 ```
 
 Щоб запустити проект у режимі розробки треба ввести у консолі наступну команду:
+
 ```
 npm run dev
 ```
@@ -25,15 +47,10 @@ npm run dev
 o
 ```
 
+## Локальна збірка проекту
+
 Команда для збірки проекту після завершення розробки (збірка для хостинга):
 
 ```
 npm run build
 ```
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

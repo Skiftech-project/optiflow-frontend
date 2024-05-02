@@ -1,0 +1,26 @@
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+}
+
+.loader__img img {
+    width: 100%;
+}
+
+.loader__spinner {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.loader__title {
+    color: #1e55b3;
+    font-size: 60px;
+    font-weight: 700;
+}
