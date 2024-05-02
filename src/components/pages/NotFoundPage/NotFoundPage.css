@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 @import 'styles/variables.css';
 /***********************************
 			/* 1. BODY */
@@ -40,10 +47,21 @@
     position: absolute;
     top: 50%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
 
     mix-blend-mode: color-burn;
@@ -51,8 +69,15 @@
 
 .message {
     color: #111;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
     gap: 25px;
 }
@@ -71,6 +96,10 @@
     font-weight: 300;
     text-align: center;
     color: #fff;
+
+    width: -webkit-fit-content;
+
+    width: -moz-fit-content;
 
     width: fit-content;
     background-color: var(--primary-color);
@@ -91,17 +120,30 @@
     position: absolute;
     top: 0;
     left: 50%;
+    -webkit-transform: translate(-50%);
+    -ms-transform: translate(-50%);
     transform: translate(-50%);
     z-index: -1;
 }
 
 .lamp {
     width: 800px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-transform-origin: center top;
+    -ms-transform-origin: center top;
     transform-origin: center top;
+    -webkit-animation-timing-function: cubic-bezier(0.6, 0, 0.38, 1);
     animation-timing-function: cubic-bezier(0.6, 0, 0.38, 1);
+    -webkit-animation: move 17s infinite;
     animation: move 17s infinite;
 }
 
@@ -163,19 +205,40 @@
     position: absolute;
     left: 50%;
     top: 900px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background-color: rgba(30, 85, 179, 0.24);
+    -webkit-clip-path: polygon(49% 0%, 51% 0%, 100% 100%, 0% 100%);
     clip-path: polygon(49% 0%, 51% 0%, 100% 100%, 0% 100%);
+}
+
+@-webkit-keyframes move {
+    0% {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+    }
+    50% {
+        -webkit-transform: rotate(-25deg);
+        transform: rotate(-25deg);
+    }
+    100% {
+        -webkit-transform: rotate(25deg);
+        transform: rotate(25deg);
+    }
 }
 
 @keyframes move {
     0% {
+        -webkit-transform: rotate(25deg);
         transform: rotate(25deg);
     }
     50% {
+        -webkit-transform: rotate(-25deg);
         transform: rotate(-25deg);
     }
     100% {
+        -webkit-transform: rotate(25deg);
         transform: rotate(25deg);
     }
 }
@@ -232,6 +295,7 @@
 
     .light {
         width: 1500px;
+        -webkit-clip-path: polygon(47% 0%, 53% 0%, 100% 100%, 0% 100%);
         clip-path: polygon(47% 0%, 53% 0%, 100% 100%, 0% 100%);
     }
 }
@@ -251,17 +315,36 @@
     }
 
     .lamp {
+        -webkit-animation: move 10s infinite;
         animation: move 10s infinite;
+    }
+
+    @-webkit-keyframes move {
+        0% {
+            -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+        }
+        50% {
+            -webkit-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+        }
+        100% {
+            -webkit-transform: rotate(10deg);
+            transform: rotate(10deg);
+        }
     }
 
     @keyframes move {
         0% {
+            -webkit-transform: rotate(10deg);
             transform: rotate(10deg);
         }
         50% {
+            -webkit-transform: rotate(-10deg);
             transform: rotate(-10deg);
         }
         100% {
+            -webkit-transform: rotate(10deg);
             transform: rotate(10deg);
         }
     }
