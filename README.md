@@ -4,7 +4,7 @@
 
 ## Стек технологій
 
-[![My Skills](https://skillicons.dev/icons?i=js,redux,react,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=html,css,js,react,redux,threejs,materialui,vite&theme=dark)](https://skillicons.dev)
 
 ## Наживо
 
