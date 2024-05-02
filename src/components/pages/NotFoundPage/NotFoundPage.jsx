@@ -6,9 +6,11 @@ const btnStyles = {
     padding: '20px 25px',
     fontSize: { sm: '1rem', lg: '1.2rem' },
     position: 'absolute',
-    top: '800px',
+    top: '700px',
     left: '50%',
     transform: 'translate(-50%, -50%)',
+    zIndex: 5,
+    bottom: 0,
 };
 
 const NotFoundPage = () => {
