@@ -21,7 +21,7 @@ const StyledTableRow = styled(TableRow)({
     },
 });
 
-const Table = ({ tableData = {}, loading = false }) => {
+const Table = ({ tableData = {}, loading = false, sx = {} }) => {
     const theme = useTheme();
 
     const styles = useMemo(
@@ -65,7 +65,7 @@ const Table = ({ tableData = {}, loading = false }) => {
     );
 
     return (
-        <TableContainer>
+        <TableContainer sx={sx}>
             <MuiTable size="small" aria-label="data table">
                 <TableHead>
                     <TableRow sx={styles.headRow}>
@@ -108,6 +108,7 @@ const Table = ({ tableData = {}, loading = false }) => {
 };
 
 Table.propTypes = {
+    sx: PropTypes.object,
     loading: PropTypes.bool,
     tableData: PropTypes.shape({
         angle_width: PropTypes.number,
