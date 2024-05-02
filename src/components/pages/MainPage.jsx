@@ -1,5 +1,12 @@
+import { Header } from '../interface';
+
 const MainPage = () => {
-    return <div>MainPage</div>;
+    return (
+        <>
+            <Header />
+            <div>Main Page</div>
+        </>
+    );
 };
 
 export default MainPage;

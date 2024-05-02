@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { IconButton, Stack, Tooltip } from '@mui/material';
+import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 
 import { TitleBlock, Button, Block, Table } from '../ui';
-import { FormBlock } from '../interface';
+import { FormBlock, Header } from '../interface';
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
 
@@ -45,53 +45,61 @@ const CalculatorPage = () => {
 
     return (
         <FormProvider {...methods}>
-            <Stack
-                sx={{ marginTop: '70px', marginBottom: '70px' }}
-                direction="column"
-                spacing={3}
-            >
-                <TitleBlock block>Калькулятор розсіяння зони випромінювання</TitleBlock>
-                <FormBlock />
-                <TitleBlock block>Результати обчислень</TitleBlock>
+            <Header />
+            <Container maxWidth="xl" component="main">
+                <Stack
+                    sx={{ marginTop: '70px', marginBottom: '70px' }}
+                    direction="column"
+                    spacing={3}
+                >
+                    <TitleBlock block>
+                        Калькулятор розсіяння зони випромінювання
+                    </TitleBlock>
+                    <FormBlock />
+                    <TitleBlock block>Результати обчислень</TitleBlock>
 
-                <Block padding="30px">
-                    <Table
-                        tableData={calculations}
-                        loading={calculationsLoadingStatus === 'loading'}
-                    />
-
-                    <Stack
-                        direction="row"
-                        justifyContent="space-between"
-                        alignItems="center"
-                    >
-                        <Button
-                            disabled={!methods.formState.isValid}
+                    <Block padding="30px">
+                        <Table
+                            tableData={calculations}
                             loading={calculationsLoadingStatus === 'loading'}
-                            onClick={methods.handleSubmit(handleSubmit)}
-                            color="primary"
-                        >
-                            Розрахувати
-                        </Button>
+                            sx={{ marginBottom: 3 }}
+                        />
 
-                        <Tooltip title={tooltipText}>
-                            <span>
-                                <IconButton
-                                    aria-label="save"
-                                    color="primary"
-                                    disabled={
-                                        !calculations ||
-                                        calculationsLoadingStatus === 'loading'
-                                    }
-                                    onClick={() => saveTableToMarkdownFile(calculations)}
-                                >
-                                    <DownloadIcon />
-                                </IconButton>
-                            </span>
-                        </Tooltip>
-                    </Stack>
-                </Block>
-            </Stack>
+                        <Stack
+                            direction="row"
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Button
+                                disabled={!methods.formState.isValid}
+                                loading={calculationsLoadingStatus === 'loading'}
+                                onClick={methods.handleSubmit(handleSubmit)}
+                                color="primary"
+                            >
+                                Розрахувати
+                            </Button>
+
+                            <Tooltip title={tooltipText}>
+                                <span>
+                                    <IconButton
+                                        aria-label="save"
+                                        color="primary"
+                                        disabled={
+                                            !calculations ||
+                                            calculationsLoadingStatus === 'loading'
+                                        }
+                                        onClick={() =>
+                                            saveTableToMarkdownFile(calculations)
+                                        }
+                                    >
+                                        <DownloadIcon />
+                                    </IconButton>
+                                </span>
+                            </Tooltip>
+                        </Stack>
+                    </Block>
+                </Stack>
+            </Container>
         </FormProvider>
     );
 };
