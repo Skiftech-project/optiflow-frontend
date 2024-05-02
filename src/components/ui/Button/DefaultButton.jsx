@@ -8,6 +8,7 @@ const buttonStyles = {
     fontSize: '15px',
     fontWeight: 'bold',
     textTransform: 'none',
+    textAlign: 'center',
     width: 'fit-content',
 };
 
