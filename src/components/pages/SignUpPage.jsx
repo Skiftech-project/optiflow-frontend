@@ -11,7 +11,7 @@ import { FormStyle } from 'src/styles';
 import { useSelector } from 'react-redux';
 
 const SignUpPage = () => {
-    const { dataLoadingStatus } = useSelector(state => state.signup);
+    const { dataLoadingStatus } = useSelector(state => state.auth);
     const { registration } = useAuthService();
 
     const methods = useForm({

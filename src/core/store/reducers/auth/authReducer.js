@@ -3,19 +3,19 @@ const initialState = {
     dataLoadingStatus: 'idle',
 };
 
-export const signupReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SIGNUP_FETCHING':
+        case 'AUTH_FETCHING':
             return { ...state, dataLoadingStatus: 'loading' };
 
-        case 'SIGNUP_FETCHED':
+        case 'AUTH_FETCHED':
             return {
                 ...state,
                 data: action.payload,
                 dataLoadingStatus: 'idle',
             };
 
-        case 'SIGNUP_FETCHING_ERROR':
+        case 'AUTH_FETCHING_ERROR':
             return { ...state, dataLoadingStatus: 'error' };
 
         default:

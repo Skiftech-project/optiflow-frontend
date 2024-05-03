@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import PropTypes from 'prop-types';
 import {
@@ -17,6 +17,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 import { Button, Link, NavLink } from 'src/components/ui';
 import { logo } from 'src/assets';
+import { AuthContext } from 'src/core/context/authContext';
 
 const pages = [
     { text: 'Калькулятор', path: '/calculator' },
@@ -122,7 +123,7 @@ const BurgerMenu = ({ anchorElNav, handleOpenNavMenu, handleCloseNavMenu }) => {
 };
 
 const Header = () => {
-    const [isAuth] = useState(false);
+    const { isAuth } = useContext(AuthContext);
 
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [anchorElNav, setAnchorElNav] = useState(null);

@@ -1,13 +1,11 @@
 import { combineReducers } from 'redux';
 
 import { calcReducer } from './calculations';
-import { loginReducer, logoutReducer, signupReducer } from './auth';
+import { authReducer } from './auth';
 
 const reducer = combineReducers({
     //auth
-    login: loginReducer,
-    logout: logoutReducer,
-    signup: signupReducer,
+    auth: authReducer,
 
     //calc
     calc: calcReducer,

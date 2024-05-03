@@ -1,49 +1,46 @@
+import { useContext } from 'react';
 import { signupRequest, loginRequest, logoutRequest } from '../api';
 import { useDispatch } from 'react-redux';
-import {
-    signupFetched,
-    signupFetching,
-    signupFetchingError,
-    loginFetched,
-    loginFetching,
-    loginFetchingError,
-} from '../store/actions';
-import { jwtDecode } from 'jwt-decode';
+import { authFetching, authFetchingError } from '../store/actions';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/authContext';
 
 const useAuthService = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { setIsAuth } = useContext(AuthContext);
 
     const login = (email, password) => {
-        dispatch(loginFetching());
+        dispatch(authFetching());
 
         const response = loginRequest(email, password)
             .then(data => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
                 localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
-                const user = jwtDecode(data.tokens.access_token);
+                setIsAuth(true);
 
-                dispatch(loginFetched(_transformJwtPayload(user)));
+                navigate('/'); // TODO: change way
             })
-            .catch(() => dispatch(loginFetchingError()));
+            .catch(() => dispatch(authFetchingError()));
 
         return response;
     };
 
     const registration = (username, email, password) => {
-        dispatch(signupFetching());
+        dispatch(authFetching());
 
         const response = signupRequest(username, email, password)
             .then(data => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
                 localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
-                const user = jwtDecode(data.tokens.access_token);
+                setIsAuth(true);
 
-                dispatch(signupFetched(_transformJwtPayload(user)));
+                navigate('/'); // TODO: change way
             })
             .catch(e => {
-                dispatch(signupFetchingError());
+                dispatch(authFetchingError());
                 console.log(e);
             });
         return response;
@@ -51,13 +48,6 @@ const useAuthService = () => {
 
     const logout = () => {
         return logoutRequest();
-    };
-
-    const _transformJwtPayload = payload => {
-        return {
-            username: payload.username,
-            sub: payload.sub,
-        };
     };
 
     return {

@@ -12,7 +12,7 @@ import { FormStyle } from 'src/styles';
 
 const SignInPage = () => {
     const { login } = useAuthService();
-    const { dataLoadingStatus } = useSelector(state => state.login);
+    const { dataLoadingStatus } = useSelector(state => state.auth);
 
     const methods = useForm({
         defaultValues: {

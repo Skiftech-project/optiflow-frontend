@@ -6,15 +6,18 @@ import { ThemeProvider } from '@mui/material/styles';
 import AppRoutes from './routes';
 import { Preloader } from './components/ui';
 import { lightTheme } from './core/themes';
+import { AuthProvider } from './core/context/authContext';
 
 const App = () => {
     return (
         <ThemeProvider theme={lightTheme}>
-            <Router>
-                <Suspense fallback={<Preloader />}>
-                    <AppRoutes />
-                </Suspense>
-            </Router>
+            <AuthProvider>
+                <Router>
+                    <Suspense fallback={<Preloader />}>
+                        <AppRoutes />
+                    </Suspense>
+                </Router>
+            </AuthProvider>
         </ThemeProvider>
     );
 };
