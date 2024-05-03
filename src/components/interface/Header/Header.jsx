@@ -18,6 +18,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Link, NavLink } from 'src/components/ui';
 import { logo } from 'src/assets';
 import { AuthContext } from 'src/core/context/authContext';
+import { getFirstLetterFromString } from 'src/core/utils';
 
 const pages = [
     { text: 'Калькулятор', path: '/calculator' },
@@ -46,11 +47,15 @@ const styleConfig = {
 };
 
 const AccountMenu = ({ anchorElUser, handleOpenUserMenu, handleCloseUserMenu }) => {
+    const { user } = useContext(AuthContext);
+
     return (
         <>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" />
+                    <Avatar alt="avatar">
+                        {getFirstLetterFromString(user.username)}
+                    </Avatar>
                 </IconButton>
             </Tooltip>
             <Menu
