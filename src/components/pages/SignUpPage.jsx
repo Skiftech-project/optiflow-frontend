@@ -100,12 +100,19 @@ const SignUpPage = () => {
                             size="medium"
                         />
 
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                            }}
+                        >
                             <Button
                                 disabled={!methods.formState.isValid}
                                 onClick={methods.handleSubmit(handleSubmit)}
                                 color="primary"
                                 loading={dataLoadingStatus === 'loading'}
+                                sx={{ width: '170px', height: '40px' }}
                             >
                                 Зареєструватися
                             </Button>

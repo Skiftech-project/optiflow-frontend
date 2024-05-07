@@ -11,7 +11,6 @@ import { validationShemaLogin } from 'src/core/shemes';
 import Paper from '@mui/material/Paper';
 import Avatar from '@mui/material/Avatar';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { Copyright } from '@mui/icons-material';
 
 const SignInPage = () => {
     const { login } = useAuthService();
@@ -111,20 +110,25 @@ const SignInPage = () => {
                             size="medium"
                         />
 
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                            }}
+                        >
                             <Button
                                 disabled={!methods.formState.isValid}
                                 onClick={methods.handleSubmit(handleSubmit)}
                                 color="primary"
                                 loading={dataLoadingStatus === 'loading'}
+                                sx={{ width: '170px', height: '40px' }}
                             >
                                 Увійти
                             </Button>
 
                             <Link to="/register">Створити акаунт</Link>
                         </Box>
-
-                        <Copyright sx={{ mt: 5 }} />
                     </Box>
                 </Grid>
             </Grid>
