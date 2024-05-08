@@ -1,13 +1,16 @@
-import PropTypes from 'prop-types';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link as MuiLink } from '@mui/material';
+
 import { styled } from '@mui/system';
+import PropTypes from 'prop-types';
+
+import { Link as MuiLink } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 const Link = ({
     underline = 'none',
     variant = 'inherrit',
     component = RouterLink,
+    sx = {},
     ...props
 }) => {
     const theme = useTheme();
@@ -18,18 +21,20 @@ const Link = ({
             underline={underline}
             component={component}
             variant={variant}
+            sx={sx}
             {...props}
         ></View>
     );
 };
 
-const View = styled(MuiLink)(({ theme }) => ({
-    color: theme.palette.black.main,
+const View = styled(MuiLink)(({ theme, sx }) => ({
+    color: theme.palette.black.main || sx?.color,
     transition: '0.2s all ease-in-out',
     '&:hover': { color: theme.palette.primary.main },
 }));
 
 Link.propTypes = {
+    sx: PropTypes.object,
     component: PropTypes.elementType,
     variant: PropTypes.string,
     underline: PropTypes.string,
