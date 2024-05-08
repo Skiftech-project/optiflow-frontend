@@ -8,7 +8,7 @@ export const $api = axios.create({
 });
 
 // * Interceptor на каждый запрос на сервер, теперь будет вешатся хедер с токеном из localStorage
-// $api.interceptors.request.use(config => {
-//     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
-//     return config;
-// });
+$api.interceptors.request.use(config => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+    return config;
+});

@@ -20,6 +20,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { logo } from 'src/assets';
 import { Link, NavLink } from 'src/components/ui';
 import { AuthContext } from 'src/core/context/authContext';
+import { useAuthService } from 'src/core/services';
 import { getFirstLetterFromString } from 'src/core/utils';
 
 const pages = [
@@ -139,6 +140,7 @@ const Header = ({
     ...props
 }) => {
     const { isAuth } = useContext(AuthContext);
+    const { logout } = useAuthService();
 
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -157,6 +159,7 @@ const Header = ({
 
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
+        logout();
     };
 
     return (

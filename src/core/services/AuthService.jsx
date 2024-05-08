@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { signupRequest, loginRequest, logoutRequest } from '../api';
 import { useDispatch } from 'react-redux';
-import { authFetching, authFetchingError } from '../store/actions';
 import { useNavigate } from 'react-router-dom';
+
+import { loginRequest, logoutRequest, signupRequest } from '../api';
 import { AuthContext } from '../context/authContext';
+import { authFetched, authFetching, authFetchingError } from '../store/actions';
 
 const useAuthService = () => {
     const dispatch = useDispatch();
@@ -20,7 +21,8 @@ const useAuthService = () => {
 
                 setIsAuth(true);
 
-                navigate('/'); // TODO: change way
+                navigate('/calculator');
+                dispatch(authFetched());
             })
             .catch(() => dispatch(authFetchingError()));
 
@@ -37,17 +39,29 @@ const useAuthService = () => {
 
                 setIsAuth(true);
 
-                navigate('/'); // TODO: change way
+                navigate('/calculator');
+                dispatch(authFetched());
             })
-            .catch(e => {
-                dispatch(authFetchingError());
-                console.log(e);
-            });
+            .catch(() => dispatch(authFetchingError()));
+
         return response;
     };
 
     const logout = () => {
-        return logoutRequest();
+        dispatch(authFetching());
+
+        const response = logoutRequest()
+            .then(() => {
+                localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+
+                setIsAuth(false);
+                navigate('/');
+                dispatch(authFetched());
+            })
+            .catch(dispatch(authFetchingError()));
+
+        return response;
     };
 
     return {
