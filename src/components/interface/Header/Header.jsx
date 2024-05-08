@@ -1,22 +1,24 @@
-import { useState, useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import PropTypes from 'prop-types';
+
 import {
     AppBar,
-    Container,
-    Box,
-    Toolbar,
-    Menu,
     Avatar,
-    Tooltip,
-    MenuItem,
+    Box,
+    Container,
     IconButton,
+    Menu,
+    MenuItem,
+    Toolbar,
+    Tooltip,
     Typography,
 } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
 
-import { Button, Link, NavLink } from 'src/components/ui';
 import { logo } from 'src/assets';
+import { Link, NavLink } from 'src/components/ui';
 import { AuthContext } from 'src/core/context/authContext';
 import { getFirstLetterFromString } from 'src/core/utils';
 
@@ -36,7 +38,7 @@ const styleConfig = {
         },
     },
     menu: {
-        mobile: { flexGrow: 1, display: { xs: 'flex', md: 'none' } },
+        mobile: { display: { xs: 'flex', md: 'none' } },
         desktop: {
             flexGrow: 1,
             display: { xs: 'none', md: 'flex' },
@@ -94,6 +96,7 @@ const BurgerMenu = ({ anchorElNav, handleOpenNavMenu, handleCloseNavMenu }) => {
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
                 color="inherit"
+                edge="end"
             >
                 <MenuIcon />
             </IconButton>
@@ -127,7 +130,14 @@ const BurgerMenu = ({ anchorElNav, handleOpenNavMenu, handleCloseNavMenu }) => {
     );
 };
 
-const Header = () => {
+const Header = ({
+    elevation = 2,
+    sx = {},
+    position = 'static',
+    color = 'white',
+    children,
+    ...props
+}) => {
     const { isAuth } = useContext(AuthContext);
 
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -150,7 +160,13 @@ const Header = () => {
     };
 
     return (
-        <AppBar color="white" position="static">
+        <AppBar
+            elevation={elevation}
+            color={color}
+            position={position}
+            sx={sx}
+            {...props}
+        >
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
                     <Box sx={styleConfig.logo.desktop}>
@@ -159,14 +175,6 @@ const Header = () => {
                                 <img src={logo} alt="logo" />
                             </Tooltip>
                         </NavLink>
-                    </Box>
-
-                    <Box sx={styleConfig.menu.mobile}>
-                        <BurgerMenu
-                            anchorElNav={anchorElNav}
-                            handleOpenNavMenu={handleOpenNavMenu}
-                            handleCloseNavMenu={handleCloseNavMenu}
-                        />
                     </Box>
 
                     <Box sx={styleConfig.logo.mobile}>
@@ -191,10 +199,15 @@ const Header = () => {
                                 handleCloseUserMenu={handleCloseUserMenu}
                             />
                         ) : (
-                            <Button link to="/register">
-                                Реєстрація
-                            </Button>
+                            children
                         )}
+                    </Box>
+                    <Box sx={styleConfig.menu.mobile}>
+                        <BurgerMenu
+                            anchorElNav={anchorElNav}
+                            handleOpenNavMenu={handleOpenNavMenu}
+                            handleCloseNavMenu={handleCloseNavMenu}
+                        />
                     </Box>
                 </Toolbar>
             </Container>
@@ -212,6 +225,14 @@ AccountMenu.propTypes = {
     anchorElUser: PropTypes.oneOfType([PropTypes.object, PropTypes.oneOf([null])]),
     handleOpenUserMenu: PropTypes.func.isRequired,
     handleCloseUserMenu: PropTypes.func.isRequired,
+};
+
+Header.propTypes = {
+    elevation: PropTypes.number,
+    sx: PropTypes.object,
+    position: PropTypes.string,
+    color: PropTypes.string,
+    children: PropTypes.node,
 };
 
 export default Header;
