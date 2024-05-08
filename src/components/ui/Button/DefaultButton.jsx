@@ -1,6 +1,8 @@
-import { Box, CircularProgress, Button as MuiButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
+
+import { Box, CircularProgress, Button as MuiButton } from '@mui/material';
 
 const buttonStyles = {
     position: 'relative',
@@ -9,7 +11,6 @@ const buttonStyles = {
     fontWeight: 'bold',
     textTransform: 'none',
     textAlign: 'center',
-    width: 'fit-content',
 };
 
 const loaderStyles = {
@@ -40,7 +41,10 @@ const Button = ({
                 size={size}
                 variant="contained"
                 color={color}
-                sx={{ ...buttonStyles, ...sx }}
+                sx={{
+                    ...buttonStyles,
+                    ...sx,
+                }}
                 {...props}
             >
                 {children}
