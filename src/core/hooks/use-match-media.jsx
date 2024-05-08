@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
 const queries = [
     '(max-width: 500px)',

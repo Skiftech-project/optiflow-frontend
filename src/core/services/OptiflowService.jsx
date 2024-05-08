@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
+
 import { basicCalculationsRequest } from '../api';
-import { calcFetching, calcFetched, calcFetchingError } from '../store/actions';
+import { calcFetched, calcFetching, calcFetchingError } from '../store/actions';
 
 const useOptiflowService = () => {
     const dispatch = useDispatch();

@@ -1,13 +1,17 @@
-import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+
 import { Container, IconButton, Stack, Tooltip } from '@mui/material';
+
 import DownloadIcon from '@mui/icons-material/Download';
 
-import { TitleBlock, Button, Block, Table } from '../ui';
-import { FormBlock, Header } from '../interface';
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
+
+import { FormBlock, Header } from '../interface';
+import { Block, Button, Table, TitleBlock } from '../ui';
 
 // !FIX: two 2d request outgoing from this component on first render after calculations button is clicked
 const CalculatorPage = () => {

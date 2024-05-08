@@ -1,4 +1,5 @@
 import { Button } from 'src/components/ui';
+
 import './NotFoundPage.css';
 
 const btnStyles = {

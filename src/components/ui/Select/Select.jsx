@@ -1,6 +1,8 @@
-import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import { FormControl, Select as MuiSelect, InputLabel, MenuItem } from '@mui/material';
+
+import PropTypes from 'prop-types';
+
+import { FormControl, InputLabel, MenuItem, Select as MuiSelect } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const Select = ({

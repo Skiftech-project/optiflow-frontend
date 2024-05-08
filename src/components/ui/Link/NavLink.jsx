@@ -1,7 +1,10 @@
-import PropTypes from 'prop-types';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { useTheme } from '@mui/material/styles';
+
 import { styled } from '@mui/system';
+import PropTypes from 'prop-types';
+
+import { useTheme } from '@mui/material/styles';
+
 import { Link } from '..';
 
 const NavLink = ({ children, ...props }) => {

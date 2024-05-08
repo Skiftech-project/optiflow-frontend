@@ -1,14 +1,16 @@
-import { TitleBlock, Input, Button } from 'src/components/ui';
 import { FormProvider, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Grid, Paper, Avatar } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { useAuthService } from 'src/core/services';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { Avatar, Box, Grid, Paper } from '@mui/material';
+
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
+import { Button, Input, TitleBlock } from 'src/components/ui';
+import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
-
-import { useSelector } from 'react-redux';
 
 const SignUpPage = () => {
     const { dataLoadingStatus } = useSelector(state => state.auth);

@@ -1,4 +1,7 @@
 import { useMemo } from 'react';
+
+import PropTypes from 'prop-types';
+
 import {
     CircularProgress,
     Table as MuiTable,
@@ -9,7 +12,6 @@ import {
     TableRow,
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
 
 const StyledTableRow = styled(TableRow)({
     '&:nth-of-type(odd)': {

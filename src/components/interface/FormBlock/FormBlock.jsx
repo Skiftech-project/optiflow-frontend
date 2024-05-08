@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { Box, Tabs, Tab, Grid, Typography } from '@mui/material';
+
+import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
 
 import { Input, Select, TitleBlock } from 'src/components/ui';
 import { Block } from 'src/components/ui';

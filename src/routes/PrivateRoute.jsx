@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+
 import { Button } from 'src/components/ui';
 
 // TODO: add layout for non-registered

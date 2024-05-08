@@ -1,7 +1,7 @@
 import CalculatorPage from './CalculatorPage';
+import MainPage from './MainPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import RayPage from './RayPage';
-import MainPage from './MainPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
 

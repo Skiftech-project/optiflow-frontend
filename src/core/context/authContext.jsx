@@ -1,6 +1,8 @@
 import { createContext, useState } from 'react';
-import { transformJwtPayload } from '../utils';
+
 import PropTypes from 'prop-types';
+
+import { transformJwtPayload } from '../utils';
 
 export const AuthContext = createContext();
 

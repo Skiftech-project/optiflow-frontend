@@ -1,13 +1,13 @@
-import TitleBlock from './TitleBlock/TitleBlock';
-import Spinner from './Spinner/Spinner';
+import Block from './Block/Block';
 import Button from './Button/DefaultButton';
-import Preloader from './Preloader/Preloader';
 import Input from './Input/Input';
-import Select from './Select/Select';
 import Link from './Link/Link';
 import NavLink from './Link/NavLink';
-import Block from './Block/Block';
+import Preloader from './Preloader/Preloader';
+import Select from './Select/Select';
+import Spinner from './Spinner/Spinner';
 import Table from './Table/Table';
+import TitleBlock from './TitleBlock/TitleBlock';
 
 export {
     TitleBlock,
