@@ -26,6 +26,7 @@ const SignUpPage = () => {
             <Grid
                 container
                 spacing={0}
+                component="main"
                 direction="column"
                 alignItems="center"
                 justifyContent="center"

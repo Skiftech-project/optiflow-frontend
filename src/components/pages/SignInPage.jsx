@@ -25,6 +25,7 @@ const SignInPage = () => {
             </Header>
             <Grid
                 container
+                component="main"
                 spacing={0}
                 direction="column"
                 alignItems="center"
