@@ -4,7 +4,7 @@ import { Avatar, Grid, Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import { pattern } from 'src/assets';
 import { Block, Button, TitleBlock } from 'src/components/ui';
@@ -53,7 +53,7 @@ const SignInPage = () => {
                         marginBottom={3}
                     >
                         <Avatar alt="lock-icon" sx={{ bgcolor: 'secondary.main' }}>
-                            <PersonOutlineOutlinedIcon />
+                            <LockOpenIcon />
                         </Avatar>
 
                         <TitleBlock
