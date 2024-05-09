@@ -20,6 +20,8 @@ const ProfileForm = () => {
         mode: 'all',
     });
 
+    const submitButtonHandler = () => {};
+
     return (
         <FormProvider {...methods}>
             <Stack direction="column" sx={{ width: '60%' }}>
@@ -42,7 +44,11 @@ const ProfileForm = () => {
                         <Button variant="outlined" color="primary">
                             Відмінити
                         </Button>
-                        <Button type="submit" color="primary">
+                        <Button
+                            type="submit"
+                            color="primary"
+                            onClick={submitButtonHandler}
+                        >
                             Зберегти
                         </Button>
                     </Stack>

@@ -1,8 +1,12 @@
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 
+import { transformJwtPayload } from 'src/core/utils';
+
 import { Header, ProfileForm } from '../interface';
 
 const ProfilePage = () => {
+    const user = transformJwtPayload(localStorage.getItem('accessToken'));
+
     return (
         <>
             <Header />
@@ -34,7 +38,7 @@ const ProfilePage = () => {
                                 marginBottom: '15px',
                             }}
                         >
-                            Kyrylo Ulianov
+                            {user.username}
                         </Typography>
 
                         <Typography
