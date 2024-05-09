@@ -1,147 +1,78 @@
-import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { Avatar, Grid, Stack, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { Avatar, Box, Grid, Paper } from '@mui/material';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { pattern } from 'src/assets';
+import { Block, Button, TitleBlock } from 'src/components/ui';
 
-import { Button, Input, TitleBlock } from 'src/components/ui';
-import { useAuthService } from 'src/core/services';
-import { validationShemaRegistration } from 'src/core/shemes';
+import { Header, SignUpForm } from '../interface';
 
 const SignUpPage = () => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
     const { dataLoadingStatus } = useSelector(state => state.auth);
-    const { registration } = useAuthService();
-
-    const methods = useForm({
-        defaultValues: {
-            username: '',
-            email: '',
-            password: '',
-        },
-        resolver: yupResolver(validationShemaRegistration),
-        mode: 'all',
-    });
-
-    const handleSubmit = async data => {
-        await registration(data.username, data.email, data.password);
-        methods.reset();
-    };
 
     return (
-        <FormProvider {...methods}>
-            <Grid container component="main" sx={{ height: '100vh' }}>
+        <>
+            <Header position="fixed">
+                <Button link to="/login">
+                    Вхід
+                </Button>
+            </Header>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                sx={{
+                    minHeight: '100vh',
+                    backgroundImage: isMobile ? `url(${pattern})` : 'none',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundColor: theme.palette.white,
+                }}
+            >
                 <Grid
                     item
-                    xs={12}
-                    sm={8}
-                    md={5}
-                    component={Paper}
-                    elevation={6}
-                    square
-                    sx={{ padding: '30px' }}
-                    alignContent="center"
+                    component={isMobile ? Block : 'div'}
+                    elevation={5}
+                    padding={{ xs: 2, sm: 5 }}
+                    width={{ sm: 500 }}
                 >
-                    <Avatar
-                        sx={{
-                            m: 1,
-                            bgcolor: 'secondary.main',
-                            left: '50%', // TODO: change code
-                            transform: 'translate(-70%, 0)', // TODO: change code
-                        }}
+                    <Stack
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        gap={1}
+                        marginBottom={3}
                     >
-                        <LockOutlinedIcon />
-                    </Avatar>
+                        <Avatar alt="lock-icon" sx={{ bgcolor: 'secondary.main' }}>
+                            <PersonOutlineOutlinedIcon />
+                        </Avatar>
 
-                    <TitleBlock
-                        textAlign="center"
-                        sx={{
-                            textTransform: 'normal',
-                            marginBottom: '15px',
-                            fontSize: '25px',
-                        }}
-                    >
-                        Зареєструватися
-                    </TitleBlock>
-
-                    <Box
-                        component="form"
-                        noValidate
-                        onSubmit={handleSubmit}
-                        sx={{ mt: 1 }}
-                    >
-                        <Input
-                            name="username"
-                            id="username"
-                            fullWidth
-                            label="Ім'я користувача:"
-                            sx={{ marginBottom: '15px' }}
-                            size="medium"
-                        />
-
-                        <Input
-                            name="email"
-                            id="email"
-                            fullWidth
-                            label="Пошта користувача:"
-                            sx={{ marginBottom: '15px' }}
-                            type="email"
-                            size="medium"
-                        />
-
-                        <Input
-                            name="password"
-                            id="password"
-                            fullWidth
-                            label="Пароль користувача:"
-                            sx={{ marginBottom: '15px' }}
-                            type="password"
-                            size="medium"
-                        />
-
-                        <Box
+                        <TitleBlock
                             sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
+                                textTransform: 'normal',
+                                fontSize: '25px',
                             }}
                         >
-                            <Button
-                                disabled={!methods.formState.isValid}
-                                onClick={methods.handleSubmit(handleSubmit)}
-                                color="primary"
-                                loading={dataLoadingStatus === 'loading'}
-                                sx={{ width: '170px', height: '40px' }}
-                            >
-                                Зареєструватися
-                            </Button>
-                            <Link to="/login">Акаунт вже існує?</Link>
-                        </Box>
-                    </Box>
-                </Grid>
+                            Реєстрація
+                        </TitleBlock>
+                        <Typography maxWidth={isMobile ? '80%' : null} align="center">
+                            Зареєструйтеся та співпрацюйте з нами вже зараз!
+                        </Typography>
+                    </Stack>
 
-                <Grid
-                    item
-                    xs={false}
-                    sm={4}
-                    md={7}
-                    sx={{
-                        backgroundImage:
-                            'url(https://source.unsplash.com/random?wallpapers)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: t =>
-                            t.palette.mode === 'light'
-                                ? t.palette.grey[50]
-                                : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                />
+                    <SignUpForm dataLoadingStatus={dataLoadingStatus} />
+                </Grid>
             </Grid>
-        </FormProvider>
+        </>
     );
 };
 
