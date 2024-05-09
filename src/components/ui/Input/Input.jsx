@@ -10,6 +10,7 @@ import { useTheme } from '@mui/material/styles';
 const Input = ({
     name,
     adornment = null,
+    adornmentOnClick = null,
     label = 'Label text',
     size = 'small',
     ...props
@@ -22,10 +23,12 @@ const Input = ({
     const inputProps = useMemo(
         () => ({
             endAdornment: adornment && (
-                <InputAdornment position="end">{adornment}</InputAdornment>
+                <InputAdornment position="end" onClick={adornmentOnClick}>
+                    {adornment}
+                </InputAdornment>
             ),
         }),
-        [adornment],
+        [adornment, adornmentOnClick],
     );
 
     return (
@@ -80,7 +83,8 @@ Input.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
     size: PropTypes.string,
-    adornment: PropTypes.string,
+    adornment: PropTypes.any,
+    adornmentOnClick: PropTypes.func,
 };
 
 export default Input;
