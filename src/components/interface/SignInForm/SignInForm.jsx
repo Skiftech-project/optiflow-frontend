@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { Button, Input, Link } from 'src/components/ui';
+import { Button, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaLogin } from 'src/core/shemes';
 
@@ -29,6 +29,7 @@ const SignInForm = ({ dataLoadingStatus }) => {
         await login(data.email, data.password);
         methods.reset();
     };
+
     return (
         <FormProvider {...methods}>
             <Stack component="form" onSubmit={handleSubmit(handleFormSubmit)} gap={3}>
@@ -40,15 +41,7 @@ const SignInForm = ({ dataLoadingStatus }) => {
                     type="email"
                     size="medium"
                 />
-
-                <Input
-                    name="password"
-                    id="password"
-                    fullWidth
-                    label="Пароль користувача:"
-                    type="password"
-                    size="medium"
-                />
+                <InputPassword />
 
                 <Stack
                     direction="column"

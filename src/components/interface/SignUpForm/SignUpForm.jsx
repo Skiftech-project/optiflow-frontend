@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { Button, Input, Link } from 'src/components/ui';
+import { Button, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
 
@@ -52,14 +52,7 @@ const SignUpForm = ({ dataLoadingStatus }) => {
                     size="medium"
                 />
 
-                <Input
-                    name="password"
-                    id="password"
-                    fullWidth
-                    label="Пароль користувача:"
-                    type="password"
-                    size="medium"
-                />
+                <InputPassword />
 
                 <Stack
                     direction="column"
