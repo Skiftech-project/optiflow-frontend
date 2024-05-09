@@ -19,7 +19,7 @@ const SignUpPage = () => {
     return (
         <>
             <Header position="fixed">
-                <Button link to="/login">
+                <Button link to="/login" sx={{ width: '105px' }}>
                     Вхід
                 </Button>
             </Header>

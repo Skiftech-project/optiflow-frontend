@@ -19,7 +19,7 @@ const SignInPage = () => {
     return (
         <>
             <Header position="fixed">
-                <Button link to="/register">
+                <Button link to="/register" sx={{ width: '105px' }}>
                     Реєстрація
                 </Button>
             </Header>
