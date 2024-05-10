@@ -1,6 +1,9 @@
+import AccountMenu from './AccountMenu/AccountMenu';
 import Block from './Block/Block';
+import BurgerMenu from './BurgerMenu/BurgerMenu';
 import Button from './Button/DefaultButton';
 import Input from './Input/Input';
+import InputPassword from './Input/InputPassword';
 import Link from './Link/Link';
 import NavLink from './Link/NavLink';
 import Preloader from './Preloader/Preloader';
@@ -20,4 +23,7 @@ export {
     NavLink,
     Block,
     Table,
+    BurgerMenu,
+    InputPassword,
+    AccountMenu,
 };
