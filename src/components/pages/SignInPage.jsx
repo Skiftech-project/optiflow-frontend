@@ -1,5 +1,3 @@
-import { useSelector } from 'react-redux';
-
 import { Avatar, Grid, Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -14,7 +12,6 @@ import { Header, SignInForm } from '../interface';
 const SignInPage = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.up('sm'));
-    const { dataLoadingStatus } = useSelector(state => state.auth);
 
     return (
         <>
@@ -71,7 +68,7 @@ const SignInPage = () => {
                         </Typography>
                     </Stack>
 
-                    <SignInForm dataLoadingStatus={dataLoadingStatus} />
+                    <SignInForm />
                 </Grid>
             </Grid>
         </>

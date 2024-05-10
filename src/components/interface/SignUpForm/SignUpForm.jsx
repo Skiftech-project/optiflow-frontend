@@ -1,7 +1,7 @@
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import PropTypes from 'prop-types';
 
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
@@ -10,7 +10,8 @@ import { Button, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
 
-const SignUpForm = ({ dataLoadingStatus }) => {
+const SignUpForm = () => {
+    const { dataLoadingStatus } = useSelector(state => state.auth);
     const { registration } = useAuthService();
     const theme = useTheme();
 
@@ -83,10 +84,6 @@ const SignUpForm = ({ dataLoadingStatus }) => {
             </Stack>
         </FormProvider>
     );
-};
-
-SignUpForm.propTypes = {
-    dataLoadingStatus: PropTypes.oneOf(['idle', 'loading', 'error']).isRequired,
 };
 
 export default SignUpForm;
