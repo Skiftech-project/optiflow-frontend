@@ -7,7 +7,7 @@ import { Link as MuiLink } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
 const Link = ({
-    underline = 'none',
+    underline = 'hover',
     variant = 'inherrit',
     component = RouterLink,
     sx = {},
@@ -30,7 +30,6 @@ const Link = ({
 const View = styled(MuiLink)(({ theme, sx }) => ({
     color: theme.palette.black.main || sx?.color,
     transition: '0.2s all ease-in-out',
-    '&:hover': { color: theme.palette.primary.main },
 }));
 
 Link.propTypes = {
