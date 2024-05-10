@@ -27,7 +27,7 @@ const ProfilePage = () => {
                     >
                         <Avatar
                             sx={{ width: '200px', height: '200px', marginBottom: '15px' }}
-                            src="src\assets\avatar.jpg"
+                            src="src\assets\avatar.png"
                         />
 
                         <Typography
