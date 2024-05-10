@@ -11,7 +11,9 @@ import {
     ListItemIcon,
     Menu,
     MenuItem,
+    Stack,
     Tooltip,
+    Typography,
     Zoom,
 } from '@mui/material';
 
@@ -35,8 +37,11 @@ const AccountMenu = ({ user = {} }) => {
     };
 
     return (
-        <>
-            <Tooltip title="Open settings">
+        <Stack direction="row" alignItems="center" gap={2}>
+            <Typography sx={{ display: { xs: 'none', md: 'block' } }}>
+                {user?.username}
+            </Typography>
+            <Tooltip title="Акаунт">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt="avatar" sx={{ bgcolor: 'secondary.main' }}>
                         {getFirstLetterFromString(user?.username)}
@@ -60,7 +65,9 @@ const AccountMenu = ({ user = {} }) => {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
             >
-                <MenuItem disabled>{user?.username}</MenuItem>
+                <MenuItem sx={{ display: { xs: 'block', md: 'none' } }} disabled>
+                    {user?.username}
+                </MenuItem>
                 <MenuItem disabled>{user?.email}</MenuItem>
 
                 <Divider sx={{ bgcolor: 'secondary.main', opacity: 1, my: 1 }} />
@@ -86,7 +93,7 @@ const AccountMenu = ({ user = {} }) => {
                     Вихід
                 </MenuItem>
             </Menu>
-        </>
+        </Stack>
     );
 };
 
