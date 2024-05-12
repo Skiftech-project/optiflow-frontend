@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { AppBar, Box, Container, Toolbar, Tooltip } from '@mui/material';
 
 import { logo } from 'src/assets';
-import { AccountMenu, BurgerMenu } from 'src/components/ui';
+import { AccountMenu, BurgerMenu, Link } from 'src/components/ui';
 import { NavLink } from 'src/components/ui';
 import { AuthContext } from 'src/core/context/authContext';
 
@@ -16,11 +16,9 @@ const pages = [
 
 const styleConfig = {
     logo: {
-        desktop: { mr: 5, display: { xs: 'none', md: 'flex' } },
-        mobile: {
-            flexGrow: 1,
-            display: { xs: 'flex', md: 'none' },
-        },
+        mr: 5,
+        display: 'flex',
+        flexGrow: { xs: 1, md: 0 },
     },
     menu: {
         mobile: { display: { xs: 'flex', md: 'none' } },
@@ -41,8 +39,7 @@ const Header = ({
     children,
     ...props
 }) => {
-    const { isAuth } = useContext(AuthContext);
-    const { user } = useContext(AuthContext);
+    const { isAuth, user } = useContext(AuthContext);
 
     return (
         <AppBar
@@ -54,19 +51,11 @@ const Header = ({
         >
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <Box sx={styleConfig.logo.desktop}>
-                        <NavLink to="/">
-                            <Tooltip color="primary" title="На головну">
-                                <img src={logo} alt="logo" />
-                            </Tooltip>
-                        </NavLink>
-                    </Box>
-
-                    <Box sx={styleConfig.logo.mobile}>
-                        <NavLink to="/">
+                    <Link to="/" sx={styleConfig.logo}>
+                        <Tooltip color="primary" title="На головну">
                             <img src={logo} alt="logo" />
-                        </NavLink>
-                    </Box>
+                        </Tooltip>
+                    </Link>
 
                     <Box sx={styleConfig.menu.desktop}>
                         {pages.map(page => (
