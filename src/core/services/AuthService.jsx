@@ -59,7 +59,7 @@ const useAuthService = () => {
                 navigate('/');
                 dispatch(authFetched());
             })
-            .catch(dispatch(authFetchingError()));
+            .catch(() => dispatch(authFetchingError()));
 
         return response;
     };
