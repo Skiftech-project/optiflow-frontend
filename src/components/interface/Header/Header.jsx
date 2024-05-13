@@ -52,7 +52,7 @@ const Header = ({
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
                     <Link to="/" sx={styleConfig.logo}>
-                        <Tooltip color="primary" title="На головну">
+                        <Tooltip color="primary" title="На головну" arrow>
                             <img src={logo} alt="logo" />
                         </Tooltip>
                     </Link>
