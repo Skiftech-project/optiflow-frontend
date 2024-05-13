@@ -1,3 +1,5 @@
+import { Container, Stack, Typography } from '@mui/material';
+
 import { Header } from '../interface';
 import { Button } from '../ui';
 
@@ -9,7 +11,19 @@ const MainPage = () => {
                     Реєстрація
                 </Button>
             </Header>
-            <div>Main Page</div>
+            <Container maxWidth="xl" component="main">
+                <Stack component="section" id="hero">
+                    <Typography
+                        component="h1"
+                        variant="h1"
+                        fontWeight={700}
+                        align="center"
+                        fontSize={60}
+                    >
+                        Розрахунок області передачі даних
+                    </Typography>
+                </Stack>
+            </Container>
         </>
     );
 };
