@@ -71,7 +71,7 @@
 
 .message__title {
     text-align: center;
-    font-family: 'Poppins', sans-serif;
+
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 5px;
@@ -79,15 +79,12 @@
 }
 
 .message_subtitle {
-    font-family: 'Poppins', sans-serif;
     font-weight: 300;
     text-align: center;
     color: #fff;
 
     width: -webkit-fit-content;
-
     width: -moz-fit-content;
-
     width: fit-content;
     background-color: var(--primary-color);
     border-radius: 5px;
