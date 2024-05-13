@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
@@ -6,11 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { Button, Input, InputPassword, Link } from 'src/components/ui';
+import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaLogin } from 'src/core/shemes';
 
 const SignInForm = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const { dataLoadingStatus } = useSelector(state => state.auth);
     const { login } = useAuthService();
     const theme = useTheme();
@@ -27,8 +29,18 @@ const SignInForm = () => {
     const { formState, handleSubmit } = methods;
 
     const handleFormSubmit = async data => {
-        await login(data.email, data.password);
-        methods.reset();
+        const response = await login(data.email, data.password);
+
+        switch (response?.status) {
+            case 404:
+                setErrorMessage('Користувач з таким Email не зареєстрований');
+                break;
+            case 400:
+                setErrorMessage('Некоректний пароль');
+                break;
+            default:
+                methods.reset();
+        }
     };
 
     return (
@@ -43,6 +55,10 @@ const SignInForm = () => {
                     size="medium"
                 />
                 <InputPassword />
+
+                {errorMessage.trim() == 0 ? null : (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                )}
 
                 <Stack
                     direction="column"
