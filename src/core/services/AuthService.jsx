@@ -24,7 +24,10 @@ const useAuthService = () => {
                 navigate('/calculator');
                 dispatch(authFetched());
             })
-            .catch(() => dispatch(authFetchingError()));
+            .catch(error => {
+                dispatch(authFetchingError());
+                return error;
+            });
 
         return response;
     };
@@ -42,7 +45,10 @@ const useAuthService = () => {
                 navigate('/calculator');
                 dispatch(authFetched());
             })
-            .catch(() => dispatch(authFetchingError()));
+            .catch(error => {
+                dispatch(authFetchingError());
+                return error;
+            });
 
         return response;
     };

@@ -5,7 +5,7 @@ export const signupRequest = async (username, email, password) => {
         const response = await $api.post('/auth/register', { username, email, password });
         return response.data;
     } catch (error) {
-        throw error.message;
+        throw error.response;
     }
 };
 
@@ -14,7 +14,7 @@ export const loginRequest = async (email, password) => {
         const response = await $api.post('/auth/login', { email, password });
         return response.data;
     } catch (error) {
-        throw error.message;
+        throw error.response;
     }
 };
 

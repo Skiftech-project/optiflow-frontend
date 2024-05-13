@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
@@ -6,11 +7,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
-import { Button, Input, InputPassword, Link } from 'src/components/ui';
+import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
 
 const SignUpForm = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const { dataLoadingStatus } = useSelector(state => state.auth);
     const { registration } = useAuthService();
     const theme = useTheme();
@@ -28,7 +30,13 @@ const SignUpForm = () => {
     const { formState, handleSubmit } = methods;
 
     const handleFormSubmit = async data => {
-        await registration(data.username, data.email, data.password);
+        const response = await registration(data.username, data.email, data.password);
+
+        if (response?.status === 409) {
+            setErrorMessage('Користувач з таким Email вже існує');
+            return;
+        }
+
         methods.reset();
     };
 
@@ -54,6 +62,10 @@ const SignUpForm = () => {
                 />
 
                 <InputPassword />
+
+                {errorMessage.trim() == 0 ? null : (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                )}
 
                 <Stack
                     direction="column"
