@@ -7,6 +7,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+
 import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaRegistration } from 'src/core/shemes';
@@ -50,6 +53,7 @@ const SignUpForm = () => {
                     label="Ім'я користувача:"
                     type="string"
                     size="medium"
+                    startAdornment={<AccountCircleOutlinedIcon />}
                 />
 
                 <Input
@@ -59,6 +63,7 @@ const SignUpForm = () => {
                     label="Пошта користувача:"
                     type="email"
                     size="medium"
+                    startAdornment={<EmailOutlinedIcon />}
                 />
 
                 <InputPassword />

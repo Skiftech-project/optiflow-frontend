@@ -7,6 +7,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Stack, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+
 import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
 import { validationShemaLogin } from 'src/core/shemes';
@@ -53,6 +55,7 @@ const SignInForm = () => {
                     label="Пошта користувача:"
                     type="email"
                     size="medium"
+                    startAdornment={<EmailOutlinedIcon />}
                 />
                 <InputPassword />
 
