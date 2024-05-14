@@ -1,5 +1,6 @@
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 
+import { skiftech } from 'src/assets';
 import { transformJwtPayload } from 'src/core/utils';
 
 import { Header, ProfileForm } from '../interface';
@@ -27,7 +28,7 @@ const ProfilePage = () => {
                     >
                         <Avatar
                             sx={{ width: '200px', height: '200px', marginBottom: '15px' }}
-                            src="src\assets\avatar.png"
+                            src={skiftech}
                         />
 
                         <Typography
