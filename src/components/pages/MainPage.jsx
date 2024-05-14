@@ -10,6 +10,8 @@ import {
     Typography,
 } from '@mui/material';
 
+import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+
 import { mainPageContent } from 'src/core/constants';
 
 import { Footer, Header } from '../interface';
@@ -24,7 +26,14 @@ const MainPage = () => {
                 </Button>
             </Header>
 
-            <Stack component="section" id="hero" height="100vh" marginTop="64px">
+            <Stack
+                component="section"
+                id="hero"
+                height="100vh"
+                marginTop="64px"
+                alignItems="center"
+                justifyContent="center"
+            >
                 <Container maxWidth="xl">
                     <Typography
                         color="primary"
@@ -40,7 +49,7 @@ const MainPage = () => {
                     <Typography component="p" variant="p" align="center">
                         {mainPageContent.hero.text}
                     </Typography>
-                    <Button>Спробувати</Button>
+                    <Button endIcon={<DoubleArrowIcon />}>Спробувати</Button>
                 </Container>
             </Stack>
 
@@ -49,6 +58,8 @@ const MainPage = () => {
                 id="advantages"
                 minHeight="740px"
                 bgcolor="rgba(233,240,251,0.5)"
+                alignItems="center"
+                justifyContent="center"
             >
                 <Container maxWidth="xl">
                     <Typography
@@ -61,7 +72,13 @@ const MainPage = () => {
                     >
                         {mainPageContent.advantages.title}
                     </Typography>
-                    <Stack direction="row" gap={5} flexWrap="wrap">
+                    <Stack
+                        direction="row"
+                        gap={5}
+                        flexWrap="wrap"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
                         {mainPageContent.advantages.cards.map(card => (
                             <CardItem key={card.title} {...card} />
                         ))}
@@ -69,7 +86,13 @@ const MainPage = () => {
                 </Container>
             </Stack>
 
-            <Stack component="section" id="companies" minHeight="740px">
+            <Stack
+                component="section"
+                id="companies"
+                minHeight="740px"
+                alignItems="center"
+                justifyContent="center"
+            >
                 <Container maxWidth="xl">
                     <Typography
                         color="primary"
@@ -81,7 +104,13 @@ const MainPage = () => {
                     >
                         {mainPageContent.companies.title}
                     </Typography>
-                    <Stack direction="row" gap={5} flexWrap="wrap">
+                    <Stack
+                        direction="row"
+                        gap={5}
+                        flexWrap="wrap"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
                         {mainPageContent.companies.logos.map(logo => (
                             <Box key={logo}>
                                 <img
@@ -104,10 +133,10 @@ const MainPage = () => {
 
 const CardItem = ({ title, text, picture }) => {
     return (
-        <Card sx={{ maxWidth: 280, borderRadius: '10px' }}>
+        <Card sx={{ maxWidth: 340, borderRadius: '10px' }}>
             <CardMedia
                 component="img"
-                sx={{ height: 160 }}
+                sx={{ height: 250 }}
                 image={picture}
                 title="green iguana"
             />
