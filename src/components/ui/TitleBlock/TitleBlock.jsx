@@ -13,6 +13,7 @@ const TitleBlock = ({
     block = false,
     sx = {},
     children,
+    normalCase = false,
     ...props
 }) => {
     const theme = useTheme();
@@ -20,11 +21,11 @@ const TitleBlock = ({
     const textStyle = useMemo(
         () => ({
             color: theme.palette.primary.main,
-            textTransform: 'uppercase',
-            fontWeight: 'bold',
+            textTransform: normalCase ? 'normal' : 'uppercase',
+            fontWeight: 700,
             fontSize: { xs: 14, sm: 18, md: 21 },
         }),
-        [theme.palette.primary.main],
+        [theme.palette.primary.main, normalCase],
     );
 
     return (
@@ -60,6 +61,7 @@ TitleBlock.propTypes = {
     component: PropTypes.elementType,
     sx: PropTypes.object,
     children: PropTypes.node.isRequired,
+    normalCase: PropTypes.bool,
 };
 
 export default TitleBlock;
