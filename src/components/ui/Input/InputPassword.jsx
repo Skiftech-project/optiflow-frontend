@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 
 import { IconButton } from '@mui/material';
 
+import PasswordIcon from '@mui/icons-material/Password';
+
 import { Input } from '..';
 
 const InputPassword = ({
@@ -35,6 +37,7 @@ const InputPassword = ({
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
             }
+            startAdornment={<PasswordIcon />}
         />
     );
 };

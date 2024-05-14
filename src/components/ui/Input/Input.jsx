@@ -10,6 +10,8 @@ import { useTheme } from '@mui/material/styles';
 const Input = ({
     name,
     adornment = null,
+    startAdornment = null,
+    onStartAdornmentClick = null,
     adornmentOnClick = null,
     label = 'Label text',
     size = 'small',
@@ -27,8 +29,13 @@ const Input = ({
                     {adornment}
                 </InputAdornment>
             ),
+            startAdornment: startAdornment && (
+                <InputAdornment position="start" onClick={onStartAdornmentClick}>
+                    {startAdornment}
+                </InputAdornment>
+            ),
         }),
-        [adornment, adornmentOnClick],
+        [adornment, adornmentOnClick, startAdornment, onStartAdornmentClick],
     );
 
     return (
@@ -85,6 +92,8 @@ Input.propTypes = {
     size: PropTypes.string,
     adornment: PropTypes.any,
     adornmentOnClick: PropTypes.func,
+    startAdornment: PropTypes.any,
+    onStartAdornmentClick: PropTypes.func,
 };
 
 export default Input;
