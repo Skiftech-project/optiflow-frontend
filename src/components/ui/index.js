@@ -7,6 +7,7 @@ import Input from './Input/Input';
 import InputPassword from './Input/InputPassword';
 import Link from './Link/Link';
 import NavLink from './Link/NavLink';
+import ModalWindow from './ModalWindow/ModalWindow';
 import Preloader from './Preloader/Preloader';
 import Select from './Select/Select';
 import Spinner from './Spinner/Spinner';
@@ -28,4 +29,5 @@ export {
     InputPassword,
     AccountMenu,
     ErrorMessage,
+    ModalWindow,
 };

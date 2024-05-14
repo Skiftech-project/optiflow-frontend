@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 
-import { Button } from 'src/components/ui';
-
-// TODO: add layout for non-registered
+import { Button, ModalWindow } from 'src/components/ui';
 
 const PrivateRoute = ({ isAuth, children }) => {
     return isAuth ? (
         children
     ) : (
-        <>
-            <div>Ви повинні зареєструватися</div>
+        <ModalWindow
+            title="Доступ до цієї сторінки обмежений"
+            content="Поспішайте зареєструватися, щоб скористатися нашим сервісом."
+        >
             <Button link to="/register">
                 Зареєструватися
             </Button>
-        </>
+        </ModalWindow>
     );
 };
 
