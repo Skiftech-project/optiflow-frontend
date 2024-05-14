@@ -2,16 +2,15 @@ import { useContext } from 'react';
 
 import PropTypes from 'prop-types';
 
-import { AppBar, Box, Container, Toolbar, Tooltip } from '@mui/material';
+import { AppBar, Box, Container, Stack, Toolbar } from '@mui/material';
 
-import { logo } from 'src/assets';
-import { AccountMenu, BurgerMenu, Link } from 'src/components/ui';
+import { AccountMenu, BurgerMenu, Logo } from 'src/components/ui';
 import { NavLink } from 'src/components/ui';
 import { AuthContext } from 'src/core/context/authContext';
 
 const pages = [
     { text: 'Калькулятор', path: '/calculator' },
-    { text: 'Візуалізація', path: '/ray' },
+    { text: 'Візуалізація проміню', path: '/ray' },
 ];
 
 const styleConfig = {
@@ -25,10 +24,8 @@ const styleConfig = {
         desktop: {
             flexGrow: 1,
             display: { xs: 'none', md: 'flex' },
-            gap: '30px',
         },
     },
-    tools: { flexGrow: 0 },
 };
 
 const Header = ({
@@ -51,23 +48,17 @@ const Header = ({
         >
             <Container maxWidth="xxl">
                 <Toolbar disableGutters>
-                    <Link to="/" sx={styleConfig.logo}>
-                        <Tooltip color="primary" title="На головну" arrow>
-                            <img src={logo} alt="logo" />
-                        </Tooltip>
-                    </Link>
+                    <Logo sx={styleConfig.logo} />
 
-                    <Box sx={styleConfig.menu.desktop}>
+                    <Stack direction="row" gap={4} sx={styleConfig.menu.desktop}>
                         {pages.map(page => (
                             <NavLink key={page.text} to={page.path}>
                                 {page.text}
                             </NavLink>
                         ))}
-                    </Box>
+                    </Stack>
 
-                    <Box sx={styleConfig.tools}>
-                        {isAuth ? <AccountMenu user={user} /> : children}
-                    </Box>
+                    <Box>{isAuth ? <AccountMenu user={user} /> : children}</Box>
 
                     <Box sx={styleConfig.menu.mobile}>
                         <BurgerMenu items={pages} />
