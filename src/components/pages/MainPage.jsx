@@ -26,73 +26,62 @@ const MainPage = () => {
                 </Button>
             </Header>
 
-            <Stack
-                component="section"
-                id="hero"
-                height="100vh"
-                marginTop="64px"
-                alignItems="center"
-                justifyContent="center"
-            >
+            <Stack component="section" id="hero" height="100vh" marginTop="64px">
                 <Container maxWidth="xl">
-                    <Typography
-                        color="primary"
-                        component="h1"
-                        variant="h1"
-                        fontWeight={700}
-                        align="center"
-                        fontSize={60}
-                    >
-                        {mainPageContent.hero.title}
-                    </Typography>
+                    <Stack alignItems="center" justifyContent="center">
+                        <Typography
+                            color="primary"
+                            component="h1"
+                            variant="h1"
+                            fontWeight={700}
+                            align="center"
+                            fontSize={60}
+                        >
+                            {mainPageContent.hero.title}
+                        </Typography>
 
-                    <Typography component="p" variant="p" align="center">
-                        {mainPageContent.hero.text}
-                    </Typography>
-                    <Button endIcon={<DoubleArrowIcon />}>Спробувати</Button>
-                </Container>
-            </Stack>
-
-            <Stack
-                component="section"
-                id="advantages"
-                minHeight="740px"
-                bgcolor="rgba(233,240,251,0.5)"
-                alignItems="center"
-                justifyContent="center"
-            >
-                <Container maxWidth="xl">
-                    <Typography
-                        color="primary"
-                        component="h1"
-                        variant="h1"
-                        fontWeight={700}
-                        align="center"
-                        fontSize={60}
-                    >
-                        {mainPageContent.advantages.title}
-                    </Typography>
-                    <Stack
-                        direction="row"
-                        gap={5}
-                        flexWrap="wrap"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        {mainPageContent.advantages.cards.map(card => (
-                            <CardItem key={card.title} {...card} />
-                        ))}
+                        <Typography component="p" variant="p" align="center">
+                            {mainPageContent.hero.text}
+                        </Typography>
+                        <Button endIcon={<DoubleArrowIcon />}>Спробувати</Button>
                     </Stack>
                 </Container>
             </Stack>
 
             <Stack
                 component="section"
-                id="companies"
-                minHeight="740px"
-                alignItems="center"
-                justifyContent="center"
+                id="advantages"
+                minHeight="800px"
+                bgcolor="rgba(233,240,251,0.5)"
             >
+                <Container maxWidth="xl">
+                    <Stack alignItems="center" justifyContent="center">
+                        <Typography
+                            color="primary"
+                            component="h1"
+                            variant="h1"
+                            fontWeight={700}
+                            align="center"
+                            fontSize={60}
+                        >
+                            {mainPageContent.advantages.title}
+                        </Typography>
+                        <Stack
+                            direction="row"
+                            gap={5}
+                            flexWrap="wrap"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            {mainPageContent.advantages.cards.map(card => (
+                                <CardItem key={card.title} {...card} />
+                            ))}
+                        </Stack>
+                    </Stack>
+                </Container>
+            </Stack>
+
+            <Stack component="section" id="companies" minHeight="800px">
                 <Container maxWidth="xl">
                     <Typography
                         color="primary"
@@ -123,7 +112,9 @@ const MainPage = () => {
                             </Box>
                         ))}
                     </Stack>
-                    <Typography>{mainPageContent.companies.text}</Typography>
+                    <Typography align="center">
+                        {mainPageContent.companies.text}
+                    </Typography>
                 </Container>
             </Stack>
             <Footer />
@@ -133,10 +124,14 @@ const MainPage = () => {
 
 const CardItem = ({ title, text, picture }) => {
     return (
-        <Card sx={{ maxWidth: 340, borderRadius: '10px' }}>
+        <Card sx={{ minHeight: 420, maxWidth: 420, borderRadius: '10px' }}>
             <CardMedia
                 component="img"
-                sx={{ height: 250 }}
+                sx={{
+                    height: 250,
+                    borderBottom: '1px solid',
+                    borderColor: 'secondary.main',
+                }}
                 image={picture}
                 title="green iguana"
             />
@@ -149,6 +144,7 @@ const CardItem = ({ title, text, picture }) => {
                 }}
             >
                 <Typography
+                    color="primary"
                     marginBottom={2}
                     fontSize="18px"
                     variant="h6"
