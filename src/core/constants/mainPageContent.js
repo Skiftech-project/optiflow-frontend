@@ -1,4 +1,4 @@
-import { skiftech } from 'src/assets';
+import { calcAdv, diagramAdv, rayAdv, skiftech } from 'src/assets';
 
 export const mainPageContent = {
     hero: {
@@ -11,21 +11,18 @@ export const mainPageContent = {
         cards: [
             {
                 title: 'Зручний калькулятор',
-                text: 'Гарний та зручний інтерфейс стане для вас гарним помічником. Він допоможе вам швидко розрахувати потрібні параметри та зберегти розрахунки у формат .md.',
-                picture:
-                    'https://c4.wallpaperflare.com/wallpaper/419/678/549/audi-e-tron-gt-electric-cars-4k-wallpaper-preview.jpg',
+                text: 'Зручний інтерфейс стане для вас справжнім помічником. Він допоможе вам швидко розрахувати потрібні параметри та зберегти розрахунки у файл.',
+                picture: calcAdv,
             },
             {
                 title: 'Візуалізація променю',
                 text: 'Сервіс дає вам унікальну можливість перевірити не тільки точність ваших розрахунків але й наглядно візуалізувати їх у трьохмірний промінь.',
-                picture:
-                    'https://c4.wallpaperflare.com/wallpaper/419/678/549/audi-e-tron-gt-electric-cars-4k-wallpaper-preview.jpg',
+                picture: rayAdv,
             },
             {
                 title: '3D - Діаграма спрямованості',
                 text: 'Окремий сервіс візуалізації діаграми спрямованості допоможе вам відтворити вашу двовимірну діаграму у тривимірну модель.',
-                picture:
-                    'https://c4.wallpaperflare.com/wallpaper/419/678/549/audi-e-tron-gt-electric-cars-4k-wallpaper-preview.jpg',
+                picture: diagramAdv,
             },
         ],
     },
