@@ -1,26 +1,37 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
 
 import { Button, Input } from 'src/components/ui';
-import { validationShemaRegistration } from 'src/core/shemes';
-
-// TODO: change to profile validation
+// import { useUserService } from 'src/core/services';
+import { validationShemaUserData } from 'src/core/shemes';
+import { transformJwtPayload } from 'src/core/utils';
 
 const ProfileForm = () => {
+    const [isUserDataDisabled, setIsUserDataDisabled] = useState(true);
+    const user = transformJwtPayload(localStorage.getItem('accessToken'));
+    // const { updateUsernameEmail } = useUserService();
+    const { userLoadingStatus } = useSelector(state => state.user);
+
     const methods = useForm({
         defaultValues: {
             username: '',
             email: '',
-            password: '',
         },
-        resolver: yupResolver(validationShemaRegistration),
+        resolver: yupResolver(validationShemaUserData),
         mode: 'all',
     });
 
-    const submitButtonHandler = () => {};
+    const { formState, handleSubmit } = methods;
+
+    const submitButtonHandler = async () => {
+        // const response = await updateUsernameEmail(data);
+        setIsUserDataDisabled(true);
+    };
 
     return (
         <FormProvider {...methods}>
@@ -39,49 +50,52 @@ const ProfileForm = () => {
                     >
                         Інформація користувача
                     </Typography>
+                </Stack>
+
+                <Stack
+                    direction="column"
+                    component="form"
+                    onSubmit={handleSubmit(submitButtonHandler)}
+                    gap={3}
+                >
+                    <Input
+                        name="username"
+                        id="username"
+                        fullWidth
+                        label={user.username} // "Ім'я користувача:"
+                        type="string"
+                        size="medium"
+                        disabled={isUserDataDisabled}
+                    />
+
+                    <Input
+                        name="email"
+                        id="email"
+                        fullWidth
+                        label={user.email} //"Пошта користувача:"
+                        type="email"
+                        size="medium"
+                        disabled={isUserDataDisabled}
+                    />
 
                     <Stack direction="row" gap="20px">
-                        <Button variant="outlined" color="primary">
-                            Відмінити
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={() => setIsUserDataDisabled(false)}
+                        >
+                            Змінити дані
                         </Button>
                         <Button
+                            disabled={!formState.isValid}
+                            loading={userLoadingStatus === 'loading'}
                             type="submit"
                             color="primary"
-                            onClick={submitButtonHandler}
                         >
                             Зберегти
                         </Button>
                     </Stack>
                 </Stack>
-
-                <Input
-                    name="username"
-                    id="username"
-                    fullWidth
-                    label="Ім'я користувача:"
-                    type="string"
-                    size="medium"
-                    sx={{ marginBottom: '25px' }}
-                />
-
-                <Input
-                    name="email"
-                    id="email"
-                    fullWidth
-                    label="Пошта користувача:"
-                    type="email"
-                    size="medium"
-                    sx={{ marginBottom: '25px' }}
-                />
-
-                <Input
-                    name="password"
-                    id="password"
-                    fullWidth
-                    label="Пароль користувача:"
-                    type="password"
-                    size="medium"
-                />
             </Stack>
         </FormProvider>
     );

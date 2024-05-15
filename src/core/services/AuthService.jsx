@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { loginRequest, logoutRequest, signupRequest } from '../api';
 import { AuthContext } from '../context/authContext';
 import { authFetched, authFetching, authFetchingError } from '../store/actions';
+import { transformJwtPayload } from '../utils';
 
 const useAuthService = () => {
     const dispatch = useDispatch();
@@ -40,10 +41,12 @@ const useAuthService = () => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
                 localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
+                const user = transformJwtPayload(data.tokens.access_token);
+
                 setIsAuth(true);
 
                 navigate('/calculator');
-                dispatch(authFetched());
+                dispatch(authFetched({ username: user.username, email: user.email }));
             })
             .catch(error => {
                 dispatch(authFetchingError());

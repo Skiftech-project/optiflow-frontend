@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 
+// import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { AppBar, Box, Container, Stack, Toolbar } from '@mui/material';
@@ -37,6 +38,7 @@ const Header = ({
     ...props
 }) => {
     const { isAuth, user } = useContext(AuthContext);
+    // const user = useSelector(state => state.auth);
 
     return (
         <AppBar
