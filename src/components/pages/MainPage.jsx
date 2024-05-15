@@ -26,12 +26,18 @@ const MainPage = () => {
                 </Button>
             </Header>
 
-            <Stack component="section" id="hero" height="100vh" marginTop="64px">
+            <Stack
+                component="section"
+                id="hero"
+                height="100vh"
+                marginTop="64px"
+                alignItems="center"
+                justifyContent="center"
+            >
                 <Container maxWidth="xl">
-                    <Stack alignItems="center" justifyContent="center">
+                    <Stack alignItems="center" justifyContent="center" gap={10}>
                         <Typography
                             color="primary"
-                            component="h1"
                             variant="h1"
                             fontWeight={700}
                             align="center"
@@ -40,10 +46,12 @@ const MainPage = () => {
                             {mainPageContent.hero.title}
                         </Typography>
 
-                        <Typography component="p" variant="p" align="center">
+                        <Typography component="p" variant="h5" align="center">
                             {mainPageContent.hero.text}
                         </Typography>
-                        <Button endIcon={<DoubleArrowIcon />}>Спробувати</Button>
+                        <Button to="/register" link endIcon={<DoubleArrowIcon />}>
+                            Спробувати
+                        </Button>
                     </Stack>
                 </Container>
             </Stack>
@@ -53,16 +61,16 @@ const MainPage = () => {
                 id="advantages"
                 minHeight="800px"
                 bgcolor="rgba(233,240,251,0.5)"
+                alignItems="center"
+                justifyContent="center"
             >
                 <Container maxWidth="xl">
-                    <Stack alignItems="center" justifyContent="center">
+                    <Stack alignItems="center" justifyContent="center" gap={10}>
                         <Typography
                             color="primary"
-                            component="h1"
-                            variant="h1"
+                            variant="h3"
                             fontWeight={700}
                             align="center"
-                            fontSize={60}
                         >
                             {mainPageContent.advantages.title}
                         </Typography>
@@ -81,42 +89,49 @@ const MainPage = () => {
                 </Container>
             </Stack>
 
-            <Stack component="section" id="companies" minHeight="800px">
+            <Stack
+                component="section"
+                id="companies"
+                minHeight="800px"
+                alignItems="center"
+                justifyContent="center"
+            >
                 <Container maxWidth="xl">
-                    <Typography
-                        color="primary"
-                        component="h1"
-                        variant="h1"
-                        fontWeight={700}
-                        align="center"
-                        fontSize={60}
-                    >
-                        {mainPageContent.companies.title}
-                    </Typography>
-                    <Stack
-                        direction="row"
-                        gap={5}
-                        flexWrap="wrap"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        {mainPageContent.companies.logos.map(logo => (
-                            <Box key={logo}>
-                                <img
-                                    src={logo}
-                                    alt={logo}
-                                    width="100%"
-                                    height="100%"
-                                    style={{ borderRadius: '20px' }}
-                                />
-                            </Box>
-                        ))}
+                    <Stack alignItems="center" justifyContent="center" gap={10}>
+                        <Typography
+                            color="primary"
+                            variant="h3"
+                            fontWeight={700}
+                            align="center"
+                        >
+                            {mainPageContent.companies.title}
+                        </Typography>
+                        <Stack
+                            direction="row"
+                            gap={5}
+                            flexWrap="wrap"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            {mainPageContent.companies.logos.map(logo => (
+                                <Box key={logo}>
+                                    <img
+                                        src={logo}
+                                        alt={logo}
+                                        width="100%"
+                                        height="100%"
+                                        style={{ borderRadius: '20px' }}
+                                    />
+                                </Box>
+                            ))}
+                        </Stack>
+                        <Typography align="center" variant="h5" component="p">
+                            {mainPageContent.companies.text}
+                        </Typography>
                     </Stack>
-                    <Typography align="center">
-                        {mainPageContent.companies.text}
-                    </Typography>
                 </Container>
             </Stack>
+
             <Footer />
         </>
     );
@@ -124,7 +139,7 @@ const MainPage = () => {
 
 const CardItem = ({ title, text, picture }) => {
     return (
-        <Card sx={{ minHeight: 420, maxWidth: 420, borderRadius: '10px' }}>
+        <Card sx={{ minHeight: 470, maxWidth: 420, borderRadius: '15px' }}>
             <CardMedia
                 component="img"
                 sx={{
@@ -141,20 +156,19 @@ const CardItem = ({ title, text, picture }) => {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    pt: 0,
                 }}
             >
                 <Typography
                     color="primary"
-                    marginBottom={2}
-                    fontSize="18px"
+                    my={3}
                     variant="h6"
-                    component="h6"
                     align="center"
                     fontWeight={700}
                 >
                     {title}
                 </Typography>
-                <Typography variant="body2" align="center">
+                <Typography align="center" fontSize={18}>
                     {text}
                 </Typography>
             </CardContent>
