@@ -35,12 +35,16 @@ const SignUpForm = () => {
     const handleFormSubmit = async data => {
         const response = await registration(data.username, data.email, data.password);
 
-        if (response?.status === 409) {
-            setErrorMessage('Користувач з таким Email вже існує');
-            return;
+        switch (response?.status) {
+            case 409:
+                setErrorMessage('Користувач з таким Email вже існує');
+                break;
+            case 400:
+                setErrorMessage('Ваш Email не коректний'); // TODO: fix email validation
+                break;
+            default:
+                methods.reset();
         }
-
-        methods.reset();
     };
 
     return (
