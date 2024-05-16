@@ -1,18 +1,13 @@
 import { useContext } from 'react';
 
-// import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { AppBar, Box, Container, Stack, Toolbar } from '@mui/material';
 
 import { AccountMenu, BurgerMenu, Logo } from 'src/components/ui';
 import { NavLink } from 'src/components/ui';
+import { pages } from 'src/core/constants';
 import { AuthContext } from 'src/core/context/authContext';
-
-const pages = [
-    { text: 'Калькулятор', path: '/calculator' },
-    { text: 'Візуалізація проміню', path: '/ray' },
-];
 
 const styleConfig = {
     logo: {
@@ -38,7 +33,6 @@ const Header = ({
     ...props
 }) => {
     const { isAuth, user } = useContext(AuthContext);
-    // const user = useSelector(state => state.auth);
 
     return (
         <AppBar
