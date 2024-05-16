@@ -12,7 +12,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
 import { useAuthService } from 'src/core/services';
-import { validationShemaRegistration } from 'src/core/shemes';
+import { validationSchemaRegistration } from 'src/core/shemes';
 
 const SignUpForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -26,7 +26,7 @@ const SignUpForm = () => {
             email: '',
             password: '',
         },
-        resolver: yupResolver(validationShemaRegistration),
+        resolver: yupResolver(validationSchemaRegistration),
         mode: 'all',
     });
 

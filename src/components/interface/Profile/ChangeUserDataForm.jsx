@@ -11,20 +11,20 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 import { Button, Input } from 'src/components/ui';
 import { useUserService } from 'src/core/services';
-import { validationShemaUserData } from 'src/core/shemes';
+import { validationSchemaUserData } from 'src/core/shemes';
 import { transformJwtPayload } from 'src/core/utils';
 
 const ChangeUserDataForm = () => {
     const user = transformJwtPayload(localStorage.getItem('accessToken'));
     const { updateUsernameEmail } = useUserService();
-    const { dataLoadingStatus } = useSelector(state => state.auth);
+    const { dataLoadingStatus } = useSelector(state => state.userData);
 
     const methods = useForm({
         defaultValues: {
             username: '',
             email: '',
         },
-        resolver: yupResolver(validationShemaUserData),
+        resolver: yupResolver(validationSchemaUserData),
         mode: 'onChange',
     });
 

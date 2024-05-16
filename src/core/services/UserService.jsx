@@ -8,7 +8,11 @@ import {
     updateUsernameEmailRequest,
 } from '../api';
 import { authFetched, authFetching, authFetchingError } from '../store/actions';
-// import { userDataFetched, userDataFetching, userDataFetchingError } from '../store/actions';
+import {
+    userDataFetched,
+    userDataFetching,
+    userDataFetchingError,
+} from '../store/actions';
 import {
     restorePasswordFetched,
     restorePasswordFetching,
@@ -32,6 +36,7 @@ const useUserService = () => {
 
     const updateUsernameEmail = data => {
         dispatch(authFetching());
+        dispatch(userDataFetching());
 
         const response = updateUsernameEmailRequest(data.username, data.email)
             .then(data => {
@@ -41,9 +46,11 @@ const useUserService = () => {
                 const user = transformJwtPayload(data.tokens.access_token);
 
                 dispatch(authFetched({ username: user.username, email: user.email }));
+                dispatch(userDataFetched());
             })
             .catch(error => {
                 dispatch(authFetchingError());
+                dispatch(userDataFetchingError());
                 return error;
             });
 

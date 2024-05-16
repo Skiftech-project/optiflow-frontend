@@ -8,7 +8,7 @@ import { Stack } from '@mui/material';
 
 import { Button, InputPassword } from 'src/components/ui';
 import { useUserService } from 'src/core/services';
-import { validationShemaUpdatePassword } from 'src/core/shemes';
+import { validationSchemaUpdatePassword } from 'src/core/shemes';
 
 const ChangePasswordForm = () => {
     const [isPasswordsDisabled, setIsPasswordsDisabled] = useState(true);
@@ -20,7 +20,7 @@ const ChangePasswordForm = () => {
             newPassword: '',
             oldPassword: '',
         },
-        resolver: yupResolver(validationShemaUpdatePassword),
+        resolver: yupResolver(validationSchemaUpdatePassword),
         mode: 'all',
     });
 
