@@ -64,7 +64,7 @@ const SignInForm = () => {
                 )}
 
                 <Link
-                    to="/forgotPassword"
+                    to="/login/forgotPassword"
                     underline="always"
                     align="center"
                     sx={{ color: theme.palette.primary.main }}

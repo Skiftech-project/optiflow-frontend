@@ -37,3 +37,15 @@ export const forgotPasswordRequest = async email => {
         throw error.response;
     }
 };
+
+export const restorePasswordRequest = async password => {
+    try {
+        const data = {
+            email: password,
+        };
+        const response = await $api.put('/auth/restorePassword', data);
+        return response.data;
+    } catch (error) {
+        throw error.response;
+    }
+};

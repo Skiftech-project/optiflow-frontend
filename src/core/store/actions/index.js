@@ -17,3 +17,9 @@ export {
     forgotPasswordFetching,
     forgotPasswordFetchingError,
 } from './user/forgotPasswordAction';
+
+export {
+    restorePasswordFetched,
+    restorePasswordFetching,
+    restorePasswordFetchingError,
+} from './user/restorePasswordAction';

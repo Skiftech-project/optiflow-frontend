@@ -5,6 +5,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import RayPage from './RayPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
+import RestorePasswordPage from './restorePasswordPage';
 
 export {
     CalculatorPage,
@@ -14,4 +15,5 @@ export {
     SignInPage,
     SignUpPage,
     ForgotPasswordPage,
+    RestorePasswordPage,
 };

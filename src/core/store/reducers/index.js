@@ -5,6 +5,7 @@ import { calcReducer } from './calculations';
 import { passwordReducer } from './user';
 import { userDataReducer } from './user';
 import { forgotPasswordReducer } from './user/forgotPasswordReducer';
+import { restorePasswordReducer } from './user/restorePasswordReducer';
 
 const reducer = combineReducers({
     //auth
@@ -21,6 +22,9 @@ const reducer = combineReducers({
 
     //forgotPassword
     forgotPassword: forgotPasswordReducer,
+
+    //restorePassword
+    restorePassword: restorePasswordReducer,
 });
 
 export default reducer;

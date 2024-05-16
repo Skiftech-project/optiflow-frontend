@@ -9,3 +9,5 @@ export { validationSchema as validationShemaUserData } from './UserDataValidatio
 export { validationSchema as validationShemaUpdatePassword } from './UpdatePasswordValidation';
 
 export { validationSchema as validationSchemaEmail } from './EmailValidation';
+
+export { validationSchema as validationSchemaRestorePassword } from './RestorePasswordValidation';

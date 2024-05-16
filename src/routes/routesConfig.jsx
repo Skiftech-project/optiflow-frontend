@@ -9,6 +9,9 @@ const SignInPage = lazy(() => import('src/components/pages/SignInPage'));
 const SignUpPage = lazy(() => import('src/components/pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('src/components/pages/NotFoundPage/NotFoundPage'));
 const ForgotPasswordPage = lazy(() => import('src/components/pages/ForgotPasswordPage'));
+const RestorePasswordPage = lazy(
+    () => import('src/components/pages/RestorePasswordPage'),
+);
 
 const routes = [
     { path: '/', component: MainPage, isPrivate: false },
@@ -17,7 +20,8 @@ const routes = [
     { path: '/calculator', component: CalculatorPage, isPrivate: true },
     { path: '/profile', component: ProfilePage, isPrivate: true },
     { path: '/ray', component: RayPage, isPrivate: true },
-    { path: '/forgotPassword', component: ForgotPasswordPage, isPrivate: false },
+    { path: '/login/forgotPassword', component: ForgotPasswordPage, isPrivate: false },
+    { path: '/login/restorePassword', component: RestorePasswordPage, isPrivate: false },
     { path: '*', component: NotFoundPage, isPrivate: false },
 ];
 
