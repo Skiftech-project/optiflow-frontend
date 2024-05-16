@@ -21,7 +21,11 @@ const routes = [
     { path: '/profile', component: ProfilePage, isPrivate: true },
     { path: '/ray', component: RayPage, isPrivate: true },
     { path: '/login/forgotPassword', component: ForgotPasswordPage, isPrivate: false },
-    { path: '/login/restorePassword', component: RestorePasswordPage, isPrivate: false },
+    {
+        path: '/login/restorePassword:token',
+        component: RestorePasswordPage,
+        isPrivate: false,
+    },
     { path: '*', component: NotFoundPage, isPrivate: false },
 ];
 

@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -12,8 +13,11 @@ import { Header } from '../interface';
 import { Block, Button, InputPassword } from '../ui';
 
 const RestorePasswordPage = () => {
+    const { token } = useParams();
     const { dataLoadingStatus } = useSelector(state => state.restorePassword);
     const { restorePassword } = useUserService();
+
+    console.log(token);
 
     const methods = useForm({
         defaultValues: {
