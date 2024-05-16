@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
@@ -15,7 +15,6 @@ import { validationShemaUserData } from 'src/core/shemes';
 import { transformJwtPayload } from 'src/core/utils';
 
 const ChangeUserDataForm = () => {
-    const [isUserDataDisabled, setIsUserDataDisabled] = useState(true);
     const user = transformJwtPayload(localStorage.getItem('accessToken'));
     const { updateUsernameEmail } = useUserService();
     const { dataLoadingStatus } = useSelector(state => state.auth);
@@ -31,15 +30,13 @@ const ChangeUserDataForm = () => {
 
     const { formState, handleSubmit } = methods;
 
-    // useEffect(() => {
-    //     methods.setValue('username', user.username);
-    //     methods.setValue('email', user.email);
-    // }, [user, methods]);
+    useEffect(() => {
+        methods.setValue('username', user.username);
+        methods.setValue('email', user.email);
+    }, [methods]);
 
     const submitButtonHandler = async data => {
         await updateUsernameEmail(data);
-        methods.reset();
-        setIsUserDataDisabled(true);
     };
 
     return (
@@ -63,10 +60,9 @@ const ChangeUserDataForm = () => {
                     name="username"
                     id="username"
                     fullWidth
-                    label={user.username} // "Ім'я користувача:"
+                    label="Ім'я користувача:"
                     type="string"
                     size="medium"
-                    disabled={isUserDataDisabled}
                     startAdornment={<AccountCircleOutlinedIcon />}
                 />
 
@@ -74,24 +70,13 @@ const ChangeUserDataForm = () => {
                     name="email"
                     id="email"
                     fullWidth
-                    label={user.email} //"Пошта користувача:"
+                    label="Пошта користувача:"
                     type="email"
                     size="medium"
-                    disabled={isUserDataDisabled}
                     startAdornment={<EmailOutlinedIcon />}
                 />
 
                 <Stack direction="row" gap="20px">
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => {
-                            setIsUserDataDisabled(false);
-                        }}
-                    >
-                        Змінити дані
-                    </Button>
-
                     <Button
                         disabled={!formState.isValid}
                         type="submit"
