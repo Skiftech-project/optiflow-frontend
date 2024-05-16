@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import {
     forgotPasswordRequest,
@@ -27,6 +28,7 @@ import { transformJwtPayload } from '../utils';
 
 const useUserService = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const updateUsernameEmail = data => {
         dispatch(authFetching());
@@ -85,6 +87,8 @@ const useUserService = () => {
         const response = restorePasswordRequest(password)
             .then(data => {
                 dispatch(restorePasswordFetched());
+                localStorage.removeItem('accessToken');
+                navigate('/login');
                 return data;
             })
             .catch(error => {

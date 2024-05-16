@@ -22,7 +22,7 @@ const routes = [
     { path: '/ray', component: RayPage, isPrivate: true },
     { path: '/login/forgotPassword', component: ForgotPasswordPage, isPrivate: false },
     {
-        path: '/login/restorePassword:token',
+        path: '/login/restorePassword/',
         component: RestorePasswordPage,
         isPrivate: false,
     },

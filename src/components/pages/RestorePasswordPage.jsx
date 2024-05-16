@@ -1,6 +1,7 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -9,15 +10,17 @@ import { Stack, Typography } from '@mui/material';
 import { useUserService } from 'src/core/services';
 import { validationSchemaRestorePassword } from 'src/core/shemes';
 
-import { Header } from '../interface';
-import { Block, Button, InputPassword } from '../ui';
+// import { Header } from '../interface';
+import { Block, Button, ErrorMessage, InputPassword } from '../ui';
 
 const RestorePasswordPage = () => {
-    const { token } = useParams();
+    const [errorMessage, setErrorMessage] = useState('');
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const token = searchParams.get('token');
+
     const { dataLoadingStatus } = useSelector(state => state.restorePassword);
     const { restorePassword } = useUserService();
-
-    console.log(token);
 
     const methods = useForm({
         defaultValues: {
@@ -31,7 +34,17 @@ const RestorePasswordPage = () => {
     const { formState, handleSubmit } = methods;
 
     const handleFormSubmit = async data => {
+        localStorage.setItem('accessToken', token);
         const response = await restorePassword(data.firstNewPassword);
+
+        switch (response?.status) {
+            case 401:
+                setErrorMessage('Посилання невалідне');
+                break;
+            default:
+                methods.reset();
+                setErrorMessage('');
+        }
     };
 
     return (
@@ -43,7 +56,7 @@ const RestorePasswordPage = () => {
                 component="form"
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
-                <Header position="fixed" />
+                {/* <Header position="fixed" /> */}
 
                 <Block
                     padding="30px"
@@ -61,18 +74,18 @@ const RestorePasswordPage = () => {
                     <InputPassword
                         id="firstNewPassword"
                         name="firstNewPassword"
-                        label="Перший новий пароль"
+                        label="Новий пароль"
                     />
 
                     <InputPassword
                         id="secondNewPassword"
                         name="secondNewPassword"
-                        label="Другий новий пароль"
+                        label="Підтвердіть новий пароль"
                     />
 
-                    {/* {errorMessage.trim() == 0 ? null : (
+                    {errorMessage.trim() == 0 ? null : (
                         <ErrorMessage>{errorMessage}</ErrorMessage>
-                    )} */}
+                    )}
 
                     <Stack
                         direction="column"
