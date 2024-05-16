@@ -3,14 +3,18 @@ import PropTypes from 'prop-types';
 import {
     Box,
     Card,
+    CardActions,
     CardContent,
     CardMedia,
     Container,
     Stack,
     Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 import { mainPageContent } from 'src/core/constants';
 
@@ -18,6 +22,9 @@ import { Footer, Header } from '../interface';
 import { Button } from '../ui';
 
 const MainPage = () => {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
     return (
         <>
             <Header position="fixed">
@@ -35,21 +42,35 @@ const MainPage = () => {
                 justifyContent="center"
             >
                 <Container maxWidth="xl">
-                    <Stack alignItems="center" justifyContent="center" gap={10}>
+                    <Stack
+                        alignItems="center"
+                        justifyContent="center"
+                        gap={isMobile ? 5 : 10}
+                    >
                         <Typography
                             color="primary"
                             variant="h1"
                             fontWeight={700}
                             align="center"
-                            fontSize={60}
+                            fontSize={{ xs: 40, sm: 50, lg: 80 }}
                         >
                             {mainPageContent.hero.title}
                         </Typography>
 
-                        <Typography component="p" variant="h5" align="center">
+                        <Typography
+                            component="p"
+                            variant={isMobile ? 'body1' : 'h5'}
+                            align="center"
+                        >
                             {mainPageContent.hero.text}
                         </Typography>
-                        <Button to="/register" link endIcon={<DoubleArrowIcon />}>
+                        <Button
+                            size={isMobile ? 'small' : 'large'}
+                            to="/register"
+                            fontSize={isMobile ? null : 18}
+                            link
+                            endIcon={<DoubleArrowIcon />}
+                        >
                             Спробувати
                         </Button>
                     </Stack>
@@ -63,12 +84,18 @@ const MainPage = () => {
                 bgcolor="rgba(233,240,251,0.5)"
                 alignItems="center"
                 justifyContent="center"
+                py={7}
             >
                 <Container maxWidth="xl">
-                    <Stack alignItems="center" justifyContent="center" gap={10}>
+                    <Stack
+                        alignItems="center"
+                        justifyContent="center"
+                        gap={isMobile ? 5 : 10}
+                    >
                         <Typography
                             color="primary"
-                            variant="h3"
+                            component="h3"
+                            variant={isMobile ? 'h4' : 'h3'}
                             fontWeight={700}
                             align="center"
                         >
@@ -92,15 +119,21 @@ const MainPage = () => {
             <Stack
                 component="section"
                 id="companies"
-                minHeight="800px"
+                minHeight="650px"
                 alignItems="center"
                 justifyContent="center"
+                py={7}
             >
                 <Container maxWidth="xl">
-                    <Stack alignItems="center" justifyContent="center" gap={10}>
+                    <Stack
+                        alignItems="center"
+                        justifyContent="center"
+                        gap={isMobile ? 5 : 10}
+                    >
                         <Typography
                             color="primary"
-                            variant="h3"
+                            component="h3"
+                            variant={isMobile ? 'h4' : 'h3'}
                             fontWeight={700}
                             align="center"
                         >
@@ -114,7 +147,7 @@ const MainPage = () => {
                             justifyContent="center"
                         >
                             {mainPageContent.companies.logos.map(logo => (
-                                <Box key={logo}>
+                                <Box key={logo} width={isMobile ? 170 : null}>
                                     <img
                                         src={logo}
                                         alt={logo}
@@ -125,7 +158,11 @@ const MainPage = () => {
                                 </Box>
                             ))}
                         </Stack>
-                        <Typography align="center" variant="h5" component="p">
+                        <Typography
+                            align="center"
+                            component="p"
+                            variant={isMobile ? 'body1' : 'h5'}
+                        >
                             {mainPageContent.companies.text}
                         </Typography>
                     </Stack>
@@ -137,7 +174,7 @@ const MainPage = () => {
     );
 };
 
-const CardItem = ({ title, text, picture }) => {
+const CardItem = ({ title, text, picture, link }) => {
     return (
         <Card sx={{ minHeight: 470, maxWidth: 420, borderRadius: '15px' }}>
             <CardMedia
@@ -150,6 +187,7 @@ const CardItem = ({ title, text, picture }) => {
                 image={picture}
                 title="green iguana"
             />
+
             <CardContent
                 sx={{
                     display: 'flex',
@@ -168,10 +206,24 @@ const CardItem = ({ title, text, picture }) => {
                 >
                     {title}
                 </Typography>
-                <Typography align="center" fontSize={18}>
+                <Typography align="center" fontSize={{ lg: 18 }}>
                     {text}
                 </Typography>
             </CardContent>
+
+            <CardActions
+                disableSpacing
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mb: 2.5,
+                }}
+            >
+                <Button to={link} link fontSize={15} endIcon={<LaunchIcon />}>
+                    До сервісу
+                </Button>
+            </CardActions>
         </Card>
     );
 };
@@ -180,6 +232,7 @@ CardItem.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
     picture: PropTypes.string,
+    link: PropTypes.string,
 };
 
 export default MainPage;

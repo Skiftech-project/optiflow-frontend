@@ -1,17 +1,9 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
 import { Box, CircularProgress, Button as MuiButton } from '@mui/material';
-
-const buttonStyles = {
-    position: 'relative',
-    height: '33px',
-    fontSize: '15px',
-    fontWeight: 'bold',
-    textTransform: 'none',
-    textAlign: 'center',
-};
 
 const loaderStyles = {
     position: 'absolute',
@@ -29,9 +21,21 @@ const Button = ({
     sx = {},
     loading = false,
     disabled = false,
+    fontSize,
     children,
     ...props
 }) => {
+    const buttonStyles = useMemo(
+        () => ({
+            position: 'relative',
+            fontSize: fontSize ? `${fontSize}px` : '15px',
+            fontWeight: 'bold',
+            textTransform: 'none',
+            textAlign: 'center',
+        }),
+        [fontSize],
+    );
+
     return (
         <Box sx={{ position: 'relative' }}>
             <MuiButton
@@ -69,6 +73,7 @@ Button.propTypes = {
     size: PropTypes.string,
     loading: PropTypes.bool,
     disabled: PropTypes.bool,
+    fontSize: PropTypes.number,
     children: PropTypes.node.isRequired,
 };
 
