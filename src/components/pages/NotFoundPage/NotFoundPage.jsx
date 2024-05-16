@@ -1,19 +1,10 @@
 import { Grid } from '@mui/material';
 
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+
 import { Button } from 'src/components/ui';
 
 import './NotFoundPage.css';
-
-const btnStyles = {
-    padding: '20px 25px',
-    fontSize: { sm: '1rem', lg: '1.2rem' },
-    // position: 'absolute',
-    // top: '700px',
-    // left: '50%',
-    // transform: 'translate(-50%, -50%)',
-    // zIndex: 5,
-    // bottom: 0,
-};
 
 const NotFoundPage = () => {
     return (
@@ -53,7 +44,7 @@ const NotFoundPage = () => {
                         </p>
                     </div>
                 </section>
-                <Button link to="/" sx={btnStyles}>
+                <Button size="large" link to="/" startIcon={<HomeRoundedIcon />}>
                     Повернутися до головної
                 </Button>
             </Grid>
