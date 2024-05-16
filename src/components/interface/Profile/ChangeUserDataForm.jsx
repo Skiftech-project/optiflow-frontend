@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
@@ -9,12 +9,13 @@ import { Stack, Typography } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
-import { Button, Input } from 'src/components/ui';
+import { Button, ErrorMessage, Input } from 'src/components/ui';
 import { useUserService } from 'src/core/services';
 import { validationSchemaUserData } from 'src/core/shemes';
 import { transformJwtPayload } from 'src/core/utils';
 
 const ChangeUserDataForm = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const user = transformJwtPayload(localStorage.getItem('accessToken'));
     const { updateUsernameEmail } = useUserService();
     const { dataLoadingStatus } = useSelector(state => state.userData);
@@ -36,7 +37,15 @@ const ChangeUserDataForm = () => {
     }, [methods]);
 
     const submitButtonHandler = async data => {
-        await updateUsernameEmail(data);
+        const response = await updateUsernameEmail(data);
+
+        switch (response?.status) {
+            case 409:
+                setErrorMessage('Користувач з таким Email вже існує');
+                break;
+            default:
+                setErrorMessage('');
+        }
     };
 
     return (
@@ -75,6 +84,10 @@ const ChangeUserDataForm = () => {
                     size="medium"
                     startAdornment={<EmailOutlinedIcon />}
                 />
+
+                {errorMessage.trim() == 0 ? null : (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                )}
 
                 <Stack direction="row" gap="20px">
                     <Button
