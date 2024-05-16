@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
 
 import { Avatar, Modal, Stack, Typography } from '@mui/material';
-import { useTheme } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 
@@ -10,9 +8,6 @@ import { pattern } from 'src/assets';
 import { Block } from 'src/components/ui';
 
 const ModalWindow = ({ open, onClose, title, content, children }) => {
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
     return (
         <Modal
             open={open}
@@ -31,20 +26,23 @@ const ModalWindow = ({ open, onClose, title, content, children }) => {
             >
                 <Block
                     sx={{
-                        width: isMobile ? `40%` : '30%',
                         padding: '30px',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        margin: '0 20px',
                     }}
                 >
                     <Avatar
                         alt="lock-icon"
-                        sx={{ bgcolor: 'secondary.main', marginBottom: '20px' }}
+                        sx={{
+                            bgcolor: 'secondary.main',
+                            marginBottom: '20px',
+                        }}
                     >
-                        <LockPersonIcon />
+                        <LockPersonIcon fontSize="medium" />
                     </Avatar>
-                    <Typography align="center" variant="h5">
+                    <Typography align="center" variant="h5" fontWeight={500}>
                         {title}
                     </Typography>
                     <Typography align="center" sx={{ margin: '15px 0' }}>
