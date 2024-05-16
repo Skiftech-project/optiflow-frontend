@@ -1,7 +1,17 @@
 import { useDispatch } from 'react-redux';
 
-import { updatePasswordRequest, updateUsernameEmailRequest } from '../api/user/user';
+import {
+    forgotPasswordRequest,
+    updatePasswordRequest,
+    updateUsernameEmailRequest,
+} from '../api/user/user';
 import { authFetched, authFetching, authFetchingError } from '../store/actions';
+// import { userDataFetched, userDataFetching, userDataFetchingError } from '../store/actions';
+import {
+    forgotPasswordFetched,
+    forgotPasswordFetching,
+    forgotPasswordFetchingError,
+} from '../store/actions';
 import {
     passwordFetched,
     passwordFetching,
@@ -47,9 +57,26 @@ const useUserService = () => {
         return response;
     };
 
+    const forgotPassword = data => {
+        dispatch(forgotPasswordFetching());
+
+        const response = forgotPasswordRequest(data.email)
+            .then(data => {
+                dispatch(forgotPasswordFetched());
+                return data;
+            })
+            .catch(error => {
+                dispatch(forgotPasswordFetchingError());
+                return error;
+            });
+
+        return response;
+    };
+
     return {
         updateUsernameEmail,
         updatePassword,
+        forgotPassword,
     };
 };
 

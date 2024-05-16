@@ -11,3 +11,9 @@ export {
     userDataFetching,
     userDataFetchingError,
 } from './user/userDataAction';
+
+export {
+    forgotPasswordFetched,
+    forgotPasswordFetching,
+    forgotPasswordFetchingError,
+} from './user/forgotPasswordAction';

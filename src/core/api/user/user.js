@@ -25,3 +25,15 @@ export const updatePasswordRequest = async (newPassword, oldPassword) => {
         throw error.response;
     }
 };
+
+export const forgotPasswordRequest = async email => {
+    try {
+        const data = {
+            email: email,
+        };
+        const response = await $api.post('/auth/sendResetEmail', data);
+        return response.data;
+    } catch (error) {
+        throw error.response;
+    }
+};

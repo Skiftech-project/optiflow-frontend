@@ -29,10 +29,7 @@ const ChangeUserDataForm = () => {
         mode: 'onChange',
     });
 
-    const { formState, handleSubmit, watch } = methods;
-
-    const username = watch('username', user.username);
-    const email = watch('email', user.email);
+    const { formState, handleSubmit } = methods;
 
     // useEffect(() => {
     //     methods.setValue('username', user.username);
