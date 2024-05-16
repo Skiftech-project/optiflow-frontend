@@ -66,7 +66,7 @@ const MainPage = () => {
                         </Typography>
                         <Button
                             size={isMobile ? 'small' : 'large'}
-                            to="/register"
+                            to="/calculator"
                             fontSize={isMobile ? null : 18}
                             link
                             endIcon={<DoubleArrowIcon />}
