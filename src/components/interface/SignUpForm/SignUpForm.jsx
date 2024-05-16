@@ -40,7 +40,7 @@ const SignUpForm = () => {
                 setErrorMessage('Користувач з таким Email вже існує');
                 break;
             case 400:
-                setErrorMessage('Ваш Email не коректний'); // TODO: fix email validation
+                setErrorMessage('Ваш Email не коректний');
                 break;
             default:
                 methods.reset();

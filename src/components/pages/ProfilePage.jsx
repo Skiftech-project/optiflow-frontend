@@ -3,7 +3,7 @@ import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 import { skiftech } from 'src/assets';
 import { transformJwtPayload } from 'src/core/utils';
 
-import { Header, ProfileForm } from '../interface';
+import { ChangePasswordForm, ChangeUserDataForm, Header } from '../interface';
 
 const ProfilePage = () => {
     const user = transformJwtPayload(localStorage.getItem('accessToken'));
@@ -55,7 +55,11 @@ const ProfilePage = () => {
                         </Typography>
                     </Box>
 
-                    <ProfileForm />
+                    <Stack width="60%" gap={3}>
+                        <ChangeUserDataForm />
+
+                        <ChangePasswordForm />
+                    </Stack>
                 </Stack>
             </Container>
         </>

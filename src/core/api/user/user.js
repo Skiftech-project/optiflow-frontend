@@ -12,3 +12,16 @@ export const updateUsernameEmailRequest = async (username, email) => {
         throw error.response;
     }
 };
+
+export const updatePasswordRequest = async (newPassword, oldPassword) => {
+    try {
+        const data = {
+            new_password: newPassword,
+            old_password: oldPassword,
+        };
+        const response = await $api.put('/auth/updateUserPassword', data);
+        return response.data;
+    } catch (error) {
+        throw error.response;
+    }
+};

@@ -63,6 +63,15 @@ const SignInForm = () => {
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
 
+                <Link
+                    to="/forgotPassword"
+                    underline="always"
+                    align="center"
+                    sx={{ color: theme.palette.primary.main }}
+                >
+                    Забули пароль?
+                </Link>
+
                 <Stack
                     direction="column"
                     alignItems="center"
