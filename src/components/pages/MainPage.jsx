@@ -49,7 +49,12 @@ const MainPage = () => {
                         <Typography component="p" variant="h5" align="center">
                             {mainPageContent.hero.text}
                         </Typography>
-                        <Button to="/register" link endIcon={<DoubleArrowIcon />}>
+                        <Button
+                            size="large"
+                            to="/register"
+                            link
+                            endIcon={<DoubleArrowIcon />}
+                        >
                             Спробувати
                         </Button>
                     </Stack>
