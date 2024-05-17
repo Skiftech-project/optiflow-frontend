@@ -1,7 +1,13 @@
 export { validationSchema as validationSchemaCalc } from './CalculatorValidation';
 
-export { validationSchema as validationShemaRegistration } from './RegistrationValidation';
+export { validationSchema as validationSchemaRegistration } from './RegistrationValidation';
 
-export { validationSchema as validationShemaLogin } from './LoginValidation';
+export { validationSchema as validationSchemaLogin } from './LoginValidation';
 
-export { validationSchema as validationShemaUserData } from './UserDataValidation';
+export { validationSchema as validationSchemaUserData } from './UserDataValidation';
+
+export { validationSchema as validationSchemaUpdatePassword } from './UpdatePasswordValidation';
+
+export { validationSchema as validationSchemaEmail } from './EmailValidation';
+
+export { validationSchema as validationSchemaRestorePassword } from './RestorePasswordValidation';

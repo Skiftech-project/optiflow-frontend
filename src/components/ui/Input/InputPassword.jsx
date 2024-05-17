@@ -10,9 +10,11 @@ import PasswordIcon from '@mui/icons-material/Password';
 import { Input } from '..';
 
 const InputPassword = ({
+    id = 'password',
     label = 'Пароль користувача:',
     size = 'medium',
     name = 'password',
+    disabled = false,
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -23,11 +25,12 @@ const InputPassword = ({
     return (
         <Input
             name={name}
-            id="password"
+            id={id}
             fullWidth
             label={label}
             type={showPassword ? 'text' : 'password'}
             size={size}
+            disabled={disabled}
             adornment={
                 <IconButton
                     aria-label="toggle password visibility"
@@ -46,6 +49,8 @@ InputPassword.propTypes = {
     label: PropTypes.string,
     size: PropTypes.string,
     name: PropTypes.string,
+    id: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default InputPassword;

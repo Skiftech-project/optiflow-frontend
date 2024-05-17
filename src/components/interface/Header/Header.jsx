@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
@@ -32,7 +33,8 @@ const Header = ({
     children,
     ...props
 }) => {
-    const { isAuth, user } = useContext(AuthContext);
+    const { isAuth } = useContext(AuthContext);
+    const { data } = useSelector(state => state.auth);
 
     return (
         <AppBar
@@ -54,7 +56,7 @@ const Header = ({
                         ))}
                     </Stack>
 
-                    <Box>{isAuth ? <AccountMenu user={user} /> : children}</Box>
+                    <Box>{isAuth ? <AccountMenu user={data} /> : children}</Box>
 
                     <Box sx={styleConfig.menu.mobile}>
                         <BurgerMenu items={pages} />

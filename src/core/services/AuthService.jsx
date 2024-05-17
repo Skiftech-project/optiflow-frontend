@@ -20,10 +20,12 @@ const useAuthService = () => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
                 localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
+                const user = transformJwtPayload(data.tokens.access_token);
+
                 setIsAuth(true);
 
                 navigate('/calculator');
-                dispatch(authFetched());
+                dispatch(authFetched({ username: user.username, email: user.email }));
             })
             .catch(error => {
                 dispatch(authFetchingError());

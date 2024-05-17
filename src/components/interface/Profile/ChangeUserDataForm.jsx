@@ -1,55 +1,70 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
-import { Button, ErrorMessage, Input, InputPassword, Link } from 'src/components/ui';
-import { useAuthService } from 'src/core/services';
-import { validationSchemaRegistration } from 'src/core/shemes';
+import { Button, ErrorMessage, Input } from 'src/components/ui';
+import { useUserService } from 'src/core/services';
+import { validationSchemaUserData } from 'src/core/shemes';
+import { transformJwtPayload } from 'src/core/utils';
 
-const SignUpForm = () => {
+const ChangeUserDataForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const { dataLoadingStatus } = useSelector(state => state.auth);
-    const { registration } = useAuthService();
-    const theme = useTheme();
+    const user = transformJwtPayload(localStorage.getItem('accessToken'));
+    const { updateUsernameEmail } = useUserService();
+    const { dataLoadingStatus } = useSelector(state => state.userData);
 
     const methods = useForm({
         defaultValues: {
             username: '',
             email: '',
-            password: '',
         },
-        resolver: yupResolver(validationSchemaRegistration),
-        mode: 'all',
+        resolver: yupResolver(validationSchemaUserData),
+        mode: 'onChange',
     });
 
     const { formState, handleSubmit } = methods;
 
-    const handleFormSubmit = async data => {
-        const response = await registration(data.username, data.email, data.password);
+    useEffect(() => {
+        methods.setValue('username', user.username);
+        methods.setValue('email', user.email);
+    }, [methods]);
+
+    const submitButtonHandler = async data => {
+        const response = await updateUsernameEmail(data);
 
         switch (response?.status) {
             case 409:
                 setErrorMessage('Користувач з таким Email вже існує');
                 break;
-            case 400:
-                setErrorMessage('Ваш Email не коректний');
-                break;
             default:
-                methods.reset();
+                setErrorMessage('');
         }
     };
 
     return (
         <FormProvider {...methods}>
-            <Stack component="form" onSubmit={handleSubmit(handleFormSubmit)} gap={3}>
+            <Stack
+                direction="column"
+                component="form"
+                onSubmit={handleSubmit(submitButtonHandler)}
+                gap={3}
+            >
+                <Typography
+                    sx={{
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    }}
+                >
+                    Інформація користувача
+                </Typography>
+
                 <Input
                     name="username"
                     id="username"
@@ -70,36 +85,18 @@ const SignUpForm = () => {
                     startAdornment={<EmailOutlinedIcon />}
                 />
 
-                <InputPassword />
-
                 {errorMessage.trim() == 0 ? null : (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
 
-                <Stack
-                    direction="column"
-                    alignItems="center"
-                    justifyContent="center"
-                    gap={3}
-                >
-                    <Typography align="center">
-                        Вже працюєте з нами?&nbsp;
-                        <Link
-                            to="/login"
-                            underline="always"
-                            sx={{ color: theme.palette.primary.main }}
-                        >
-                            Увійти.
-                        </Link>
-                    </Typography>
+                <Stack direction="row" gap="20px">
                     <Button
                         disabled={!formState.isValid}
                         type="submit"
                         color="primary"
                         loading={dataLoadingStatus === 'loading'}
-                        sx={{ width: '170px', height: '40px' }}
                     >
-                        Зареєструватися
+                        Зберегти
                     </Button>
                 </Stack>
             </Stack>
@@ -107,4 +104,4 @@ const SignUpForm = () => {
     );
 };
 
-export default SignUpForm;
+export default ChangeUserDataForm;

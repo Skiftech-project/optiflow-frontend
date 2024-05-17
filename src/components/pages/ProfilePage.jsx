@@ -1,12 +1,13 @@
+import { useSelector } from 'react-redux';
+
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 
 import { skiftech } from 'src/assets';
-import { transformJwtPayload } from 'src/core/utils';
 
-import { Header, ProfileForm } from '../interface';
+import { ChangePasswordForm, ChangeUserDataForm, Header } from '../interface';
 
 const ProfilePage = () => {
-    const user = transformJwtPayload(localStorage.getItem('accessToken'));
+    const { data } = useSelector(state => state.auth);
 
     return (
         <>
@@ -39,7 +40,7 @@ const ProfilePage = () => {
                                 marginBottom: '15px',
                             }}
                         >
-                            {user.username}
+                            {data?.username}
                         </Typography>
 
                         <Typography
@@ -55,7 +56,11 @@ const ProfilePage = () => {
                         </Typography>
                     </Box>
 
-                    <ProfileForm />
+                    <Stack width="60%" gap={3}>
+                        <ChangeUserDataForm />
+
+                        <ChangePasswordForm />
+                    </Stack>
                 </Stack>
             </Container>
         </>
