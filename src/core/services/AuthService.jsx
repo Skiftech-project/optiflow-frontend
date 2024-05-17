@@ -18,7 +18,6 @@ const useAuthService = () => {
         const response = loginRequest(email, password)
             .then(data => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
-                localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
                 const user = transformJwtPayload(data.tokens.access_token);
 
@@ -41,7 +40,6 @@ const useAuthService = () => {
         const response = signupRequest(username, email, password)
             .then(data => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
-                localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
                 const user = transformJwtPayload(data.tokens.access_token);
 

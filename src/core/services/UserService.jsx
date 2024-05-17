@@ -41,7 +41,6 @@ const useUserService = () => {
         const response = updateUsernameEmailRequest(data.username, data.email)
             .then(data => {
                 localStorage.setItem('accessToken', data.tokens.access_token);
-                localStorage.setItem('refreshToken', data.tokens.refresh_token);
 
                 const user = transformJwtPayload(data.tokens.access_token);
 
