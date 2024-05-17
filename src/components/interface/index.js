@@ -6,6 +6,7 @@ import ChangePasswordForm from './Profile/ChangePasswordForm';
 import ChangeUserDataForm from './Profile/ChangeUserDataForm';
 import SignInForm from './SignInForm/SignInForm';
 import SignUpForm from './SignUpForm/SignUpForm';
+import TemplateBlock from './TemplatesComponents/TemplateBlock';
 
 export {
     Header,
@@ -16,4 +17,5 @@ export {
     SignUpForm,
     ChangePasswordForm,
     ChangeUserDataForm,
+    TemplateBlock,
 };

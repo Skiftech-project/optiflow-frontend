@@ -6,11 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack } from '@mui/material';
 
-import { Button, InputPassword } from 'src/components/ui';
+import { Button, ErrorMessage, InputPassword } from 'src/components/ui';
 import { useUserService } from 'src/core/services';
 import { validationSchemaUpdatePassword } from 'src/core/shemes';
 
 const ChangePasswordForm = () => {
+    const [errorMessage, setErrorMessage] = useState('');
     const [isPasswordsDisabled, setIsPasswordsDisabled] = useState(true);
     const { dataLoadingStatus } = useSelector(state => state.password);
     const { updatePassword } = useUserService();
@@ -27,9 +28,17 @@ const ChangePasswordForm = () => {
     const { formState, handleSubmit } = methods;
 
     const handleFormSubmit = async data => {
-        await updatePassword(data);
-        methods.reset();
-        setIsPasswordsDisabled(true);
+        const response = await updatePassword(data);
+
+        switch (response?.status) {
+            case 400:
+                setErrorMessage('Некоректний старий пароль');
+                break;
+            default:
+                setErrorMessage('');
+                methods.reset();
+                setIsPasswordsDisabled(true);
+        }
     };
 
     return (
@@ -48,6 +57,10 @@ const ChangePasswordForm = () => {
                     label="Новий пароль"
                     disabled={isPasswordsDisabled}
                 />
+
+                {errorMessage.trim() == 0 ? null : (
+                    <ErrorMessage>{errorMessage}</ErrorMessage>
+                )}
 
                 <Stack direction="row" gap="20px">
                     <Button

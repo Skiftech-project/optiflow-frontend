@@ -13,6 +13,7 @@ const ForgotPasswordPage = lazy(() => import('src/components/pages/ForgotPasswor
 const RestorePasswordPage = lazy(
     () => import('src/components/pages/RestorePasswordPage'),
 );
+const TemplatesPage = lazy(() => import('src/components/pages/TemplatesPage'));
 
 const routes = [
     { path: '/', component: MainPage, isPrivate: false },
@@ -28,6 +29,7 @@ const routes = [
         isPrivate: false,
     },
     { path: '/diagram', component: DiagramPage, isPrivate: true },
+    { path: '/templates', component: TemplatesPage, isPrivate: true },
     { path: '*', component: NotFoundPage, isPrivate: false },
 ];
 

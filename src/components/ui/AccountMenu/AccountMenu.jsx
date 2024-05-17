@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Logout, Settings } from '@mui/icons-material';
+import { DescriptionOutlined, Logout, TuneOutlined } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 
 import {
@@ -72,10 +72,18 @@ const AccountMenu = ({ user = {} }) => {
 
                 <Divider sx={{ bgcolor: 'secondary.main', opacity: 1, my: 1 }} />
 
+                <Link to="/templates" underline="none">
+                    <MenuItem onClick={handleCloseUserMenu}>
+                        <ListItemIcon>
+                            <DescriptionOutlined color="black" fontSize="small" />
+                        </ListItemIcon>
+                        Шаблони
+                    </MenuItem>
+                </Link>
                 <Link to="/profile" underline="none">
                     <MenuItem onClick={handleCloseUserMenu}>
                         <ListItemIcon>
-                            <Settings color="black" fontSize="small" />
+                            <TuneOutlined color="black" fontSize="small" />
                         </ListItemIcon>
                         Налаштування
                     </MenuItem>
