@@ -1,8 +1,9 @@
+import { loginUrl, logoutUrl, registerUrl } from 'src/core/config/endpoints';
 import { $api } from 'src/core/http';
 
 export const signupRequest = async (username, email, password) => {
     try {
-        const response = await $api.post('/auth/register', { username, email, password });
+        const response = await $api.post(registerUrl, { username, email, password });
         return response.data;
     } catch (error) {
         throw error.response;
@@ -11,7 +12,7 @@ export const signupRequest = async (username, email, password) => {
 
 export const loginRequest = async (email, password) => {
     try {
-        const response = await $api.post('/auth/login', { email, password });
+        const response = await $api.post(loginUrl, { email, password });
         return response.data;
     } catch (error) {
         throw error.response;
@@ -20,7 +21,7 @@ export const loginRequest = async (email, password) => {
 
 export const logoutRequest = async () => {
     try {
-        const response = await $api.get('/auth/logout');
+        const response = await $api.get(logoutUrl);
         return response.data;
     } catch (error) {
         throw error.message;

@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-export const apiBase = 'https://optiflowbackend.azurewebsites.net';
-// export const apiBase = 'http://127.0.0.1:5000';
+import { refreshTokenUrl } from '../config/endpoints';
 
 export const $api = axios.create({
-    baseURL: apiBase,
     withCredentials: true,
 });
 
@@ -23,13 +21,13 @@ $api.interceptors.response.use(
         if (error.response.status == 401 && error.config && !error.config._isRetry) {
             originalRequest._isRetry = true;
             try {
-                const response = (await axios.get)(`${apiBase}/auth/refresh`, {
+                const response = await axios.get(refreshTokenUrl, {
                     withCredentials: true,
                 });
                 localStorage.setItem('token', response.data.accessToken);
                 return $api.request(originalRequest);
             } catch (e) {
-                console.log('НЕ АВТОРИЗОВАН');
+                console.log('НЕ АВТОРИЗОВАНИЙ КОРИСТУВАЧ!');
             }
         }
         throw error;

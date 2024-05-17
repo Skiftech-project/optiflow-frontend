@@ -1,3 +1,9 @@
+import {
+    forgotPasswordUrl,
+    restorePasswordUrl,
+    updatePasswordUrl,
+    updateUserDataUrl,
+} from 'src/core/config/endpoints';
 import { $api } from 'src/core/http';
 
 export const updateUsernameEmailRequest = async (username, email) => {
@@ -6,7 +12,7 @@ export const updateUsernameEmailRequest = async (username, email) => {
             username: username,
             email: email,
         };
-        const response = await $api.put('/auth/updateProfile', data);
+        const response = await $api.put(updateUserDataUrl, data);
         return response.data;
     } catch (error) {
         throw error.response;
@@ -19,7 +25,7 @@ export const updatePasswordRequest = async (newPassword, oldPassword) => {
             new_password: newPassword,
             old_password: oldPassword,
         };
-        const response = await $api.put('/auth/updateUserPassword', data);
+        const response = await $api.put(updatePasswordUrl, data);
         return response.data;
     } catch (error) {
         throw error.response;
@@ -31,7 +37,7 @@ export const forgotPasswordRequest = async email => {
         const data = {
             email: email,
         };
-        const response = await $api.post('/auth/sendResetEmail', data);
+        const response = await $api.post(forgotPasswordUrl, data);
         return response.data;
     } catch (error) {
         throw error.response;
@@ -43,7 +49,7 @@ export const restorePasswordRequest = async password => {
         const data = {
             password: password,
         };
-        const response = await $api.put('/auth/restorePassword', data);
+        const response = await $api.put(restorePasswordUrl, data);
         return response.data;
     } catch (error) {
         throw error.response;
