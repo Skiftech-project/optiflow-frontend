@@ -6,6 +6,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import RayPage from './RayPage';
 import SignInPage from './SignInPage';
 import SignUpPage from './SignUpPage';
+import TemplatesPage from './TemplatesPage';
 import RestorePasswordPage from './restorePasswordPage';
 
 export {
@@ -18,4 +19,5 @@ export {
     ForgotPasswordPage,
     DiagramPage,
     RestorePasswordPage,
+    TemplatesPage,
 };

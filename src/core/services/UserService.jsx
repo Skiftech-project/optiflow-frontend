@@ -40,9 +40,9 @@ const useUserService = () => {
 
         const response = updateUsernameEmailRequest(data.username, data.email)
             .then(data => {
-                localStorage.setItem('accessToken', data.tokens.access_token);
+                localStorage.setItem('accessToken', data.access_token);
 
-                const user = transformJwtPayload(data.tokens.access_token);
+                const user = transformJwtPayload(data.access_token);
 
                 dispatch(authFetched({ username: user.username, email: user.email }));
                 dispatch(userDataFetched());

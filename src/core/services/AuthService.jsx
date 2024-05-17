@@ -17,9 +17,9 @@ const useAuthService = () => {
 
         const response = loginRequest(email, password)
             .then(data => {
-                localStorage.setItem('accessToken', data.tokens.access_token);
+                localStorage.setItem('accessToken', data.access_token);
 
-                const user = transformJwtPayload(data.tokens.access_token);
+                const user = transformJwtPayload(data.access_token);
 
                 setIsAuth(true);
 
@@ -39,9 +39,9 @@ const useAuthService = () => {
 
         const response = signupRequest(username, email, password)
             .then(data => {
-                localStorage.setItem('accessToken', data.tokens.access_token);
+                localStorage.setItem('accessToken', data.access_token);
 
-                const user = transformJwtPayload(data.tokens.access_token);
+                const user = transformJwtPayload(data.access_token);
 
                 setIsAuth(true);
 
@@ -62,7 +62,6 @@ const useAuthService = () => {
         const response = logoutRequest()
             .then(() => {
                 localStorage.removeItem('accessToken');
-                localStorage.removeItem('refreshToken');
 
                 setIsAuth(false);
                 navigate('/');
