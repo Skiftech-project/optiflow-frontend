@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -15,9 +16,17 @@ import { Block, Button, ErrorMessage, InputPassword } from '../ui';
 
 const RestorePasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
+
+    useEffect(() => {
+        if (!token) {
+            localStorage.removeItem('accessToken');
+            navigate('/login'); // TODO: add modal window before sign up
+        }
+    }, [token]);
 
     const { dataLoadingStatus } = useSelector(state => state.restorePassword);
     const { restorePassword } = useUserService();
@@ -34,7 +43,7 @@ const RestorePasswordPage = () => {
     const { formState, handleSubmit } = methods;
 
     const handleFormSubmit = async data => {
-        localStorage.setItem('accessToken', token);
+        if (token) localStorage.setItem('accessToken', token);
         const response = await restorePassword(data.firstNewPassword);
 
         switch (response?.status) {
