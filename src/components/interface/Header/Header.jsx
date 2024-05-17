@@ -7,12 +7,8 @@ import { AppBar, Box, Container, Stack, Toolbar } from '@mui/material';
 
 import { AccountMenu, BurgerMenu, Logo } from 'src/components/ui';
 import { NavLink } from 'src/components/ui';
+import { pages } from 'src/core/constants';
 import { AuthContext } from 'src/core/context/authContext';
-
-const pages = [
-    { text: 'Калькулятор', path: '/calculator' },
-    { text: 'Візуалізація проміню', path: '/ray' },
-];
 
 const styleConfig = {
     logo: {

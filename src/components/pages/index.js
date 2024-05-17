@@ -1,4 +1,5 @@
 import CalculatorPage from './CalculatorPage';
+import DiagramPage from './DiagramPage';
 import ForgotPasswordPage from './ForgotPasswordPage';
 import MainPage from './MainPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
@@ -15,5 +16,6 @@ export {
     SignInPage,
     SignUpPage,
     ForgotPasswordPage,
+    DiagramPage,
     RestorePasswordPage,
 };

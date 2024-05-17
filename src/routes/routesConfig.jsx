@@ -5,6 +5,7 @@ const MainPage = lazy(() => import('src/components/pages/MainPage'));
 const CalculatorPage = lazy(() => import('src/components/pages/CalculatorPage'));
 const ProfilePage = lazy(() => import('src/components/pages/ProfilePage'));
 const RayPage = lazy(() => import('src/components/pages/RayPage'));
+const DiagramPage = lazy(() => import('src/components/pages/DiagramPage'));
 const SignInPage = lazy(() => import('src/components/pages/SignInPage'));
 const SignUpPage = lazy(() => import('src/components/pages/SignUpPage'));
 const NotFoundPage = lazy(() => import('src/components/pages/NotFoundPage/NotFoundPage'));
@@ -26,6 +27,7 @@ const routes = [
         component: RestorePasswordPage,
         isPrivate: false,
     },
+    { path: '/diagram', component: DiagramPage, isPrivate: true },
     { path: '*', component: NotFoundPage, isPrivate: false },
 ];
 
