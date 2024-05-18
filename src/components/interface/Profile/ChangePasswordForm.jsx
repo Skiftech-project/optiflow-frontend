@@ -12,7 +12,6 @@ import { validationSchemaUpdatePassword } from 'src/core/shemes';
 
 const ChangePasswordForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const [isPasswordsDisabled, setIsPasswordsDisabled] = useState(true);
     const { dataLoadingStatus } = useSelector(state => state.password);
     const { updatePassword } = useUserService();
 
@@ -37,7 +36,6 @@ const ChangePasswordForm = () => {
             default:
                 setErrorMessage('');
                 methods.reset();
-                setIsPasswordsDisabled(true);
         }
     };
 
@@ -48,28 +46,15 @@ const ChangePasswordForm = () => {
                     id="oldPassword"
                     name="oldPassword"
                     label="Старий пароль"
-                    disabled={isPasswordsDisabled}
                 />
 
-                <InputPassword
-                    id="newPassword"
-                    name="newPassword"
-                    label="Новий пароль"
-                    disabled={isPasswordsDisabled}
-                />
+                <InputPassword id="newPassword" name="newPassword" label="Новий пароль" />
 
                 {errorMessage.trim() == 0 ? null : (
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
 
                 <Stack direction="row" gap="20px">
-                    <Button
-                        variant="outlined"
-                        color="primary"
-                        onClick={() => setIsPasswordsDisabled(false)}
-                    >
-                        Змінити пароль
-                    </Button>
                     <Button
                         disabled={!formState.isValid}
                         type="submit"
