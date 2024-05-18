@@ -26,7 +26,7 @@ import './AccountMenu.css';
 const AccountMenu = ({ user = {} }) => {
     const [anchorElUser, setAnchorElUser] = useState(null);
     const { logout } = useAuthService();
-    const { dataLoadingStatus } = useSelector(state => state.auth);
+    const { dataLoadingStatus } = useSelector(state => state.logout);
 
     const handleOpenUserMenu = event => {
         setAnchorElUser(event.currentTarget);

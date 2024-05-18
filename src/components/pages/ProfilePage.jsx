@@ -7,7 +7,7 @@ import { skiftech } from 'src/assets';
 import { ChangePasswordForm, ChangeUserDataForm, Header } from '../interface';
 
 const ProfilePage = () => {
-    const { data } = useSelector(state => state.auth);
+    const { data } = useSelector(state => state.userData);
 
     return (
         <>

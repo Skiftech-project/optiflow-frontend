@@ -16,7 +16,7 @@ import { validationSchemaRegistration } from 'src/core/shemes';
 
 const SignUpForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const { dataLoadingStatus } = useSelector(state => state.auth);
+    const { dataLoadingStatus } = useSelector(state => state.signup);
     const { registration } = useAuthService();
     const theme = useTheme();
 

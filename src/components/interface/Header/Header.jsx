@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
@@ -8,7 +7,6 @@ import { AppBar, Box, Container, Stack, Toolbar } from '@mui/material';
 import { AccountMenu, BurgerMenu, Logo } from 'src/components/ui';
 import { NavLink } from 'src/components/ui';
 import { pages } from 'src/core/constants';
-import { AuthContext } from 'src/core/context/authContext';
 
 const styleConfig = {
     logo: {
@@ -33,8 +31,8 @@ const Header = ({
     children,
     ...props
 }) => {
-    const { isAuth } = useContext(AuthContext);
-    const { data } = useSelector(state => state.auth);
+    const isAuth = useSelector(state => state.auth.isAuth);
+    const data = useSelector(state => state.userData.data);
 
     return (
         <AppBar

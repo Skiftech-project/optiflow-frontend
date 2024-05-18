@@ -15,7 +15,7 @@ import { validationSchemaLogin } from 'src/core/shemes';
 
 const SignInForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
-    const { dataLoadingStatus } = useSelector(state => state.auth);
+    const { dataLoadingStatus } = useSelector(state => state.login);
     const { login } = useAuthService();
     const theme = useTheme();
 
