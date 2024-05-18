@@ -1,19 +1,20 @@
-import { useContext } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { loginRequest, logoutRequest, signupRequest } from '../api';
-import { AuthContext } from '../context/authContext';
-import { authFetched, authFetching, authFetchingError } from '../store/actions';
+import { loginFetched, loginFetching, loginFetchingError } from '../store/actions';
+import { logoutFetched, logoutFetching, logoutFetchingError } from '../store/actions';
+import { signupFetched, signupFetching, signupFetchingError } from '../store/actions';
+import { setAuth } from '../store/actions';
+import { userDataFetched } from '../store/actions';
 import { transformJwtPayload } from '../utils';
 
 const useAuthService = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { setIsAuth } = useContext(AuthContext);
 
     const login = (email, password) => {
-        dispatch(authFetching());
+        dispatch(loginFetching());
 
         const response = loginRequest(email, password)
             .then(data => {
@@ -21,13 +22,19 @@ const useAuthService = () => {
 
                 const user = transformJwtPayload(data.access_token);
 
-                setIsAuth(true);
+                dispatch(loginFetched());
+                dispatch(
+                    userDataFetched({
+                        username: user.username,
+                        email: user.email,
+                    }),
+                );
+                dispatch(setAuth(true));
 
                 navigate('/calculator');
-                dispatch(authFetched({ username: user.username, email: user.email }));
             })
             .catch(error => {
-                dispatch(authFetchingError());
+                dispatch(loginFetchingError());
                 return error;
             });
 
@@ -35,7 +42,7 @@ const useAuthService = () => {
     };
 
     const registration = (username, email, password) => {
-        dispatch(authFetching());
+        dispatch(signupFetching());
 
         const response = signupRequest(username, email, password)
             .then(data => {
@@ -43,13 +50,19 @@ const useAuthService = () => {
 
                 const user = transformJwtPayload(data.access_token);
 
-                setIsAuth(true);
+                dispatch(signupFetched());
+                dispatch(
+                    userDataFetched({
+                        username: user.username,
+                        email: user.email,
+                    }),
+                );
+                dispatch(setAuth(true));
 
                 navigate('/calculator');
-                dispatch(authFetched({ username: user.username, email: user.email }));
             })
             .catch(error => {
-                dispatch(authFetchingError());
+                dispatch(signupFetchingError());
                 return error;
             });
 
@@ -57,17 +70,22 @@ const useAuthService = () => {
     };
 
     const logout = () => {
-        dispatch(authFetching());
+        dispatch(logoutFetching());
 
         const response = logoutRequest()
             .then(() => {
                 localStorage.removeItem('accessToken');
 
-                setIsAuth(false);
+                dispatch(logoutFetched());
+                dispatch(userDataFetched(null));
+                dispatch(setAuth(false));
+
                 navigate('/');
-                dispatch(authFetched());
             })
-            .catch(() => dispatch(authFetchingError()));
+            .catch(error => {
+                dispatch(logoutFetchingError());
+                return error;
+            });
 
         return response;
     };

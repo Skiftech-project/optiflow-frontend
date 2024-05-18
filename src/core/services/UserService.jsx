@@ -7,7 +7,6 @@ import {
     updatePasswordRequest,
     updateUsernameEmailRequest,
 } from '../api';
-import { authFetched, authFetching, authFetchingError } from '../store/actions';
 import {
     userDataFetched,
     userDataFetching,
@@ -35,7 +34,6 @@ const useUserService = () => {
     const navigate = useNavigate();
 
     const updateUsernameEmail = data => {
-        dispatch(authFetching());
         dispatch(userDataFetching());
 
         const response = updateUsernameEmailRequest(data.username, data.email)
@@ -44,11 +42,14 @@ const useUserService = () => {
 
                 const user = transformJwtPayload(data.access_token);
 
-                dispatch(authFetched({ username: user.username, email: user.email }));
-                dispatch(userDataFetched());
+                dispatch(
+                    userDataFetched({
+                        username: user.username,
+                        email: user.email,
+                    }),
+                );
             })
             .catch(error => {
-                dispatch(authFetchingError());
                 dispatch(userDataFetchingError());
                 return error;
             });
