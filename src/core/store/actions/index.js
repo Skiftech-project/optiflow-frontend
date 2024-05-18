@@ -1,5 +1,10 @@
 export { calcFetching, calcFetched, calcFetchingError } from './calculations/calcActions';
-export { authFetched, authFetching, authFetchingError } from './auth/authActions';
+
+export { loginFetching, loginFetched, loginFetchingError } from './auth/loginActions';
+export { logoutFetching, logoutFetched, logoutFetchingError } from './auth/logoutActions';
+export { signupFetched, signupFetching, signupFetchingError } from './auth/signupActions';
+export { setAuth } from './auth/authActions';
+
 export {
     passwordFetched,
     passwordFetching,
