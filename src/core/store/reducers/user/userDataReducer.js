@@ -1,4 +1,5 @@
 const initialState = {
+    data: null,
     dataLoadingStatus: 'idle',
 };
 
@@ -10,11 +11,15 @@ export const userDataReducer = (state = initialState, action) => {
         case 'USERDATA_FETCHED':
             return {
                 ...state,
+                data: action.payload,
                 dataLoadingStatus: 'idle',
             };
 
         case 'USERDATA_FETCHING_ERROR':
-            return { ...state, dataLoadingStatus: 'error' };
+            return {
+                ...state,
+                dataLoadingStatus: 'error',
+            };
 
         default:
             return state;
