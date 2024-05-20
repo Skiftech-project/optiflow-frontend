@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
+// import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
@@ -17,7 +17,7 @@ import { Block, Button, ErrorMessage, InputPassword, ModalWindow } from '../ui';
 const RestorePasswordPage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
@@ -25,7 +25,8 @@ const RestorePasswordPage = () => {
     useEffect(() => {
         if (!token) {
             localStorage.removeItem('accessToken');
-            navigate('/login'); // TODO: add modal window before sign up
+            // navigate('/login'); // TODO: add modal window before sign up
+            setIsModalOpen(true);
         }
     }, [token]);
 
@@ -54,6 +55,7 @@ const RestorePasswordPage = () => {
             default:
                 methods.reset();
                 setErrorMessage('');
+                setIsModalOpen(true);
         }
     };
 
