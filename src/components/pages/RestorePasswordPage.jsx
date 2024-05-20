@@ -12,9 +12,10 @@ import { useUserService } from 'src/core/services';
 import { validationSchemaRestorePassword } from 'src/core/shemes';
 
 // import { Header } from '../interface';
-import { Block, Button, ErrorMessage, InputPassword } from '../ui';
+import { Block, Button, ErrorMessage, InputPassword, ModalWindow } from '../ui';
 
 const RestorePasswordPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
@@ -58,6 +59,16 @@ const RestorePasswordPage = () => {
 
     return (
         <FormProvider {...methods}>
+            <ModalWindow
+                open={isModalOpen}
+                title="Пароль успішно було змінено"
+                content="Для подальшої роботи, перейдіть на сторінку входу та увійдіть в свій акаунт"
+                onClose={() => setIsModalOpen(false)}
+            >
+                <Button link to="/login">
+                    Увійти в акаунт
+                </Button>
+            </ModalWindow>
             <Stack
                 height="100vh"
                 alignItems="center"

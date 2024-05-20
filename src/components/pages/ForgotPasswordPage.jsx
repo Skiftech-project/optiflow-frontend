@@ -12,9 +12,10 @@ import { useUserService } from 'src/core/services';
 import { validationSchemaEmail } from 'src/core/shemes';
 
 import { Header } from '../interface';
-import { Block, Button, ErrorMessage, Input } from '../ui';
+import { Block, Button, ErrorMessage, Input, ModalWindow } from '../ui';
 
 const ForgotPasswordPage = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const { dataLoadingStatus } = useSelector(state => state.forgotPassword);
     const { forgotPassword } = useUserService();
@@ -39,6 +40,7 @@ const ForgotPasswordPage = () => {
             default:
                 methods.reset();
                 setErrorMessage('');
+                setIsModalOpen(true);
         }
     };
 
@@ -52,6 +54,17 @@ const ForgotPasswordPage = () => {
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
                 <Header position="fixed" />
+
+                <ModalWindow
+                    open={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    title="Відновлення паролю"
+                    content="Перевірте пошту для відновлення пароля, та перейдіть за посиланням"
+                >
+                    <Button link to="/">
+                        Повернутися на головну
+                    </Button>
+                </ModalWindow>
 
                 <Block
                     padding="30px"
