@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-// import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
@@ -12,12 +12,11 @@ import { useUserService } from 'src/core/services';
 import { validationSchemaRestorePassword } from 'src/core/shemes';
 
 // import { Header } from '../interface';
-import { Block, Button, ErrorMessage, InputPassword, ModalWindow } from '../ui';
+import { Block, Button, ErrorMessage, InputPassword } from '../ui';
 
 const RestorePasswordPage = () => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
@@ -25,8 +24,7 @@ const RestorePasswordPage = () => {
     useEffect(() => {
         if (!token) {
             localStorage.removeItem('accessToken');
-            // navigate('/login'); // TODO: add modal window before sign up
-            setIsModalOpen(true);
+            navigate('/login');
         }
     }, [token]);
 
@@ -55,22 +53,11 @@ const RestorePasswordPage = () => {
             default:
                 methods.reset();
                 setErrorMessage('');
-                setIsModalOpen(true);
         }
     };
 
     return (
         <FormProvider {...methods}>
-            <ModalWindow
-                open={isModalOpen}
-                title="Пароль успішно було змінено"
-                content="Для подальшої роботи, перейдіть на сторінку входу та увійдіть в свій акаунт"
-                onClose={() => setIsModalOpen(false)}
-            >
-                <Button link to="/login">
-                    Увійти в акаунт
-                </Button>
-            </ModalWindow>
             <Stack
                 height="100vh"
                 alignItems="center"
