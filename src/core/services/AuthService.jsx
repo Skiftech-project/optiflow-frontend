@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { loginRequest, logoutRequest, signupRequest } from '../api';
+import { loginRequest, logoutRequest, refreshTokenRequest, signupRequest } from '../api';
 import { loginFetched, loginFetching, loginFetchingError } from '../store/actions';
 import { logoutFetched, logoutFetching, logoutFetchingError } from '../store/actions';
 import { signupFetched, signupFetching, signupFetchingError } from '../store/actions';
@@ -90,10 +90,33 @@ const useAuthService = () => {
         return response;
     };
 
+    const checkAuth = () => {
+        const response = refreshTokenRequest()
+            .then(data => {
+                localStorage.setItem('accessToken', data.access_token);
+                dispatch(setAuth(true));
+                const user = transformJwtPayload(data.access_token);
+
+                dispatch(signupFetched());
+                dispatch(
+                    userDataFetched({
+                        username: user.username,
+                        email: user.email,
+                    }),
+                );
+                dispatch(setAuth(true));
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        return response;
+    };
+
     return {
         login,
         registration,
         logout,
+        checkAuth,
     };
 };
 
