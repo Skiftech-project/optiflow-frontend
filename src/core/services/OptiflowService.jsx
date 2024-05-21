@@ -8,9 +8,13 @@ const useOptiflowService = () => {
 
     const calculateData = data => {
         dispatch(calcFetching());
-        basicCalculationsRequest(data)
+        const response = basicCalculationsRequest(data)
             .then(data => dispatch(calcFetched(data)))
-            .catch(() => dispatch(calcFetchingError()));
+            .catch(error => {
+                dispatch(calcFetchingError());
+                return error;
+            });
+        return response;
     };
 
     return {

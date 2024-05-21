@@ -1,22 +1,14 @@
 const initialState = {
-    data: null,
-    dataLoadingStatus: 'idle',
+    isAuth: false,
 };
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'AUTH_FETCHING':
-            return { ...state, dataLoadingStatus: 'loading' };
-
-        case 'AUTH_FETCHED':
+        case 'SET_AUTH':
             return {
                 ...state,
-                data: action.payload,
-                dataLoadingStatus: 'idle',
+                isAuth: action.payload,
             };
-
-        case 'AUTH_FETCHING_ERROR':
-            return { ...state, dataLoadingStatus: 'error' };
 
         default:
             return state;

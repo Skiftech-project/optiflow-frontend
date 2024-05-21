@@ -1,4 +1,9 @@
-export { signupRequest, loginRequest, logoutRequest } from './auth/auth';
+export {
+    signupRequest,
+    loginRequest,
+    logoutRequest,
+    refreshTokenRequest,
+} from './auth/auth';
 export {
     updateUsernameEmailRequest,
     updatePasswordRequest,

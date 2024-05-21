@@ -1,18 +1,6 @@
-export const authFetching = () => {
+export const setAuth = data => {
     return {
-        type: 'AUTH_FETCHING',
-    };
-};
-
-export const authFetched = data => {
-    return {
-        type: 'AUTH_FETCHED',
+        type: 'SET_AUTH',
         payload: data,
-    };
-};
-
-export const authFetchingError = () => {
-    return {
-        type: 'AUTH_FETCHING_ERROR',
     };
 };
