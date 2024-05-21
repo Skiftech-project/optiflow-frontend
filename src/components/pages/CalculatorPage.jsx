@@ -13,12 +13,10 @@ import { validationSchemaCalc } from 'src/core/shemes';
 import { FormBlock, Header } from '../interface';
 import { Block, Button, Table, TitleBlock } from '../ui';
 
-// !FIX: two 2d request outgoing from this component on first render after calculations button is clicked
 const CalculatorPage = () => {
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
-    console.log('CalcPage render');
 
     const methods = useForm({
         defaultValues: {
@@ -51,15 +49,13 @@ const CalculatorPage = () => {
         <FormProvider {...methods}>
             <Header />
             <Container maxWidth="xl" component="main">
-                <Stack
-                    sx={{ marginTop: '70px', marginBottom: '70px' }}
-                    direction="column"
-                    spacing={3}
-                >
+                <Stack direction="column" spacing={3} my={7}>
                     <TitleBlock block>
                         Калькулятор розсіяння зони випромінювання
                     </TitleBlock>
+
                     <FormBlock />
+
                     <TitleBlock block>Результати обчислень</TitleBlock>
 
                     <Block padding="30px">
