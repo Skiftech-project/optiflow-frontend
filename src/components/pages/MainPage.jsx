@@ -185,7 +185,7 @@ const CardItem = ({ title, text, picture, link }) => {
                     borderColor: 'secondary.main',
                 }}
                 image={picture}
-                title="green iguana"
+                title="service"
             />
 
             <CardContent
