@@ -20,3 +20,4 @@ export const restorePasswordUrl = apiBase + '/auth/restorePassword';
 // templates endpoints
 export const getAllTemplates = apiBase + '/templates/getUserSavedTemplates';
 export const saveTemplateEndpoint = apiBase + '/templates/saveTemplate';
+export const deleteTemplate = apiBase + '/templates/deleteTemplate';

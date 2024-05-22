@@ -15,7 +15,7 @@ const TemplatesPage = () => {
             const response = await getAllTemplates();
             if (response) setTemplates(response.templates);
 
-            if (response.status === 404) {
+            if (response?.status === 404) {
                 setTemplates('На жаль збережених шаблонів ще немає.');
             }
         };

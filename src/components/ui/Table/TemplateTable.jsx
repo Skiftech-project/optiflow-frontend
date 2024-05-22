@@ -12,7 +12,7 @@ import {
 
 const TemplateTable = ({ tableData = {} }) => {
     return (
-        <TableContainer>
+        <TableContainer sx={{ marginBottom: '20px' }}>
             <MuiTable size="small" aria-label="data table">
                 <TableHead>
                     <TableRow>

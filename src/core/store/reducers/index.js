@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 
 import { authReducer, loginReducer, logoutReducer, signupReducer } from './auth';
 import { calcReducer } from './calculations';
+import { deleteTemplateReducer } from './templateRedusers/deleteTemplateReducer';
 import { passwordReducer } from './user';
 import { userDataReducer } from './user';
 import { forgotPasswordReducer } from './user/forgotPasswordReducer';
@@ -28,6 +29,9 @@ const reducer = combineReducers({
 
     //restorePassword
     restorePassword: restorePasswordReducer,
+
+    //deleteTemplate
+    deleteTemplate: deleteTemplateReducer,
 });
 
 export default reducer;

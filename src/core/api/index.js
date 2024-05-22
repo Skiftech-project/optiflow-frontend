@@ -14,4 +14,8 @@ export {
 
 export { basicCalculationsRequest } from './calculations/calculations';
 
-export { getAllTemplatesRequest, saveTemplateRequest } from './templatesApi/template';
+export {
+    getAllTemplatesRequest,
+    saveTemplateRequest,
+    deleteTemplateRequest,
+} from './templatesApi/template';

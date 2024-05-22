@@ -1,15 +1,26 @@
+import { useSelector } from 'react-redux';
+
 import PropTypes from 'prop-types';
 
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+import { Button } from 'src/components/ui';
 import TemplateTable from 'src/components/ui/Table/TemplateTable';
+import { useTemplateService } from 'src/core/services';
 
 const TemplateBlock = ({ title, calcType, tableData = {} }) => {
+    const { dataLoadingStatus } = useSelector(state => state.deleteTemplate);
+    const { deleteTemplate } = useTemplateService();
+
+    const deleteTemplateHandler = async () => {
+        deleteTemplate(tableData.id);
+    };
+
     return (
         <Box width="90%">
             <Accordion square>
@@ -27,6 +38,15 @@ const TemplateBlock = ({ title, calcType, tableData = {} }) => {
                 </AccordionSummary>
                 <AccordionDetails sx={{ backgroundColor: '#FFCCCF' }}>
                     <TemplateTable tableData={tableData} />
+
+                    <Stack direction="column" alignItems="start">
+                        <Button
+                            loading={dataLoadingStatus === 'loading'}
+                            onClick={deleteTemplateHandler}
+                        >
+                            Видалити шаблон
+                        </Button>
+                    </Stack>
                 </AccordionDetails>
             </Accordion>
         </Box>

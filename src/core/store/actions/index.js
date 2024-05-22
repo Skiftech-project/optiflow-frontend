@@ -28,3 +28,9 @@ export {
     restorePasswordFetching,
     restorePasswordFetchingError,
 } from './user/restorePasswordAction';
+
+export {
+    deleteTemplateFetched,
+    deleteTemplateFetching,
+    deleteTemplateFetchingError,
+} from './templateActions/deleteTemplateAction';
