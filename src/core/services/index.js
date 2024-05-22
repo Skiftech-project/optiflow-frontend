@@ -1,6 +1,6 @@
 import useAuthService from './AuthService';
 import useOptiflowService from './OptiflowService';
-import createIntersectionMesh from './RayModelingService';
+import RayModelingService from './RayModelingService';
 import useSaveToFileService from './SaveToFileService';
 import useUserService from './UserService';
 
@@ -9,5 +9,5 @@ export {
     useAuthService,
     useSaveToFileService,
     useUserService,
-    createIntersectionMesh,
+    RayModelingService,
 };

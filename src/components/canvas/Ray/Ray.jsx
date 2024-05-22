@@ -7,7 +7,7 @@ import { Canvas } from '@react-three/fiber';
 import PropTypes from 'prop-types';
 
 import { Spinner } from 'src/components/ui';
-import { createIntersectionMesh } from 'src/core/services';
+import { RayModelingService } from 'src/core/services';
 
 const Camera = () => {
     const { maxDistance } = useSelector(state => state.calc.calculations);
@@ -29,7 +29,7 @@ const Ray = ({ wireframe }) => {
     const [mesh, setMesh] = useState(null);
 
     useEffect(() => {
-        setMesh(createIntersectionMesh(calcs, 'rectangle'));
+        setMesh(RayModelingService.createIntersectionMesh(calcs, 'rectangle'));
     }, [calcs]);
 
     return (
