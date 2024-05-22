@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { Box, Stack } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
@@ -29,14 +29,15 @@ const TemplateBlock = ({ title, calcType, tableData = {} }) => {
                     aria-controls="panel1-content"
                     id="panel1-header"
                     sx={{
-                        backgroundColor: '#FF999E',
+                        backgroundColor: '#A8C2F0',
                         margin: 0,
-                        fontSize: '22px',
                     }}
                 >
-                    {title} ({calcType})
+                    <Typography fontSize="22px">
+                        {title} ({calcType})
+                    </Typography>
                 </AccordionSummary>
-                <AccordionDetails sx={{ backgroundColor: '#FFCCCF' }}>
+                <AccordionDetails sx={{ backgroundColor: '#FFF' }}>
                     <TemplateTable tableData={tableData} />
 
                     <Stack direction="column" alignItems="start">
