@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { CSG } from 'three-csg-ts';
 
+//TODO: rewrite using class
 const createCone = (xRadius, yRadius, maxDistance) => {
     const coneRadius = Math.max(xRadius, yRadius);
     let coneGeometry = new THREE.ConeGeometry(coneRadius, maxDistance, 32);
