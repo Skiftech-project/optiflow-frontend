@@ -1,10 +1,14 @@
+import { RayCanvas } from '../canvas';
 import { Header } from '../interface';
+import { ErrorBoundary } from '../ui';
 
 const RayPage = () => {
     return (
         <>
             <Header />
-            <div>3d ray page</div>
+            <ErrorBoundary>
+                <RayCanvas />
+            </ErrorBoundary>
         </>
     );
 };
