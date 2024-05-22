@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
@@ -8,13 +9,19 @@ import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 import DownloadIcon from '@mui/icons-material/Download';
 
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
+import { useTemplateService } from 'src/core/services';
 import { validationSchemaCalc } from 'src/core/shemes';
 
 import { FormBlock, Header } from '../interface';
-import { Block, Button, Table, TitleBlock } from '../ui';
+import { Block, Button, Input, ModalWindow, Table, TitleBlock } from '../ui';
 
 // !FIX: two 2d request outgoing from this component on first render after calculations button is clicked
 const CalculatorPage = () => {
+    const [isDisabledSaveTemplateBtn, setIsDisabledSaveTemplateBtn] = useState(true);
+    const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
+    const [currentUserRequest, setCurrentUserRequest] = useState({});
+    const { saveTemplate } = useTemplateService();
+
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
@@ -37,8 +44,39 @@ const CalculatorPage = () => {
         mode: 'all',
     });
 
-    const handleSubmit = data => {
-        calculateData(data);
+    const templateMethods = useForm({
+        defaultValues: {
+            templateName: '',
+        },
+    });
+
+    const handleSubmit = async data => {
+        setCurrentUserRequest(data);
+        const response = await calculateData(data);
+        if (response) setIsDisabledSaveTemplateBtn(false);
+    };
+
+    const saveTemplateHandler = data => {
+        const request = {
+            angle_height: currentUserRequest.angleHeight,
+            angle_width: currentUserRequest.angleWidth,
+            calculator_type: 'calculator',
+            distance: currentUserRequest.distance,
+            distance_for_plume_size: currentUserRequest.distanceModuleThird,
+            max_distance: calculations.max_distance,
+            min_distance: calculations.min_distance,
+            min_plume_size: currentUserRequest.minPlumeSize,
+            plume_form: currentUserRequest.plumeForm,
+            plume_height_module3: calculations.plume_height_module3,
+            plume_width_module3: calculations.plume_width_module3,
+            power: currentUserRequest.power,
+            sensitivity: currentUserRequest.sensitivity,
+            spot_height: currentUserRequest.spotHeight,
+            spot_width: currentUserRequest.spotWidth,
+            title: data.templateName,
+        };
+
+        saveTemplate(request);
     };
 
     const tooltipText = !calculations ? null : (
@@ -49,6 +87,33 @@ const CalculatorPage = () => {
 
     return (
         <FormProvider {...methods}>
+            <ModalWindow
+                open={isModalWindowOpen}
+                onClose={() => {
+                    setIsModalWindowOpen(false);
+                }}
+                title="Назвіть ваш шаблон"
+            >
+                <FormProvider {...templateMethods}>
+                    <Stack component="form">
+                        <Input
+                            name="templateName"
+                            id="templateName"
+                            fullWidth
+                            label="Назва шаблону:"
+                            type="string"
+                            size="medium"
+                            // startAdornment={<AccountCircleOutlinedIcon />}
+                        />
+                        <Button
+                            onClick={templateMethods.handleSubmit(saveTemplateHandler)}
+                        >
+                            Зберегти
+                        </Button>
+                    </Stack>
+                </FormProvider>
+            </ModalWindow>
+
             <Header />
             <Container maxWidth="xl" component="main">
                 <Stack
@@ -74,14 +139,26 @@ const CalculatorPage = () => {
                             justifyContent="space-between"
                             alignItems="center"
                         >
-                            <Button
-                                disabled={!methods.formState.isValid}
-                                loading={calculationsLoadingStatus === 'loading'}
-                                onClick={methods.handleSubmit(handleSubmit)}
-                                color="primary"
-                            >
-                                Розрахувати
-                            </Button>
+                            <Stack direction="row" alignItems="center" gap={3}>
+                                <Button
+                                    disabled={!methods.formState.isValid}
+                                    loading={calculationsLoadingStatus === 'loading'}
+                                    onClick={methods.handleSubmit(handleSubmit)}
+                                    color="primary"
+                                >
+                                    Розрахувати
+                                </Button>
+
+                                <Button
+                                    disabled={isDisabledSaveTemplateBtn}
+                                    onClick={() => {
+                                        setIsModalWindowOpen(true);
+                                    }}
+                                    color="secondary"
+                                >
+                                    Зберегти в шаблони
+                                </Button>
+                            </Stack>
 
                             <Tooltip title={tooltipText}>
                                 <span>

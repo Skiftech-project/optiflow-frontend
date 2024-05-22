@@ -1,4 +1,4 @@
-import { getAllTemplatesRequest } from '../api';
+import { getAllTemplatesRequest, saveTemplateRequest } from '../api';
 
 const useTemplateService = () => {
     const getAllTemplates = () => {
@@ -11,8 +11,21 @@ const useTemplateService = () => {
         return response;
     };
 
+    const saveTemplate = data => {
+        const response = saveTemplateRequest(data)
+            .then(data => {
+                return data;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        return response;
+    };
+
     return {
         getAllTemplates,
+        saveTemplate,
     };
 };
 
