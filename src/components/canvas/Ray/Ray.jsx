@@ -10,7 +10,8 @@ import { Spinner } from 'src/components/ui';
 import { createIntersectionMesh } from 'src/core/services';
 
 const Camera = () => {
-    const { max_distance } = useSelector(state => state.calc.calculations);
+    const { maxDistance } = useSelector(state => state.calc.calculations);
+    const cameraPosition = [maxDistance || 3, 0, maxDistance || 3];
     return (
         <PerspectiveCamera
             makeDefault
@@ -18,7 +19,7 @@ const Camera = () => {
             aspect={window.innerWidth / window.innerHeight}
             near={0.1}
             far={1000}
-            position={[max_distance, 0, max_distance]}
+            position={cameraPosition}
         />
     );
 };
@@ -28,17 +29,7 @@ const Ray = ({ wireframe }) => {
     const [mesh, setMesh] = useState(null);
 
     useEffect(() => {
-        setMesh(
-            createIntersectionMesh(
-                {
-                    maxDistance: calcs.max_distance,
-                    minDistance: calcs.min_distance,
-                    plumeHeight: calcs.plume_height_module3,
-                    plumeWidth: calcs.plume_width_module3,
-                },
-                'rectangle',
-            ),
-        );
+        setMesh(createIntersectionMesh(calcs, 'rectangle'));
     }, [calcs]);
 
     return (
