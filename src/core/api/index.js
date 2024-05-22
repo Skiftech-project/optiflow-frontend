@@ -10,6 +10,7 @@ export {
     updatePasswordRequest,
     restorePasswordRequest,
     forgotPasswordRequest,
+    deleteUserRequest,
 } from './user/user';
 
 export { basicCalculationsRequest } from './calculations/calculations';

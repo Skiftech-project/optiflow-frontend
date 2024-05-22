@@ -2,12 +2,16 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import {
+    deleteUserRequest,
     forgotPasswordRequest,
     restorePasswordRequest,
     updatePasswordRequest,
     updateUsernameEmailRequest,
 } from '../api';
 import {
+    deleteUserFetched,
+    deleteUserFetching,
+    deleteUserFetchingError,
     userDataFetched,
     userDataFetching,
     userDataFetchingError,
@@ -27,6 +31,7 @@ import {
     passwordFetching,
     passwordFetchingError,
 } from '../store/actions';
+import { setAuth } from '../store/actions';
 import { transformJwtPayload } from '../utils';
 
 const useUserService = () => {
@@ -106,11 +111,32 @@ const useUserService = () => {
         return response;
     };
 
+    const deleteUser = () => {
+        dispatch(deleteUserFetching());
+
+        const response = deleteUserRequest()
+            .then(data => {
+                localStorage.removeItem('accessToken');
+                dispatch(userDataFetched(null));
+                dispatch(setAuth(false));
+                dispatch(deleteUserFetched());
+                navigate('/');
+                return data;
+            })
+            .catch(error => {
+                deleteUserFetchingError();
+                throw error;
+            });
+
+        return response;
+    };
+
     return {
         updateUsernameEmail,
         updatePassword,
         forgotPassword,
         restorePassword,
+        deleteUser,
     };
 };
 

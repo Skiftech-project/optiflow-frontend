@@ -3,11 +3,15 @@ import { useSelector } from 'react-redux';
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 
 import { skiftech } from 'src/assets';
+import { useUserService } from 'src/core/services';
 
 import { ChangePasswordForm, ChangeUserDataForm, Header } from '../interface';
+import { Button } from '../ui';
 
 const ProfilePage = () => {
+    const { deleteUser } = useUserService();
     const { data } = useSelector(state => state.userData);
+    const { dataLoadingStatus } = useSelector(state => state.deleteUser);
 
     return (
         <>
@@ -49,11 +53,21 @@ const ProfilePage = () => {
                                 fontWeight: 'light',
                                 fontSize: '18px',
                                 color: '#6C6C6C',
+                                marginBottom: '30px',
                             }}
                         >
                             I’m web designer, I work in programs like figma, adobe
                             photoshop, adobe illustrator
                         </Typography>
+
+                        <Button
+                            loading={dataLoadingStatus === 'loading'}
+                            onClick={() => {
+                                deleteUser();
+                            }}
+                        >
+                            Видалити акаунт
+                        </Button>
                     </Box>
 
                     <Stack width="60%" gap={3}>
