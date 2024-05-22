@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import { useTemplateService } from 'src/core/services';
 
@@ -14,6 +14,10 @@ const TemplatesPage = () => {
         const fetchTemplates = async () => {
             const response = await getAllTemplates();
             if (response) setTemplates(response.templates);
+
+            if (response.status === 404) {
+                setTemplates('На жаль збережених шаблонів ще немає.');
+            }
         };
 
         fetchTemplates();
@@ -24,16 +28,20 @@ const TemplatesPage = () => {
             <Header sx={{ marginBottom: '65px' }} />
 
             <Stack direction="column" gap={5} alignItems="center">
-                {templates.map(item => {
-                    return (
-                        <TemplateBlock
-                            key={item.id}
-                            title={item.title}
-                            calcType={item.calculator_type}
-                            tableData={{ ...item }}
-                        ></TemplateBlock>
-                    );
-                })}
+                {Array.isArray(templates) ? (
+                    templates.map(item => {
+                        return (
+                            <TemplateBlock
+                                key={item.id}
+                                title={item.title}
+                                calcType={item.calculator_type}
+                                tableData={{ ...item }}
+                            ></TemplateBlock>
+                        );
+                    })
+                ) : (
+                    <Typography>{templates}</Typography>
+                )}
             </Stack>
         </div>
     );

@@ -57,6 +57,10 @@ const CalculatorPage = () => {
     };
 
     const saveTemplateHandler = data => {
+        console.log(data);
+        console.log(currentUserRequest);
+        console.log(calculations);
+
         const request = {
             angle_height: currentUserRequest.angleHeight,
             angle_width: currentUserRequest.angleWidth,
@@ -106,7 +110,10 @@ const CalculatorPage = () => {
                             // startAdornment={<AccountCircleOutlinedIcon />}
                         />
                         <Button
-                            onClick={templateMethods.handleSubmit(saveTemplateHandler)}
+                            onClick={templateMethods.handleSubmit(data => {
+                                setIsModalWindowOpen(false);
+                                saveTemplateHandler(data);
+                            })}
                         >
                             Зберегти
                         </Button>
