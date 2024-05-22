@@ -4,10 +4,14 @@ export {
     logoutRequest,
     refreshTokenRequest,
 } from './auth/auth';
+
 export {
     updateUsernameEmailRequest,
     updatePasswordRequest,
     restorePasswordRequest,
     forgotPasswordRequest,
 } from './user/user';
+
 export { basicCalculationsRequest } from './calculations/calculations';
+
+export { getAllTemplatesRequest } from './templatesApi/template';
