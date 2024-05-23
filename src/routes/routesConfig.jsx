@@ -19,7 +19,7 @@ const routes = [
     { path: '/', component: MainPage, isPrivate: false },
     { path: '/register', component: SignUpPage, isPrivate: false },
     { path: '/login', component: SignInPage, isPrivate: false },
-    { path: '/calculator', component: CalculatorPage, isPrivate: false },
+    { path: '/calculator', component: CalculatorPage, isPrivate: true },
     { path: '/profile', component: ProfilePage, isPrivate: true },
     { path: '/ray', component: RayPage, isPrivate: true },
     { path: '/login/forgotPassword', component: ForgotPasswordPage, isPrivate: false },
