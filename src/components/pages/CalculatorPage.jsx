@@ -1,14 +1,12 @@
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-
-import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/Download';
 
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
-import { validationSchemaCalc } from 'src/core/shemes';
 
 import { FormBlock, Header } from '../interface';
 import { Block, Button, Table, TitleBlock } from '../ui';
@@ -17,25 +15,25 @@ const CalculatorPage = () => {
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+    const [calcOption, setCalcOption] = useState(0);
 
     const methods = useForm({
         defaultValues: {
             plumeForm: 'ellipse',
-            distance: '',
-            spotHeight: '',
-            spotWidth: '',
-            angleWidth: '',
-            angleHeight: '',
-            sensitivity: '',
-            power: '',
-            minPlumeSize: '',
-            distanceModuleThird: '',
         },
-        resolver: yupResolver(validationSchemaCalc),
+
         mode: 'all',
     });
 
     const handleSubmit = data => {
+        if (calcOption === 1) {
+            delete data.spotWidth;
+            delete data.spotHeight;
+            delete data.distance;
+        } else if (calcOption === 0) {
+            delete data.angleWidth;
+            delete data.angleHeight;
+        }
         calculateData(data);
     };
 
@@ -54,7 +52,7 @@ const CalculatorPage = () => {
                         Калькулятор розсіяння зони випромінювання
                     </TitleBlock>
 
-                    <FormBlock />
+                    <FormBlock calcOption={calcOption} toggleCalcOption={setCalcOption} />
 
                     <TitleBlock block>Результати обчислень</TitleBlock>
 

@@ -10,8 +10,11 @@ import { Spinner } from 'src/components/ui';
 import { RayModelingService } from 'src/core/services';
 
 const Camera = () => {
-    const { maxDistance } = useSelector(state => state.calc.calculations);
+    const calcs = useSelector(state => state.calc.calculations);
+    const { maxDistance } = calcs ?? {};
+
     const cameraPosition = [maxDistance || 3, 0, maxDistance || 3];
+
     return (
         <PerspectiveCamera
             makeDefault
@@ -29,7 +32,7 @@ const Ray = ({ wireframe }) => {
     const [mesh, setMesh] = useState(null);
 
     useEffect(() => {
-        setMesh(RayModelingService.createIntersectionMesh(calcs, 'rectangle'));
+        setMesh(RayModelingService.createIntersectionMesh(calcs ?? {}));
     }, [calcs]);
 
     return (
@@ -42,7 +45,7 @@ const Ray = ({ wireframe }) => {
                     scale={mesh.scale}
                 >
                     {wireframe ? (
-                        <meshBasicMaterial wireframe color="#7CA4E9" />
+                        <meshNormalMaterial wireframe />
                     ) : (
                         <meshMatcapMaterial color="#7CA4E9" />
                     )}

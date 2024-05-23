@@ -1,5 +1,5 @@
 const initialState = {
-    calculations: {},
+    calculations: null,
     calculationsLoadingStatus: 'idle',
 };
 

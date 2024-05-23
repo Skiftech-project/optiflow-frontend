@@ -8,10 +8,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
 
+import { pattern } from 'src/assets';
 import { useUserService } from 'src/core/services';
 import { validationSchemaRestorePassword } from 'src/core/shemes';
+import { PatternBgStyles } from 'src/styles';
 
-// import { Header } from '../interface';
 import { Block, Button, ErrorMessage, InputPassword } from '../ui';
 
 const RestorePasswordPage = () => {
@@ -63,6 +64,7 @@ const RestorePasswordPage = () => {
                 alignItems="center"
                 justifyContent="center"
                 component="form"
+                sx={{ width: '100%', background: `url(${pattern})`, ...PatternBgStyles }}
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
                 {/* <Header position="fixed" /> */}
