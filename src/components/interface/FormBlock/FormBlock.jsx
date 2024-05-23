@@ -55,7 +55,7 @@ const FormBlock = ({ calcOption, toggleCalcOption }) => {
         distanceModuleThird,
     } = validationSchemaCalc;
 
-    const TempHandleChangeToggleBtn = newValue => {
+    const TempHandleChangeToggleBtn = (event, newValue) => {
         toggleCalcOption(newValue);
     };
 
