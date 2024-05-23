@@ -1,11 +1,10 @@
-import { useState } from 'react';
-
 import PropTypes from 'prop-types';
 
 import { Box, Grid, Tab, Tabs, Typography } from '@mui/material';
 
 import { Input, Select, TitleBlock } from 'src/components/ui';
 import { Block } from 'src/components/ui';
+import { validationSchemaCalc } from 'src/core/shemes';
 
 const inputStyles = {
     marginBottom: '17px',
@@ -43,11 +42,21 @@ function a11yProps(index) {
     };
 }
 
-const FormBlock = () => {
-    const [tabValue, setTabValue] = useState(0);
+const FormBlock = ({ calcOption, toggleCalcOption }) => {
+    const {
+        distance,
+        spotHeight,
+        spotWidth,
+        angleHeight,
+        angleWidth,
+        sensitivity,
+        power,
+        minPlumeSize,
+        distanceModuleThird,
+    } = validationSchemaCalc;
 
-    const TempHandleChangeToggleBtn = (event, newValue) => {
-        setTabValue(newValue);
+    const TempHandleChangeToggleBtn = newValue => {
+        toggleCalcOption(newValue);
     };
 
     return (
@@ -70,7 +79,7 @@ const FormBlock = () => {
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <Tabs
                                 centered
-                                value={tabValue}
+                                value={calcOption}
                                 onChange={TempHandleChangeToggleBtn}
                                 aria-label="basic tabs example"
                                 sx={{ padding: 0 }}
@@ -80,50 +89,68 @@ const FormBlock = () => {
                             </Tabs>
                         </Box>
 
-                        <CustomTabPanel value={tabValue} index={0}>
-                            <Input
-                                name="distance"
-                                id="distance"
-                                fullWidth
-                                label="Відстань:"
-                                adornment="м"
-                                sx={inputStyles}
-                            />
-                            <Input
-                                name="spotHeight"
-                                id="spotHeight"
-                                fullWidth
-                                label="Висота плями:"
-                                adornment="м"
-                                sx={inputStyles}
-                            />
-                            <Input
-                                name="spotWidth"
-                                id="spotWidth"
-                                fullWidth
-                                label="Ширина плями:"
-                                adornment="м"
-                                sx={inputStyles}
-                            />
+                        <CustomTabPanel value={calcOption} index={0}>
+                            {calcOption === 0 ? (
+                                <>
+                                    <Input
+                                        name="distance"
+                                        id="distance"
+                                        fullWidth
+                                        label="Відстань:"
+                                        adornment="м"
+                                        sx={inputStyles}
+                                        validation={distance}
+                                        defaultValue=""
+                                    />
+                                    <Input
+                                        name="spotHeight"
+                                        id="spotHeight"
+                                        fullWidth
+                                        label="Висота плями:"
+                                        adornment="м"
+                                        sx={inputStyles}
+                                        validation={spotHeight}
+                                        defaultValue=""
+                                    />
+                                    <Input
+                                        name="spotWidth"
+                                        id="spotWidth"
+                                        fullWidth
+                                        label="Ширина плями:"
+                                        adornment="м"
+                                        sx={inputStyles}
+                                        validation={spotWidth}
+                                        defaultValue=""
+                                    />
+                                </>
+                            ) : null}
                         </CustomTabPanel>
 
-                        <CustomTabPanel value={tabValue} index={1}>
-                            <Input
-                                name="angleWidth"
-                                id="angleWidth"
-                                fullWidth
-                                label="Кут ширини:"
-                                adornment="(°)"
-                                sx={inputStyles}
-                            />
-                            <Input
-                                name="angleHeight"
-                                id="angleHeight"
-                                fullWidth
-                                label="Кут висоти:"
-                                adornment="(°)"
-                                sx={inputStyles}
-                            />
+                        <CustomTabPanel value={calcOption} index={1}>
+                            {calcOption === 1 ? (
+                                <>
+                                    <Input
+                                        name="angleWidth"
+                                        id="angleWidth"
+                                        fullWidth
+                                        label="Кут ширини:"
+                                        adornment="(°)"
+                                        sx={inputStyles}
+                                        validation={angleWidth}
+                                        defaultValue=""
+                                    />
+                                    <Input
+                                        name="angleHeight"
+                                        id="angleHeight"
+                                        fullWidth
+                                        label="Кут висоти:"
+                                        adornment="(°)"
+                                        sx={inputStyles}
+                                        validation={angleHeight}
+                                        defaultValue=""
+                                    />
+                                </>
+                            ) : null}
                         </CustomTabPanel>
                     </Block>
                 </Grid>
@@ -142,6 +169,8 @@ const FormBlock = () => {
                                 label="Чутливість:"
                                 adornment="(мВт/м²)"
                                 sx={inputStyles}
+                                validation={sensitivity}
+                                defaultValue=""
                             />
                             <Input
                                 name="power"
@@ -149,6 +178,8 @@ const FormBlock = () => {
                                 fullWidth
                                 label="Потужність:"
                                 adornment="мВт"
+                                validation={power}
+                                defaultValue=""
                             />
                         </Block>
                     </Grid>
@@ -165,6 +196,8 @@ const FormBlock = () => {
                                 label="Мінімальний розмір плями:"
                                 adornment="м"
                                 sx={inputStyles}
+                                validation={minPlumeSize}
+                                defaultValue=""
                             />
                             <Input
                                 name="distanceModuleThird"
@@ -173,6 +206,8 @@ const FormBlock = () => {
                                 label="Дистанція для розрахунку розмірів плями:"
                                 adornment="м"
                                 sx={inputStyles}
+                                validation={distanceModuleThird}
+                                defaultValue=""
                             />
                         </Block>
                     </Grid>
@@ -180,6 +215,11 @@ const FormBlock = () => {
             </Grid>
         </section>
     );
+};
+
+FormBlock.propTypes = {
+    calcOption: PropTypes.number.isRequired,
+    toggleCalcOption: PropTypes.func.isRequired,
 };
 
 CustomTabPanel.propTypes = {
