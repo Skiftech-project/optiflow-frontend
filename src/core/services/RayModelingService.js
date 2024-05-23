@@ -79,7 +79,7 @@ export default class RayModelingService {
         return interRes;
     };
 
-    static createIntersectionMesh = (data, shapeType = 'ellipse') => {
+    static createIntersectionMesh = (data = {}, shapeType = 'ellipse') => {
         const { maxDistance, minDistance, plumeHeight, plumeWidth } = data;
         let baseShape = undefined;
 
