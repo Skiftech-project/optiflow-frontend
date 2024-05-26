@@ -4,6 +4,7 @@ export { loginFetching, loginFetched, loginFetchingError } from './auth/loginAct
 export { logoutFetching, logoutFetched, logoutFetchingError } from './auth/logoutActions';
 export { signupFetched, signupFetching, signupFetchingError } from './auth/signupActions';
 export { setAuth } from './auth/authActions';
+export { setCalcValues } from './calculations/calcValuesActions';
 
 export {
     passwordFetched,
@@ -34,6 +35,12 @@ export {
     deleteTemplateFetching,
     deleteTemplateFetchingError,
 } from './templateActions/deleteTemplateAction';
+
+export {
+    getTemplatesFetched,
+    getTemplatesFetching,
+    getTemplatesFetchingError,
+} from './templateActions/getTemplatesActions';
 
 export {
     deleteUserFetched,

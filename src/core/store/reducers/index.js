@@ -2,7 +2,9 @@ import { combineReducers } from 'redux';
 
 import { authReducer, loginReducer, logoutReducer, signupReducer } from './auth';
 import { calcReducer } from './calculations';
+import { calcValuesReducer } from './calculations';
 import { deleteTemplateReducer } from './templateRedusers/deleteTemplateReducer';
+import { getTemplatesReducer } from './templateRedusers/getTemplatesReducer';
 import { passwordReducer } from './user';
 import { userDataReducer } from './user';
 import { deleteUserReducer } from './user/deleteUserReducer';
@@ -16,26 +18,22 @@ const reducer = combineReducers({
     signup: signupReducer,
     auth: authReducer,
 
-    //userData
+    //user
     userData: userDataReducer,
+    deleteUser: deleteUserReducer,
 
     //calc
     calc: calcReducer,
+    calcValues: calcValuesReducer,
 
     //password
     password: passwordReducer,
-
-    //forgotPassword
     forgotPassword: forgotPasswordReducer,
-
-    //restorePassword
     restorePassword: restorePasswordReducer,
 
-    //deleteTemplate
+    //templates
     deleteTemplate: deleteTemplateReducer,
-
-    //deleteUser
-    deleteUser: deleteUserReducer,
+    getTemplates: getTemplatesReducer,
 });
 
 export default reducer;
