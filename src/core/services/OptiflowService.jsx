@@ -9,24 +9,12 @@ const useOptiflowService = () => {
     const calculateData = data => {
         dispatch(calcFetching());
         const response = basicCalculationsRequest(data)
-            .then(data => dispatch(calcFetched(_transformCalcs(data))))
+            .then(data => dispatch(calcFetched(data)))
             .catch(error => {
                 dispatch(calcFetchingError());
                 return error;
             });
         return response;
-    };
-
-    const _transformCalcs = data => {
-        return {
-            angleHeight: data.angle_height,
-            angleWidth: data.angle_width,
-            maxDistance: data.max_distance,
-            minDistance: data.min_distance,
-            plumeForm: data.plumeForm,
-            plumeHeight: data.plume_height_module3,
-            plumeWidth: data.plume_width_module3,
-        };
     };
 
     return {
