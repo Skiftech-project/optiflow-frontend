@@ -48,19 +48,19 @@ const Table = ({ tableData = {}, loading = false, sx = {} }) => {
     const rows = useMemo(
         () => [
             { label: 'Геометрія променю', colspan: 2 },
-            { label: 'Кут ширини', value: tableData?.angle_width || '-' },
-            { label: 'Кут висоти', value: tableData?.angle_height || '-' },
+            { label: 'Кут ширини', value: tableData?.angleWidth || '-' },
+            { label: 'Кут висоти', value: tableData?.angleHeight || '-' },
             {
                 label: 'Лінійні розміри перерізу області передачі даних на заданій дистанції',
                 colspan: 2,
             },
-            { label: 'Ширина плями', value: tableData?.plume_width_module3 || '-' },
-            { label: 'Висота плями', value: tableData?.plume_height_module3 || '-' },
+            { label: 'Ширина плями', value: tableData?.plumeWidth || '-' },
+            { label: 'Висота плями', value: tableData?.plumeHeight || '-' },
             { label: 'Інші розраховані значення', colspan: 2 },
-            { label: 'Мінімальна дистанція', value: tableData?.min_distance || '-' },
+            { label: 'Мінімальна дистанція', value: tableData?.minDistance || '-' },
             {
                 label: 'Максимальна гарантована дистанція передачі даних',
-                value: tableData?.max_distance || '-',
+                value: tableData?.maxDistance || '-',
             },
         ],
         [tableData],

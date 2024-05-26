@@ -6,3 +6,9 @@ export const FormStyle = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
 };
+
+export const PatternBgStyles = {
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+};

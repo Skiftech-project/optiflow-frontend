@@ -13,14 +13,17 @@ const Input = ({
     startAdornment = null,
     onStartAdornmentClick = null,
     adornmentOnClick = null,
+    defaultValue = undefined,
     label = 'Label text',
     size = 'small',
+    validation = {},
     ...props
 }) => {
     const theme = useTheme();
     const {
         formState: { errors },
     } = useFormContext();
+    const { required, pattern, maxLength, minLength, validate } = validation;
 
     const inputProps = useMemo(
         () => ({
@@ -38,9 +41,31 @@ const Input = ({
         [adornment, adornmentOnClick, startAdornment, onStartAdornmentClick],
     );
 
+    const rules = useMemo(
+        () => ({
+            required: required && "Обов'язкове поле!",
+            pattern: pattern && {
+                value: pattern.value || pattern,
+                message: pattern.message || 'Поле не вірне',
+            },
+            maxLength: maxLength && {
+                value: maxLength.value || maxLength,
+                message: maxLength.message || `Поле дуже довге`,
+            },
+            minLength: minLength && {
+                value: minLength.value || minLength,
+                message: minLength.message || `Поле дуже коротке`,
+            },
+            validate: validate || false,
+        }),
+        [required, pattern, maxLength, minLength, validate],
+    );
+
     return (
         <Controller
             name={name}
+            rules={rules}
+            defaultValue={defaultValue}
             render={({ field }) => (
                 <View
                     theme={theme}
@@ -94,6 +119,8 @@ Input.propTypes = {
     adornmentOnClick: PropTypes.func,
     startAdornment: PropTypes.any,
     onStartAdornmentClick: PropTypes.func,
+    validation: PropTypes.object,
+    defaultValue: PropTypes.any,
 };
 
 export default Input;

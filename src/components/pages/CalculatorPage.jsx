@@ -2,20 +2,16 @@ import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-
 import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/Download';
 
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 import { useTemplateService } from 'src/core/services';
-import { validationSchemaCalc } from 'src/core/shemes';
 
 import { FormBlock, Header } from '../interface';
 import { Block, Button, Input, ModalWindow, Table, TitleBlock } from '../ui';
 
-// !FIX: two 2d request outgoing from this component on first render after calculations button is clicked
 const CalculatorPage = () => {
     const [isDisabledSaveTemplateBtn, setIsDisabledSaveTemplateBtn] = useState(true);
     const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
@@ -25,22 +21,13 @@ const CalculatorPage = () => {
     const { calculateData } = useOptiflowService();
     const { saveTableToMarkdownFile } = useSaveToFileService();
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
-    console.log('CalcPage render');
+    const [calcOption, setCalcOption] = useState(0);
 
     const methods = useForm({
         defaultValues: {
             plumeForm: 'ellipse',
-            distance: '',
-            spotHeight: '',
-            spotWidth: '',
-            angleWidth: '',
-            angleHeight: '',
-            sensitivity: '',
-            power: '',
-            minPlumeSize: '',
-            distanceModuleThird: '',
         },
-        resolver: yupResolver(validationSchemaCalc),
+
         mode: 'all',
     });
 
@@ -123,15 +110,13 @@ const CalculatorPage = () => {
 
             <Header />
             <Container maxWidth="xl" component="main">
-                <Stack
-                    sx={{ marginTop: '70px', marginBottom: '70px' }}
-                    direction="column"
-                    spacing={3}
-                >
+                <Stack direction="column" spacing={3} my={7}>
                     <TitleBlock block>
                         Калькулятор розсіяння зони випромінювання
                     </TitleBlock>
-                    <FormBlock />
+
+                    <FormBlock calcOption={calcOption} toggleCalcOption={setCalcOption} />
+
                     <TitleBlock block>Результати обчислень</TitleBlock>
 
                     <Block padding="30px">

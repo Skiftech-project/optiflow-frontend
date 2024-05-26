@@ -4,7 +4,6 @@ import { Avatar, Modal, Stack, Typography } from '@mui/material';
 
 import LockPersonIcon from '@mui/icons-material/LockPerson';
 
-import { pattern } from 'src/assets';
 import { Block } from 'src/components/ui';
 
 const ModalWindow = ({ open, onClose, title, content, children }) => {
@@ -17,11 +16,9 @@ const ModalWindow = ({ open, onClose, title, content, children }) => {
         >
             <Stack
                 sx={{
-                    width: '100%',
                     height: '100vh',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: `url(${pattern})`,
                 }}
             >
                 <Block
