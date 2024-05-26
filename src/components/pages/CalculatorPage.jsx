@@ -6,8 +6,11 @@ import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/Download';
 
-import { useOptiflowService, useSaveToFileService } from 'src/core/services';
-import { useTemplateService } from 'src/core/services';
+import {
+    useOptiflowService,
+    useSaveToFileService,
+    useTemplateService,
+} from 'src/core/services';
 
 import { FormBlock, Header } from '../interface';
 import { Block, Button, Input, ModalWindow, Table, TitleBlock } from '../ui';
@@ -38,6 +41,14 @@ const CalculatorPage = () => {
     });
 
     const handleSubmit = async data => {
+        if (calcOption === 1) {
+            delete data.spotWidth;
+            delete data.spotHeight;
+            delete data.distance;
+        } else if (calcOption === 0) {
+            delete data.angleWidth;
+            delete data.angleHeight;
+        }
         setCurrentUserRequest(data);
         const response = await calculateData(data);
         if (response) setIsDisabledSaveTemplateBtn(false);
