@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 import { RayCanvas } from '../canvas';
 import { Header } from '../interface';
-import { ErrorBoundary } from '../ui';
+import { ErrorBoundary, SideMenu } from '../ui';
 
 const RayPage = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -14,7 +14,6 @@ const RayPage = () => {
     const toggleMenu = state => () => {
         setMenuOpen(state);
     };
-    console.log(menuOpen);
 
     return (
         <>
@@ -24,11 +23,30 @@ const RayPage = () => {
                 sx={{
                     height: `calc(100vh - 64px)`,
                     paddingTop: '64px',
+                    position: 'relative',
                 }}
             >
-                <IconButton onClick={toggleMenu(true)}>
-                    <KeyboardDoubleArrowRightIcon fontSize="large" />
-                </IconButton>
+                <SideMenu open={menuOpen} onClose={toggleMenu(false)}></SideMenu>
+
+                <Tooltip
+                    title="Відкрити меню для розрахування променю "
+                    placement="bottom-end"
+                    arrow
+                >
+                    <IconButton
+                        onClick={toggleMenu(true)}
+                        size="small"
+                        edge="end"
+                        sx={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            marginLeft: 2,
+                            marginTop: 2,
+                        }}
+                    >
+                        <KeyboardDoubleArrowRightIcon fontSize="large" />
+                    </IconButton>
+                </Tooltip>
 
                 <ErrorBoundary>
                     <RayCanvas />
