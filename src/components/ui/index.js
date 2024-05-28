@@ -12,6 +12,7 @@ import Logo from './Logo/Logo';
 import ModalWindow from './ModalWindow/ModalWindow';
 import Preloader from './Preloader/Preloader';
 import Select from './Select/Select';
+import SideMenu from './SideMenu/SideMenu';
 import Spinner from './Spinner/Spinner';
 import Table from './Table/Table';
 import TitleBlock from './TitleBlock/TitleBlock';
@@ -34,4 +35,5 @@ export {
     ModalWindow,
     Logo,
     ErrorBoundary,
+    SideMenu,
 };
