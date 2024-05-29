@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
+import { DescriptionOutlined } from '@mui/icons-material';
+
 import { Container, IconButton, Stack, Tooltip } from '@mui/material';
 
 import DownloadIcon from '@mui/icons-material/Download';
@@ -105,7 +107,10 @@ const CalculatorPage = () => {
                             label="Назва шаблону:"
                             type="string"
                             size="medium"
-                            // startAdornment={<AccountCircleOutlinedIcon />}
+                            sx={{ marginBottom: '15px' }}
+                            startAdornment={
+                                <DescriptionOutlined color="black" fontSize="small" />
+                            }
                         />
                         <Button
                             onClick={templateMethods.handleSubmit(data => {
