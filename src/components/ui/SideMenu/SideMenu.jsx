@@ -5,18 +5,19 @@ import { Divider, IconButton, Paper, Stack, Typography } from '@mui/material';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 
 const menuStyles = {
-    width: 400,
+    width: 450,
     height: '100%',
     position: 'absolute',
     zIndex: '5',
     transition: '0.5s',
+    overflow: 'auto',
     p: 2,
 };
 
 const SideMenu = ({ open = false, onClose = null, children }) => {
     return (
         <Paper
-            variant="outlined"
+            elevation={4}
             sx={{
                 ...menuStyles,
                 transform: open ? 'translateX(0)' : 'translateX(-100%)',
@@ -35,7 +36,7 @@ const SideMenu = ({ open = false, onClose = null, children }) => {
                     <KeyboardDoubleArrowLeftIcon fontSize="large" />
                 </IconButton>
             </Stack>
-            <Divider sx={{ my: 1 }} />
+            <Divider sx={{ mb: 7, mt: 1 }} />
             {children}
         </Paper>
     );
