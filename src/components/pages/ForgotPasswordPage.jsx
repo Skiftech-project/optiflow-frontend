@@ -8,8 +8,10 @@ import { Stack, Typography } from '@mui/material';
 
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
+import { pattern } from 'src/assets';
 import { useUserService } from 'src/core/services';
 import { validationSchemaEmail } from 'src/core/shemes';
+import { PatternBgStyles } from 'src/styles';
 
 import { Header } from '../interface';
 import { Block, Button, ErrorMessage, Input, ModalWindow } from '../ui';
@@ -51,6 +53,7 @@ const ForgotPasswordPage = () => {
                 alignItems="center"
                 justifyContent="center"
                 component="form"
+                sx={{ width: '100%', background: `url(${pattern})`, ...PatternBgStyles }}
                 onSubmit={handleSubmit(handleFormSubmit)}
             >
                 <Header position="fixed" />

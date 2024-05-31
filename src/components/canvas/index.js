@@ -1,3 +1,3 @@
-import Ray from './Ray/Ray';
+import RayCanvas from './Ray/Ray';
 
-export { Ray };
+export { RayCanvas };

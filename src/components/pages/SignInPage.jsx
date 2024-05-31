@@ -6,6 +6,7 @@ import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 import { pattern } from 'src/assets';
 import { Block, Button, TitleBlock } from 'src/components/ui';
+import { PatternBgStyles } from 'src/styles';
 
 import { Header, SignInForm } from '../interface';
 
@@ -30,10 +31,8 @@ const SignInPage = () => {
                 sx={{
                     minHeight: '100vh',
                     backgroundImage: isMobile ? `url(${pattern})` : 'none',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
                     backgroundColor: theme.palette.white,
+                    ...PatternBgStyles,
                 }}
             >
                 <Grid
