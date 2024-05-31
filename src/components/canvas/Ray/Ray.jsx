@@ -6,7 +6,6 @@ import { OrbitControls, PerspectiveCamera, Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import PropTypes from 'prop-types';
 
-import { Spinner } from 'src/components/ui';
 import { RayModelingService } from 'src/core/services';
 
 const Camera = () => {
@@ -58,7 +57,7 @@ const Ray = ({ wireframe }) => {
 const RayCanvas = () => {
     return (
         <Canvas>
-            <Suspense fallback={<Spinner />}>
+            <Suspense>
                 <OrbitControls />
                 <Camera />
                 <Ray />
