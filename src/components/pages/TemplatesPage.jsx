@@ -26,7 +26,7 @@ const TemplatesPage = () => {
     return (
         <div>
             <Header sx={{ marginBottom: '65px' }} />
-
+{/* console.log(object); */}
             <Stack direction="column" gap={5} alignItems="center">
                 {Array.isArray(templates) ? (
                     templates.map(item => {
