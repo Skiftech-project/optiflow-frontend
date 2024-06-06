@@ -1,7 +1,12 @@
 import { useDispatch } from 'react-redux';
 
 import { basicCalculationsRequest } from '../api';
-import { calcFetched, calcFetching, calcFetchingError } from '../store/actions';
+import {
+    calcFetched,
+    calcFetching,
+    calcFetchingError,
+    setCalcValues,
+} from '../store/actions';
 
 const useOptiflowService = () => {
     const dispatch = useDispatch();
@@ -17,8 +22,13 @@ const useOptiflowService = () => {
         return response;
     };
 
+    const saveInputValues = data => {
+        dispatch(setCalcValues(data));
+    };
+
     return {
         calculateData,
+        saveInputValues,
     };
 };
 
