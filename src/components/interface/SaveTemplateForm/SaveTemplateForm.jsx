@@ -32,9 +32,10 @@ const SaveTemplateForm = ({ open, setOpen }) => {
                 setOpen(false);
             }}
             title="Назвіть ваш шаблон"
+            width="500"
         >
             <FormProvider {...methods}>
-                <Stack component="form">
+                <Stack component="form" sx={{ width: '100%' }}>
                     <Input
                         name="templateName"
                         id="templateName"
@@ -42,7 +43,7 @@ const SaveTemplateForm = ({ open, setOpen }) => {
                         label="Назва шаблону:"
                         type="string"
                         size="medium"
-                        sx={{ marginBottom: '15px' }}
+                        sx={{ marginBottom: '20px' }}
                         startAdornment={
                             <DescriptionOutlined color="black" fontSize="small" />
                         }
