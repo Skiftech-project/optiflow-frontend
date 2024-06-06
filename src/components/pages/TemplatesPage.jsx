@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Stack, Typography } from '@mui/material';
 
@@ -7,28 +9,21 @@ import { useTemplateService } from 'src/core/services';
 import { Header, TemplateBlock } from '../interface';
 
 const TemplatesPage = () => {
-    const [templates, setTemplates] = useState([]);
+    const { templates, errorMessage } = useSelector(state => state.getTemplates);
+
     const { getAllTemplates } = useTemplateService();
 
     useEffect(() => {
-        const fetchTemplates = async () => {
-            const response = await getAllTemplates();
-            if (response) setTemplates(response.templates);
-
-            if (response?.status === 404) {
-                setTemplates('На жаль збережених шаблонів ще немає.');
-            }
-        };
-
-        fetchTemplates();
-    }, [getAllTemplates]);
+        getAllTemplates();
+    }, []);
 
     return (
         <div>
             <Header sx={{ marginBottom: '65px' }} />
-{/* console.log(object); */}
             <Stack direction="column" gap={5} alignItems="center">
-                {Array.isArray(templates) ? (
+                {errorMessage ? (
+                    <Typography>{errorMessage}</Typography>
+                ) : (
                     templates.map(item => {
                         return (
                             <TemplateBlock
@@ -39,8 +34,6 @@ const TemplatesPage = () => {
                             ></TemplateBlock>
                         );
                     })
-                ) : (
-                    <Typography>{templates}</Typography>
                 )}
             </Stack>
         </div>

@@ -13,7 +13,7 @@ import { Button } from 'src/components/ui';
 import TemplateTable from 'src/components/ui/Table/TemplateTable';
 import { useTemplateService } from 'src/core/services';
 
-const TemplateBlock = ({ title, calcType, tableData = {} }) => {
+const TemplateBlock = ({ title, tableData = {} }) => {
     const { dataLoadingStatus } = useSelector(state => state.deleteTemplate);
     const { deleteTemplate } = useTemplateService();
 
@@ -34,7 +34,7 @@ const TemplateBlock = ({ title, calcType, tableData = {} }) => {
                     }}
                 >
                     <Typography fontSize="22px">
-                        {title} ({calcType})
+                        {title} ({tableData?.input_data.calculator_type})
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails sx={{ backgroundColor: '#FFF' }}>
@@ -56,7 +56,6 @@ const TemplateBlock = ({ title, calcType, tableData = {} }) => {
 
 TemplateBlock.propTypes = {
     title: PropTypes.string,
-    calcType: PropTypes.string,
     tableData: PropTypes.shape({
         calculator_type: PropTypes.string,
         user_id: PropTypes.string,

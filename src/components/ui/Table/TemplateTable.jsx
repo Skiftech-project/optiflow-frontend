@@ -9,8 +9,10 @@ import {
     TableRow,
     Typography,
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const TemplateTable = ({ tableData = {} }) => {
+    const { output_data, input_data } = tableData;
     return (
         <TableContainer sx={{ marginBottom: '20px' }}>
             <MuiTable size="small" aria-label="data table">
@@ -47,23 +49,50 @@ const TemplateTable = ({ tableData = {} }) => {
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Форма плями: {tableData.plume_form}</Typography>
+                            <Typography>
+                                Форма плями:{' '}
+                                <Highlighter>{input_data?.plume_form || '-'}</Highlighter>
+                            </Typography>
                         </TableCell>
                         <TableCell scope="row">
-                            <Typography>Кут ширини: {tableData.angle_width}</Typography>
+                            <Typography>
+                                Кут ширини:{' '}
+                                <Highlighter>
+                                    {output_data?.angle_width ??
+                                        input_data?.angle_width ??
+                                        '-'}
+                                </Highlighter>
+                            </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Кут ширини: {tableData.angle_width}</Typography>
+                            <Typography>
+                                Кут ширини:{' '}
+                                <Highlighter>
+                                    {input_data?.angle_width || '-'}
+                                </Highlighter>
+                            </Typography>
                         </TableCell>
                         <TableCell scope="row">
-                            <Typography>Кут висоти: {tableData.angle_height}</Typography>
+                            <Typography>
+                                Кут висоти:{' '}
+                                <Highlighter>
+                                    {output_data?.angle_height ??
+                                        input_data?.angle_height ??
+                                        '-'}
+                                </Highlighter>
+                            </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Кут висоти: {tableData.angle_height}</Typography>
+                            <Typography>
+                                Кут висоти:{' '}
+                                <Highlighter>
+                                    {input_data?.angle_height || '-'}
+                                </Highlighter>
+                            </Typography>
                         </TableCell>
                         <TableCell scope="row">
                             <Typography fontSize="18px" fontWeight="bold">
@@ -79,23 +108,37 @@ const TemplateTable = ({ tableData = {} }) => {
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Ширина плями: {tableData.plume_width_module3}
+                                Ширина плями:{' '}
+                                <Highlighter>
+                                    {output_data?.plume_width_module3 || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Чутливість: {tableData.sensitivity}</Typography>
+                            <Typography>
+                                Чутливість:{' '}
+                                <Highlighter>
+                                    {input_data?.sensitivity || '-'}
+                                </Highlighter>
+                            </Typography>
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Висота плями: {tableData.plume_height_module3}
+                                Висота плями:{' '}
+                                <Highlighter>
+                                    {output_data?.plume_height_module3 || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Потужність: {tableData.power}</Typography>
+                            <Typography>
+                                Потужність:{' '}
+                                <Highlighter>{input_data?.power || '-'}</Highlighter>
+                            </Typography>
                         </TableCell>
                         <TableCell scope="row">
                             <Typography fontSize="18px" fontWeight="bold">
@@ -111,31 +154,49 @@ const TemplateTable = ({ tableData = {} }) => {
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Мін. дистанція: {tableData.min_distance}
+                                Мін. дистанція:{' '}
+                                <Highlighter>
+                                    {output_data?.min_distance || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
                             <Typography>
-                                Мін. розмір плями: {tableData.min_plume_size}
+                                Мін. розмір плями:{' '}
+                                <Highlighter>
+                                    {input_data?.min_plume_size || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Макс. гарантована дистанція: {tableData.max_distance}
+                                Макс. гарантована дистанція:{' '}
+                                <Highlighter>
+                                    {output_data?.max_distance || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                     </TableRow>
                     <TableRow>
                         <TableCell scope="row">
-                            <Typography>Дистанція: {tableData.distance}</Typography>
+                            <Typography>
+                                Дистанція:
+                                <Highlighter>{input_data?.distance || '-'}</Highlighter>
+                            </Typography>
                         </TableCell>
                     </TableRow>
                 </TableBody>
             </MuiTable>
         </TableContainer>
     );
+};
+
+const Highlighter = ({ children }) => {
+    const theme = useTheme();
+    const styles = { color: theme.palette.primary.main, fontWeight: 600 };
+    return <span style={styles}>{children}</span>;
 };
 
 TemplateTable.propTypes = {
@@ -159,6 +220,10 @@ TemplateTable.propTypes = {
         plume_width_module3: PropTypes.number,
         plume_height_module3: PropTypes.number,
     }),
+};
+
+Highlighter.propTypes = {
+    children: PropTypes.node.isRequired,
 };
 
 export default TemplateTable;
