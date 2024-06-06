@@ -80,26 +80,27 @@ export default class RayModelingService {
     };
 
     static createIntersectionMesh = (data = {}, shapeType = 'ellipse') => {
-        const { maxDistance, minDistance, plumeHeight, plumeWidth } = data;
+        const { max_distance, min_distance, plume_height_module3, plume_width_module3 } =
+            data;
         let baseShape = undefined;
 
         if (shapeType === 'ellipse') {
             baseShape = RayModelingService.createCone(
-                plumeWidth,
-                plumeHeight,
-                maxDistance,
+                plume_width_module3,
+                plume_height_module3,
+                max_distance,
             );
         } else if (shapeType === 'rectangle') {
             baseShape = RayModelingService.createPyramid(
-                plumeWidth,
-                plumeHeight,
-                maxDistance,
+                plume_width_module3,
+                plume_height_module3,
+                max_distance,
             );
         } else {
             return baseShape;
         }
 
-        const maxSphere = RayModelingService.createSphere(maxDistance, maxDistance);
+        const maxSphere = RayModelingService.createSphere(max_distance, max_distance);
 
         maxSphere.updateMatrix();
         baseShape.updateMatrix();
@@ -109,7 +110,7 @@ export default class RayModelingService {
             maxSphere,
             'intersect',
         );
-        let minSphere = RayModelingService.createSphere(minDistance, maxDistance);
+        let minSphere = RayModelingService.createSphere(min_distance, max_distance);
 
         interModel1.updateMatrix();
         minSphere.updateMatrix();
@@ -127,7 +128,7 @@ export default class RayModelingService {
             model.position.x = 0;
         } else if (shapeType === 'rectangle') {
             model.position.y = 0;
-            model.position.x = maxDistance / 2;
+            model.position.x = max_distance / 2;
         }
 
         return model;

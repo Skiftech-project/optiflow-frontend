@@ -1,16 +1,40 @@
-import { Stack } from '@mui/material';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
+import { Stack, Typography } from '@mui/material';
+
+import { useTemplateService } from 'src/core/services';
 
 import { Header, TemplateBlock } from '../interface';
 
 const TemplatesPage = () => {
+    const { templates, errorMessage } = useSelector(state => state.getTemplates);
+
+    const { getAllTemplates } = useTemplateService();
+
+    useEffect(() => {
+        getAllTemplates();
+    }, []);
+
     return (
         <div>
             <Header sx={{ marginBottom: '65px' }} />
-
             <Stack direction="column" gap={5} alignItems="center">
-                <TemplateBlock title="Test 1"></TemplateBlock>
-
-                <TemplateBlock title="Test 2"></TemplateBlock>
+                {errorMessage ? (
+                    <Typography>{errorMessage}</Typography>
+                ) : (
+                    templates.map(item => {
+                        return (
+                            <TemplateBlock
+                                key={item.id}
+                                title={item.title}
+                                calcType={item.calculator_type}
+                                tableData={{ ...item }}
+                            ></TemplateBlock>
+                        );
+                    })
+                )}
             </Stack>
         </div>
     );

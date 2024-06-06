@@ -1,4 +1,5 @@
 import {
+    deleteUserUrl,
     forgotPasswordUrl,
     restorePasswordUrl,
     updatePasswordUrl,
@@ -50,6 +51,15 @@ export const restorePasswordRequest = async password => {
             password: password,
         };
         const response = await $api.put(restorePasswordUrl, data);
+        return response.data;
+    } catch (error) {
+        throw error.response;
+    }
+};
+
+export const deleteUserRequest = async () => {
+    try {
+        const response = await $api.delete(deleteUserUrl);
         return response.data;
     } catch (error) {
         throw error.response;

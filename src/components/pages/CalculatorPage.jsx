@@ -8,14 +8,17 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 
-import { FormBlock, Header } from '../interface';
+import { FormBlock, Header, SaveTemplateForm } from '../interface';
 import { Block, Button, Table, TitleBlock } from '../ui';
 
 const CalculatorPage = () => {
-    const { calculateData } = useOptiflowService();
-    const { saveTableToMarkdownFile } = useSaveToFileService();
-    const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+    const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
     const [calcOption, setCalcOption] = useState(0);
+
+    const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+
+    const { calculateData, saveInputValues } = useOptiflowService();
+    const { saveTableToMarkdownFile } = useSaveToFileService();
 
     const methods = useForm({
         defaultValues: {
@@ -25,7 +28,7 @@ const CalculatorPage = () => {
         mode: 'all',
     });
 
-    const handleSubmit = data => {
+    const handleSubmit = async data => {
         if (calcOption === 1) {
             delete data.spotWidth;
             delete data.spotHeight;
@@ -34,6 +37,11 @@ const CalculatorPage = () => {
             delete data.angleWidth;
             delete data.angleHeight;
         }
+
+        let calculatorType = 'звичайний калькулятор';
+        const inputValues = { ...data, calculatorType };
+        saveInputValues(inputValues);
+
         calculateData(data);
     };
 
@@ -68,14 +76,30 @@ const CalculatorPage = () => {
                             justifyContent="space-between"
                             alignItems="center"
                         >
-                            <Button
-                                disabled={!methods.formState.isValid}
-                                loading={calculationsLoadingStatus === 'loading'}
-                                onClick={methods.handleSubmit(handleSubmit)}
-                                color="primary"
-                            >
-                                Розрахувати
-                            </Button>
+                            <Stack direction="row" alignItems="center" gap={3}>
+                                <Button
+                                    disabled={!methods.formState.isValid}
+                                    loading={calculationsLoadingStatus === 'loading'}
+                                    onClick={methods.handleSubmit(handleSubmit)}
+                                    color="primary"
+                                >
+                                    Розрахувати
+                                </Button>
+
+                                <Button
+                                    disabled={
+                                        !calculations ||
+                                        calculationsLoadingStatus === 'loading'
+                                    }
+                                    onClick={() => {
+                                        setIsModalWindowOpen(true);
+                                    }}
+                                    variant="outlined"
+                                    color="primary"
+                                >
+                                    Зберегти в шаблони
+                                </Button>
+                            </Stack>
 
                             <Tooltip title={tooltipText}>
                                 <span>
@@ -98,6 +122,7 @@ const CalculatorPage = () => {
                     </Block>
                 </Stack>
             </Container>
+            <SaveTemplateForm open={isModalWindowOpen} setOpen={setIsModalWindowOpen} />
         </FormProvider>
     );
 };
