@@ -87,7 +87,7 @@ const CalculatorPage = () => {
                             rowsConfig={tableData}
                             tableData={calculations}
                             loading={calculationsLoadingStatus === 'loading'}
-                            sx={{ marginBottom: 3 }}
+                            sx={{ marginBottom: 7 }}
                         />
 
                         <Stack
@@ -95,8 +95,9 @@ const CalculatorPage = () => {
                             justifyContent="space-between"
                             alignItems="center"
                         >
-                            <Stack direction="row" alignItems="center" gap={3}>
+                            <Stack direction={{ md: 'row' }} alignItems="center" gap={3}>
                                 <Button
+                                    sx={{ width: '180px' }}
                                     disabled={!methods.formState.isValid}
                                     loading={calculationsLoadingStatus === 'loading'}
                                     onClick={methods.handleSubmit(handleSubmit)}
@@ -106,6 +107,7 @@ const CalculatorPage = () => {
                                 </Button>
 
                                 <Button
+                                    sx={{ width: '180px' }}
                                     disabled={
                                         !calculations ||
                                         calculationsLoadingStatus === 'loading'
