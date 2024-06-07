@@ -51,6 +51,24 @@ const CalculatorPage = () => {
         </span>
     );
 
+    const tableData = [
+        { label: 'Геометрія променю', colspan: 2 },
+        { label: 'Кут ширини', value: calculations?.angle_width || '-' },
+        { label: 'Кут висоти', value: calculations?.angle_height || '-' },
+        {
+            label: 'Лінійні розміри перерізу області передачі даних на заданій дистанції',
+            colspan: 2,
+        },
+        { label: 'Ширина плями', value: calculations?.plume_width_module3 || '-' },
+        { label: 'Висота плями', value: calculations?.plume_height_module3 || '-' },
+        { label: 'Інші розраховані значення', colspan: 2 },
+        { label: 'Мінімальна дистанція', value: calculations?.min_distance || '-' },
+        {
+            label: 'Максимальна гарантована дистанція передачі даних',
+            value: calculations?.max_distance || '-',
+        },
+    ];
+
     return (
         <FormProvider {...methods}>
             <Header />
@@ -66,6 +84,7 @@ const CalculatorPage = () => {
 
                     <Block padding="30px">
                         <Table
+                            rowsConfig={tableData}
                             tableData={calculations}
                             loading={calculationsLoadingStatus === 'loading'}
                             sx={{ marginBottom: 3 }}
