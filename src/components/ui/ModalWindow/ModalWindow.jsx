@@ -8,12 +8,22 @@ import LockPersonIcon from '@mui/icons-material/LockPerson';
 
 import { Block } from 'src/components/ui';
 
-const ModalWindow = ({ open, onClose, title, content, children, width }) => {
+const ModalWindow = ({
+    open,
+    sx,
+    onClose,
+    title,
+    content,
+    children,
+    width,
+    icon = <LockPersonIcon fontSize="medium" />,
+}) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <Modal
+            sx={sx}
             open={open}
             onClose={onClose}
             aria-labelledby="modal-modal-title"
@@ -43,7 +53,7 @@ const ModalWindow = ({ open, onClose, title, content, children, width }) => {
                             marginBottom: '20px',
                         }}
                     >
-                        <LockPersonIcon fontSize="medium" />
+                        {icon}
                     </Avatar>
                     <Typography align="center" variant="h5" fontWeight={500}>
                         {title}
@@ -60,12 +70,14 @@ const ModalWindow = ({ open, onClose, title, content, children, width }) => {
 };
 
 ModalWindow.propTypes = {
+    sx: PropTypes.object,
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     title: PropTypes.string,
     content: PropTypes.string,
     width: PropTypes.string,
     children: PropTypes.node,
+    icon: PropTypes.node,
 };
 
 export default ModalWindow;
