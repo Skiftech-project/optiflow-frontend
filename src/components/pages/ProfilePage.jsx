@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 
 import { Avatar, Box, Container, Stack, Typography } from '@mui/material';
 
-import { skiftech } from 'src/assets';
 import { useUserService } from 'src/core/services';
 
 import { ChangePasswordForm, ChangeUserDataForm, Header } from '../interface';
@@ -18,10 +17,10 @@ const ProfilePage = () => {
             <Header />
             <Container maxWidth="xl" component="main">
                 <Stack
-                    direction="row"
+                    direction={{ md: 'row' }}
                     alignItems="center"
-                    gap="200px"
-                    sx={{ marginTop: '100px' }}
+                    gap={{ xs: '70px', md: '200px' }}
+                    my={20}
                 >
                     <Box
                         sx={{
@@ -33,7 +32,6 @@ const ProfilePage = () => {
                     >
                         <Avatar
                             sx={{ width: '200px', height: '200px', marginBottom: '15px' }}
-                            src={skiftech}
                         />
 
                         <Typography
@@ -43,6 +41,7 @@ const ProfilePage = () => {
                                 fontSize: '48px',
                                 marginBottom: '15px',
                             }}
+                            color="primary"
                         >
                             {data?.username}
                         </Typography>
@@ -56,8 +55,7 @@ const ProfilePage = () => {
                                 marginBottom: '30px',
                             }}
                         >
-                            I’m web designer, I work in programs like figma, adobe
-                            photoshop, adobe illustrator
+                            Звичайний користувач сервісу
                         </Typography>
 
                         <Button
@@ -70,9 +68,8 @@ const ProfilePage = () => {
                         </Button>
                     </Box>
 
-                    <Stack width="60%" gap={3}>
+                    <Stack width="70%" gap={10}>
                         <ChangeUserDataForm />
-
                         <ChangePasswordForm />
                     </Stack>
                 </Stack>
