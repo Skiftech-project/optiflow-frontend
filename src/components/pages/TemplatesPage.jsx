@@ -6,10 +6,14 @@ import { Stack, Typography } from '@mui/material';
 
 import { useTemplateService } from 'src/core/services';
 
+import { Portal } from '../common';
 import { Header, TemplateBlock } from '../interface';
+import { BarLoader } from '../ui';
 
 const TemplatesPage = () => {
-    const { templates, errorMessage } = useSelector(state => state.getTemplates);
+    const { templates, errorMessage, templatesLoadingStatus } = useSelector(
+        state => state.getTemplates,
+    );
 
     const { getAllTemplates } = useTemplateService();
 
@@ -18,11 +22,15 @@ const TemplatesPage = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <Header sx={{ marginBottom: '65px' }} />
             <Stack direction="column" gap={5} alignItems="center">
                 {errorMessage ? (
                     <Typography>{errorMessage}</Typography>
+                ) : templatesLoadingStatus === 'loading' ? (
+                    <Portal rootId="header">
+                        <BarLoader />
+                    </Portal>
                 ) : (
                     templates.map(item => {
                         return (
@@ -36,7 +44,7 @@ const TemplatesPage = () => {
                     })
                 )}
             </Stack>
-        </div>
+        </>
     );
 };
 

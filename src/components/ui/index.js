@@ -1,8 +1,8 @@
 import AccountMenu from './AccountMenu/AccountMenu';
+import BarLoader from './BarLoader/BarLoader';
 import Block from './Block/Block';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import Button from './Button/DefaultButton';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
 import Input from './Input/Input';
 import InputPassword from './Input/InputPassword';
@@ -33,5 +33,5 @@ export {
     ErrorMessage,
     ModalWindow,
     Logo,
-    ErrorBoundary,
+    BarLoader,
 };

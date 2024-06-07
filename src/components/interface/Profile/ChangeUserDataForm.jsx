@@ -58,11 +58,12 @@ const ChangeUserDataForm = () => {
             >
                 <Typography
                     sx={{
+                        textAlign: { xs: 'center', md: 'left' },
                         fontWeight: 'bold',
                         fontSize: '18px',
                     }}
                 >
-                    Інформація користувача
+                    Інформація про користувача
                 </Typography>
 
                 <Input
@@ -89,8 +90,9 @@ const ChangeUserDataForm = () => {
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
 
-                <Stack direction="row" gap="20px">
+                <Stack direction="row" justifyContent={{ xs: 'center', md: 'left' }}>
                     <Button
+                        sx={{ width: '170px' }}
                         disabled={!formState.isValid}
                         type="submit"
                         color="primary"

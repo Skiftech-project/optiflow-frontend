@@ -40,6 +40,7 @@ const Header = ({
             color={color}
             position={position}
             sx={sx}
+            id="header"
             {...props}
         >
             <Container maxWidth="xxl">

@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 
 import { Stack } from '@mui/material';
 
+import CalculateIcon from '@mui/icons-material/Calculate';
+
 import { Button, Input, ModalWindow } from 'src/components/ui';
 import { useTemplateService } from 'src/core/services';
 
@@ -17,7 +19,7 @@ const SaveTemplateForm = ({ open, setOpen }) => {
 
     const methods = useForm({
         defaultValues: {
-            templateName: 'Збережений шаблон',
+            templateName: 'Шаблон',
         },
     });
 
@@ -31,10 +33,17 @@ const SaveTemplateForm = ({ open, setOpen }) => {
             onClose={() => {
                 setOpen(false);
             }}
-            title="Назвіть ваш шаблон"
+            title="Назва вашого шаблону"
+            width="500"
+            icon={<CalculateIcon fontSize="medium" />}
         >
             <FormProvider {...methods}>
-                <Stack component="form">
+                <Stack
+                    alignItems="center"
+                    gap={3}
+                    component="form"
+                    sx={{ width: '100%' }}
+                >
                     <Input
                         name="templateName"
                         id="templateName"
@@ -42,12 +51,14 @@ const SaveTemplateForm = ({ open, setOpen }) => {
                         label="Назва шаблону:"
                         type="string"
                         size="medium"
-                        sx={{ marginBottom: '15px' }}
+                        sx={{ marginBottom: '20px' }}
                         startAdornment={
                             <DescriptionOutlined color="black" fontSize="small" />
                         }
                     />
                     <Button
+                        sx={{ width: '180px' }}
+                        fontSize={16}
                         onClick={methods.handleSubmit(data => {
                             handleSubmit(data);
                             setOpen(false);
