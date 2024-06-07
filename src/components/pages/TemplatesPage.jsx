@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { HashLoader } from 'react-spinners';
 
 import { Stack, Typography } from '@mui/material';
 
 import { useTemplateService } from 'src/core/services';
 
+import { Portal } from '../common';
 import { Header, TemplateBlock } from '../interface';
+import { BarLoader } from '../ui';
 
 const TemplatesPage = () => {
     const { templates, errorMessage, templatesLoadingStatus } = useSelector(
@@ -21,13 +22,15 @@ const TemplatesPage = () => {
     }, []);
 
     return (
-        <div>
+        <>
             <Header sx={{ marginBottom: '65px' }} />
             <Stack direction="column" gap={5} alignItems="center">
                 {errorMessage ? (
                     <Typography>{errorMessage}</Typography>
                 ) : templatesLoadingStatus === 'loading' ? (
-                    <HashLoader color="#1e55b3" />
+                    <Portal rootId="header">
+                        <BarLoader />
+                    </Portal>
                 ) : (
                     templates.map(item => {
                         return (
@@ -41,7 +44,7 @@ const TemplatesPage = () => {
                     })
                 )}
             </Stack>
-        </div>
+        </>
     );
 };
 
