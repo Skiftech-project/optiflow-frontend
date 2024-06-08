@@ -5,8 +5,9 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 
 import { RayCanvas } from '../canvas';
+import { ErrorBoundary } from '../common';
 import { Header, RayForm } from '../interface';
-import { ErrorBoundary, SideMenu } from '../ui';
+import { SideMenu } from '../ui';
 
 const RayPage = () => {
     const [menuOpen, setMenuOpen] = useState(false);
