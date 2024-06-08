@@ -16,3 +16,9 @@ export const updateUserDataUrl = apiBase + '/auth/updateProfile';
 export const updatePasswordUrl = apiBase + '/auth/updateUserPassword';
 export const forgotPasswordUrl = apiBase + '/auth/sendResetEmail';
 export const restorePasswordUrl = apiBase + '/auth/restorePassword';
+export const deleteUserUrl = apiBase + '/auth/deleteAccount';
+
+// templates endpoints
+export const getAllTemplates = apiBase + '/templates/getUserSavedTemplates';
+export const saveTemplateEndpoint = apiBase + '/templates/saveTemplate';
+export const deleteTemplate = apiBase + '/templates/deleteTemplate';

@@ -8,14 +8,17 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 import { useOptiflowService, useSaveToFileService } from 'src/core/services';
 
-import { FormBlock, Header } from '../interface';
+import { FormBlock, Header, SaveTemplateForm } from '../interface';
 import { Block, Button, Table, TitleBlock } from '../ui';
 
 const CalculatorPage = () => {
-    const { calculateData } = useOptiflowService();
-    const { saveTableToMarkdownFile } = useSaveToFileService();
-    const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+    const [isModalWindowOpen, setIsModalWindowOpen] = useState(false);
     const [calcOption, setCalcOption] = useState(0);
+
+    const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+
+    const { calculateData, saveInputValues } = useOptiflowService();
+    const { saveTableToMarkdownFile } = useSaveToFileService();
 
     const methods = useForm({
         defaultValues: {
@@ -25,7 +28,7 @@ const CalculatorPage = () => {
         mode: 'all',
     });
 
-    const handleSubmit = data => {
+    const handleSubmit = async data => {
         if (calcOption === 1) {
             delete data.spotWidth;
             delete data.spotHeight;
@@ -34,6 +37,11 @@ const CalculatorPage = () => {
             delete data.angleWidth;
             delete data.angleHeight;
         }
+
+        let calculatorType = 'звичайний калькулятор';
+        const inputValues = { ...data, calculatorType };
+        saveInputValues(inputValues);
+
         calculateData(data);
     };
 
@@ -42,6 +50,24 @@ const CalculatorPage = () => {
             save as <b>.md</b>
         </span>
     );
+
+    const tableData = [
+        { label: 'Геометрія променю', colspan: 2 },
+        { label: 'Кут ширини', value: calculations?.angle_width || '-' },
+        { label: 'Кут висоти', value: calculations?.angle_height || '-' },
+        {
+            label: 'Лінійні розміри перерізу області передачі даних на заданій дистанції',
+            colspan: 2,
+        },
+        { label: 'Ширина плями', value: calculations?.plume_width_module3 || '-' },
+        { label: 'Висота плями', value: calculations?.plume_height_module3 || '-' },
+        { label: 'Інші розраховані значення', colspan: 2 },
+        { label: 'Мінімальна дистанція', value: calculations?.min_distance || '-' },
+        {
+            label: 'Максимальна гарантована дистанція передачі даних',
+            value: calculations?.max_distance || '-',
+        },
+    ];
 
     return (
         <FormProvider {...methods}>
@@ -58,9 +84,10 @@ const CalculatorPage = () => {
 
                     <Block padding="30px">
                         <Table
+                            rowsConfig={tableData}
                             tableData={calculations}
                             loading={calculationsLoadingStatus === 'loading'}
-                            sx={{ marginBottom: 3 }}
+                            sx={{ marginBottom: 7 }}
                         />
 
                         <Stack
@@ -68,14 +95,32 @@ const CalculatorPage = () => {
                             justifyContent="space-between"
                             alignItems="center"
                         >
-                            <Button
-                                disabled={!methods.formState.isValid}
-                                loading={calculationsLoadingStatus === 'loading'}
-                                onClick={methods.handleSubmit(handleSubmit)}
-                                color="primary"
-                            >
-                                Розрахувати
-                            </Button>
+                            <Stack direction={{ md: 'row' }} alignItems="center" gap={3}>
+                                <Button
+                                    sx={{ width: '180px' }}
+                                    disabled={!methods.formState.isValid}
+                                    loading={calculationsLoadingStatus === 'loading'}
+                                    onClick={methods.handleSubmit(handleSubmit)}
+                                    color="primary"
+                                >
+                                    Розрахувати
+                                </Button>
+
+                                <Button
+                                    sx={{ width: '180px' }}
+                                    disabled={
+                                        !calculations ||
+                                        calculationsLoadingStatus === 'loading'
+                                    }
+                                    onClick={() => {
+                                        setIsModalWindowOpen(true);
+                                    }}
+                                    variant="outlined"
+                                    color="primary"
+                                >
+                                    Зберегти в шаблони
+                                </Button>
+                            </Stack>
 
                             <Tooltip title={tooltipText}>
                                 <span>
@@ -98,6 +143,7 @@ const CalculatorPage = () => {
                     </Block>
                 </Stack>
             </Container>
+            <SaveTemplateForm open={isModalWindowOpen} setOpen={setIsModalWindowOpen} />
         </FormProvider>
     );
 };

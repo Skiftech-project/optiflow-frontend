@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Stack } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 import { Button, ErrorMessage, InputPassword } from 'src/components/ui';
 import { useUserService } from 'src/core/services';
@@ -42,6 +42,16 @@ const ChangePasswordForm = () => {
     return (
         <FormProvider {...methods}>
             <Stack component="form" onSubmit={handleSubmit(handleFormSubmit)} gap={3}>
+                <Typography
+                    sx={{
+                        textAlign: { xs: 'center', md: 'left' },
+                        fontWeight: 'bold',
+                        fontSize: '18px',
+                    }}
+                >
+                    Пароль
+                </Typography>
+
                 <InputPassword
                     id="oldPassword"
                     name="oldPassword"
@@ -54,8 +64,9 @@ const ChangePasswordForm = () => {
                     <ErrorMessage>{errorMessage}</ErrorMessage>
                 )}
 
-                <Stack direction="row" gap="20px">
+                <Stack direction="row" justifyContent={{ xs: 'center', md: 'left' }}>
                     <Button
+                        sx={{ width: '170px' }}
                         disabled={!formState.isValid}
                         type="submit"
                         color="primary"

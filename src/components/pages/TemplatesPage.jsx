@@ -1,18 +1,50 @@
-import { Stack } from '@mui/material';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
+import { Stack, Typography } from '@mui/material';
+
+import { useTemplateService } from 'src/core/services';
+
+import { Portal } from '../common';
 import { Header, TemplateBlock } from '../interface';
+import { BarLoader } from '../ui';
 
 const TemplatesPage = () => {
+    const { templates, errorMessage, templatesLoadingStatus } = useSelector(
+        state => state.getTemplates,
+    );
+
+    const { getAllTemplates } = useTemplateService();
+
+    useEffect(() => {
+        getAllTemplates();
+    }, []);
+
     return (
-        <div>
+        <>
             <Header sx={{ marginBottom: '65px' }} />
-
             <Stack direction="column" gap={5} alignItems="center">
-                <TemplateBlock title="Fuck Putin"></TemplateBlock>
-
-                <TemplateBlock title="GG"></TemplateBlock>
+                {errorMessage ? (
+                    <Typography>{errorMessage}</Typography>
+                ) : templatesLoadingStatus === 'loading' ? (
+                    <Portal rootId="header">
+                        <BarLoader />
+                    </Portal>
+                ) : (
+                    templates.map(item => {
+                        return (
+                            <TemplateBlock
+                                key={item.id}
+                                title={item.title}
+                                calcType={item.calculator_type}
+                                tableData={{ ...item }}
+                            ></TemplateBlock>
+                        );
+                    })
+                )}
             </Stack>
-        </div>
+        </>
     );
 };
 

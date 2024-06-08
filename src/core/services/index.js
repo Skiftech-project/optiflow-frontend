@@ -2,6 +2,7 @@ import useAuthService from './AuthService';
 import useOptiflowService from './OptiflowService';
 import RayModelingService from './RayModelingService';
 import useSaveToFileService from './SaveToFileService';
+import useTemplateService from './TemplateService';
 import useUserService from './UserService';
 
 export {
@@ -10,4 +11,5 @@ export {
     useSaveToFileService,
     useUserService,
     RayModelingService,
+    useTemplateService,
 };

@@ -10,9 +10,9 @@ import { RayModelingService } from 'src/core/services';
 
 const Camera = () => {
     const calcs = useSelector(state => state.calc.calculations);
-    const { maxDistance } = calcs ?? {};
+    const { max_distance } = calcs ?? {};
 
-    const cameraPosition = [maxDistance || 3, 0, maxDistance || 3];
+    const cameraPosition = [max_distance || 3, 0, max_distance || 3];
 
     return (
         <PerspectiveCamera

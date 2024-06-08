@@ -23,7 +23,7 @@ const StyledTableRow = styled(TableRow)({
     },
 });
 
-const Table = ({ tableData = {}, loading = false, sx = {} }) => {
+const Table = ({ loading = false, sx = {}, rowsConfig = [] }) => {
     const theme = useTheme();
 
     const styles = useMemo(
@@ -45,27 +45,6 @@ const Table = ({ tableData = {}, loading = false, sx = {} }) => {
         [theme],
     );
 
-    const rows = useMemo(
-        () => [
-            { label: 'Геометрія променю', colspan: 2 },
-            { label: 'Кут ширини', value: tableData?.angleWidth || '-' },
-            { label: 'Кут висоти', value: tableData?.angleHeight || '-' },
-            {
-                label: 'Лінійні розміри перерізу області передачі даних на заданій дистанції',
-                colspan: 2,
-            },
-            { label: 'Ширина плями', value: tableData?.plumeWidth || '-' },
-            { label: 'Висота плями', value: tableData?.plumeHeight || '-' },
-            { label: 'Інші розраховані значення', colspan: 2 },
-            { label: 'Мінімальна дистанція', value: tableData?.minDistance || '-' },
-            {
-                label: 'Максимальна гарантована дистанція передачі даних',
-                value: tableData?.maxDistance || '-',
-            },
-        ],
-        [tableData],
-    );
-
     return (
         <TableContainer sx={sx}>
             <MuiTable size="small" aria-label="data table">
@@ -79,7 +58,7 @@ const Table = ({ tableData = {}, loading = false, sx = {} }) => {
                 </TableHead>
 
                 <TableBody>
-                    {rows.map((row, i) => (
+                    {rowsConfig.map((row, i) => (
                         <StyledTableRow key={i} sx={row?.colspan && styles.bodyRow}>
                             {row?.colspan ? (
                                 <TableCell
@@ -112,14 +91,7 @@ const Table = ({ tableData = {}, loading = false, sx = {} }) => {
 Table.propTypes = {
     sx: PropTypes.object,
     loading: PropTypes.bool,
-    tableData: PropTypes.shape({
-        angle_width: PropTypes.number,
-        angle_height: PropTypes.number,
-        plume_width_module3: PropTypes.number,
-        plume_height_module3: PropTypes.number,
-        min_distance: PropTypes.number,
-        max_distance: PropTypes.number,
-    }),
+    rowsConfig: PropTypes.array,
 };
 
 export default Table;
