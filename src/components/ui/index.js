@@ -12,6 +12,7 @@ import Link from './Link/Link';
 import NavLink from './Link/NavLink';
 import Logo from './Logo/Logo';
 import ModalWindow from './ModalWindow/ModalWindow';
+import Notification from './Notification/Notification';
 import Preloader from './Preloader/Preloader';
 import Select from './Select/Select';
 import SideMenu from './SideMenu/SideMenu';
@@ -38,4 +39,5 @@ export {
     SideMenu,
     CanvasLoader,
     Highlighter,
+    Notification,
 };
