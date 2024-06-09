@@ -3,7 +3,9 @@ import BarLoader from './BarLoader/BarLoader';
 import Block from './Block/Block';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import Button from './Button/DefaultButton';
+import CanvasLoader from './CanvasLoader/CanvasLoader';
 import ErrorMessage from './ErrorMessage/ErrorMessage';
+import Highlighter from './Highlighter/Highlighter';
 import Input from './Input/Input';
 import InputPassword from './Input/InputPassword';
 import Link from './Link/Link';
@@ -34,4 +36,6 @@ export {
     Logo,
     BarLoader,
     SideMenu,
+    CanvasLoader,
+    Highlighter,
 };
