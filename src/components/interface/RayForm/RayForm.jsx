@@ -1,4 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
@@ -45,6 +46,8 @@ function a11yProps(index) {
 }
 
 const RayForm = ({ calcOption = 1, toggleCalcOption = null }) => {
+    const { calculationsLoadingStatus } = useSelector(state => state.calc);
+
     const { calculateData, saveInputValues } = useOptiflowService();
     const methods = useForm({
         defaultValues: {
@@ -217,14 +220,17 @@ const RayForm = ({ calcOption = 1, toggleCalcOption = null }) => {
                     defaultValue=""
                 />
 
-                <Button
-                    fullWidth
-                    sx={{ mt: 4 }}
-                    onClick={methods.handleSubmit(handleSubmit)}
-                    color="primary"
-                >
-                    Розрахувати
-                </Button>
+                <Box mt={4}>
+                    <Button
+                        fullWidth
+                        disabled={!methods.formState.isValid}
+                        loading={calculationsLoadingStatus === 'loading'}
+                        onClick={methods.handleSubmit(handleSubmit)}
+                        color="primary"
+                    >
+                        Розрахувати
+                    </Button>
+                </Box>
             </Stack>
         </FormProvider>
     );
