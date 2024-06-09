@@ -59,8 +59,8 @@ const CalculatorPage = () => {
             label: 'Лінійні розміри перерізу області передачі даних на заданій дистанції',
             colspan: 2,
         },
-        { label: 'Ширина плями', value: calculations?.plume_width_module3 || '-' },
-        { label: 'Висота плями', value: calculations?.plume_height_module3 || '-' },
+        { label: 'Ширина плями', value: calculations?.plume_width_cut || '-' },
+        { label: 'Висота плями', value: calculations?.plume_height_cut || '-' },
         { label: 'Інші розраховані значення', colspan: 2 },
         { label: 'Мінімальна дистанція', value: calculations?.min_distance || '-' },
         {

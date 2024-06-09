@@ -80,20 +80,19 @@ export default class RayModelingService {
     };
 
     static createIntersectionMesh = (data = {}, shapeType = 'ellipse') => {
-        const { max_distance, min_distance, plume_height_module3, plume_width_module3 } =
-            data;
+        const { max_distance, min_distance, plume_height, plume_width } = data;
         let baseShape = undefined;
 
         if (shapeType === 'ellipse') {
             baseShape = RayModelingService.createCone(
-                plume_width_module3,
-                plume_height_module3,
+                plume_width,
+                plume_height,
                 max_distance,
             );
         } else if (shapeType === 'rectangle') {
             baseShape = RayModelingService.createPyramid(
-                plume_width_module3,
-                plume_height_module3,
+                plume_width,
+                plume_height,
                 max_distance,
             );
         } else {

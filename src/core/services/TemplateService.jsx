@@ -95,8 +95,8 @@ const useTemplateService = () => {
         return {
             max_distance: data.max_distance,
             min_distance: data.min_distance,
-            plume_height_module3: data.plume_height_module3,
-            plume_width_module3: data.plume_width_module3,
+            plume_height_module3: data.plume_height_cut,
+            plume_width_module3: data.plume_width_cut,
             angle_height: data.angle_height,
             angle_width: data.angle_width,
         };

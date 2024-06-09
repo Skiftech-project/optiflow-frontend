@@ -9,7 +9,8 @@ export const logoutUrl = apiBase + '/auth/logout';
 export const refreshTokenUrl = apiBase + '/auth/refresh';
 
 //calculations endpoints
-export const calculationsUrl = apiBase + '/2d';
+export const calculationsUrl = apiBase + '/ray';
+export const diagramCreationUrl = apiBase + '/radiation_pattern/uploadFile';
 
 //user endpoints
 export const updateUserDataUrl = apiBase + '/auth/updateProfile';
