@@ -14,7 +14,12 @@ const menuStyles = {
     p: 2,
 };
 
-const SideMenu = ({ open = false, onClose = null, children }) => {
+const SideMenu = ({
+    open = false,
+    onClose = null,
+    heading = 'Menu Heading',
+    children,
+}) => {
     return (
         <Paper
             elevation={4}
@@ -30,7 +35,7 @@ const SideMenu = ({ open = false, onClose = null, children }) => {
                     fontWeight={700}
                     fontSize={15}
                 >
-                    Перебудувати промінь
+                    {heading}
                 </Typography>
                 <IconButton onClick={onClose} size="small" edge="start">
                     <KeyboardDoubleArrowLeftIcon fontSize="large" />
@@ -46,6 +51,7 @@ SideMenu.propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func,
     children: PropTypes.node,
+    heading: PropTypes.string,
 };
 
 export default SideMenu;
