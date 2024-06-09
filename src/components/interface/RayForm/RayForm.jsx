@@ -45,7 +45,7 @@ function a11yProps(index) {
 }
 
 const RayForm = ({ calcOption = 1, toggleCalcOption = null }) => {
-    const { calculateRay } = useOptiflowService();
+    const { calculateData, saveInputValues } = useOptiflowService();
     const methods = useForm({
         defaultValues: {
             plumeForm: 'ellipse',
@@ -54,7 +54,7 @@ const RayForm = ({ calcOption = 1, toggleCalcOption = null }) => {
         mode: 'all',
     });
 
-    const handleSubmit = data => {
+    const handleSubmit = async data => {
         if (calcOption === 1) {
             delete data.spotWidth;
             delete data.spotHeight;
@@ -63,7 +63,12 @@ const RayForm = ({ calcOption = 1, toggleCalcOption = null }) => {
             delete data.angleWidth;
             delete data.angleHeight;
         }
-        calculateRay(data);
+
+        let calculatorType = 'звичайний калькулятор';
+        const inputValues = { ...data, calculatorType };
+        saveInputValues(inputValues);
+
+        calculateData(data);
     };
 
     const TempHandleChangeToggleBtn = (event, newValue) => {
