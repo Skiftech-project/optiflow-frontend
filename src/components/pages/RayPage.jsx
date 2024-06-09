@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import {
@@ -17,13 +18,16 @@ import {
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
+import { useNotification } from 'src/core/hooks';
+
 import { RayCanvas } from '../canvas';
 import { ErrorBoundary } from '../common';
 import { Header, RayForm } from '../interface';
-import { BarLoader, Block, Highlighter, SideMenu } from '../ui';
+import { BarLoader, Block, Highlighter, Notification, SideMenu } from '../ui';
 
 const RayPage = () => {
     const { calculations, calculationsLoadingStatus } = useSelector(state => state.calc);
+    const { isNotified, showNotification, closeNotification } = useNotification();
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [calcOption, setCalcOption] = useState(0);
@@ -45,6 +49,20 @@ const RayPage = () => {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
+
+    useEffect(() => {
+        showNotification('info');
+
+        const secondNotificationTimeout = setTimeout(() => {
+            showNotification('warn');
+        }, 6000);
+
+        return () => {
+            clearTimeout(secondNotificationTimeout);
+        };
+    }, []);
+
+    const loader = calculationsLoadingStatus === 'loading' && <BarLoader />;
 
     return (
         <>
@@ -183,7 +201,26 @@ const RayPage = () => {
                     <RayCanvas wireframe={checked} />
                 </ErrorBoundary>
             </Box>
-            {calculationsLoadingStatus === 'loading' && <BarLoader />}
+
+            <Notification
+                title="Підказка"
+                open={isNotified('info')}
+                onClose={closeNotification('info')}
+                key="info"
+            >
+                Спочатку зробіть розрахунки щоб побачити модель..
+            </Notification>
+            <Notification
+                title="Увага !"
+                type="warning"
+                open={isNotified('warn')}
+                onClose={closeNotification('warn')}
+                key="warn"
+            >
+                Коректність введених даних впливає на відображення моделі.
+            </Notification>
+
+            {loader}
         </>
     );
 };
