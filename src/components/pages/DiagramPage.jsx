@@ -6,7 +6,7 @@ import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArro
 
 import { DiagramCanvas } from '../canvas';
 import { ErrorBoundary } from '../common';
-import { Header } from '../interface';
+import { DiagramForm, Header } from '../interface';
 import { SideMenu } from '../ui';
 
 const DiagramPage = () => {
@@ -31,7 +31,9 @@ const DiagramPage = () => {
                     open={menuOpen}
                     onClose={toggleMenu(false)}
                     heading="Створити діаграму спрямованості"
-                ></SideMenu>
+                >
+                    <DiagramForm />
+                </SideMenu>
 
                 <Tooltip
                     title="Відкрити меню побудови діаграми "

@@ -1,4 +1,5 @@
 import AppContainer from './AppContainer/AppContainer';
+import DiagramForm from './DiagramForm/DiagramForm';
 import Footer from './Footer/Footer';
 import FormBlock from './FormBlock/FormBlock';
 import Header from './Header/Header';
@@ -22,4 +23,5 @@ export {
     TemplateBlock,
     RayForm,
     SaveTemplateForm,
+    DiagramForm,
 };
