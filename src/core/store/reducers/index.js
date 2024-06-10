@@ -5,6 +5,7 @@ import { calcReducer } from './calculations';
 import { calcValuesReducer } from './calculations';
 import { deleteTemplateReducer } from './templateRedusers/deleteTemplateReducer';
 import { getTemplatesReducer } from './templateRedusers/getTemplatesReducer';
+import { saveTemplateReducer } from './templateRedusers/saveTemplateReducer';
 import { passwordReducer } from './user';
 import { userDataReducer } from './user';
 import { deleteUserReducer } from './user/deleteUserReducer';
@@ -34,6 +35,7 @@ const reducer = combineReducers({
     //templates
     deleteTemplate: deleteTemplateReducer,
     getTemplates: getTemplatesReducer,
+    saveTemplate: saveTemplateReducer,
 });
 
 export default reducer;
