@@ -14,6 +14,7 @@ import { useTemplateService } from 'src/core/services';
 const SaveTemplateForm = ({ open, setOpen }) => {
     const outputValues = useSelector(state => state.calc.calculations);
     const inputValues = useSelector(state => state.calcValues.calcValues);
+    const { dataLoadingStatus } = useSelector(state => state.saveTemplate);
 
     const { saveTemplate } = useTemplateService();
 
@@ -59,6 +60,7 @@ const SaveTemplateForm = ({ open, setOpen }) => {
                     <Button
                         sx={{ width: '180px' }}
                         fontSize={16}
+                        loading={dataLoadingStatus === 'loading'}
                         onClick={methods.handleSubmit(data => {
                             handleSubmit(data);
                             setOpen(false);

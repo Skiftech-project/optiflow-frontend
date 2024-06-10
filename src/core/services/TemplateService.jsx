@@ -17,6 +17,9 @@ import {
     deleteTemplateFetched,
     deleteTemplateFetching,
     deleteTemplateFetchingError,
+    saveTemplateFetched,
+    saveTemplateFetching,
+    saveTemplateFetchingError,
 } from '../store/actions';
 
 const useTemplateService = () => {
@@ -46,11 +49,15 @@ const useTemplateService = () => {
             output_data: transformedOutputData,
         };
 
+        dispatch(saveTemplateFetching());
+
         const response = saveTemplateRequest(data)
             .then(data => {
+                dispatch(saveTemplateFetched());
                 return data;
             })
             .catch(error => {
+                dispatch(saveTemplateFetchingError());
                 throw error;
             });
 

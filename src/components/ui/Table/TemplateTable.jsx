@@ -128,12 +128,7 @@ const TemplateTable = ({ tableData = {} }) => {
                                 <Highlighter>{input_data?.spot_width || '-'}</Highlighter>
                             </Typography>
                         </TableCell>
-                        <TableCell scope="row">
-                            {' '}
-                            <Typography fontSize="18px" fontWeight="bold">
-                                Лінійні розміри перерізу на заданій дистанції
-                            </Typography>
-                        </TableCell>
+                        <TableCell scope="row"></TableCell>
                     </TableRow>
 
                     <TableRow>
@@ -143,11 +138,9 @@ const TemplateTable = ({ tableData = {} }) => {
                             </Typography>
                         </TableCell>
                         <TableCell scope="row">
-                            <Typography>
-                                Ширина плями:{' '}
-                                <Highlighter>
-                                    {output_data?.plume_width_module3 || '-'}
-                                </Highlighter>
+                            {' '}
+                            <Typography fontSize="18px" fontWeight="bold">
+                                Лінійні розміри перерізу на заданій дистанції
                             </Typography>
                         </TableCell>
                     </TableRow>
@@ -162,9 +155,9 @@ const TemplateTable = ({ tableData = {} }) => {
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Висота плями:{' '}
+                                Ширина плями:{' '}
                                 <Highlighter>
-                                    {output_data?.plume_height_module3 || '-'}
+                                    {output_data?.plume_width_module3 || '-'}
                                 </Highlighter>
                             </Typography>
                         </TableCell>
@@ -177,8 +170,11 @@ const TemplateTable = ({ tableData = {} }) => {
                             </Typography>
                         </TableCell>
                         <TableCell scope="row">
-                            <Typography fontSize="18px" fontWeight="bold">
-                                Інші розраховані значення
+                            <Typography>
+                                Висота плями:{' '}
+                                <Highlighter>
+                                    {output_data?.plume_height_module3 || '-'}
+                                </Highlighter>
                             </Typography>
                         </TableCell>
                     </TableRow>
@@ -189,11 +185,8 @@ const TemplateTable = ({ tableData = {} }) => {
                             </Typography>
                         </TableCell>
                         <TableCell scope="row">
-                            <Typography>
-                                Мін. дистанція:{' '}
-                                <Highlighter>
-                                    {output_data?.min_distance || '-'}
-                                </Highlighter>
+                            <Typography fontSize="18px" fontWeight="bold">
+                                Інші розраховані значення
                             </Typography>
                         </TableCell>
                     </TableRow>
@@ -208,9 +201,9 @@ const TemplateTable = ({ tableData = {} }) => {
                         </TableCell>
                         <TableCell scope="row">
                             <Typography>
-                                Макс. гарантована дистанція:{' '}
+                                Мін. дистанція:{' '}
                                 <Highlighter>
-                                    {output_data?.max_distance || '-'}
+                                    {output_data?.min_distance || '-'}
                                 </Highlighter>
                             </Typography>
                         </TableCell>
@@ -224,7 +217,14 @@ const TemplateTable = ({ tableData = {} }) => {
                                 </Highlighter>
                             </Typography>
                         </TableCell>
-                        <TableCell scope="row"></TableCell>
+                        <TableCell scope="row">
+                            <Typography>
+                                Макс. гарантована дистанція:{' '}
+                                <Highlighter>
+                                    {output_data?.max_distance || '-'}
+                                </Highlighter>
+                            </Typography>
+                        </TableCell>
                     </TableRow>
                 </TableBody>
             </MuiTable>

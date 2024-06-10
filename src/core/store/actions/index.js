@@ -47,3 +47,8 @@ export {
     deleteUserFetching,
     deleteUserFetchingError,
 } from './user/deleteUserAction';
+export {
+    saveTemplateFetched,
+    saveTemplateFetching,
+    saveTemplateFetchingError,
+} from './templateActions/saveTemplateAction';

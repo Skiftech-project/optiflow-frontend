@@ -23,7 +23,7 @@ const TemplatesPage = () => {
     return (
         <>
             <Header sx={{ marginBottom: '65px' }} />
-            <Stack direction="column" gap={5} alignItems="center">
+            <Stack direction="column" gap={5} alignItems="center" marginBottom="65px">
                 {errorMessage ? (
                     <Typography>{errorMessage}</Typography>
                 ) : templatesLoadingStatus === 'loading' ? (
