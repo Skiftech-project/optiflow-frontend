@@ -11,7 +11,7 @@ const menuStyles = {
     zIndex: '5',
     transition: '0.5s',
     overflow: 'auto',
-    p: 2,
+    p: 3,
 };
 
 const SideMenu = ({
