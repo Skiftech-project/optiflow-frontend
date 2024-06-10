@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { authReducer, loginReducer, logoutReducer, signupReducer } from './auth';
 import { calcReducer } from './calculations';
 import { calcValuesReducer } from './calculations';
+import { diagramReducer } from './calculations';
 import { deleteTemplateReducer } from './templateRedusers/deleteTemplateReducer';
 import { getTemplatesReducer } from './templateRedusers/getTemplatesReducer';
 import { saveTemplateReducer } from './templateRedusers/saveTemplateReducer';
@@ -24,6 +25,7 @@ const reducer = combineReducers({
     deleteUser: deleteUserReducer,
 
     //calc
+    diagram: diagramReducer,
     calc: calcReducer,
     calcValues: calcValuesReducer,
 
