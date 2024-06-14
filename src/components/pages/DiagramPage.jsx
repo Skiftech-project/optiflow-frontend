@@ -17,9 +17,9 @@ import { BarLoader, Notification, SideMenu } from '../ui';
 const DiagramPage = () => {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const [discrette, setDiscrette] = useState(1);
+    const [discrette, setDiscrette] = useState(4);
     const [power, setPower] = useState(1);
-    const [sensitivity, setSensitivity] = useState(1);
+    const [sensitivity, setSensitivity] = useState(0.015);
     const [type, setType] = useState('log');
 
     const { isNotified, showNotification, closeNotification } = useNotification();
