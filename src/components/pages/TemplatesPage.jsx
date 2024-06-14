@@ -6,7 +6,6 @@ import { Stack, Typography } from '@mui/material';
 
 import { useTemplateService } from 'src/core/services';
 
-import { Portal } from '../common';
 import { Header, TemplateBlock } from '../interface';
 import { BarLoader } from '../ui';
 
@@ -28,9 +27,7 @@ const TemplatesPage = () => {
                 {errorMessage ? (
                     <Typography>{errorMessage}</Typography>
                 ) : templatesLoadingStatus === 'loading' ? (
-                    <Portal rootId="header">
-                        <BarLoader />
-                    </Portal>
+                    <BarLoader />
                 ) : (
                     templates.map(item => {
                         return (
@@ -39,7 +36,7 @@ const TemplatesPage = () => {
                                 title={item.title}
                                 calcType={item.calculator_type}
                                 tableData={{ ...item }}
-                            ></TemplateBlock>
+                            />
                         );
                     })
                 )}

@@ -41,7 +41,7 @@ const AccountMenu = ({ user = {} }) => {
             <Typography sx={{ display: { xs: 'none', md: 'block' } }}>
                 {user?.username}
             </Typography>
-            <Tooltip title="Акаунт">
+            <Tooltip title="Акаунт" arrow>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt="avatar" sx={{ bgcolor: 'secondary.main' }}>
                         {getFirstLetterFromString(user?.username)}

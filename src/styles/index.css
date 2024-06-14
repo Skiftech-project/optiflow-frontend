@@ -21,9 +21,15 @@ h6 {
 
 body {
     background-color: #fff;
+    padding: 0;
+    margin: 0;
 }
 
 #root {
     position: relative;
-    height: 100vh;
+}
+
+/* menus global style */
+.MuiMenu-paper {
+    border-radius: 12px !important;
 }

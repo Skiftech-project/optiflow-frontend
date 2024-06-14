@@ -6,7 +6,7 @@ import { OrbitControls, PerspectiveCamera, Preload } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import PropTypes from 'prop-types';
 
-import { Spinner } from 'src/components/ui';
+import { CanvasLoader } from 'src/components/ui';
 import { RayModelingService } from 'src/core/services';
 
 const Camera = () => {
@@ -29,10 +29,17 @@ const Camera = () => {
 
 const Ray = ({ wireframe }) => {
     const calcs = useSelector(state => state.calc.calculations);
+    const inputValues = useSelector(state => state.calcValues.calcValues);
+
     const [mesh, setMesh] = useState(null);
 
     useEffect(() => {
-        setMesh(RayModelingService.createIntersectionMesh(calcs ?? {}));
+        setMesh(
+            RayModelingService.createIntersectionMesh(
+                calcs ?? {},
+                inputValues?.plumeForm,
+            ),
+        );
     }, [calcs]);
 
     return (
@@ -55,13 +62,13 @@ const Ray = ({ wireframe }) => {
     );
 };
 
-const RayCanvas = () => {
+const RayCanvas = ({ wireframe }) => {
     return (
         <Canvas>
-            <Suspense fallback={<Spinner />}>
+            <Suspense fallback={<CanvasLoader />}>
                 <OrbitControls />
                 <Camera />
-                <Ray />
+                <Ray wireframe={wireframe} />
             </Suspense>
             <Preload all />
         </Canvas>
@@ -69,6 +76,10 @@ const RayCanvas = () => {
 };
 
 Ray.propTypes = {
+    wireframe: PropTypes.bool,
+};
+
+RayCanvas.propTypes = {
     wireframe: PropTypes.bool,
 };
 

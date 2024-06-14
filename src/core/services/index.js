@@ -1,4 +1,5 @@
 import useAuthService from './AuthService';
+import { createDiagram } from './DiagramService';
 import useOptiflowService from './OptiflowService';
 import RayModelingService from './RayModelingService';
 import useSaveToFileService from './SaveToFileService';
@@ -12,4 +13,5 @@ export {
     useUserService,
     RayModelingService,
     useTemplateService,
+    createDiagram,
 };

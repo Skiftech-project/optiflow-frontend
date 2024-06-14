@@ -1,14 +1,18 @@
 import { LinearProgress } from '@mui/material';
 
+import { Portal } from 'src/components/common';
+
 const BarLoader = () => {
     return (
-        <LinearProgress
-            sx={{
-                height: 3,
-                borderBottomLeftRadius: 50,
-                borderBottomRightRadius: 50,
-            }}
-        />
+        <Portal rootId="header">
+            <LinearProgress
+                sx={{
+                    height: 3,
+                    borderBottomLeftRadius: 50,
+                    borderBottomRightRadius: 50,
+                }}
+            />
+        </Portal>
     );
 };
 

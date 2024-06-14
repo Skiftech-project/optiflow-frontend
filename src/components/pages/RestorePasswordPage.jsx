@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
 
 import { pattern } from 'src/assets';
+import { useNotification } from 'src/core/hooks';
 import { useUserService } from 'src/core/services';
 import { validationSchemaRestorePassword } from 'src/core/shemes';
 import { PatternBgStyles } from 'src/styles';
 
-import { Block, Button, ErrorMessage, InputPassword } from '../ui';
+import { Block, Button, ErrorMessage, InputPassword, Notification } from '../ui';
 
 const RestorePasswordPage = () => {
     const [errorMessage, setErrorMessage] = useState('');
@@ -21,6 +21,7 @@ const RestorePasswordPage = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
+    const { isNotified, showNotification, closeNotification } = useNotification();
 
     useEffect(() => {
         if (!token) {
@@ -52,6 +53,7 @@ const RestorePasswordPage = () => {
                 setErrorMessage('Посилання невалідне');
                 break;
             default:
+                showNotification('info');
                 methods.reset();
                 setErrorMessage('');
         }
@@ -115,6 +117,17 @@ const RestorePasswordPage = () => {
                     </Stack>
                 </Block>
             </Stack>
+            <Notification
+                title="Підказка"
+                open={isNotified('info')}
+                onClose={closeNotification('info')}
+                key="info"
+                type="success"
+                autoHideDuration={null}
+            >
+                Ви успішно оновили пароль{' '}
+                <Link to="/login">Повернутись на авторизацію</Link>
+            </Notification>
         </FormProvider>
     );
 };

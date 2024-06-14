@@ -9,7 +9,8 @@ import {
     TableRow,
     Typography,
 } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+
+import { Highlighter } from '..';
 
 const TemplateTable = ({ tableData = {} }) => {
     const { output_data, input_data } = tableData;
@@ -229,12 +230,6 @@ const TemplateTable = ({ tableData = {} }) => {
             </MuiTable>
         </TableContainer>
     );
-};
-
-const Highlighter = ({ children }) => {
-    const theme = useTheme();
-    const styles = { color: theme.palette.primary.main, fontWeight: 600 };
-    return <span style={styles}>{children}</span>;
 };
 
 TemplateTable.propTypes = {

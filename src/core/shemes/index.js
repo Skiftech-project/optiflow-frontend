@@ -11,3 +11,5 @@ export { validationSchema as validationSchemaUpdatePassword } from './UpdatePass
 export { validationSchema as validationSchemaEmail } from './EmailValidation';
 
 export { validationSchema as validationSchemaRestorePassword } from './RestorePasswordValidation';
+
+export { validationSchema as validationSchemaDiagram } from './DiagramValidation';

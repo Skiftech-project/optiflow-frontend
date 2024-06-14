@@ -1,3 +1,9 @@
+export {
+    diagramFetched,
+    diagramFetching,
+    diagramFetchingError,
+} from './calculations/diagramActions';
+
 export { calcFetching, calcFetched, calcFetchingError } from './calculations/calcActions';
 
 export { loginFetching, loginFetched, loginFetchingError } from './auth/loginActions';
@@ -47,6 +53,7 @@ export {
     deleteUserFetching,
     deleteUserFetchingError,
 } from './user/deleteUserAction';
+
 export {
     saveTemplateFetched,
     saveTemplateFetching,

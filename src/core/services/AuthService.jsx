@@ -90,6 +90,7 @@ const useAuthService = () => {
         return response;
     };
 
+    //TODO: temporarily not in use, refacrtor service first by deleting navigate
     const checkAuth = () => {
         const response = refreshTokenRequest()
             .then(data => {
@@ -107,7 +108,8 @@ const useAuthService = () => {
                 dispatch(setAuth(true));
             })
             .catch(error => {
-                console.log(error);
+                // console.log(error);
+                return error;
             });
         return response;
     };

@@ -6,7 +6,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { Stack, Typography } from '@mui/material';
 
-import { Button, ErrorMessage, InputPassword } from 'src/components/ui';
+import { Button, ErrorMessage, InputPassword, Notification } from 'src/components/ui';
+import { useNotification } from 'src/core/hooks';
 import { useUserService } from 'src/core/services';
 import { validationSchemaUpdatePassword } from 'src/core/shemes';
 
@@ -14,6 +15,7 @@ const ChangePasswordForm = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const { dataLoadingStatus } = useSelector(state => state.password);
     const { updatePassword } = useUserService();
+    const { isNotified, showNotification, closeNotification } = useNotification();
 
     const methods = useForm({
         defaultValues: {
@@ -34,6 +36,7 @@ const ChangePasswordForm = () => {
                 setErrorMessage('Некоректний старий пароль');
                 break;
             default:
+                showNotification('info');
                 setErrorMessage('');
                 methods.reset();
         }
@@ -76,6 +79,16 @@ const ChangePasswordForm = () => {
                     </Button>
                 </Stack>
             </Stack>
+
+            <Notification
+                title="Підказка"
+                open={isNotified('info')}
+                onClose={closeNotification('info')}
+                key="info"
+                type="success"
+            >
+                Ви успішно оновили пароль
+            </Notification>
         </FormProvider>
     );
 };
