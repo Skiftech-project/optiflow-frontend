@@ -208,7 +208,7 @@ const RayPage = () => {
                 onClose={closeNotification('info')}
                 key="info"
             >
-                Спочатку зробіть розрахунки щоб побачити модель..
+                Спочатку зробіть розрахунки щоб побачити модель.
             </Notification>
             <Notification
                 title="Увага !"
