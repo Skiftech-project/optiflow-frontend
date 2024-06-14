@@ -471,15 +471,19 @@ const initTables = tables => {
     return resultTables;
 };
 
-export const createDiagram = (data, type = 'log') => {
-    const discreteCoefficient = 4;
+export const createDiagram = (
+    data,
+    type = 'log',
+    discreteCoefficient,
+    sensitivity,
+    power,
+) => {
+    if (discreteCoefficient === 0) {
+        return;
+    }
     let geometry;
 
     data = initTables(data);
-
-    // Входные данные - not required
-    const sensitivity = 0.015;
-    const power = 1;
 
     const subdivisions = 4;
     const gradient = ['#ff0000', '#00ff00', '#0000ff'];
