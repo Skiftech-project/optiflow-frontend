@@ -17,6 +17,7 @@ const Input = ({
     label = 'Label text',
     size = 'small',
     validation = {},
+    uncontrolled = false,
     ...props
 }) => {
     const theme = useTheme();
@@ -62,11 +63,8 @@ const Input = ({
     );
 
     return (
-        <Controller
-            name={name}
-            rules={rules}
-            defaultValue={defaultValue}
-            render={({ field }) => (
+        <>
+            {uncontrolled ? (
                 <View
                     theme={theme}
                     label={label}
@@ -74,11 +72,28 @@ const Input = ({
                     InputProps={inputProps}
                     error={!!errors?.[name]}
                     helperText={errors?.[name]?.message || null}
-                    {...field}
                     {...props}
                 />
+            ) : (
+                <Controller
+                    name={name}
+                    rules={rules}
+                    defaultValue={defaultValue}
+                    render={({ field }) => (
+                        <View
+                            theme={theme}
+                            label={label}
+                            size={size}
+                            InputProps={inputProps}
+                            error={!!errors?.[name]}
+                            helperText={errors?.[name]?.message || null}
+                            {...field}
+                            {...props}
+                        />
+                    )}
+                />
             )}
-        />
+        </>
     );
 };
 
@@ -121,6 +136,7 @@ Input.propTypes = {
     onStartAdornmentClick: PropTypes.func,
     validation: PropTypes.object,
     defaultValue: PropTypes.any,
+    uncontrolled: PropTypes.bool,
 };
 
 export default Input;
