@@ -13,7 +13,7 @@ export {
     deleteUserRequest,
 } from './user/user';
 
-export { basicCalculationsRequest } from './calculations/calculations';
+export { basicCalculationsRequest, diagramRequest } from './calculations/calculations';
 
 export {
     getAllTemplatesRequest,

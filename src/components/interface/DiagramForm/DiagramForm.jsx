@@ -1,26 +1,34 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import { Divider, Stack, Typography } from '@mui/material';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useTheme } from '@mui/material/styles';
 
-import { DragDropZone, Highlighter, Input, InputFile } from 'src/components/ui';
-import { validationSchemaDiagram } from 'src/core/shemes';
+import { Button, DragDropZone, Highlighter, Input, InputFile } from 'src/components/ui';
+import { useOptiflowService } from 'src/core/services';
 
-const DiagramForm = () => {
-    const [type, setType] = useState('log');
+//TODO: rewrite this component
+const DiagramForm = ({
+    type,
+    discrette,
+    power,
+    sensitivity,
+    setDiscrette,
+    setPower,
+    setType,
+    setSensitivity,
+}) => {
     const [fileError, setFileError] = useState(null);
+    const [file, setFile] = useState(null);
 
-    const methods = useForm({ mode: 'all' });
+    const { data, dataLoadingStatus } = useSelector(state => state.diagram);
+    const { calculateDiagram } = useOptiflowService();
+
     const theme = useTheme();
 
-    const handleTypeChange = (e, type) => {
-        setType(type);
-    };
-    //TODO: move file logic to custom hook
     const handleDrop = e => {
         e.preventDefault();
         const files = e.dataTransfer.files;
@@ -38,9 +46,9 @@ const DiagramForm = () => {
         }
 
         setFileError(null);
-        console.log('Files dropped:', files);
+        setFile(file);
     };
-    //TODO: move file logic to custom hook
+
     const handleFile = e => {
         const file = e.target.files[0];
 
@@ -54,96 +62,134 @@ const DiagramForm = () => {
         }
 
         setFileError(null);
-        console.log('File uploaded:', file);
+        setFile(file);
     };
 
-    const { discrette, power, sensitivity } = validationSchemaDiagram;
+    const handleSubmit = () => {
+        if (!file) {
+            setFileError('Файл не завантажено !');
+        }
+        calculateDiagram(file);
+        setFile(null);
+    };
+
+    const handleDiscretteChange = e => {
+        setDiscrette(e.target.value);
+    };
+
+    const handleTypeChange = (e, type) => {
+        setType(type);
+    };
+
+    const handlePowerChange = e => {
+        setPower(e.target.value);
+    };
+
+    const handleSensitivityChange = e => {
+        setSensitivity(e.target.value);
+    };
 
     const additionalParams =
         type === 'scale' ? (
             <>
                 <Input
-                    name="discrette"
-                    id="discrette"
-                    fullWidth
-                    label="Дискретність:"
-                    adornment="(°)"
-                    validation={discrette}
-                    defaultValue=""
-                />
-                <Input
+                    value={power}
+                    uncontrolled
                     name="power"
                     id="power"
                     fullWidth
                     label="Потужність:"
                     adornment="мВт"
-                    validation={power}
                     defaultValue=""
+                    onChange={handlePowerChange}
+                    inputProps={{
+                        type: 'number',
+                    }}
                 />
                 <Input
+                    value={sensitivity}
+                    uncontrolled
                     name="sensitivity"
                     id="sensitivity"
                     fullWidth
                     label="Чутливість:"
                     adornment="(мВт/м²)"
-                    validation={sensitivity}
                     defaultValue=""
+                    onChange={handleSensitivityChange}
+                    inputProps={{
+                        type: 'number',
+                    }}
                 />
             </>
-        ) : (
-            <Input
-                name="discrette"
-                id="discrette"
-                fullWidth
-                label="Дискретність:"
-                adornment="(°)"
-                validation={discrette}
-                defaultValue=""
-            />
-        );
-
+        ) : null;
     return (
-        <FormProvider {...methods}>
-            <DragDropZone onDrop={handleDrop}>
-                <Stack gap={5}>
-                    <Stack gap={2}>
-                        <Typography>Таблиці відстаней діаграми спрямованості:</Typography>
+        <DragDropZone onDrop={handleDrop}>
+            <Stack gap={5}>
+                <Stack gap={2}>
+                    <Typography>Таблиці відстаней діаграми спрямованості:</Typography>
+                    <InputFile
+                        variant="outlined"
+                        color="primary"
+                        inputProps={{ accept: '.csv' }}
+                        onChange={handleFile}
+                        sx={{ height: 70, borderRadius: '12px' }}
+                    >
+                        Завантажити файл{' '}
+                        <Highlighter color={theme.palette.secondary.main}>
+                            .csv
+                        </Highlighter>
+                    </InputFile>
+                    {fileError ? (
+                        <Typography color="error">{fileError}</Typography>
+                    ) : null}
+                    <Button
+                        color="primary"
+                        fullWidth
+                        disabled={!file}
+                        loading={dataLoadingStatus === 'loading'}
+                        onClick={handleSubmit}
+                    >
+                        Розрахувати
+                    </Button>
+                    {!data ? null : (
+                        <>
+                            <Divider />
 
-                        <InputFile
-                            variant="outlined"
-                            color="primary"
-                            inputProps={{ accept: '.csv' }}
-                            onChange={handleFile}
-                            sx={{ height: 70, borderRadius: '12px' }}
-                        >
-                            Завантажити файл{' '}
-                            <Highlighter color={theme.palette.secondary.main}>
-                                .csv
-                            </Highlighter>
-                        </InputFile>
-                        {fileError ? (
-                            <Typography color="error">{fileError}</Typography>
-                        ) : null}
-                    </Stack>
+                            <Stack gap={2}>
+                                <Typography>Оберіть тип діаграми:</Typography>
+                                <DiagramTypes type={type} onChange={handleTypeChange} />
+                            </Stack>
 
-                    <Divider />
-
-                    <Stack gap={2}>
-                        <Typography>Оберіть тип діаграми:</Typography>
-                        <DiagramTypes type={type} onChange={handleTypeChange} />
-                    </Stack>
-
-                    <Stack gap={2}>
-                        <Typography>Додаткові параметри:</Typography>
-                        {additionalParams}
-                    </Stack>
+                            <Stack gap={2}>
+                                <Typography>Додаткові параметри:</Typography>
+                                <Input
+                                    value={discrette}
+                                    uncontrolled
+                                    name="discrette"
+                                    id="discrette"
+                                    fullWidth
+                                    label="Дискретність:"
+                                    adornment="(°)"
+                                    defaultValue=""
+                                    inputProps={{
+                                        step: 1,
+                                        min: 1,
+                                        max: 180,
+                                        type: 'number',
+                                    }}
+                                    onChange={handleDiscretteChange}
+                                />
+                                {additionalParams}
+                            </Stack>
+                        </>
+                    )}
                 </Stack>
-            </DragDropZone>
-        </FormProvider>
+            </Stack>
+        </DragDropZone>
     );
 };
 
-const DiagramTypes = ({ type, onChange }) => {
+const DiagramTypes = ({ type, onChange, ...props }) => {
     return (
         <ToggleButtonGroup
             value={type}
@@ -153,6 +199,7 @@ const DiagramTypes = ({ type, onChange }) => {
             color="primary"
             fullWidth
             size="small"
+            {...props}
         >
             <ToggleButton value="log" aria-label="log model">
                 log
