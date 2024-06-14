@@ -100,7 +100,6 @@ const useUserService = () => {
             .then(data => {
                 dispatch(restorePasswordFetched());
                 localStorage.removeItem('accessToken');
-                navigate('/login');
                 return data;
             })
             .catch(error => {

@@ -9,7 +9,8 @@ import { Stack, Typography } from '@mui/material';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
-import { Button, ErrorMessage, Input } from 'src/components/ui';
+import { Button, ErrorMessage, Input, Notification } from 'src/components/ui';
+import { useNotification } from 'src/core/hooks';
 import { useUserService } from 'src/core/services';
 import { validationSchemaUserData } from 'src/core/shemes';
 import { transformJwtPayload } from 'src/core/utils';
@@ -19,6 +20,7 @@ const ChangeUserDataForm = () => {
     const user = transformJwtPayload(localStorage.getItem('accessToken'));
     const { updateUsernameEmail } = useUserService();
     const { dataLoadingStatus } = useSelector(state => state.userData);
+    const { isNotified, showNotification, closeNotification } = useNotification();
 
     const methods = useForm({
         defaultValues: {
@@ -44,6 +46,7 @@ const ChangeUserDataForm = () => {
                 setErrorMessage('Користувач з таким Email вже існує');
                 break;
             default:
+                showNotification('info');
                 setErrorMessage('');
         }
     };
@@ -102,6 +105,16 @@ const ChangeUserDataForm = () => {
                     </Button>
                 </Stack>
             </Stack>
+
+            <Notification
+                title="Підказка"
+                open={isNotified('info')}
+                onClose={closeNotification('info')}
+                key="info"
+                type="success"
+            >
+                Ви успішно оновили дані користувача
+            </Notification>
         </FormProvider>
     );
 };
