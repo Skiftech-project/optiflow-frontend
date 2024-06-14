@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 
 import { Box, IconButton, Tooltip } from '@mui/material';
 
@@ -10,7 +11,7 @@ import { useNotification } from 'src/core/hooks';
 import { DiagramCanvas } from '../canvas';
 import { ErrorBoundary } from '../common';
 import { DiagramForm, Header } from '../interface';
-import { Notification, SideMenu } from '../ui';
+import { BarLoader, Notification, SideMenu } from '../ui';
 
 //TODO: rewrite this component
 const DiagramPage = () => {
@@ -22,6 +23,7 @@ const DiagramPage = () => {
     const [type, setType] = useState('log');
 
     const { isNotified, showNotification, closeNotification } = useNotification();
+    const { dataLoadingStatus } = useSelector(state => state.diagram);
     const methods = useForm({
         defaultValues: { sensitivity: 0.015, power: 1, discrette: 4 },
         mode: 'all',
@@ -33,7 +35,10 @@ const DiagramPage = () => {
 
     useEffect(() => {
         showNotification('info');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const loader = dataLoadingStatus === 'loading' && <BarLoader />;
 
     return (
         <>
@@ -106,6 +111,8 @@ const DiagramPage = () => {
                 Для цього <b>натисніть кнопку</b> або просто <b>перетягніть файл</b> у
                 зону меню.
             </Notification>
+
+            {loader}
         </>
     );
 };
