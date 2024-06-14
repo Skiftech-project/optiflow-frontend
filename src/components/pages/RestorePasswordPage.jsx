@@ -118,7 +118,7 @@ const RestorePasswordPage = () => {
                 </Block>
             </Stack>
             <Notification
-                title="Підказка"
+                title="Пароль змінено"
                 open={isNotified('info')}
                 onClose={closeNotification('info')}
                 key="info"
